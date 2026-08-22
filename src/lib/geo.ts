@@ -1,7 +1,16 @@
 import type { RegionFeature } from '../types.ts'
+import { AUTH_HEIGHT, AUTH_WIDTH, MAP_HEIGHT, MAP_WIDTH } from '../types.ts'
+
+export function sx(x: number): number {
+  return (x / AUTH_WIDTH) * MAP_WIDTH
+}
+
+export function sy(y: number): number {
+  return (y / AUTH_HEIGHT) * MAP_HEIGHT
+}
 
 export function toLatLng(x: number, y: number): [number, number] {
-  return [y, x]
+  return [sy(y), sx(x)]
 }
 
 export function closeRing(points: [number, number][]): [number, number][] {

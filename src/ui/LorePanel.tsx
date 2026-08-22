@@ -11,6 +11,7 @@ import { regionById } from '../data/regions.ts'
 import { routeById } from '../data/routes.ts'
 import { siteById, sitesByParent } from '../data/sites.ts'
 import { flyZoomFor } from '../map/zoom.ts'
+import { seatPortraits } from '../data/portraits.ts'
 import { bannerSvg } from '../lib/banners.ts'
 import { useAtlas } from '../state/AtlasContext.tsx'
 import type { IceAndFireCharacter, IceAndFireHouse, ThronesPortrait } from '../types.ts'
@@ -127,21 +128,22 @@ export function LorePanel() {
           title={place.name}
           onClose={() => setSelection(null)}
         />
+        {seatPortraits[place.id] && (
+          <img className="seat-art" src={seatPortraits[place.id]} alt="" />
+        )}
         <p>{place.lore}</p>
         {house && (
           <p>
             The surrounding land answers to <strong>{house.shortName}</strong> in season {season}.
           </p>
         )}
-        {(sitesByParent[place.id] ?? []).length > 0 && (
-          <button
-            className="dive"
-            type="button"
-            onClick={() => flyTo(place.x, place.y, flyZoomFor('site'))}
-          >
-            Dive into the streets
-          </button>
-        )}
+        <button
+          className="dive"
+          type="button"
+          onClick={() => flyTo(place.x, place.y, flyZoomFor('location'))}
+        >
+          Fly to this place
+        </button>
         <ApiHouseBlock house={apiHouse} source={source} />
         {present.length > 0 && (
           <PeopleList title="Present this season" names={present.map((person) => person.name)} />
@@ -172,10 +174,13 @@ export function LorePanel() {
           title={site.name}
           onClose={() => setSelection(null)}
         />
+        {parent && seatPortraits[parent.id] && (
+          <img className="seat-art" src={seatPortraits[parent.id]} alt="" />
+        )}
         <p>{site.lore}</p>
         {parent && (
           <p>
-            Part of <strong>{parent.name}</strong>. Zoom is street-level here — keep dragging to walk the grounds.
+            Part of <strong>{parent.name}</strong>.
           </p>
         )}
         {house && (

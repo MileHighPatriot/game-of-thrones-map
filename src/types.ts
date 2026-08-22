@@ -1,5 +1,7 @@
-export const MAP_WIDTH = 1600
-export const MAP_HEIGHT = 900
+export const MAP_WIDTH = 1536
+export const MAP_HEIGHT = 1024
+export const AUTH_WIDTH = 1600
+export const AUTH_HEIGHT = 900
 
 export type Season = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
 
