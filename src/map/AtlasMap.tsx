@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import type { Feature, FeatureCollection } from 'geojson'
-import { GeoJSON, ImageOverlay, MapContainer, Marker, useMap, useMapEvents } from 'react-leaflet'
+import { GeoJSON, ImageOverlay, MapContainer, Marker, ZoomControl, useMap, useMapEvents } from 'react-leaflet'
 import L, { type DivIcon, type Layer, type LeafletMouseEvent, type PathOptions } from 'leaflet'
 import { battles } from '../data/battles.ts'
 import { controlBySeason } from '../data/control.ts'
@@ -32,7 +32,7 @@ function divIcon(html: string, className: string, size: [number, number]): DivIc
 
 function MapEvents() {
   const map = useMap()
-  const { flyTarget, setSelection } = useAtlas()
+  const { flyTarget, selection, setSelection } = useAtlas()
 
   useMapEvents({
     click: () => setSelection(null),
@@ -41,6 +41,11 @@ function MapEvents() {
   useEffect(() => {
     map.fitBounds(bounds, { padding: [24, 24] })
   }, [map])
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => map.invalidateSize(), 280)
+    return () => window.clearTimeout(timer)
+  }, [selection, map])
 
   useEffect(() => {
     if (!flyTarget) return
@@ -234,9 +239,10 @@ export function AtlasMap() {
       maxBounds={bounds}
       maxBoundsViscosity={0.85}
       attributionControl={false}
-      zoomControl
+      zoomControl={false}
     >
       <ImageOverlay url={basemapUrl} bounds={bounds} opacity={1} />
+      <ZoomControl position="bottomleft" />
       <MapEvents />
       <RegionLayer />
       <PlaceLayer />

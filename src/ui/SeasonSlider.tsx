@@ -5,36 +5,39 @@ import type { Season } from '../types.ts'
 const seasons: Season[] = [1, 2, 3, 4, 5, 6, 7, 8]
 
 export function SeasonSlider() {
-  const { season, setSeason } = useAtlas()
+  const { season, setSeason, selection } = useAtlas()
   const meta = SEASON_META[season]
 
   return (
-    <div className="chrome slider">
-      <div className="slider-head">
+    <footer className="season-dock">
+      <div className="season-copy">
         <strong>{meta.title}</strong>
         <span>{meta.caption}</span>
+        {!selection && <em>Click a region, banner, battle, or traveler for lore.</em>}
       </div>
-      <input
-        type="range"
-        min={1}
-        max={8}
-        step={1}
-        value={season}
-        aria-label="Season"
-        onChange={(event) => setSeason(Number(event.target.value) as Season)}
-      />
-      <div className="season-ticks">
-        {seasons.map((value) => (
-          <button
-            key={value}
-            type="button"
-            className={value === season ? 'active' : ''}
-            onClick={() => setSeason(value)}
-          >
-            S{value}
-          </button>
-        ))}
+      <div className="season-controls">
+        <input
+          type="range"
+          min={1}
+          max={8}
+          step={1}
+          value={season}
+          aria-label="Season"
+          onChange={(event) => setSeason(Number(event.target.value) as Season)}
+        />
+        <div className="season-ticks">
+          {seasons.map((value) => (
+            <button
+              key={value}
+              type="button"
+              className={value === season ? 'active' : ''}
+              onClick={() => setSeason(value)}
+            >
+              {value}
+            </button>
+          ))}
+        </div>
       </div>
-    </div>
+    </footer>
   )
 }

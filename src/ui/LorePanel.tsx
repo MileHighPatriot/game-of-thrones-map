@@ -75,21 +75,7 @@ export function LorePanel() {
     }
   }, [house?.iceAndFireId, selection])
 
-  if (!selection) {
-    return (
-      <aside className="chrome panel">
-        <h2>The atlas</h2>
-        <p>
-          Click a region, banner, battle, or traveler. Scrub seasons to watch house control and
-          character presence move across the known world.
-        </p>
-        <p className="muted">
-          Geography and timeline are local. House and character details enrich from An API of Ice
-          and Fire, with a local cache if the network is quiet.
-        </p>
-      </aside>
-    )
-  }
+  if (!selection) return null
 
   if (selection.kind === 'region') {
     const region = regionById[selection.id]
@@ -98,12 +84,12 @@ export function LorePanel() {
       .filter((place) => place.regionId === region.properties.id)
       .flatMap((place) => peopleHere(season, place.id))
     return (
-      <aside className="chrome panel">
-        <button className="close" type="button" onClick={() => setSelection(null)}>
-          Close
-        </button>
-        <p className="eyebrow">{region.properties.continent} · Season {season}</p>
-        <h2>{region.properties.name}</h2>
+      <aside className="panel">
+        <PanelHead
+          eyebrow={`${region.properties.continent} · Season ${season}`}
+          title={region.properties.name}
+          onClose={() => setSelection(null)}
+        />
         {house && (
           <div className="banner-row" dangerouslySetInnerHTML={{ __html: bannerSvg(house.id) }} />
         )}
@@ -127,12 +113,12 @@ export function LorePanel() {
     if (!place) return null
     const present = peopleHere(season, place.id)
     return (
-      <aside className="chrome panel">
-        <button className="close" type="button" onClick={() => setSelection(null)}>
-          Close
-        </button>
-        <p className="eyebrow">{place.kind} · {regionById[place.regionId]?.properties.name}</p>
-        <h2>{place.name}</h2>
+      <aside className="panel">
+        <PanelHead
+          eyebrow={`${place.kind} · ${regionById[place.regionId]?.properties.name ?? ''}`}
+          title={place.name}
+          onClose={() => setSelection(null)}
+        />
         <p>{place.lore}</p>
         {house && (
           <p>
@@ -151,12 +137,13 @@ export function LorePanel() {
     const selectedHouse = houseById[selection.id]
     if (!selectedHouse) return null
     return (
-      <aside className="chrome panel">
-        <button className="close" type="button" onClick={() => setSelection(null)}>
-          Close
-        </button>
+      <aside className="panel">
+        <PanelHead
+          eyebrow="Great house"
+          title={selectedHouse.name}
+          onClose={() => setSelection(null)}
+        />
         <div className="banner-row" dangerouslySetInnerHTML={{ __html: bannerSvg(selectedHouse.id) }} />
-        <h2>{selectedHouse.name}</h2>
         <p className="words">{selectedHouse.words}</p>
         <p>{selectedHouse.lore}</p>
         <ApiHouseBlock house={apiHouse} source={source} />
@@ -169,12 +156,12 @@ export function LorePanel() {
     if (!battle) return null
     const place = locationById[battle.locationId]
     return (
-      <aside className="chrome panel">
-        <button className="close" type="button" onClick={() => setSelection(null)}>
-          Close
-        </button>
-        <p className="eyebrow">Battle · Season {battle.season}</p>
-        <h2>{battle.name}</h2>
+      <aside className="panel">
+        <PanelHead
+          eyebrow={`Battle · Season ${battle.season}`}
+          title={battle.name}
+          onClose={() => setSelection(null)}
+        />
         <p>{battle.lore}</p>
         <p>
           <strong>Where:</strong> {place?.name ?? 'Unknown'}
@@ -196,13 +183,13 @@ export function LorePanel() {
   const image = portrait?.imageUrl ?? character.portrait
 
   return (
-    <aside className="chrome panel">
-      <button className="close" type="button" onClick={() => setSelection(null)}>
-        Close
-      </button>
+    <aside className="panel">
+      <PanelHead
+        eyebrow={house?.shortName ?? 'Wanderer'}
+        title={character.name}
+        onClose={() => setSelection(null)}
+      />
       {image && <img className="portrait" src={image} alt={character.name} />}
-      <p className="eyebrow">{house?.shortName ?? 'Wanderer'}</p>
-      <h2>{character.name}</h2>
       <p>{character.lore}</p>
       <p>
         {here
@@ -271,6 +258,28 @@ function ApiHouseBlock({
           <strong>Titles:</strong> {house.titles.join(', ')}
         </p>
       )}
+    </div>
+  )
+}
+
+function PanelHead({
+  eyebrow,
+  title,
+  onClose,
+}: {
+  eyebrow: string
+  title: string
+  onClose: () => void
+}) {
+  return (
+    <div className="panel-head">
+      <div>
+        <p className="eyebrow">{eyebrow}</p>
+        <h2>{title}</h2>
+      </div>
+      <button className="close" type="button" onClick={onClose}>
+        Close
+      </button>
     </div>
   )
 }

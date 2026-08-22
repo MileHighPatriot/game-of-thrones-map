@@ -97,7 +97,7 @@ export function SearchBox() {
   }, [query, season])
 
   return (
-    <div className="chrome search">
+    <div className="search">
       <input
         type="search"
         placeholder="Search places, houses, battles…"
