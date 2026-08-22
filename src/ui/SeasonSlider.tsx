@@ -13,7 +13,7 @@ export function SeasonSlider() {
       <div className="season-copy">
         <strong>{meta.title}</strong>
         <span>{meta.caption}</span>
-        {!selection && <em>Click a region, banner, battle, or traveler for lore.</em>}
+        {!selection && <em>Double-click a place to drop into the streets.</em>}
       </div>
       <div className="season-controls">
         <input

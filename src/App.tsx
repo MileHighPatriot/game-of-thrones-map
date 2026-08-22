@@ -11,20 +11,18 @@ export default function App() {
   return (
     <AtlasProvider>
       <div className="app">
-        <header className="topbar">
-          <Header />
-          <SearchBox />
-          <LayerToggles />
-        </header>
-        <div className="workspace">
-          <main className="map-stage">
-            <AtlasMap />
-            <div className="map-vignette" aria-hidden="true" />
-            <MapHud />
-          </main>
+        <main className="map-stage">
+          <AtlasMap />
+          <div className="map-vignette" aria-hidden="true" />
+          <div className="chrome-top">
+            <Header />
+            <SearchBox />
+            <LayerToggles />
+          </div>
           <LorePanel />
-        </div>
-        <SeasonSlider />
+          <SeasonSlider />
+          <MapHud />
+        </main>
       </div>
     </AtlasProvider>
   )

@@ -128,7 +128,7 @@ export function SearchBox() {
     <div className="search">
       <input
         type="search"
-        placeholder="Search places, streets, houses…"
+        placeholder="Search King’s Landing, Winterfell…"
         value={query}
         onChange={(event) => setQuery(event.target.value)}
         aria-label="Search the atlas"

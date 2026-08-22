@@ -1,6 +1,7 @@
 import type { Site } from '../types.ts'
+import { landmarkXY } from './cities.ts'
 
-export const sites: Site[] = [
+const rawSites: Site[] = [
   {
     id: 'wf-keep',
     parentId: 'winterfell',
@@ -425,6 +426,11 @@ export const sites: Site[] = [
     lore: 'A warlock’s house of doors. Daenerys walks in for prophecy and leaves it burning.',
   },
 ]
+
+export const sites: Site[] = rawSites.map((site) => {
+  const placed = landmarkXY(site.parentId, site.id)
+  return placed ? { ...site, x: placed.x, y: placed.y } : site
+})
 
 export const siteById = Object.fromEntries(sites.map((site) => [site.id, site]))
 

@@ -48,7 +48,7 @@ export function AtlasProvider({ children }: { children: ReactNode }) {
       zoom,
       setZoom,
       flyTarget,
-      flyTo: (x, y, nextZoom = 2.6) => setFlyTarget({ x, y, zoom: nextZoom }),
+      flyTo: (x, y, nextZoom = 5.85) => setFlyTarget({ x, y, zoom: nextZoom }),
       fitNonce,
       fitWorld: () => setFitNonce((count) => count + 1),
     }),
