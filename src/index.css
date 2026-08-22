@@ -182,6 +182,69 @@ body,
 
 .leaflet-container {
   font-family: inherit;
+  cursor: grab;
+}
+
+.leaflet-container.leaflet-drag-target,
+.leaflet-container.leaflet-dragging {
+  cursor: grabbing;
+}
+
+.map-vignette {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  box-shadow:
+    inset 0 0 90px 28px rgba(18, 14, 11, 0.42),
+    inset 0 0 0 1px rgba(212, 180, 60, 0.08);
+  background:
+    radial-gradient(ellipse at center, transparent 52%, rgba(18, 14, 11, 0.28) 100%);
+}
+
+.map-hud {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  max-width: 16rem;
+  pointer-events: none;
+}
+
+.map-hud button {
+  pointer-events: auto;
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid var(--line);
+  background: #2a2118;
+  color: var(--parchment);
+  padding: 6px 12px;
+  border-radius: 2px;
+}
+
+.map-hud button:hover {
+  border-color: rgba(212, 180, 60, 0.55);
+  color: var(--gold);
+}
+
+.map-hud span {
+  font-family: Cinzel, serif;
+  color: var(--gold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  text-shadow: 0 1px 0 #120e0b;
+}
+
+.map-hud small {
+  color: var(--muted);
+  font-size: 0.72rem;
+  text-align: right;
+  text-shadow: 0 1px 0 #120e0b;
 }
 
 .panel {
@@ -252,6 +315,26 @@ body,
   padding-left: 1.1rem;
 }
 
+.grounds {
+  list-style: none;
+  padding-left: 0;
+}
+
+.grounds button {
+  font: inherit;
+  color: var(--parchment);
+  background: transparent;
+  border: 0;
+  padding: 3px 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.grounds button:hover {
+  color: var(--gold);
+}
+
 .season-dock {
   display: grid;
   grid-template-columns: minmax(16rem, 1.2fr) minmax(18rem, 1fr);
@@ -302,12 +385,75 @@ body,
   border-radius: 2px;
 }
 
+.dive {
+  display: inline-block;
+  margin: 0 0 14px;
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid var(--line);
+  background: #3a2d18;
+  color: var(--gold);
+  padding: 7px 12px;
+  border-radius: 2px;
+}
+
+.dive:hover {
+  border-color: rgba(212, 180, 60, 0.7);
+}
+
 .marker-place,
 .marker-banner,
 .marker-battle,
-.marker-char {
+.marker-char,
+.marker-label,
+.marker-site {
   background: transparent;
   border: 0;
+}
+
+.map-label {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 7px 2px;
+  border: 1px solid rgba(58, 44, 28, 0.45);
+  background: rgba(239, 228, 200, 0.88);
+  color: #1a120a;
+  font-size: 11px;
+  line-height: 1.3;
+  white-space: nowrap;
+  box-shadow: 0 1px 0 rgba(255, 248, 220, 0.4);
+}
+
+.region-label {
+  font-family: Cinzel, serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 12px;
+  background: rgba(239, 228, 200, 0.72);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.place-label {
+  font-size: 11px;
+}
+
+.site-label {
+  font-size: 10px;
+  background: rgba(247, 236, 208, 0.94);
+}
+
+.leaflet-tooltip {
+  background: #efe4c8;
+  color: #1a120a;
+  border: 1px solid #6b4a28;
+  border-radius: 2px;
+  font-family: 'Source Serif 4', Georgia, serif;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+.leaflet-tooltip-top:before {
+  border-top-color: #6b4a28;
 }
 
 .pin {
@@ -366,6 +512,57 @@ body,
   width: 26px;
   height: 26px;
   object-fit: cover;
+}
+
+.site-pin {
+  display: block;
+  width: 9px;
+  height: 9px;
+  border: 1px solid #1a120a;
+  background: #efe4c8;
+  box-shadow: 0 0 0 1px rgba(212, 180, 60, 0.35);
+}
+
+.site-keep,
+.site-tower {
+  background: #d4b43c;
+  transform: rotate(45deg);
+}
+
+.site-sept {
+  border-radius: 50%;
+  background: #f4e3b2;
+}
+
+.site-market {
+  border-radius: 2px;
+  background: #c9a56a;
+}
+
+.site-harbor {
+  border-radius: 50% 50% 50% 0;
+  background: #6b8ea3;
+}
+
+.site-woods {
+  border-radius: 50%;
+  background: #5d7346;
+}
+
+.site-yard {
+  background: #b08958;
+}
+
+.site-gate {
+  width: 10px;
+  height: 7px;
+  background: #8a6a3c;
+}
+
+.site-crypt,
+.site-ruin {
+  background: #7a5a3a;
+  border-radius: 1px;
 }
 
 .leaflet-control-zoom {

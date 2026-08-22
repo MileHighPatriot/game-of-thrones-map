@@ -1,5 +1,5 @@
 import { createContext, useContext, useMemo, useState, type ReactNode } from 'react'
-import type { LayerKey, Season, Selection } from '../types.ts'
+import type { FlyTarget, LayerKey, Season, Selection } from '../types.ts'
 
 export type LayerState = Record<LayerKey, boolean>
 
@@ -10,8 +10,12 @@ type AtlasContextValue = {
   setSelection: (selection: Selection | null) => void
   layers: LayerState
   toggleLayer: (key: LayerKey) => void
-  flyTarget: [number, number] | null
-  flyTo: (x: number, y: number) => void
+  zoom: number
+  setZoom: (zoom: number) => void
+  flyTarget: FlyTarget | null
+  flyTo: (x: number, y: number, zoom?: number) => void
+  fitNonce: number
+  fitWorld: () => void
 }
 
 const AtlasContext = createContext<AtlasContextValue | null>(null)
@@ -19,6 +23,7 @@ const AtlasContext = createContext<AtlasContextValue | null>(null)
 const initialLayers: LayerState = {
   regions: true,
   places: true,
+  roads: true,
   banners: true,
   battles: true,
   characters: true,
@@ -28,7 +33,9 @@ export function AtlasProvider({ children }: { children: ReactNode }) {
   const [season, setSeason] = useState<Season>(1)
   const [selection, setSelection] = useState<Selection | null>(null)
   const [layers, setLayers] = useState<LayerState>(initialLayers)
-  const [flyTarget, setFlyTarget] = useState<[number, number] | null>(null)
+  const [zoom, setZoom] = useState(0)
+  const [flyTarget, setFlyTarget] = useState<FlyTarget | null>(null)
+  const [fitNonce, setFitNonce] = useState(0)
 
   const value = useMemo<AtlasContextValue>(
     () => ({
@@ -38,10 +45,14 @@ export function AtlasProvider({ children }: { children: ReactNode }) {
       setSelection,
       layers,
       toggleLayer: (key) => setLayers((current) => ({ ...current, [key]: !current[key] })),
+      zoom,
+      setZoom,
       flyTarget,
-      flyTo: (x, y) => setFlyTarget([x, y]),
+      flyTo: (x, y, nextZoom = 2.6) => setFlyTarget({ x, y, zoom: nextZoom }),
+      fitNonce,
+      fitWorld: () => setFitNonce((count) => count + 1),
     }),
-    [season, selection, layers, flyTarget],
+    [season, selection, layers, zoom, flyTarget, fitNonce],
   )
 
   return <AtlasContext.Provider value={value}>{children}</AtlasContext.Provider>

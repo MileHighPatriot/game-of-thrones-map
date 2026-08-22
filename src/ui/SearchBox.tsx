@@ -5,6 +5,9 @@ import { houses } from '../data/houses.ts'
 import { locationById, locations } from '../data/locations.ts'
 import { presenceBySeason } from '../data/presence.ts'
 import { regionFeatures } from '../data/regions.ts'
+import { routes } from '../data/routes.ts'
+import { sites } from '../data/sites.ts'
+import { flyZoomFor } from '../map/zoom.ts'
 import { useAtlas } from '../state/AtlasContext.tsx'
 import type { Selection } from '../types.ts'
 
@@ -46,6 +49,31 @@ export function SearchBox() {
           kind: 'location',
           x: place.x,
           y: place.y,
+        })
+      }
+    }
+
+    for (const site of sites) {
+      if (site.name.toLowerCase().includes(needle)) {
+        results.push({
+          id: site.id,
+          label: site.name,
+          kind: 'site',
+          x: site.x,
+          y: site.y,
+        })
+      }
+    }
+
+    for (const route of routes) {
+      if (route.name.toLowerCase().includes(needle)) {
+        const mid = route.points[Math.floor(route.points.length / 2)]
+        results.push({
+          id: route.id,
+          label: route.name,
+          kind: 'route',
+          x: mid?.[0] ?? 800,
+          y: mid?.[1] ?? 450,
         })
       }
     }
@@ -93,14 +121,14 @@ export function SearchBox() {
       }
     }
 
-    return results.slice(0, 8)
+    return results.slice(0, 10)
   }, [query, season])
 
   return (
     <div className="search">
       <input
         type="search"
-        placeholder="Search places, houses, battles…"
+        placeholder="Search places, streets, houses…"
         value={query}
         onChange={(event) => setQuery(event.target.value)}
         aria-label="Search the atlas"
@@ -113,7 +141,7 @@ export function SearchBox() {
                 type="button"
                 onClick={() => {
                   setSelection({ kind: hit.kind, id: hit.id })
-                  flyTo(hit.x, hit.y)
+                  flyTo(hit.x, hit.y, flyZoomFor(hit.kind))
                   setQuery('')
                 }}
               >

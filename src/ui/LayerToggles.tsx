@@ -4,6 +4,7 @@ import type { LayerKey } from '../types.ts'
 const labels: { key: LayerKey; label: string }[] = [
   { key: 'regions', label: 'Regions' },
   { key: 'places', label: 'Places' },
+  { key: 'roads', label: 'Roads' },
   { key: 'banners', label: 'Banners' },
   { key: 'battles', label: 'Battles' },
   { key: 'characters', label: 'Characters' },

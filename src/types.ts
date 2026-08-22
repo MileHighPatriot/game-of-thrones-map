@@ -3,14 +3,41 @@ export const MAP_HEIGHT = 900
 
 export type Season = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
 
-export type LayerKey = 'regions' | 'places' | 'banners' | 'battles' | 'characters'
+export type LayerKey = 'regions' | 'places' | 'roads' | 'banners' | 'battles' | 'characters'
 
 export type Selection =
   | { kind: 'region'; id: string }
   | { kind: 'location'; id: string }
+  | { kind: 'site'; id: string }
+  | { kind: 'route'; id: string }
   | { kind: 'battle'; id: string }
   | { kind: 'character'; id: string }
   | { kind: 'house'; id: string }
+
+export type FlyTarget = {
+  x: number
+  y: number
+  zoom: number
+}
+
+export type Route = {
+  id: string
+  name: string
+  kind: 'road' | 'river' | 'wall'
+  lore: string
+  points: [number, number][]
+  minZoom: number
+}
+
+export type Site = {
+  id: string
+  parentId: string
+  name: string
+  kind: 'keep' | 'sept' | 'market' | 'harbor' | 'woods' | 'yard' | 'tower' | 'gate' | 'crypt' | 'ruin'
+  x: number
+  y: number
+  lore: string
+}
 
 export type RegionProps = {
   id: string

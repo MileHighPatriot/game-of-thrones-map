@@ -445,3 +445,31 @@ export const locations: Location[] = [
 ]
 
 export const locationById = Object.fromEntries(locations.map((location) => [location.id, location]))
+
+export const majorLocationIds = new Set([
+  'winterfell',
+  'castle-black',
+  'the-wall',
+  'kings-landing',
+  'dragonstone',
+  'casterly-rock',
+  'the-eyrie',
+  'riverrun',
+  'highgarden',
+  'storms-end',
+  'sunspear',
+  'pyke',
+  'meereen',
+  'braavos',
+  'pentos',
+  'vaes-dothrak',
+  'qarth',
+  'harrenhal',
+  'the-twins',
+  'oldtown',
+  'white-harbor',
+])
+
+export function placeMinZoom(id: string): number {
+  return majorLocationIds.has(id) ? 0.5 : 1.25
+}
