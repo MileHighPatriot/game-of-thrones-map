@@ -33,6 +33,7 @@ export function LayerToggles() {
               {item.label}
             </button>
           ))}
+          <p className="layers-hint">People stay grouped by city until you click them.</p>
         </div>
       )}
     </div>

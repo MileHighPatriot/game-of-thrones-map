@@ -16,6 +16,10 @@ type AtlasContextValue = {
   flyTo: (x: number, y: number, zoom?: number) => void
   fitNonce: number
   fitWorld: () => void
+  expandedPresence: string | null
+  setExpandedPresence: (locationId: string | null) => void
+  playing: boolean
+  setPlaying: (playing: boolean) => void
 }
 
 const AtlasContext = createContext<AtlasContextValue | null>(null)
@@ -36,6 +40,8 @@ export function AtlasProvider({ children }: { children: ReactNode }) {
   const [zoom, setZoom] = useState(0)
   const [flyTarget, setFlyTarget] = useState<FlyTarget | null>(null)
   const [fitNonce, setFitNonce] = useState(0)
+  const [expandedPresence, setExpandedPresence] = useState<string | null>(null)
+  const [playing, setPlaying] = useState(false)
 
   const value = useMemo<AtlasContextValue>(
     () => ({
@@ -48,11 +54,18 @@ export function AtlasProvider({ children }: { children: ReactNode }) {
       zoom,
       setZoom,
       flyTarget,
-      flyTo: (x, y, nextZoom = 2.2) => setFlyTarget({ x, y, zoom: nextZoom }),
+      flyTo: (x, y, nextZoom = 1.4) => setFlyTarget({ x, y, zoom: nextZoom }),
       fitNonce,
-      fitWorld: () => setFitNonce((count) => count + 1),
+      fitWorld: () => {
+        setExpandedPresence(null)
+        setFitNonce((count) => count + 1)
+      },
+      expandedPresence,
+      setExpandedPresence,
+      playing,
+      setPlaying,
     }),
-    [season, selection, layers, zoom, flyTarget, fitNonce],
+    [season, selection, layers, zoom, flyTarget, fitNonce, expandedPresence, playing],
   )
 
   return <AtlasContext.Provider value={value}>{children}</AtlasContext.Provider>

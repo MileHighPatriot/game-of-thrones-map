@@ -20,7 +20,7 @@ type Hit = {
 }
 
 export function SearchBox() {
-  const { season, setSelection, flyTo } = useAtlas()
+  const { season, setSelection, flyTo, setExpandedPresence } = useAtlas()
   const [query, setQuery] = useState('')
 
   const hits = useMemo(() => {
@@ -128,7 +128,7 @@ export function SearchBox() {
     <div className="search">
       <input
         type="search"
-        placeholder="Search King’s Landing, Winterfell…"
+        placeholder="Search Arya, Winterfell…"
         value={query}
         onChange={(event) => setQuery(event.target.value)}
         aria-label="Search the atlas"
@@ -141,6 +141,14 @@ export function SearchBox() {
                 type="button"
                 onClick={() => {
                   setSelection({ kind: hit.kind, id: hit.id })
+                  if (hit.kind === 'character') {
+                    const pin = presenceBySeason[season].find((item) => item.characterId === hit.id)
+                    setExpandedPresence(pin?.locationId ?? null)
+                  } else if (hit.kind === 'location') {
+                    setExpandedPresence(hit.id)
+                  } else {
+                    setExpandedPresence(null)
+                  }
                   flyTo(hit.x, hit.y, flyZoomFor(hit.kind))
                   setQuery('')
                 }}
