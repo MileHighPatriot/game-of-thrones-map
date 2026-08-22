@@ -8,6 +8,9 @@ import { houseById } from '../data/houses.ts'
 import { locationById, locations } from '../data/locations.ts'
 import { presenceBySeason } from '../data/presence.ts'
 import { regionById } from '../data/regions.ts'
+import { routeById } from '../data/routes.ts'
+import { siteById, sitesByParent } from '../data/sites.ts'
+import { flyZoomFor } from '../map/zoom.ts'
 import { bannerSvg } from '../lib/banners.ts'
 import { useAtlas } from '../state/AtlasContext.tsx'
 import type { IceAndFireCharacter, IceAndFireHouse, ThronesPortrait } from '../types.ts'
@@ -21,7 +24,7 @@ function peopleHere(season: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8, locationId: string) {
 }
 
 export function LorePanel() {
-  const { season, selection, setSelection } = useAtlas()
+  const { season, selection, setSelection, flyTo } = useAtlas()
   const [apiHouse, setApiHouse] = useState<IceAndFireHouse | null>(null)
   const [apiCharacter, setApiCharacter] = useState<IceAndFireCharacter | null>(null)
   const [portrait, setPortrait] = useState<ThronesPortrait | null>(null)
@@ -34,6 +37,11 @@ export function LorePanel() {
     if (selection.kind === 'character') return characterById[selection.id]?.houseId ?? null
     if (selection.kind === 'location') {
       const regionId = locationById[selection.id]?.regionId
+      return regionId ? (controlBySeason[season][regionId] ?? null) : null
+    }
+    if (selection.kind === 'site') {
+      const parentId = siteById[selection.id]?.parentId
+      const regionId = parentId ? locationById[parentId]?.regionId : undefined
       return regionId ? (controlBySeason[season][regionId] ?? null) : null
     }
     return null
@@ -125,9 +133,90 @@ export function LorePanel() {
             The surrounding land answers to <strong>{house.shortName}</strong> in season {season}.
           </p>
         )}
+        {(sitesByParent[place.id] ?? []).length > 0 && (
+          <button
+            className="dive"
+            type="button"
+            onClick={() => flyTo(place.x, place.y, flyZoomFor('site'))}
+          >
+            Dive into the streets
+          </button>
+        )}
         <ApiHouseBlock house={apiHouse} source={source} />
         {present.length > 0 && (
           <PeopleList title="Present this season" names={present.map((person) => person.name)} />
+        )}
+        {(sitesByParent[place.id] ?? []).length > 0 && (
+          <GroundsList
+            title="Inside this place"
+            items={sitesByParent[place.id] ?? []}
+            onPick={(site) => {
+              setSelection({ kind: 'site', id: site.id })
+              flyTo(site.x, site.y, flyZoomFor('site'))
+            }}
+          />
+        )}
+      </aside>
+    )
+  }
+
+  if (selection.kind === 'site') {
+    const site = siteById[selection.id]
+    if (!site) return null
+    const parent = locationById[site.parentId]
+    const neighbors = (sitesByParent[site.parentId] ?? []).filter((item) => item.id !== site.id)
+    return (
+      <aside className="panel">
+        <PanelHead
+          eyebrow={`${site.kind} · ${parent?.name ?? 'Unknown keep'}`}
+          title={site.name}
+          onClose={() => setSelection(null)}
+        />
+        <p>{site.lore}</p>
+        {parent && (
+          <p>
+            Part of <strong>{parent.name}</strong>. Zoom is street-level here — keep dragging to walk the grounds.
+          </p>
+        )}
+        {house && (
+          <p>
+            The surrounding land answers to <strong>{house.shortName}</strong> in season {season}.
+          </p>
+        )}
+        {neighbors.length > 0 && (
+          <GroundsList
+            title="Also on these grounds"
+            items={neighbors}
+            onPick={(item) => {
+              setSelection({ kind: 'site', id: item.id })
+              flyTo(item.x, item.y, flyZoomFor('site'))
+            }}
+          />
+        )}
+      </aside>
+    )
+  }
+
+  if (selection.kind === 'route') {
+    const route = routeById[selection.id]
+    if (!route) return null
+    const mid = route.points[Math.floor(route.points.length / 2)]
+    return (
+      <aside className="panel">
+        <PanelHead
+          eyebrow={route.kind === 'road' ? 'Road' : route.kind === 'river' ? 'River' : 'The Wall'}
+          title={route.name}
+          onClose={() => setSelection(null)}
+        />
+        <p>{route.lore}</p>
+        {mid && (
+          <button
+            className="dive"
+            type="button"
+            onClick={() => flyTo(mid[0], mid[1], flyZoomFor('route'))}
+          >
+            Follow this line
+          </button>
         )}
       </aside>
     )
@@ -176,6 +265,7 @@ export function LorePanel() {
     )
   }
 
+  if (selection.kind !== 'character') return null
   const character = characterById[selection.id]
   if (!character) return null
   const pin = presenceBySeason[season].find((item) => item.characterId === selection.id)
@@ -280,6 +370,31 @@ function PanelHead({
       <button className="close" type="button" onClick={onClose}>
         Close
       </button>
+    </div>
+  )
+}
+
+function GroundsList({
+  title,
+  items,
+  onPick,
+}: {
+  title: string
+  items: { id: string; name: string; x: number; y: number }[]
+  onPick: (item: { id: string; name: string; x: number; y: number }) => void
+}) {
+  return (
+    <div className="people">
+      <p className="eyebrow">{title}</p>
+      <ul className="grounds">
+        {items.map((item) => (
+          <li key={item.id}>
+            <button type="button" onClick={() => onPick(item)}>
+              {item.name}
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }
