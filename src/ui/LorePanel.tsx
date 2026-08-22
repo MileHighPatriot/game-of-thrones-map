@@ -13,8 +13,9 @@ import { siteById, sitesByParent } from '../data/sites.ts'
 import { flyZoomFor } from '../map/zoom.ts'
 import { seatPortraits } from '../data/portraits.ts'
 import { bannerSvg } from '../lib/banners.ts'
+import { compareCharacters, firstName, initials } from '../lib/people.ts'
 import { useAtlas } from '../state/AtlasContext.tsx'
-import type { IceAndFireCharacter, IceAndFireHouse, ThronesPortrait } from '../types.ts'
+import type { Character, IceAndFireCharacter, IceAndFireHouse, ThronesPortrait } from '../types.ts'
 
 function peopleHere(season: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8, locationId: string) {
   return presenceBySeason[season].flatMap((pin) => {
@@ -25,7 +26,11 @@ function peopleHere(season: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8, locationId: string) {
 }
 
 export function LorePanel() {
-  const { season, selection, setSelection, flyTo } = useAtlas()
+  const { season, selection, setSelection, flyTo, setExpandedPresence } = useAtlas()
+  const closePanel = () => {
+    setSelection(null)
+    setExpandedPresence(null)
+  }
   const [apiHouse, setApiHouse] = useState<IceAndFireHouse | null>(null)
   const [apiCharacter, setApiCharacter] = useState<IceAndFireCharacter | null>(null)
   const [portrait, setPortrait] = useState<ThronesPortrait | null>(null)
@@ -97,7 +102,7 @@ export function LorePanel() {
         <PanelHead
           eyebrow={`${region.properties.continent} · Season ${season}`}
           title={region.properties.name}
-          onClose={() => setSelection(null)}
+          onClose={closePanel}
         />
         {house && (
           <div className="banner-row" dangerouslySetInnerHTML={{ __html: bannerSvg(house.id) }} />
@@ -111,7 +116,7 @@ export function LorePanel() {
         )}
         <ApiHouseBlock house={apiHouse} source={source} />
         {present.length > 0 && (
-          <PeopleList title="Present this season" names={present.map((person) => person.name)} />
+          <PeoplePicker title="Present this season" people={present} />
         )}
       </aside>
     )
@@ -126,7 +131,7 @@ export function LorePanel() {
         <PanelHead
           eyebrow={`${place.kind} · ${regionById[place.regionId]?.properties.name ?? ''}`}
           title={place.name}
-          onClose={() => setSelection(null)}
+          onClose={closePanel}
         />
         {seatPortraits[place.id] && (
           <img className="seat-art" src={seatPortraits[place.id]} alt="" />
@@ -146,7 +151,7 @@ export function LorePanel() {
         </button>
         <ApiHouseBlock house={apiHouse} source={source} />
         {present.length > 0 && (
-          <PeopleList title="Present this season" names={present.map((person) => person.name)} />
+          <PeoplePicker title="Present this season" people={present} />
         )}
         {(sitesByParent[place.id] ?? []).length > 0 && (
           <GroundsList
@@ -172,7 +177,7 @@ export function LorePanel() {
         <PanelHead
           eyebrow={`${site.kind} · ${parent?.name ?? 'Unknown keep'}`}
           title={site.name}
-          onClose={() => setSelection(null)}
+          onClose={closePanel}
         />
         {parent && seatPortraits[parent.id] && (
           <img className="seat-art" src={seatPortraits[parent.id]} alt="" />
@@ -211,7 +216,7 @@ export function LorePanel() {
         <PanelHead
           eyebrow={route.kind === 'road' ? 'Road' : route.kind === 'river' ? 'River' : 'The Wall'}
           title={route.name}
-          onClose={() => setSelection(null)}
+          onClose={closePanel}
         />
         <p>{route.lore}</p>
         {mid && (
@@ -235,7 +240,7 @@ export function LorePanel() {
         <PanelHead
           eyebrow="Great house"
           title={selectedHouse.name}
-          onClose={() => setSelection(null)}
+          onClose={closePanel}
         />
         <div className="banner-row" dangerouslySetInnerHTML={{ __html: bannerSvg(selectedHouse.id) }} />
         <p className="words">{selectedHouse.words}</p>
@@ -254,7 +259,7 @@ export function LorePanel() {
         <PanelHead
           eyebrow={`Battle · Season ${battle.season}`}
           title={battle.name}
-          onClose={() => setSelection(null)}
+          onClose={closePanel}
         />
         <p>{battle.lore}</p>
         <p>
@@ -282,7 +287,7 @@ export function LorePanel() {
       <PanelHead
         eyebrow={house?.shortName ?? 'Wanderer'}
         title={character.name}
-        onClose={() => setSelection(null)}
+        onClose={closePanel}
       />
       {image && <img className="portrait" src={image} alt={character.name} />}
       <p>{character.lore}</p>
@@ -291,6 +296,24 @@ export function LorePanel() {
           ? `Primary presence in season ${season}: ${here.name}.`
           : `Not on the board in season ${season}.`}
       </p>
+      {here && (
+        <button
+          className="dive"
+          type="button"
+          onClick={() => {
+            setExpandedPresence(here.id)
+            flyTo(here.x, here.y, flyZoomFor('character'))
+          }}
+        >
+          See on the map
+        </button>
+      )}
+      {here && (
+        <PeoplePicker
+          title="Also here this season"
+          people={peopleHere(season, here.id).filter((person) => person.id !== character.id)}
+        />
+      )}
       {apiCharacter && (
         <div className="api-block">
           <p className="eyebrow">From An API of Ice and Fire</p>
@@ -404,15 +427,34 @@ function GroundsList({
   )
 }
 
-function PeopleList({ title, names }: { title: string; names: string[] }) {
+function PeoplePicker({ title, people }: { title: string; people: Character[] }) {
+  const { season, setSelection, setExpandedPresence } = useAtlas()
+  if (people.length === 0) return null
+  const ordered = [...people].sort(compareCharacters)
+
   return (
     <div className="people">
       <p className="eyebrow">{title}</p>
-      <ul>
-        {names.map((name) => (
-          <li key={name}>{name}</li>
+      <div className="people-picker">
+        {ordered.map((person) => (
+          <button
+            key={person.id}
+            type="button"
+            onClick={() => {
+              setSelection({ kind: 'character', id: person.id })
+              const pin = presenceBySeason[season].find((item) => item.characterId === person.id)
+              if (pin) setExpandedPresence(pin.locationId)
+            }}
+          >
+            {person.portrait ? (
+              <img src={person.portrait} alt="" />
+            ) : (
+              <span className="face">{initials(person.name)}</span>
+            )}
+            <em>{firstName(person.name)}</em>
+          </button>
         ))}
-      </ul>
+      </div>
     </div>
   )
 }

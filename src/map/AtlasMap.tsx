@@ -17,13 +17,13 @@ import { controlBySeason } from '../data/control.ts'
 import { houseById } from '../data/houses.ts'
 import { locationById, locations, placeMinZoom } from '../data/locations.ts'
 import { presenceBySeason } from '../data/presence.ts'
-import { characterById } from '../data/characters.ts'
 import { regionsGeoJSON } from '../data/regions.ts'
 import { routes } from '../data/routes.ts'
 import { bannerSvg } from '../lib/banners.ts'
 import { sx, sy, toLatLng } from '../lib/geo.ts'
 import { useAtlas } from '../state/AtlasContext.tsx'
 import { MAP_HEIGHT, MAP_WIDTH, type RegionFeature } from '../types.ts'
+import { FollowSelection, PresenceLayer } from './PresenceLayer.tsx'
 import { MAX_ZOOM, ZOOM, fitZoom, flyZoomFor } from './zoom.ts'
 
 const bounds: L.LatLngBoundsExpression = [
@@ -54,10 +54,15 @@ function applyFit(map: L.Map) {
 
 function MapEvents() {
   const map = useMap()
-  const { flyTarget, selection, setSelection, setZoom, fitNonce } = useAtlas()
+  const { flyTarget, selection, setSelection, setZoom, fitNonce, setExpandedPresence } = useAtlas()
 
   useMapEvents({
-    click: () => setSelection(null),
+    click: (event) => {
+      const target = event.originalEvent.target
+      if (target instanceof Element && target.closest('.leaflet-marker-icon')) return
+      setSelection(null)
+      setExpandedPresence(null)
+    },
     zoomend: () => setZoom(map.getZoom()),
     zoom: () => setZoom(map.getZoom()),
   })
@@ -216,13 +221,21 @@ function RouteLayer() {
 }
 
 function PlaceLayer() {
-  const { layers, zoom, setSelection, flyTo } = useAtlas()
+  const { layers, zoom, season, setSelection, flyTo } = useAtlas()
   if (!layers.places) return null
+
+  const clusteredPeople =
+    layers.characters && zoom < ZOOM.presenceSpread
+      ? new Set(presenceBySeason[season].map((pin) => pin.locationId))
+      : null
 
   return (
     <>
       {locations
-        .filter((place) => zoom >= placeMinZoom(place.id))
+        .filter((place) => {
+          if (clusteredPeople?.has(place.id)) return false
+          return zoom >= placeMinZoom(place.id)
+        })
         .map((place) => {
           const showName = zoom >= ZOOM.placeLabels
           return (
@@ -293,8 +306,8 @@ function BannerLayer() {
 }
 
 function BattleLayer() {
-  const { season, layers, zoom, setSelection } = useAtlas()
-  if (!layers.battles || zoom < 0.4) return null
+  const { season, layers, setSelection } = useAtlas()
+  if (!layers.battles) return null
 
   return (
     <>
@@ -306,7 +319,7 @@ function BattleLayer() {
           return (
             <Marker
               key={battle.id}
-              position={toLatLng(place.x, place.y + 10)}
+              position={toLatLng(place.x + 16, place.y - 6)}
               icon={icon('<span class="pin-battle">⚔</span>', 'marker-battle', [22, 22])}
               eventHandlers={{
                 click: (event) => {
@@ -319,59 +332,6 @@ function BattleLayer() {
             </Marker>
           )
         })}
-    </>
-  )
-}
-
-function PresenceLayer() {
-  const { season, layers, zoom, setSelection } = useAtlas()
-  if (!layers.characters || zoom < 0.55) return null
-
-  const pins = presenceBySeason[season]
-  const grouped = new Map<string, typeof pins>()
-  for (const pin of pins) {
-    const list = grouped.get(pin.locationId) ?? []
-    list.push(pin)
-    grouped.set(pin.locationId, list)
-  }
-
-  return (
-    <>
-      {pins.map((pin) => {
-        const character = characterById[pin.characterId]
-        const place = locationById[pin.locationId]
-        if (!character || !place) return null
-        const siblings = grouped.get(pin.locationId) ?? []
-        const siblingIndex = siblings.findIndex((item) => item.characterId === pin.characterId)
-        const angle = siblings.length > 1 ? (siblingIndex / siblings.length) * Math.PI * 2 : 0
-        const radius = siblings.length > 1 ? 11 : 0
-        const lift = 9
-        const x = place.x + Math.cos(angle) * radius
-        const y = place.y + Math.sin(angle) * radius + lift
-        const initial = character.name
-          .split(' ')
-          .map((part) => part[0])
-          .join('')
-          .slice(0, 2)
-        const portrait = character.portrait
-          ? `<img src="${character.portrait}" alt="" />`
-          : `<span>${initial}</span>`
-        return (
-          <Marker
-            key={pin.characterId}
-            position={toLatLng(x, y)}
-            icon={icon(`<span class="pin-char">${portrait}</span>`, 'marker-char', [26, 26])}
-            eventHandlers={{
-              click: (event) => {
-                L.DomEvent.stopPropagation(event.originalEvent)
-                setSelection({ kind: 'character', id: character.id })
-              },
-            }}
-          >
-            <Tooltip direction="top">{character.name}</Tooltip>
-          </Marker>
-        )
-      })}
     </>
   )
 }
@@ -397,6 +357,7 @@ export function AtlasMap() {
       <ImageOverlay url={basemapUrl} bounds={bounds} opacity={1} />
       <ZoomControl position="bottomleft" />
       <MapEvents />
+      <FollowSelection />
       <RegionLayer />
       <RouteLayer />
       <RegionLabels />
