@@ -21,13 +21,15 @@ import { presenceBySeason } from '../data/presence.ts'
 import { characterById } from '../data/characters.ts'
 import { regionsGeoJSON } from '../data/regions.ts'
 import { routes } from '../data/routes.ts'
+import { cityLocationIds, citySpecs } from '../data/cities.ts'
 import { sites } from '../data/sites.ts'
 import { streets } from '../data/streets.ts'
+import { CityLayer } from './CityLayer.tsx'
 import { bannerSvg } from '../lib/banners.ts'
 import { toLatLng } from '../lib/geo.ts'
 import { useAtlas } from '../state/AtlasContext.tsx'
 import { MAP_HEIGHT, MAP_WIDTH, type RegionFeature } from '../types.ts'
-import { MAX_ZOOM, MIN_ZOOM, ZOOM, flyZoomFor } from './zoom.ts'
+import { MAX_ZOOM, ZOOM, coverZoom, flyZoomFor } from './zoom.ts'
 
 const bounds: L.LatLngBoundsExpression = [
   [0, 0],
@@ -45,6 +47,14 @@ function icon(html: string, className: string, size: [number, number], anchor?: 
   })
 }
 
+function applyCover(map: L.Map) {
+  const size = map.getSize()
+  const min = coverZoom(size.x, size.y)
+  map.setMinZoom(min)
+  if (map.getZoom() < min) map.setZoom(min)
+  return min
+}
+
 function MapEvents() {
   const map = useMap()
   const { flyTarget, selection, setSelection, setZoom, fitNonce } = useAtlas()
@@ -56,13 +66,23 @@ function MapEvents() {
   })
 
   useEffect(() => {
-    map.fitBounds(bounds, { padding: [28, 28] })
+    const min = applyCover(map)
+    map.setView(toLatLng(MAP_WIDTH / 2, MAP_HEIGHT / 2), min, { animate: false })
     setZoom(map.getZoom())
+    const onResize = () => {
+      applyCover(map)
+      setZoom(map.getZoom())
+    }
+    map.on('resize', onResize)
+    return () => {
+      map.off('resize', onResize)
+    }
   }, [map, setZoom])
 
   useEffect(() => {
     if (!fitNonce) return
-    map.flyToBounds(bounds, { padding: [28, 28], duration: 0.85 })
+    const min = applyCover(map)
+    map.flyTo(toLatLng(MAP_WIDTH / 2, MAP_HEIGHT / 2), min, { duration: 0.7 })
   }, [fitNonce, map])
 
   useEffect(() => {
@@ -72,7 +92,7 @@ function MapEvents() {
 
   useEffect(() => {
     if (!flyTarget) return
-    map.flyTo(toLatLng(flyTarget.x, flyTarget.y), flyTarget.zoom, { duration: 0.9 })
+    map.flyTo(toLatLng(flyTarget.x, flyTarget.y), flyTarget.zoom, { duration: 1.05 })
   }, [flyTarget, map])
 
   return null
@@ -83,7 +103,7 @@ function RegionLayer() {
   if (!layers.regions) return null
 
   const control = controlBySeason[season]
-  const fill = zoom > 2.2 ? 0.08 : zoom > 1.1 ? 0.16 : 0.26
+  const fill = zoom > 2.6 ? 0.04 : zoom > 1.4 ? 0.12 : 0.22
 
   const style = (feature?: Feature): PathOptions => {
     const id = String(feature?.properties && (feature.properties as RegionFeature['properties']).id)
@@ -199,7 +219,7 @@ function RouteLayer() {
 
 function DistrictLayer() {
   const { layers, zoom } = useAtlas()
-  if (!layers.places || zoom < ZOOM.districts) return null
+  if (!layers.places || zoom < ZOOM.cityPlans - 0.4 || zoom >= ZOOM.cityPlans) return null
 
   return (
     <>
@@ -225,7 +245,7 @@ function DistrictLayer() {
 
 function StreetLayer() {
   const { layers, zoom } = useAtlas()
-  if (!layers.roads || zoom < ZOOM.districts) return null
+  if (!layers.roads || zoom < ZOOM.cityPlans - 0.35 || zoom >= ZOOM.cityPlans) return null
 
   return (
     <>
@@ -254,6 +274,7 @@ function PlaceLayer() {
     <>
       {locations
         .filter((place) => zoom >= placeMinZoom(place.id))
+        .filter((place) => !(cityLocationIds.has(place.id) && zoom >= ZOOM.cityPlans))
         .map((place) => {
           const showName = zoom >= ZOOM.placeLabels
           return (
@@ -283,6 +304,33 @@ function PlaceLayer() {
             </Marker>
           )
         })}
+    </>
+  )
+}
+
+function CityLabels() {
+  const { layers, zoom, setSelection } = useAtlas()
+  if (!layers.places || zoom < ZOOM.cityPlans || zoom > 5.3) return null
+
+  return (
+    <>
+      {citySpecs.map((city) => {
+        const place = locationById[city.locationId]
+        if (!place) return null
+        return (
+          <Marker
+            key={`city-title-${city.id}`}
+            position={toLatLng(city.cx, city.cy + city.h / 2 - 1.2)}
+            icon={icon(`<span class="map-label city-title">${place.name}</span>`, 'marker-label', [180, 22])}
+            eventHandlers={{
+              click: (event) => {
+                L.DomEvent.stopPropagation(event.originalEvent)
+                setSelection({ kind: 'location', id: place.id })
+              },
+            }}
+          />
+        )
+      })}
     </>
   )
 }
@@ -321,7 +369,7 @@ function SiteLayer() {
 
 function BannerLayer() {
   const { season, layers, zoom, setSelection, flyTo } = useAtlas()
-  if (!layers.banners || zoom < ZOOM.banners || zoom > 2.4) return null
+  if (!layers.banners || zoom < ZOOM.banners || zoom >= ZOOM.cityPlans) return null
 
   const control = controlBySeason[season]
 
@@ -388,7 +436,7 @@ function BattleLayer() {
 
 function PresenceLayer() {
   const { season, layers, zoom, setSelection } = useAtlas()
-  if (!layers.characters || zoom < 0.6) return null
+  if (!layers.characters || zoom < 0.6 || zoom >= ZOOM.cityPlans) return null
 
   const pins = presenceBySeason[season]
   const grouped = new Map<string, typeof pins>()
@@ -407,9 +455,10 @@ function PresenceLayer() {
         const siblings = grouped.get(pin.locationId) ?? []
         const siblingIndex = siblings.findIndex((item) => item.characterId === pin.characterId)
         const angle = siblings.length > 1 ? (siblingIndex / siblings.length) * Math.PI * 2 : 0
-        const radius = siblings.length > 1 ? 16 : 0
+        const radius = siblings.length > 1 ? (zoom >= ZOOM.cityPlans ? 2.6 : 12) : 0
+        const lift = zoom >= ZOOM.cityPlans ? 1.6 : 10
         const x = place.x + Math.cos(angle) * radius
-        const y = place.y + Math.sin(angle) * radius + 14
+        const y = place.y + Math.sin(angle) * radius + lift
         const initial = character.name
           .split(' ')
           .map((part) => part[0])
@@ -444,14 +493,14 @@ export function AtlasMap() {
       className="atlas-map"
       crs={L.CRS.Simple}
       center={toLatLng(MAP_WIDTH / 2, MAP_HEIGHT / 2)}
-      zoom={0}
-      minZoom={MIN_ZOOM}
+      zoom={0.25}
+      minZoom={0}
       maxZoom={MAX_ZOOM}
       zoomSnap={0.25}
       zoomDelta={0.5}
-      wheelPxPerZoomLevel={90}
+      wheelPxPerZoomLevel={80}
       maxBounds={bounds}
-      maxBoundsViscosity={0.7}
+      maxBoundsViscosity={1}
       bounceAtZoomLimits={false}
       attributionControl={false}
       zoomControl={false}
@@ -459,12 +508,14 @@ export function AtlasMap() {
       <ImageOverlay url={basemapUrl} bounds={bounds} opacity={1} />
       <ZoomControl position="bottomleft" />
       <MapEvents />
+      <CityLayer />
       <RegionLayer />
       <RouteLayer />
       <DistrictLayer />
       <StreetLayer />
       <RegionLabels />
       <PlaceLayer />
+      <CityLabels />
       <SiteLayer />
       <BannerLayer />
       <BattleLayer />

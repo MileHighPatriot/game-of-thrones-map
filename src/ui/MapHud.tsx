@@ -7,10 +7,9 @@ export function MapHud() {
   return (
     <div className="map-hud">
       <button type="button" onClick={fitWorld}>
-        World view
+        Continent
       </button>
       <span>{zoomName(zoom)}</span>
-      <small>Scroll to zoom · drag to roam · double-click to dive in</small>
     </div>
   )
 }
