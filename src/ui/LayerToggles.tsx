@@ -13,16 +13,17 @@ export function LayerToggles() {
   const { layers, toggleLayer } = useAtlas()
 
   return (
-    <div className="chrome toggles" role="group" aria-label="Map layers">
+    <div className="toggles" role="group" aria-label="Map layers">
       {labels.map((item) => (
-        <label key={item.key}>
-          <input
-            type="checkbox"
-            checked={layers[item.key]}
-            onChange={() => toggleLayer(item.key)}
-          />
+        <button
+          key={item.key}
+          type="button"
+          className={layers[item.key] ? 'active' : ''}
+          aria-pressed={layers[item.key]}
+          onClick={() => toggleLayer(item.key)}
+        >
           {item.label}
-        </label>
+        </button>
       ))}
     </div>
   )

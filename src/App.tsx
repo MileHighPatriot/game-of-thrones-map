@@ -10,11 +10,17 @@ export default function App() {
   return (
     <AtlasProvider>
       <div className="app">
-        <AtlasMap />
-        <Header />
-        <SearchBox />
-        <LayerToggles />
-        <LorePanel />
+        <header className="topbar">
+          <Header />
+          <SearchBox />
+          <LayerToggles />
+        </header>
+        <div className="workspace">
+          <main className="map-stage">
+            <AtlasMap />
+          </main>
+          <LorePanel />
+        </div>
         <SeasonSlider />
       </div>
     </AtlasProvider>
