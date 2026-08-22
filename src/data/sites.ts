@@ -1,5 +1,5 @@
 import type { Site } from '../types.ts'
-import { landmarkXY } from './cities.ts'
+import { locationById } from './locations.ts'
 
 const rawSites: Site[] = [
   {
@@ -428,8 +428,8 @@ const rawSites: Site[] = [
 ]
 
 export const sites: Site[] = rawSites.map((site) => {
-  const placed = landmarkXY(site.parentId, site.id)
-  return placed ? { ...site, x: placed.x, y: placed.y } : site
+  const parent = locationById[site.parentId]
+  return parent ? { ...site, x: parent.x, y: parent.y } : site
 })
 
 export const siteById = Object.fromEntries(sites.map((site) => [site.id, site]))

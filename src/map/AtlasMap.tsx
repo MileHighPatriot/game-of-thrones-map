@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import type { Feature, FeatureCollection } from 'geojson'
 import {
-  CircleMarker,
   GeoJSON,
   ImageOverlay,
   MapContainer,
@@ -21,20 +20,18 @@ import { presenceBySeason } from '../data/presence.ts'
 import { characterById } from '../data/characters.ts'
 import { regionsGeoJSON } from '../data/regions.ts'
 import { routes } from '../data/routes.ts'
-import { cityLocationIds, citySpecs } from '../data/cities.ts'
-import { sites } from '../data/sites.ts'
-import { streets } from '../data/streets.ts'
-import { CityLayer } from './CityLayer.tsx'
 import { bannerSvg } from '../lib/banners.ts'
-import { toLatLng } from '../lib/geo.ts'
+import { sx, sy, toLatLng } from '../lib/geo.ts'
 import { useAtlas } from '../state/AtlasContext.tsx'
 import { MAP_HEIGHT, MAP_WIDTH, type RegionFeature } from '../types.ts'
-import { MAX_ZOOM, ZOOM, coverZoom, flyZoomFor } from './zoom.ts'
+import { MAX_ZOOM, ZOOM, fitZoom, flyZoomFor } from './zoom.ts'
 
 const bounds: L.LatLngBoundsExpression = [
   [0, 0],
   [MAP_HEIGHT, MAP_WIDTH],
 ]
+
+const imageCenter: L.LatLngExpression = [MAP_HEIGHT / 2, MAP_WIDTH / 2]
 
 const basemapUrl = `${import.meta.env.BASE_URL}map/westeros-essos.png`
 
@@ -47,9 +44,9 @@ function icon(html: string, className: string, size: [number, number], anchor?: 
   })
 }
 
-function applyCover(map: L.Map) {
+function applyFit(map: L.Map) {
   const size = map.getSize()
-  const min = coverZoom(size.x, size.y)
+  const min = fitZoom(size.x, size.y)
   map.setMinZoom(min)
   if (map.getZoom() < min) map.setZoom(min)
   return min
@@ -66,11 +63,11 @@ function MapEvents() {
   })
 
   useEffect(() => {
-    const min = applyCover(map)
-    map.setView(toLatLng(MAP_WIDTH / 2, MAP_HEIGHT / 2), min, { animate: false })
+    const min = applyFit(map)
+    map.setView(imageCenter, min, { animate: false })
     setZoom(map.getZoom())
     const onResize = () => {
-      applyCover(map)
+      applyFit(map)
       setZoom(map.getZoom())
     }
     map.on('resize', onResize)
@@ -81,8 +78,8 @@ function MapEvents() {
 
   useEffect(() => {
     if (!fitNonce) return
-    const min = applyCover(map)
-    map.flyTo(toLatLng(MAP_WIDTH / 2, MAP_HEIGHT / 2), min, { duration: 0.7 })
+    const min = applyFit(map)
+    map.flyTo(imageCenter, min, { duration: 0.7 })
   }, [fitNonce, map])
 
   useEffect(() => {
@@ -103,18 +100,18 @@ function RegionLayer() {
   if (!layers.regions) return null
 
   const control = controlBySeason[season]
-  const fill = zoom > 2.6 ? 0.04 : zoom > 1.4 ? 0.12 : 0.22
+  const fill = zoom > 1.8 ? 0.03 : 0.08
 
   const style = (feature?: Feature): PathOptions => {
     const id = String(feature?.properties && (feature.properties as RegionFeature['properties']).id)
     const house = houseById[control[id]]
     const selected = selection?.kind === 'region' && selection.id === id
     return {
-      color: selected ? '#f4e3b2' : house?.accent ?? '#3a2c1c',
-      weight: selected ? 2.2 : zoom > 1.4 ? 0.6 : 1,
+      color: selected ? '#f4e3b2' : house?.accent ?? '#4a3a28',
+      weight: selected ? 2 : 0.9,
       fillColor: house?.color ?? '#8a7a62',
-      fillOpacity: selected ? Math.max(fill, 0.22) : fill,
-      interactive: zoom < 2.05,
+      fillOpacity: selected ? 0.22 : fill,
+      interactive: zoom < 2.2,
     }
   }
 
@@ -136,6 +133,7 @@ function RegionLayer() {
       key={`regions-${season}-${selection?.kind === 'region' ? selection.id : ''}-${Math.round(fill * 100)}`}
       data={regionsGeoJSON as FeatureCollection}
       style={style}
+      coordsToLatLng={(coords) => L.latLng(sy(coords[1]), sx(coords[0]))}
       onEachFeature={onEachFeature}
     />
   )
@@ -217,55 +215,6 @@ function RouteLayer() {
   )
 }
 
-function DistrictLayer() {
-  const { layers, zoom } = useAtlas()
-  if (!layers.places || zoom < ZOOM.cityPlans - 0.4 || zoom >= ZOOM.cityPlans) return null
-
-  return (
-    <>
-      {locations
-        .filter((place) => place.kind === 'city' || place.kind === 'castle' || place.kind === 'ruin')
-        .map((place) => (
-          <CircleMarker
-            key={`district-${place.id}`}
-            center={toLatLng(place.x, place.y)}
-            radius={place.kind === 'city' ? 38 : 28}
-            pathOptions={{
-              color: '#5a4030',
-              weight: 1.1,
-              fillColor: '#d8c4a0',
-              fillOpacity: 0.2,
-            }}
-            interactive={false}
-          />
-        ))}
-    </>
-  )
-}
-
-function StreetLayer() {
-  const { layers, zoom } = useAtlas()
-  if (!layers.roads || zoom < ZOOM.cityPlans - 0.35 || zoom >= ZOOM.cityPlans) return null
-
-  return (
-    <>
-      {streets.map((street) => (
-        <Polyline
-          key={street.id}
-          positions={street.points.map(([x, y]) => toLatLng(x, y))}
-          pathOptions={{
-            color: '#6b4a28',
-            weight: zoom >= ZOOM.sites ? 2.4 : 1.6,
-            opacity: 0.55,
-            lineCap: 'round',
-          }}
-          interactive={false}
-        />
-      ))}
-    </>
-  )
-}
-
 function PlaceLayer() {
   const { layers, zoom, setSelection, flyTo } = useAtlas()
   if (!layers.places) return null
@@ -274,7 +223,6 @@ function PlaceLayer() {
     <>
       {locations
         .filter((place) => zoom >= placeMinZoom(place.id))
-        .filter((place) => !(cityLocationIds.has(place.id) && zoom >= ZOOM.cityPlans))
         .map((place) => {
           const showName = zoom >= ZOOM.placeLabels
           return (
@@ -308,68 +256,9 @@ function PlaceLayer() {
   )
 }
 
-function CityLabels() {
-  const { layers, zoom, setSelection } = useAtlas()
-  if (!layers.places || zoom < ZOOM.cityPlans || zoom > 5.3) return null
-
-  return (
-    <>
-      {citySpecs.map((city) => {
-        const place = locationById[city.locationId]
-        if (!place) return null
-        return (
-          <Marker
-            key={`city-title-${city.id}`}
-            position={toLatLng(city.cx, city.cy + city.h / 2 - 1.2)}
-            icon={icon(`<span class="map-label city-title">${place.name}</span>`, 'marker-label', [180, 22])}
-            eventHandlers={{
-              click: (event) => {
-                L.DomEvent.stopPropagation(event.originalEvent)
-                setSelection({ kind: 'location', id: place.id })
-              },
-            }}
-          />
-        )
-      })}
-    </>
-  )
-}
-
-function SiteLayer() {
-  const { layers, zoom, setSelection } = useAtlas()
-  if (!layers.places || zoom < ZOOM.sites) return null
-
-  return (
-    <>
-      {sites.map((site) => (
-        <Marker
-          key={site.id}
-          position={toLatLng(site.x, site.y)}
-          icon={icon(
-            `<span class="site-pin site-${site.kind}"></span>${
-              zoom >= ZOOM.siteLabels ? `<span class="map-label site-label">${site.name}</span>` : ''
-            }`,
-            'marker-site',
-            [130, 26],
-            [6, 8],
-          )}
-          eventHandlers={{
-            click: (event) => {
-              L.DomEvent.stopPropagation(event.originalEvent)
-              setSelection({ kind: 'site', id: site.id })
-            },
-          }}
-        >
-          {zoom < ZOOM.siteLabels && <Tooltip direction="top">{site.name}</Tooltip>}
-        </Marker>
-      ))}
-    </>
-  )
-}
-
 function BannerLayer() {
   const { season, layers, zoom, setSelection, flyTo } = useAtlas()
-  if (!layers.banners || zoom < ZOOM.banners || zoom >= ZOOM.cityPlans) return null
+  if (!layers.banners || zoom < ZOOM.banners) return null
 
   const control = controlBySeason[season]
 
@@ -436,7 +325,7 @@ function BattleLayer() {
 
 function PresenceLayer() {
   const { season, layers, zoom, setSelection } = useAtlas()
-  if (!layers.characters || zoom < 0.6 || zoom >= ZOOM.cityPlans) return null
+  if (!layers.characters || zoom < 0.55) return null
 
   const pins = presenceBySeason[season]
   const grouped = new Map<string, typeof pins>()
@@ -455,8 +344,8 @@ function PresenceLayer() {
         const siblings = grouped.get(pin.locationId) ?? []
         const siblingIndex = siblings.findIndex((item) => item.characterId === pin.characterId)
         const angle = siblings.length > 1 ? (siblingIndex / siblings.length) * Math.PI * 2 : 0
-        const radius = siblings.length > 1 ? (zoom >= ZOOM.cityPlans ? 2.6 : 12) : 0
-        const lift = zoom >= ZOOM.cityPlans ? 1.6 : 10
+        const radius = siblings.length > 1 ? 11 : 0
+        const lift = 9
         const x = place.x + Math.cos(angle) * radius
         const y = place.y + Math.sin(angle) * radius + lift
         const initial = character.name
@@ -492,15 +381,15 @@ export function AtlasMap() {
     <MapContainer
       className="atlas-map"
       crs={L.CRS.Simple}
-      center={toLatLng(MAP_WIDTH / 2, MAP_HEIGHT / 2)}
-      zoom={0.25}
-      minZoom={0}
+      center={imageCenter}
+      zoom={0.1}
+      minZoom={-1}
       maxZoom={MAX_ZOOM}
       zoomSnap={0.25}
       zoomDelta={0.5}
-      wheelPxPerZoomLevel={80}
+      wheelPxPerZoomLevel={90}
       maxBounds={bounds}
-      maxBoundsViscosity={1}
+      maxBoundsViscosity={0.7}
       bounceAtZoomLimits={false}
       attributionControl={false}
       zoomControl={false}
@@ -508,15 +397,10 @@ export function AtlasMap() {
       <ImageOverlay url={basemapUrl} bounds={bounds} opacity={1} />
       <ZoomControl position="bottomleft" />
       <MapEvents />
-      <CityLayer />
       <RegionLayer />
       <RouteLayer />
-      <DistrictLayer />
-      <StreetLayer />
       <RegionLabels />
       <PlaceLayer />
-      <CityLabels />
-      <SiteLayer />
       <BannerLayer />
       <BattleLayer />
       <PresenceLayer />
