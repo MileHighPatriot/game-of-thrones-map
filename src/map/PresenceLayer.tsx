@@ -100,18 +100,25 @@ export function PresenceLayer() {
         if (!place) return null
         const people = peopleAtLocation(season, locationId, selectedId)
         if (people.length === 0) return null
-        const expanded = expandedPresence === locationId
-        const spread = zoom >= ZOOM.presenceSpread || expanded
+        const spread = zoom >= ZOOM.presenceSpread
         const names = people.map((person) => person.name).join(', ')
+        const compact = zoom < 0.9
 
         if (!spread) {
+          const size: [number, number] = compact ? [44, 44] : [128, 64]
+          const anchor: [number, number] = compact ? [22, 22] : [64, 64]
           return (
             <Marker
               key={`cluster-${season}-${locationId}`}
               position={toLatLng(place.x, place.y)}
               zIndexOffset={selectedId && people.some((person) => person.id === selectedId) ? 1400 : 900}
               riseOnHover
-              icon={icon(clusterHtml(people, place.name, selectedId), 'marker-presence', [128, 72], [64, 72])}
+              icon={icon(
+                clusterHtml(people, place.name, selectedId, compact),
+                'marker-presence',
+                size,
+                anchor,
+              )}
               eventHandlers={{
                 click: (event) => {
                   if (event.originalEvent) L.DomEvent.stop(event.originalEvent)
@@ -121,6 +128,7 @@ export function PresenceLayer() {
                   } else {
                     setSelection({ kind: 'location', id: locationId })
                   }
+                  flyTo(place.x, place.y, flyZoomFor('character'))
                 },
                 dblclick: (event) => {
                   if (event.originalEvent) L.DomEvent.stop(event.originalEvent)
@@ -129,21 +137,24 @@ export function PresenceLayer() {
                 },
               }}
             >
-              <Tooltip direction="top" offset={[0, -64]}>
+              <Tooltip direction="top" offset={[0, compact ? -18 : -56]}>
                 {place.name}: {names}
               </Tooltip>
             </Marker>
           )
         }
 
-        const radius = 42 + people.length * 6
-
         return people.map((person, index) => {
+          const innerCount = Math.min(people.length, 8)
+          const ring = index < innerCount ? 0 : 1
+          const ringCount = ring === 0 ? innerCount : people.length - innerCount
+          const ringIndex = ring === 0 ? index : index - innerCount
+          const radius = (34 + ring * 28 + Math.min(people.length, 8) * 2) * (0.7 + zoom * 0.28)
           const angle =
-            people.length === 1 ? -Math.PI / 2 : (index / people.length) * Math.PI * 2 - Math.PI / 2
+            people.length === 1 ? -Math.PI / 2 : (ringIndex / ringCount) * Math.PI * 2 - Math.PI / 2
           const position =
             people.length === 1
-              ? offsetLatLng(place.x, place.y, -Math.PI / 2, 22, zoom)
+              ? offsetLatLng(place.x, place.y, -Math.PI / 2, 26, zoom)
               : offsetLatLng(place.x, place.y, angle, radius, zoom)
           const selected = person.id === selectedId
           return (

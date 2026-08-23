@@ -17,9 +17,9 @@ import { controlBySeason } from '../data/control.ts'
 import { houseById } from '../data/houses.ts'
 import { locationById, locations, placeMinZoom } from '../data/locations.ts'
 import { presenceBySeason } from '../data/presence.ts'
-import { regionsGeoJSON } from '../data/regions.ts'
+import { regionLabelAt, regionShortName, regionsGeoJSON } from '../data/regions.ts'
 import { routes } from '../data/routes.ts'
-import { bannerSvg } from '../lib/banners.ts'
+import { bannerSvg, regionPaint } from '../lib/banners.ts'
 import { sx, sy, toLatLng } from '../lib/geo.ts'
 import { useAtlas } from '../state/AtlasContext.tsx'
 import { MAP_HEIGHT, MAP_WIDTH, type RegionFeature } from '../types.ts'
@@ -105,17 +105,20 @@ function RegionLayer() {
   if (!layers.regions) return null
 
   const control = controlBySeason[season]
-  const fill = zoom > 1.8 ? 0.03 : 0.08
+  const fill = zoom < 0.9 ? 0.32 : zoom < 1.7 ? 0.24 : 0.1
+  const band = zoom < 0.9 ? 'c' : zoom < 1.7 ? 'r' : 's'
 
   const style = (feature?: Feature): PathOptions => {
     const id = String(feature?.properties && (feature.properties as RegionFeature['properties']).id)
-    const house = houseById[control[id]]
+    const houseId = control[id]
+    const paint = regionPaint(houseId)
     const selected = selection?.kind === 'region' && selection.id === id
     return {
-      color: selected ? '#f4e3b2' : house?.accent ?? '#4a3a28',
-      weight: selected ? 2 : 0.9,
-      fillColor: house?.color ?? '#8a7a62',
-      fillOpacity: selected ? 0.22 : fill,
+      color: selected ? '#f4e3b2' : paint.stroke,
+      weight: selected ? 2.8 : zoom < 1.7 ? 2.1 : 1.3,
+      fillColor: paint.fill,
+      fillOpacity: selected ? Math.max(fill, 0.36) : fill,
+      opacity: 0.96,
       interactive: zoom < 2.2,
     }
   }
@@ -135,7 +138,7 @@ function RegionLayer() {
 
   return (
     <GeoJSON
-      key={`regions-${season}-${selection?.kind === 'region' ? selection.id : ''}-${Math.round(fill * 100)}`}
+      key={`regions-${season}-${selection?.kind === 'region' ? selection.id : ''}-${band}`}
       data={regionsGeoJSON as FeatureCollection}
       style={style}
       coordsToLatLng={(coords) => L.latLng(sy(coords[1]), sx(coords[0]))}
@@ -145,22 +148,28 @@ function RegionLayer() {
 }
 
 function RegionLabels() {
-  const { zoom, setSelection, flyTo } = useAtlas()
-  if (zoom < ZOOM.regionLabel || zoom > 1.8) return null
+  const { season, layers, zoom, setSelection, flyTo } = useAtlas()
+  if (!layers.regions) return null
+  if (zoom < ZOOM.regionLabel || zoom > ZOOM.regionLabelMax) return null
 
+  const control = controlBySeason[season]
   return (
     <>
       {regionsGeoJSON.features.map((region) => {
-        const [x, y] = region.properties.banner
+        const [x, y] = regionLabelAt[region.properties.id] ?? region.properties.banner
+        const house = houseById[control[region.properties.id]]
+        const name = regionShortName[region.properties.id] ?? region.properties.name
+        const plate = `<div class="realm-plate">${
+          house ? bannerSvg(house.id) : ''
+        }<span><strong>${name}</strong>${
+          house ? `<em>${house.shortName}</em>` : ''
+        }</span></div>`
         return (
           <Marker
-            key={`label-${region.properties.id}`}
-            position={toLatLng(x, y + 18)}
-            icon={icon(
-              `<span class="map-label region-label">${region.properties.name}</span>`,
-              'marker-label',
-              [160, 20],
-            )}
+            key={`label-${region.properties.id}-${house?.id ?? 'none'}`}
+            position={toLatLng(x, y)}
+            zIndexOffset={200}
+            icon={icon(plate, 'marker-label', [176, 48], [88, 24])}
             eventHandlers={{
               click: (event) => {
                 L.DomEvent.stopPropagation(event.originalEvent)
@@ -271,7 +280,7 @@ function PlaceLayer() {
 
 function BannerLayer() {
   const { season, layers, zoom, setSelection, flyTo } = useAtlas()
-  if (!layers.banners || zoom < ZOOM.banners) return null
+  if (!layers.banners || zoom <= ZOOM.regionLabelMax) return null
 
   const control = controlBySeason[season]
 
@@ -306,8 +315,8 @@ function BannerLayer() {
 }
 
 function BattleLayer() {
-  const { season, layers, setSelection } = useAtlas()
-  if (!layers.battles) return null
+  const { season, layers, zoom, setSelection } = useAtlas()
+  if (!layers.battles || zoom < ZOOM.battles) return null
 
   return (
     <>

@@ -145,14 +145,22 @@ export function faceHtml(character: Character, extraClass = ''): string {
   return `<span class="pin-char ${extraClass}" style="box-shadow:0 0 0 2px ${color},0 4px 12px rgba(0,0,0,.5)">${img}<span class="pin-char-fallback">${fallback}</span></span>`
 }
 
-export function clusterHtml(people: Character[], placeName: string, selectedId: string | null): string {
-  const faces = people.slice(0, 3)
+export function clusterHtml(
+  people: Character[],
+  placeName: string,
+  selectedId: string | null,
+  compact = false,
+): string {
+  const faces = people.slice(0, compact ? 1 : 3)
   const count = people.length
   const selected = selectedId ? people.some((person) => person.id === selectedId) : false
   const faceMarkup = faces
     .map((person) => faceHtml(person, person.id === selectedId ? 'is-selected' : ''))
     .join('')
   const countMarkup = count > 1 ? `<span class="presence-count">${count}</span>` : ''
+  if (compact) {
+    return `<div class="presence-cluster is-compact${selected ? ' is-lit' : ''}"><div class="presence-faces">${faceMarkup}${countMarkup}</div></div>`
+  }
   const label =
     count === 1
       ? `${escapeHtml(people[0] ? displayName(people[0]) : '')}<em>${escapeHtml(placeName)}</em>`

@@ -33,7 +33,7 @@ export function LayerToggles() {
               {item.label}
             </button>
           ))}
-          <p className="layers-hint">People stay grouped by city until you click them.</p>
+          <p className="layers-hint">Travelers stay grouped until you zoom in. Realms wear their lord’s colors.</p>
         </div>
       )}
     </div>

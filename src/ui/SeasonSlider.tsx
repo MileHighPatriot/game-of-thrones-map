@@ -26,7 +26,7 @@ export function SeasonSlider() {
       <div className="season-copy">
         <strong>{meta.title}</strong>
         <span>{meta.caption}</span>
-        {!selection && <em>Portraits mark who stands where. Click a group to fan them out.</em>}
+        {!selection && <em>Zoom in to see every traveler. Each realm wears its ruling house.</em>}
       </div>
       <div className="season-controls">
         <input

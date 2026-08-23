@@ -471,5 +471,5 @@ export const majorLocationIds = new Set([
 ])
 
 export function placeMinZoom(id: string): number {
-  return majorLocationIds.has(id) ? 0.5 : 1.25
+  return majorLocationIds.has(id) ? 0.95 : 1.45
 }

@@ -763,6 +763,57 @@ body,
     0 0 6px rgba(239, 228, 200, 0.7);
 }
 
+.house-banner {
+  width: 22px;
+  height: 26px;
+  display: block;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.45));
+}
+
+.realm-plate {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 9px 4px 5px;
+  background: rgba(18, 14, 11, 0.78);
+  border: 1px solid rgba(212, 180, 60, 0.45);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.realm-plate .house-banner {
+  width: 20px;
+  height: 24px;
+  flex: 0 0 auto;
+}
+
+.realm-plate span {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.realm-plate strong {
+  font-family: Cinzel, serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 11px;
+  color: #f4e3b2;
+  text-shadow: 0 1px 0 #120e0b;
+  line-height: 1.15;
+}
+
+.realm-plate em {
+  font-style: normal;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #d4b43c;
+  line-height: 1;
+}
+
 .region-label {
   font-family: Cinzel, serif;
   letter-spacing: 0.14em;
@@ -871,6 +922,19 @@ body,
   align-items: center;
   gap: 3px;
   pointer-events: none;
+}
+
+.presence-cluster.is-compact {
+  gap: 0;
+}
+
+.presence-cluster.is-compact .presence-faces {
+  height: 32px;
+}
+
+.presence-cluster.is-compact .pin-char {
+  width: 32px;
+  height: 32px;
 }
 
 .presence-faces {

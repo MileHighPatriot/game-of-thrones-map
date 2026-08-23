@@ -311,3 +311,42 @@ export const regionsGeoJSON = {
 export const regionById = Object.fromEntries(
   regionFeatures.map((region) => [region.properties.id, region]),
 )
+
+/** Label plates sit in the realm, not on the seat, so cities stay readable. */
+export const regionLabelAt: Record<string, [number, number]> = {
+  'beyond-wall': [300, 780],
+  north: [400, 640],
+  vale: [510, 548],
+  riverlands: [320, 438],
+  'iron-islands': [88, 575],
+  westerlands: [148, 418],
+  crownlands: [445, 368],
+  reach: [210, 280],
+  stormlands: [470, 245],
+  dorne: [400, 95],
+  braavos: [880, 770],
+  pentos: [860, 545],
+  'dothraki-sea': [1180, 620],
+  'slavers-bay': [1300, 310],
+  valyria: [1000, 255],
+  qarth: [1440, 500],
+}
+
+export const regionShortName: Record<string, string> = {
+  'beyond-wall': 'Beyond the Wall',
+  north: 'The North',
+  vale: 'The Vale',
+  riverlands: 'The Riverlands',
+  'iron-islands': 'Iron Islands',
+  westerlands: 'The Westerlands',
+  crownlands: 'The Crownlands',
+  reach: 'The Reach',
+  stormlands: 'The Stormlands',
+  dorne: 'Dorne',
+  braavos: 'Braavos',
+  pentos: 'Pentos',
+  'dothraki-sea': 'Dothraki Sea',
+  'slavers-bay': "Slaver's Bay",
+  valyria: 'Valyria',
+  qarth: 'Qarth',
+}
