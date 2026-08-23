@@ -12,6 +12,7 @@ const RANK: Record<string, number> = Object.fromEntries(
     'sansa',
     'jaime',
     'bran',
+    'tywin',
     'robb',
     'catelyn',
     'theon',
@@ -19,21 +20,73 @@ const RANK: Record<string, number> = Object.fromEntries(
     'nightking',
     'brienne',
     'davos',
+    'littlefinger',
+    'varys',
+    'sam',
+    'hound',
+    'margaery',
+    'olenna',
     'jorah',
     'melisandre',
+    'joffrey',
+    'ramsay',
+    'robert',
+    'drogo',
+    'tormund',
+    'greyworm',
+    'missandei',
+    'bronn',
+    'ygritte',
+    'gendry',
+    'oberyn',
+    'barristan',
+    'sparrow',
+    'jeor',
+    'euron',
+    'yara',
+    'roose',
+    'qyburn',
+    'daario',
+    'gilly',
   ].map((id, index) => [id, index]),
 )
 
+const SHORT: Record<string, string> = {
+  nightking: 'Night King',
+  greyworm: 'Grey Worm',
+  littlefinger: 'Littlefinger',
+  hound: 'The Hound',
+  sparrow: 'Sparrow',
+}
+
+const INITIALS: Record<string, string> = {
+  nightking: 'NK',
+  greyworm: 'GW',
+  littlefinger: 'LF',
+  hound: 'SC',
+  sparrow: 'HS',
+}
+
 export function firstName(name: string): string {
-  return name.split(' ')[0] ?? name
+  const stripped = name.replace(/^The /, '')
+  return stripped.split(' ')[0] ?? name
+}
+
+export function displayName(character: Character): string {
+  return SHORT[character.id] ?? firstName(character.name)
 }
 
 export function initials(name: string): string {
   return name
+    .replace(/^The /, '')
     .split(' ')
     .map((part) => part[0])
     .join('')
     .slice(0, 2)
+}
+
+export function pinInitials(character: Character): string {
+  return INITIALS[character.id] ?? initials(character.name)
 }
 
 export function compareCharacters(a: Character, b: Character): number {
@@ -55,6 +108,9 @@ const GIVEN_NAMES: Record<string, string> = {
   cat: 'catelyn',
   dany: 'daenerys',
   petyr: 'petyr',
+  sam: 'samwell',
+  ramsey: 'ramsay',
+  ramsay: 'ramsay',
 }
 
 export function samePerson(apiName: string, localName: string): boolean {
@@ -82,7 +138,7 @@ export function houseColor(character: Character): string {
 
 export function faceHtml(character: Character, extraClass = ''): string {
   const color = houseColor(character)
-  const fallback = escapeHtml(initials(character.name))
+  const fallback = escapeHtml(pinInitials(character))
   const img = character.portrait
     ? `<img src="${character.portrait}" alt="" onerror="this.style.display='none'" />`
     : ''
@@ -99,11 +155,11 @@ export function clusterHtml(people: Character[], placeName: string, selectedId: 
   const countMarkup = count > 1 ? `<span class="presence-count">${count}</span>` : ''
   const label =
     count === 1
-      ? `${escapeHtml(firstName(people[0]?.name ?? ''))}<em>${escapeHtml(placeName)}</em>`
+      ? `${escapeHtml(people[0] ? displayName(people[0]) : '')}<em>${escapeHtml(placeName)}</em>`
       : escapeHtml(placeName)
   return `<div class="presence-cluster${selected ? ' is-lit' : ''}"><div class="presence-faces">${faceMarkup}${countMarkup}</div><span class="presence-place">${label}</span></div>`
 }
 
 export function personHtml(character: Character, selected: boolean): string {
-  return `<div class="presence-person${selected ? ' is-selected' : ''}">${faceHtml(character, selected ? 'is-selected' : '')}<span class="presence-name">${escapeHtml(firstName(character.name))}</span></div>`
+  return `<div class="presence-person${selected ? ' is-selected' : ''}">${faceHtml(character, selected ? 'is-selected' : '')}<span class="presence-name">${escapeHtml(displayName(character))}</span></div>`
 }

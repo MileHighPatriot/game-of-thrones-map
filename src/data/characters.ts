@@ -1,6 +1,7 @@
 import type { Character } from '../types.ts'
+import { moreCharacters } from './moreCharacters.ts'
 
-export const characters: Character[] = [
+const coreCharacters: Character[] = [
   {
     id: 'ned',
     name: 'Eddard Stark',
@@ -587,6 +588,8 @@ export const characters: Character[] = [
     },
   },
 ]
+
+export const characters: Character[] = [...coreCharacters, ...moreCharacters]
 
 export const characterById = Object.fromEntries(
   characters.map((character) => [character.id, character]),

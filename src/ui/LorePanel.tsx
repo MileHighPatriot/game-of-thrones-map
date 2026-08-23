@@ -13,7 +13,7 @@ import { siteById, sitesByParent } from '../data/sites.ts'
 import { flyZoomFor } from '../map/zoom.ts'
 import { seatPortraits } from '../data/portraits.ts'
 import { bannerSvg } from '../lib/banners.ts'
-import { compareCharacters, firstName, initials, samePerson } from '../lib/people.ts'
+import { compareCharacters, displayName, pinInitials, samePerson } from '../lib/people.ts'
 import { useAtlas } from '../state/AtlasContext.tsx'
 import type { Character, IceAndFireCharacter, IceAndFireHouse, ThronesPortrait } from '../types.ts'
 import { CharacterBio } from './CharacterBio.tsx'
@@ -443,9 +443,9 @@ function PeoplePicker({ title, people }: { title: string; people: Character[] })
             {person.portrait ? (
               <img src={person.portrait} alt="" />
             ) : (
-              <span className="face">{initials(person.name)}</span>
+              <span className="face">{pinInitials(person)}</span>
             )}
-            <em>{firstName(person.name)}</em>
+            <em>{displayName(person)}</em>
           </button>
         ))}
       </div>

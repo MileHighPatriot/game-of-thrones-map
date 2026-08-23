@@ -29,6 +29,8 @@ const art: Record<string, string> = {
   pentos: svg('<rect x="13" y="16" width="14" height="14" fill="#efe4c8"/>', '#7a8f5a'),
   qarth: svg('<circle cx="20" cy="22" r="8" fill="none" stroke="#2c1810" stroke-width="2"/><circle cx="20" cy="22" r="3" fill="#2c1810"/>', '#b8860b'),
   ruins: svg('<path d="M12 30 L16 16 L20 26 L24 14 L28 30" fill="none" stroke="#c45c2a" stroke-width="2"/>', '#3a3330'),
+  baelish: svg('<path d="M12 26c4-10 8-12 16-12M14 22h12" fill="none" stroke="#c5b48a" stroke-width="2"/><circle cx="20" cy="18" r="2.2" fill="#c5b48a"/>', '#6a6e76'),
+  faith: svg('<path d="M20 12v20M14 18h12M16 28h8" stroke="#6b4a28" stroke-width="1.8"/><circle cx="20" cy="14" r="2" fill="#6b4a28"/>', '#efe6d0'),
 }
 
 export function bannerSvg(houseId: string): string {

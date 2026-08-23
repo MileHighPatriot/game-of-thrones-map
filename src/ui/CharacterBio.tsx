@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from 'react'
+import { useEffect, type CSSProperties, type ReactNode } from 'react'
 import { presenceBySeason } from '../data/presence.ts'
 import { locationById } from '../data/locations.ts'
 import { flyZoomFor } from '../map/zoom.ts'
@@ -25,6 +25,14 @@ export function CharacterBio({
   const here = pin ? locationById[pin.locationId] : undefined
   const seasonLore = character.seasons[season]
   const score = Math.max(0, Math.min(100, character.score))
+
+  useEffect(() => {
+    if (character.seasons[season]) return
+    const first = ALL_SEASONS.find((value) => character.seasons[value])
+    if (!first) return
+    setPlaying(false)
+    setSeason(first)
+  }, [character])
 
   return (
     <>
