@@ -7,6 +7,7 @@ import { presenceBySeason } from '../data/presence.ts'
 import { regionFeatures } from '../data/regions.ts'
 import { routes } from '../data/routes.ts'
 import { sites } from '../data/sites.ts'
+import { characterMatchesQuery, initials } from '../lib/people.ts'
 import { flyZoomFor } from '../map/zoom.ts'
 import { useAtlas } from '../state/AtlasContext.tsx'
 import type { Selection } from '../types.ts'
@@ -17,6 +18,9 @@ type Hit = {
   kind: Selection['kind']
   x: number
   y: number
+  portrait?: string | null
+  score?: number
+  blurb?: string
 }
 
 export function SearchBox() {
@@ -95,7 +99,7 @@ export function SearchBox() {
     }
 
     for (const character of characters) {
-      if (character.name.toLowerCase().includes(needle)) {
+      if (characterMatchesQuery(character, needle)) {
         const pin = presenceBySeason[season].find((item) => item.characterId === character.id)
         const place = pin ? locationById[pin.locationId] : undefined
         results.push({
@@ -104,6 +108,9 @@ export function SearchBox() {
           kind: 'character',
           x: place?.x ?? 800,
           y: place?.y ?? 450,
+          portrait: character.portrait,
+          score: character.score,
+          blurb: character.lore,
         })
       }
     }
@@ -120,6 +127,18 @@ export function SearchBox() {
         })
       }
     }
+
+    results.sort((a, b) => {
+      const rank = (hit: Hit) => {
+        const label = hit.label.toLowerCase()
+        if (label === needle) return 0
+        if (hit.kind === 'character' && label.startsWith(needle)) return 1
+        if (hit.kind === 'character') return 2
+        if (label.startsWith(needle)) return 3
+        return 4
+      }
+      return rank(a) - rank(b)
+    })
 
     return results.slice(0, 10)
   }, [query, season])
@@ -153,8 +172,30 @@ export function SearchBox() {
                   setQuery('')
                 }}
               >
-                <em>{hit.kind}</em>
-                {hit.label}
+                {hit.kind === 'character' ? (
+                  <span className="search-bio">
+                    {hit.portrait ? (
+                      <img src={hit.portrait} alt="" />
+                    ) : (
+                      <span className="search-face">{initials(hit.label)}</span>
+                    )}
+                    <span className="search-bio-copy">
+                      <span className="search-bio-top">
+                        <em>{hit.kind}</em>
+                        <strong>{hit.label}</strong>
+                        {hit.score != null && (
+                          <span className="search-score">{hit.score}</span>
+                        )}
+                      </span>
+                      {hit.blurb && <span className="search-blurb">{hit.blurb}</span>}
+                    </span>
+                  </span>
+                ) : (
+                  <>
+                    <em>{hit.kind}</em>
+                    {hit.label}
+                  </>
+                )}
               </button>
             </li>
           ))}

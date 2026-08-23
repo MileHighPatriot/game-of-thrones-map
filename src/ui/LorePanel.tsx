@@ -13,9 +13,10 @@ import { siteById, sitesByParent } from '../data/sites.ts'
 import { flyZoomFor } from '../map/zoom.ts'
 import { seatPortraits } from '../data/portraits.ts'
 import { bannerSvg } from '../lib/banners.ts'
-import { compareCharacters, firstName, initials } from '../lib/people.ts'
+import { compareCharacters, firstName, initials, samePerson } from '../lib/people.ts'
 import { useAtlas } from '../state/AtlasContext.tsx'
 import type { Character, IceAndFireCharacter, IceAndFireHouse, ThronesPortrait } from '../types.ts'
+import { CharacterBio } from './CharacterBio.tsx'
 
 function peopleHere(season: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8, locationId: string) {
   return presenceBySeason[season].flatMap((pin) => {
@@ -78,7 +79,9 @@ export function LorePanel() {
         }
         if (character?.thronesApiId != null) {
           const shot = await fetchPortrait(character.thronesApiId)
-          if (!cancelled && shot) setPortrait(shot)
+          if (!cancelled && shot && samePerson(shot.fullName, character.name)) {
+            setPortrait(shot)
+          }
         }
       }
     }
@@ -283,62 +286,53 @@ export function LorePanel() {
   const image = portrait?.imageUrl ?? character.portrait
 
   return (
-    <aside className="panel">
+    <aside className="panel panel-bio">
       <PanelHead
         eyebrow={house?.shortName ?? 'Wanderer'}
         title={character.name}
         onClose={closePanel}
       />
-      {image && <img className="portrait" src={image} alt={character.name} />}
-      <p>{character.lore}</p>
-      <p>
-        {here
-          ? `Primary presence in season ${season}: ${here.name}.`
-          : `Not on the board in season ${season}.`}
-      </p>
-      {here && (
-        <button
-          className="dive"
-          type="button"
-          onClick={() => {
-            setExpandedPresence(here.id)
-            flyTo(here.x, here.y, flyZoomFor('character'))
-          }}
-        >
-          See on the map
-        </button>
-      )}
-      {here && (
-        <PeoplePicker
-          title="Also here this season"
-          people={peopleHere(season, here.id).filter((person) => person.id !== character.id)}
-        />
-      )}
-      {apiCharacter && (
-        <div className="api-block">
-          <p className="eyebrow">From An API of Ice and Fire</p>
-          {apiCharacter.titles.filter(Boolean).length > 0 && (
-            <p>
-              <strong>Titles:</strong> {apiCharacter.titles.filter(Boolean).join(', ')}
-            </p>
-          )}
-          {apiCharacter.aliases.filter(Boolean).length > 0 && (
-            <p>
-              <strong>Aliases:</strong> {apiCharacter.aliases.filter(Boolean).slice(0, 5).join(', ')}
-            </p>
-          )}
-          {apiCharacter.born && (
-            <p>
-              <strong>Born:</strong> {apiCharacter.born}
-            </p>
-          )}
-          {apiCharacter.playedBy[0] && (
-            <p>
-              <strong>Played by:</strong> {apiCharacter.playedBy[0]}
-            </p>
-          )}
-        </div>
-      )}
+      <CharacterBio
+        character={character}
+        houseName={house?.name ?? ''}
+        image={image}
+        alsoHere={
+          here ? (
+            <PeoplePicker
+              title="Also here this season"
+              people={peopleHere(season, here.id).filter((person) => person.id !== character.id)}
+            />
+          ) : null
+        }
+        apiBlock={
+          apiCharacter ? (
+            <div className="api-block">
+              <p className="eyebrow">From An API of Ice and Fire</p>
+              {apiCharacter.titles.filter(Boolean).length > 0 && (
+                <p>
+                  <strong>Titles:</strong> {apiCharacter.titles.filter(Boolean).join(', ')}
+                </p>
+              )}
+              {apiCharacter.aliases.filter(Boolean).length > 0 && (
+                <p>
+                  <strong>Aliases:</strong>{' '}
+                  {apiCharacter.aliases.filter(Boolean).slice(0, 5).join(', ')}
+                </p>
+              )}
+              {apiCharacter.born && (
+                <p>
+                  <strong>Born:</strong> {apiCharacter.born}
+                </p>
+              )}
+              {apiCharacter.playedBy[0] && (
+                <p>
+                  <strong>Played by:</strong> {apiCharacter.playedBy[0]}
+                </p>
+              )}
+            </div>
+          ) : null
+        }
+      />
     </aside>
   )
 }
