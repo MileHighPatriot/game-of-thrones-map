@@ -4,15 +4,17 @@ export const MAX_ZOOM = 3.15
 
 export const ZOOM = {
   regionFill: 0.15,
-  regionLabel: 0.2,
-  wall: 0.35,
-  banners: 0.45,
-  majorPlaces: 0.5,
-  roads: 0.75,
-  minorPlaces: 1.25,
-  placeLabels: 1.45,
+  regionLabel: -0.2,
+  regionLabelMax: 2.05,
+  wall: 0.45,
+  banners: 1.55,
+  majorPlaces: 0.95,
+  roads: 0.85,
+  minorPlaces: 1.45,
+  placeLabels: 1.6,
+  battles: 1.05,
   /** Below this, people stay grouped by city so the continent stays readable. */
-  presenceSpread: 1.12,
+  presenceSpread: 1.32,
 } as const
 
 export function fitZoom(width: number, height: number): number {
@@ -28,12 +30,12 @@ export function zoomName(zoom: number): string {
 }
 
 export function flyZoomFor(kind: string): number {
-  if (kind === 'character') return 0.9
-  if (kind === 'region') return 1.35
-  if (kind === 'house') return 1.55
+  if (kind === 'character') return 1.62
+  if (kind === 'region') return 1.15
+  if (kind === 'house') return 1.35
   if (kind === 'route') return 1.55
-  if (kind === 'location') return 1.4
-  if (kind === 'battle') return 1.5
+  if (kind === 'location') return 1.5
+  if (kind === 'battle') return 1.55
   if (kind === 'site') return 2.35
   return 1.4
 }
