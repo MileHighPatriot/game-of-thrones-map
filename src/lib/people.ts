@@ -48,6 +48,33 @@ export function escapeHtml(value: string): string {
     .replaceAll('"', '&quot;')
 }
 
+const GIVEN_NAMES: Record<string, string> = {
+  bran: 'brandon',
+  ned: 'eddard',
+  jamie: 'jaime',
+  cat: 'catelyn',
+  dany: 'daenerys',
+  petyr: 'petyr',
+}
+
+export function samePerson(apiName: string, localName: string): boolean {
+  const norm = (value: string) => value.toLowerCase().replace(/[^a-z]+/g, ' ').trim()
+  const api = norm(apiName)
+  const local = norm(localName)
+  if (api === local) return true
+  const canon = (name: string) => {
+    const first = name.split(' ')[0] ?? name
+    return GIVEN_NAMES[first] ?? first
+  }
+  return canon(api) === canon(local)
+}
+
+export function characterMatchesQuery(character: Character, needle: string): boolean {
+  if (character.name.toLowerCase().includes(needle)) return true
+  if (character.lore.toLowerCase().includes(needle)) return true
+  return character.aliases.some((alias) => alias.toLowerCase().includes(needle))
+}
+
 export function houseColor(character: Character): string {
   if (!character.houseId) return '#d4b43c'
   return houseById[character.houseId]?.color ?? '#d4b43c'

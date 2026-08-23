@@ -98,6 +98,13 @@ export type Character = {
   portrait: string | null
   lore: string
   lastSeason: Season
+  playedBy: string | null
+  aliases: string[]
+  backstory: string
+  accomplishments: string[]
+  score: number
+  scoreWhy: string
+  seasons: Partial<Record<Season, string>>
 }
 
 export type PresencePin = {

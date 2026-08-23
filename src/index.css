@@ -111,6 +111,7 @@ body,
 .close:focus,
 .toggles button:focus-visible,
 .season-ticks button:focus-visible,
+.bio-season-tabs button:focus-visible,
 .people-picker button:focus-visible {
   outline: 1px solid var(--gold);
   outline-offset: 1px;
@@ -128,6 +129,8 @@ body,
   border: 1px solid var(--line);
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
   z-index: 30;
+  max-height: min(70vh, 28rem);
+  overflow: auto;
 }
 
 .search button {
@@ -141,7 +144,7 @@ body,
   font: inherit;
   display: flex;
   gap: 12px;
-  align-items: baseline;
+  align-items: flex-start;
 }
 
 .search button:hover {
@@ -155,6 +158,78 @@ body,
   text-transform: uppercase;
   font-size: 0.68rem;
   letter-spacing: 0.08em;
+}
+
+.search-bio {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  min-width: 0;
+  width: 100%;
+}
+
+.search-bio img,
+.search-face {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex: 0 0 auto;
+  background: #2a2118;
+  box-shadow: 0 0 0 1px var(--line);
+}
+
+.search-face {
+  display: grid;
+  place-items: center;
+  font-family: Cinzel, serif;
+  font-size: 11px;
+  color: #f4e3b2;
+}
+
+.search-bio-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.search-bio-top {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+
+.search-bio-top em {
+  flex: 0 0 auto;
+}
+
+.search-bio-top strong {
+  flex: 1 1 auto;
+  font-weight: 600;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.search-score {
+  flex: 0 0 auto;
+  font-family: Cinzel, serif;
+  color: var(--gold);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+.search-blurb {
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .layers-menu {
@@ -311,6 +386,11 @@ body,
   z-index: 1200;
 }
 
+.panel-bio {
+  width: min(440px, 46vw);
+  max-height: calc(100% - 168px);
+}
+
 .panel-head {
   display: flex;
   justify-content: space-between;
@@ -353,6 +433,132 @@ body,
   border: 1px solid var(--line);
   margin-bottom: 14px;
   background: #241c14;
+}
+
+.panel-bio .portrait {
+  height: 200px;
+  object-position: center 18%;
+}
+
+.bio-tagline {
+  font-size: 1.02rem;
+  color: var(--parchment);
+}
+
+.score-card {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin: 0 0 16px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: rgba(36, 28, 22, 0.7);
+}
+
+.score-ring {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: conic-gradient(var(--gold) calc(var(--score) * 1%), #2a2118 0);
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+}
+
+.score-ring-inner {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--panel);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.score-ring-inner strong {
+  font-family: Cinzel, serif;
+  color: var(--gold);
+  font-size: 1.35rem;
+}
+
+.score-ring-inner span {
+  color: var(--muted);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  margin-top: 3px;
+}
+
+.score-why {
+  margin: 0 !important;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.bio-aliases {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.bio-section {
+  margin: 16px 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.bio-list {
+  margin: 6px 0 0;
+  padding-left: 1.15rem;
+  color: var(--parchment);
+}
+
+.bio-list li {
+  margin: 0 0 8px;
+  line-height: 1.45;
+}
+
+.bio-season-tabs {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 4px;
+  margin: 8px 0 12px;
+}
+
+.bio-season-tabs button {
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  padding: 6px 0;
+  border-radius: 2px;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+.bio-season-tabs button.active {
+  background: #3a2d18;
+  color: var(--gold);
+  border-color: rgba(212, 180, 60, 0.55);
+}
+
+.bio-season-tabs button:disabled {
+  cursor: default;
+  opacity: 0.35;
+}
+
+.bio-season-kicker {
+  font-family: Cinzel, serif;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  margin-bottom: 6px !important;
+}
+
+.bio-season-copy p:last-child {
+  margin-bottom: 0;
 }
 
 .seat-art {
@@ -851,6 +1057,11 @@ body,
     left: 10px;
     width: auto;
     max-height: 34vh;
+  }
+
+  .panel-bio {
+    width: auto;
+    max-height: 48vh;
   }
 
   .season-dock {
