@@ -419,9 +419,9 @@ body,
   margin: 0 0 12px;
 }
 
-.banner-row svg {
-  width: 40px;
-  height: 48px;
+.banner-row .house-banner {
+  width: 72px;
+  height: 80px;
 }
 
 .portrait,
@@ -767,7 +767,13 @@ body,
   width: 22px;
   height: 26px;
   display: block;
+  object-fit: contain;
   filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.45));
+}
+
+.marker-banner .house-banner {
+  width: 28px;
+  height: 34px;
 }
 
 .realm-plate {
