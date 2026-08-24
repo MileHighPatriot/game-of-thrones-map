@@ -1,31 +1,36 @@
-import { AtlasMap } from './map/AtlasMap.tsx'
+import { useEffect } from 'react'
+import { useHashRoute } from './lib/hashRoute.ts'
+import { AtlasPage } from './pages/AtlasPage.tsx'
+import { LandingPage } from './pages/LandingPage.tsx'
 import { AtlasProvider } from './state/AtlasContext.tsx'
-import { Header } from './ui/Header.tsx'
-import { Keybinds } from './ui/Keybinds.tsx'
-import { LayerToggles } from './ui/LayerToggles.tsx'
-import { LorePanel } from './ui/LorePanel.tsx'
-import { MapHud } from './ui/MapHud.tsx'
-import { SearchBox } from './ui/SearchBox.tsx'
-import { SeasonSlider } from './ui/SeasonSlider.tsx'
+import { SiteNav } from './ui/SiteNav.tsx'
 
 export default function App() {
+  const route = useHashRoute()
+
+  useEffect(() => {
+    document.body.classList.toggle('is-hall', route === 'hall')
+    document.body.classList.toggle('is-atlas', route === 'atlas')
+    document.title = route === 'atlas' ? 'The Atlas · Westeros & Essos' : 'Westeros & Essos'
+    return () => {
+      document.body.classList.remove('is-hall', 'is-atlas')
+    }
+  }, [route])
+
+  if (route === 'atlas') {
+    return (
+      <AtlasProvider>
+        <div className="app is-atlas">
+          <SiteNav current="atlas" />
+          <AtlasPage />
+        </div>
+      </AtlasProvider>
+    )
+  }
+
   return (
-    <AtlasProvider>
-      <div className="app">
-        <Keybinds />
-        <main className="map-stage">
-          <AtlasMap />
-          <div className="map-vignette" aria-hidden="true" />
-          <div className="chrome-top">
-            <Header />
-            <SearchBox />
-            <LayerToggles />
-          </div>
-          <LorePanel />
-          <SeasonSlider />
-          <MapHud />
-        </main>
-      </div>
-    </AtlasProvider>
+    <div className="app is-hall">
+      <LandingPage />
+    </div>
   )
 }
