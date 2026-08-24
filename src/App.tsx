@@ -4,6 +4,7 @@ import { ArmoryPage } from './pages/ArmoryPage.tsx'
 import { AtlasPage } from './pages/AtlasPage.tsx'
 import { KeepsPage } from './pages/KeepsPage.tsx'
 import { LandingPage } from './pages/LandingPage.tsx'
+import { WordsPage } from './pages/WordsPage.tsx'
 import { AtlasProvider } from './state/AtlasContext.tsx'
 import { SiteNav } from './ui/SiteNav.tsx'
 
@@ -11,6 +12,7 @@ const TITLES: Record<string, string> = {
   atlas: 'The Atlas · Westeros & Essos',
   armory: 'The Armory · Westeros & Essos',
   keeps: 'The Keeps · Westeros & Essos',
+  words: 'The Words · Westeros & Essos',
   hall: 'Westeros & Essos',
 }
 
@@ -48,6 +50,14 @@ export default function App() {
     return (
       <div className="app is-keeps">
         <KeepsPage />
+      </div>
+    )
+  }
+
+  if (route === 'words') {
+    return (
+      <div className="app is-words">
+        <WordsPage />
       </div>
     )
   }

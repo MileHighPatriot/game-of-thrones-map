@@ -40,6 +40,13 @@ const DOORS = [
     alt: 'Winterfell',
     href: 'keeps' as const,
   },
+  {
+    title: 'The Words',
+    copy: 'House words, oaths, prophecies, and the lines that outlived the people who said them.',
+    image: 'words/weirwood.jpg',
+    alt: 'A weirwood',
+    href: 'words' as const,
+  },
 ]
 
 const courtHouses = COURT.map((id) => houses.find((house) => house.id === id)).filter(
