@@ -1150,7 +1150,8 @@ body.is-atlas {
   border-bottom: 1px solid var(--line);
 }
 
-.app.is-armory .site-nav.is-solid {
+.app.is-armory .site-nav.is-solid,
+.app.is-keeps .site-nav.is-solid {
   position: sticky;
   top: 0;
 }
@@ -1587,6 +1588,92 @@ body.is-atlas {
   line-height: 1.5;
 }
 
+.keeps {
+  color: var(--parchment);
+  min-height: 100%;
+}
+
+.keeps-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 12px 24px 48px;
+}
+
+.keep-card {
+  border: 1px solid var(--line);
+  background: #1b1510;
+  overflow: hidden;
+  scroll-margin-top: 76px;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
+}
+
+.keep-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 420px;
+  object-fit: contain;
+  background: #120e0b;
+}
+
+.keep-copy {
+  padding: 22px 24px 28px;
+}
+
+.keep-copy h2 {
+  margin: 0 0 14px;
+  font-family: Cinzel, serif;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  font-size: 1.7rem;
+}
+
+.keep-copy dl {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.keep-copy dt {
+  font-family: Cinzel, serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.keep-copy dd {
+  margin: 0;
+  color: var(--parchment);
+  line-height: 1.5;
+}
+
+.keep-events {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.keep-events li {
+  margin: 0 0 10px;
+  line-height: 1.5;
+}
+
+.keep-events li:last-child {
+  margin-bottom: 0;
+}
+
+.keep-events strong {
+  color: var(--gold);
+  font-family: Cinzel, serif;
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
+}
+
 @keyframes landing-kenburns {
   from {
     transform: scale(1.04) translate3d(0, 0, 0);
@@ -1646,6 +1733,16 @@ body.is-atlas {
   .weapon-card img {
     min-height: 240px;
     max-height: 340px;
+  }
+
+  .keep-card img {
+    max-height: 240px;
+  }
+
+  .site-tabs a {
+    padding: 7px 8px;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
   }
 
   .landing-hero-copy {

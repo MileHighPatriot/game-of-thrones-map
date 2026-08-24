@@ -47,6 +47,13 @@ const DOORS = [
     alt: 'Dragonstone',
     href: 'atlas' as const,
   },
+  {
+    title: 'The Keeps',
+    copy: 'Who raised the stone, who sat it, and what was done in the halls.',
+    image: 'seats/winterfell.jpg',
+    alt: 'Winterfell',
+    href: 'keeps' as const,
+  },
 ]
 
 const courtHouses = COURT.map((id) => houses.find((house) => house.id === id)).filter(
