@@ -50,9 +50,13 @@ const paint: Record<string, { fill: string; stroke: string }> = {
   faith: { fill: '#e8e0cc', stroke: '#c9a227' },
 }
 
-export function bannerSvg(houseId: string): string {
+export function sigilSrc(houseId: string): string {
   const file = SIGIL_FILE[houseId] ?? 'unknown.svg'
-  return `<img src="${import.meta.env.BASE_URL}sigils/${file}" class="house-banner" alt="" />`
+  return `${import.meta.env.BASE_URL}sigils/${file}`
+}
+
+export function bannerSvg(houseId: string): string {
+  return `<img src="${sigilSrc(houseId)}" class="house-banner" alt="" />`
 }
 
 export function regionPaint(houseId: string | undefined): { fill: string; stroke: string } {
