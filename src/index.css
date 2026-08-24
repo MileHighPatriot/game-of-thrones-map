@@ -1150,6 +1150,11 @@ body.is-atlas {
   border-bottom: 1px solid var(--line);
 }
 
+.app.is-armory .site-nav.is-solid {
+  position: sticky;
+  top: 0;
+}
+
 .site-wordmark {
   color: var(--parchment);
   text-decoration: none;
@@ -1177,12 +1182,12 @@ body.is-atlas {
 }
 
 .site-tabs a {
-  padding: 7px 14px;
+  padding: 7px 11px;
   color: var(--muted);
   text-decoration: none;
   font-family: Cinzel, serif;
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -1354,7 +1359,7 @@ body.is-atlas {
 
 .landing-doors-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
   max-width: 1080px;
   margin: 0 auto;
@@ -1453,6 +1458,135 @@ body.is-atlas {
   border-top: 1px solid var(--line);
 }
 
+.armory {
+  color: var(--parchment);
+  min-height: 100%;
+}
+
+.armory-hero {
+  padding: 32px 24px 12px;
+  text-align: center;
+  max-width: 52rem;
+  margin: 0 auto;
+}
+
+.armory-hero h1 {
+  margin: 0 0 12px;
+  font-family: Cinzel, serif;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+}
+
+.armory-lede {
+  margin: 0 auto 22px;
+  color: var(--muted);
+  line-height: 1.5;
+  font-size: 1.05rem;
+}
+
+.armory-index {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 10px;
+  margin-bottom: 8px;
+}
+
+.armory-index a {
+  color: var(--gold);
+  text-decoration: none;
+  font-family: Cinzel, serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.armory-index a:hover {
+  border-bottom-color: var(--gold);
+}
+
+.armory-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 12px 24px 48px;
+}
+
+.weapon-card {
+  display: grid;
+  grid-template-columns: minmax(240px, 38%) 1fr;
+  gap: 0;
+  border: 1px solid var(--line);
+  background: #1b1510;
+  overflow: hidden;
+  scroll-margin-top: 76px;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
+}
+
+.weapon-card:nth-child(even) {
+  grid-template-columns: 1fr minmax(240px, 38%);
+}
+
+.weapon-card:nth-child(even) img {
+  order: 2;
+}
+
+.weapon-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.weapon-copy {
+  padding: 22px 24px 26px;
+}
+
+.weapon-copy h2 {
+  margin: 0 0 4px;
+  font-family: Cinzel, serif;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  font-size: 1.7rem;
+}
+
+.weapon-house {
+  margin: 0 0 16px;
+  color: var(--gold);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 1.05rem;
+}
+
+.weapon-copy dl {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.weapon-copy dt {
+  font-family: Cinzel, serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 5px;
+}
+
+.weapon-copy dd {
+  margin: 0;
+  color: var(--parchment);
+  line-height: 1.5;
+}
+
 @keyframes landing-kenburns {
   from {
     transform: scale(1.04) translate3d(0, 0, 0);
@@ -1494,6 +1628,24 @@ body.is-atlas {
   .landing-doors-grid {
     grid-template-columns: 1fr;
     max-width: 28rem;
+  }
+
+  .site-nav {
+    flex-wrap: wrap;
+  }
+
+  .weapon-card,
+  .weapon-card:nth-child(even) {
+    grid-template-columns: 1fr;
+  }
+
+  .weapon-card:nth-child(even) img {
+    order: 0;
+  }
+
+  .weapon-card img {
+    min-height: 240px;
+    max-height: 340px;
   }
 
   .landing-hero-copy {

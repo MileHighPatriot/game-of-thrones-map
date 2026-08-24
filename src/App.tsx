@@ -1,19 +1,25 @@
 import { useEffect } from 'react'
 import { useHashRoute } from './lib/hashRoute.ts'
+import { ArmoryPage } from './pages/ArmoryPage.tsx'
 import { AtlasPage } from './pages/AtlasPage.tsx'
 import { LandingPage } from './pages/LandingPage.tsx'
 import { AtlasProvider } from './state/AtlasContext.tsx'
 import { SiteNav } from './ui/SiteNav.tsx'
 
+const TITLES: Record<string, string> = {
+  atlas: 'The Atlas · Westeros & Essos',
+  armory: 'The Armory · Westeros & Essos',
+  hall: 'Westeros & Essos',
+}
+
 export default function App() {
   const route = useHashRoute()
 
   useEffect(() => {
-    document.body.classList.toggle('is-hall', route === 'hall')
     document.body.classList.toggle('is-atlas', route === 'atlas')
-    document.title = route === 'atlas' ? 'The Atlas · Westeros & Essos' : 'Westeros & Essos'
+    document.title = TITLES[route] ?? 'Westeros & Essos'
     return () => {
-      document.body.classList.remove('is-hall', 'is-atlas')
+      document.body.classList.remove('is-atlas')
     }
   }, [route])
 
@@ -25,6 +31,14 @@ export default function App() {
           <AtlasPage />
         </div>
       </AtlasProvider>
+    )
+  }
+
+  if (route === 'armory') {
+    return (
+      <div className="app is-armory">
+        <ArmoryPage />
+      </div>
     )
   }
 

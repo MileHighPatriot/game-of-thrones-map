@@ -14,6 +14,9 @@ export function SiteNav({ current, overlay = false }: { current: Route; overlay?
         <a className={current === 'atlas' ? 'active' : ''} href={hrefFor('atlas')} aria-current={current === 'atlas' ? 'page' : undefined}>
           The Atlas
         </a>
+        <a className={current === 'armory' ? 'active' : ''} href={hrefFor('armory')} aria-current={current === 'armory' ? 'page' : undefined}>
+          The Armory
+        </a>
       </nav>
     </header>
   )

@@ -24,18 +24,28 @@ const DOORS = [
     copy: 'Eight seasons. One parchment world. Watch who holds the land as the game turns.',
     image: 'seats/kings-landing.jpg',
     alt: 'King’s Landing',
+    href: 'atlas' as const,
+  },
+  {
+    title: 'The Armory',
+    copy: 'Ice, Longclaw, Dawn, and the hammer that killed a prince. Named steel, named hands.',
+    image: 'weapons/ice.jpg',
+    alt: 'Ice',
+    href: 'armory' as const,
   },
   {
     title: 'The Great Houses',
     copy: 'Banners on the wind. Words, seats, and the colors each realm wears.',
     image: 'seats/winterfell.jpg',
     alt: 'Winterfell',
+    href: 'atlas' as const,
   },
   {
     title: 'The Travelers',
     copy: 'Find a soul and follow them — from the Wall to the grass sea.',
     image: 'seats/dragonstone.jpg',
     alt: 'Dragonstone',
+    href: 'atlas' as const,
   },
 ]
 
@@ -85,7 +95,7 @@ export function LandingPage() {
         <h2>The realm is waiting</h2>
         <div className="landing-doors-grid">
           {DOORS.map((door) => (
-            <a key={door.title} className="landing-door" href={hrefFor('atlas')}>
+            <a key={door.title} className="landing-door" href={hrefFor(door.href)}>
               <img src={asset(door.image)} alt={door.alt} />
               <div className="landing-door-copy">
                 <strong>{door.title}</strong>
