@@ -34,20 +34,6 @@ const DOORS = [
     href: 'armory' as const,
   },
   {
-    title: 'The Great Houses',
-    copy: 'Banners on the wind. Words, seats, and the colors each realm wears.',
-    image: 'seats/winterfell.jpg',
-    alt: 'Winterfell',
-    href: 'atlas' as const,
-  },
-  {
-    title: 'The Travelers',
-    copy: 'Find a soul and follow them — from the Wall to the grass sea.',
-    image: 'seats/dragonstone.jpg',
-    alt: 'Dragonstone',
-    href: 'atlas' as const,
-  },
-  {
     title: 'The Keeps',
     copy: 'Who raised the stone, who sat it, and what was done in the halls.',
     image: 'seats/winterfell.jpg',
