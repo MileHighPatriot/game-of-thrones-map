@@ -1,5 +1,5 @@
 const SIGIL_FILE: Record<string, string> = {
-  stark: 'stark.svg',
+  stark: 'stark.png',
   lannister: 'lannister.svg',
   baratheon: 'baratheon.svg',
   'baratheon-ds': 'baratheon-ds.svg',
