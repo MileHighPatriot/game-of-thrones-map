@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export type Route = 'hall' | 'atlas' | 'armory' | 'keeps'
+export type Route = 'hall' | 'atlas' | 'armory' | 'keeps' | 'words'
 
 export function parseHash(hash = window.location.hash): Route {
   const path = hash.replace(/^#/, '').replace(/^\/+|\/+$/g, '')
@@ -8,6 +8,7 @@ export function parseHash(hash = window.location.hash): Route {
   if (head === 'map' || head === 'atlas') return 'atlas'
   if (head === 'armory' || head === 'weapons') return 'armory'
   if (head === 'keeps' || head === 'castles') return 'keeps'
+  if (head === 'words' || head === 'voice') return 'words'
   return 'hall'
 }
 
@@ -15,6 +16,7 @@ export function hrefFor(route: Route): string {
   if (route === 'atlas') return '#/map'
   if (route === 'armory') return '#/armory'
   if (route === 'keeps') return '#/keeps'
+  if (route === 'words') return '#/words'
   return '#/'
 }
 
