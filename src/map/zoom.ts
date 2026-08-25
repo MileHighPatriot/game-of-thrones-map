@@ -20,7 +20,7 @@ export const ZOOM = {
 export function fitZoom(width: number, height: number): number {
   if (width < 40 || height < 40) return -0.2
   const raw = Math.min(Math.log2(width / MAP_WIDTH), Math.log2(height / MAP_HEIGHT))
-  return raw - 0.04
+  return raw - 0.16
 }
 
 export function zoomName(zoom: number): string {
