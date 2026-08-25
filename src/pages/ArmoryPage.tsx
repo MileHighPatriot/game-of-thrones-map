@@ -26,21 +26,25 @@ export function ArmoryPage() {
   return (
     <div className="armory">
       <SiteNav current="armory" />
-      <header className="armory-hero">
-        <p className="eyebrow">Named steel of Westeros</p>
-        <h1>The Armory</h1>
-        <p className="armory-lede">
-          Valyrian blades, a star that fell on Dorne, a castle-forged needle, and the hammer that killed a prince.
-          Who held them, where they went, and how they were made.
-        </p>
-        <nav className="armory-index" aria-label="Weapons">
-          {weapons.map((weapon) => (
-            <a key={weapon.id} href={`#/armory/${weapon.id}`}>
-              {weapon.name}
-            </a>
-          ))}
-        </nav>
-      </header>
+      <section className="room-hero">
+        <img src={asset('weapons/hero.jpg')} alt="" className="room-hero-art" />
+        <div className="room-hero-veil" />
+        <div className="room-hero-copy">
+          <p className="eyebrow">Named steel of Westeros</p>
+          <h1>The Armory</h1>
+          <p className="room-lede">
+            Valyrian blades, a star that fell on Dorne, a castle-forged needle, and the hammer that
+            killed a prince. Who held them, where they went, and how they were made.
+          </p>
+          <nav className="room-index" aria-label="Weapons">
+            {weapons.map((weapon) => (
+              <a key={weapon.id} href={`#/armory/${weapon.id}`}>
+                {weapon.name}
+              </a>
+            ))}
+          </nav>
+        </div>
+      </section>
       <div className="armory-grid">
         {weapons.map((weapon) => (
           <article key={weapon.id} id={weapon.id} className="weapon-card">

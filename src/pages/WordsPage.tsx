@@ -1,11 +1,33 @@
+import { useEffect } from 'react'
 import { houseWords, oaths, prophecies, quotes } from '../data/voice.ts'
 import { SiteNav } from '../ui/SiteNav.tsx'
 
 const great = houseWords.filter((item) => item.great)
 const lesser = houseWords.filter((item) => !item.great)
 
+function wordsIdFromHash(): string {
+  const path = window.location.hash.replace(/^#/, '').replace(/^\/+|\/+$/g, '')
+  const parts = path.split('/')
+  if ((parts[0] === 'words' || parts[0] === 'voice') && parts[1]) return parts[1]
+  return ''
+}
+
 export function WordsPage() {
   const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`
+
+  useEffect(() => {
+    const scrollTo = () => {
+      const id = wordsIdFromHash()
+      if (!id) return
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+    const timer = window.setTimeout(scrollTo, 80)
+    window.addEventListener('hashchange', scrollTo)
+    return () => {
+      window.clearTimeout(timer)
+      window.removeEventListener('hashchange', scrollTo)
+    }
+  }, [])
 
   return (
     <div className="words">
@@ -22,15 +44,15 @@ export function WordsPage() {
             Prophecies that have not yet finished paying.
           </p>
           <nav className="words-index" aria-label="Chapters">
-            <a href="#words-houses">Words</a>
-            <a href="#words-voices">Voices</a>
-            <a href="#words-oaths">Oaths</a>
-            <a href="#words-prophecies">Prophecies</a>
+            <a href="#/words/houses">Words</a>
+            <a href="#/words/voices">Voices</a>
+            <a href="#/words/oaths">Oaths</a>
+            <a href="#/words/prophecies">Prophecies</a>
           </nav>
         </div>
       </section>
 
-      <section className="words-chapter" id="words-houses">
+      <section className="words-chapter" id="houses">
         <div className="words-chapter-head">
           <img src={asset('words/parchment.jpg')} alt="" />
           <div>
@@ -69,7 +91,7 @@ export function WordsPage() {
         </div>
       </section>
 
-      <section className="words-chapter" id="words-voices">
+      <section className="words-chapter" id="voices">
         <div className="words-chapter-head">
           <img src={asset('words/ravens.jpg')} alt="" />
           <div>
@@ -90,7 +112,7 @@ export function WordsPage() {
         </div>
       </section>
 
-      <section className="words-chapter words-chapter-oaths" id="words-oaths">
+      <section className="words-chapter words-chapter-oaths" id="oaths">
         <div className="words-chapter-head">
           <img src={asset('words/wall.jpg')} alt="" />
           <div>
@@ -110,7 +132,7 @@ export function WordsPage() {
         ))}
       </section>
 
-      <section className="words-chapter" id="words-prophecies">
+      <section className="words-chapter" id="prophecies">
         <div className="words-chapter-head">
           <img src={asset('words/comet.jpg')} alt="" />
           <div>

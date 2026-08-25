@@ -1,6 +1,12 @@
 import { useEffect } from 'react'
 import { keeps } from '../data/keeps.ts'
+import { atlasHref } from '../lib/hashRoute.ts'
 import { SiteNav } from '../ui/SiteNav.tsx'
+
+function keepLocationId(id: string): string {
+  if (id === 'red-keep') return 'kings-landing'
+  return id
+}
 
 function keepIdFromHash(): string {
   const path = window.location.hash.replace(/^#/, '').replace(/^\/+|\/+$/g, '')
@@ -18,7 +24,7 @@ export function KeepsPage() {
       if (!id) return
       document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
-    const timer = window.setTimeout(scrollToKeep, 50)
+    const timer = window.setTimeout(scrollToKeep, 80)
     window.addEventListener('hashchange', scrollToKeep)
     return () => {
       window.clearTimeout(timer)
@@ -29,21 +35,25 @@ export function KeepsPage() {
   return (
     <div className="keeps">
       <SiteNav current="keeps" />
-      <header className="armory-hero">
-        <p className="eyebrow">Stone of the Seven Kingdoms</p>
-        <h1>The Keeps</h1>
-        <p className="armory-lede">
-          Who raised them, who sat them, and what was done in their halls. Every castle on the atlas —
-          founders in the Age of Heroes, the lords of the war, and the nights that named them.
-        </p>
-        <nav className="armory-index" aria-label="Castles">
-          {keeps.map((keep) => (
-            <a key={keep.id} href={`#/keeps/${keep.id}`}>
-              {keep.name}
-            </a>
-          ))}
-        </nav>
-      </header>
+      <section className="room-hero">
+        <img src={asset('keeps/hero.jpg')} alt="" className="room-hero-art" />
+        <div className="room-hero-veil" />
+        <div className="room-hero-copy">
+          <p className="eyebrow">Stone of the Seven Kingdoms</p>
+          <h1>The Keeps</h1>
+          <p className="room-lede">
+            Who raised them, who sat them, and what was done in their halls. Founders in the Age of
+            Heroes, the lords of the war, and the nights that named them.
+          </p>
+          <nav className="room-index" aria-label="Castles">
+            {keeps.map((keep) => (
+              <a key={keep.id} href={`#/keeps/${keep.id}`}>
+                {keep.name}
+              </a>
+            ))}
+          </nav>
+        </div>
+      </section>
       <div className="keeps-grid">
         {keeps.map((keep) => (
           <article key={keep.id} id={keep.id} className="keep-card">
@@ -73,6 +83,9 @@ export function KeepsPage() {
                   </dd>
                 </div>
               </dl>
+              <a className="room-atlas" href={atlasHref(keepLocationId(keep.id))}>
+                Show on Atlas
+              </a>
             </div>
           </article>
         ))}
