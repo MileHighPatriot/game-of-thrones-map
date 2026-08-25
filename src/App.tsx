@@ -4,6 +4,7 @@ import { ArmoryPage } from './pages/ArmoryPage.tsx'
 import { AtlasPage } from './pages/AtlasPage.tsx'
 import { KeepsPage } from './pages/KeepsPage.tsx'
 import { LandingPage } from './pages/LandingPage.tsx'
+import { TrueNorthPage } from './pages/TrueNorthPage.tsx'
 import { WordsPage } from './pages/WordsPage.tsx'
 import { AtlasProvider } from './state/AtlasContext.tsx'
 import { SiteNav } from './ui/SiteNav.tsx'
@@ -13,6 +14,7 @@ const TITLES: Record<string, string> = {
   armory: 'The Armory · Westeros & Essos',
   keeps: 'The Keeps · Westeros & Essos',
   words: 'The Words · Westeros & Essos',
+  north: 'The True North · Westeros & Essos',
   hall: 'Westeros & Essos',
 }
 
@@ -58,6 +60,14 @@ export default function App() {
     return (
       <div className="app is-words">
         <WordsPage />
+      </div>
+    )
+  }
+
+  if (route === 'north') {
+    return (
+      <div className="app is-north">
+        <TrueNorthPage />
       </div>
     )
   }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export type Route = 'hall' | 'atlas' | 'armory' | 'keeps' | 'words'
+export type Route = 'hall' | 'atlas' | 'armory' | 'keeps' | 'words' | 'north'
 
 export function parseHash(hash = window.location.hash): Route {
   const path = hash.replace(/^#/, '').replace(/^\/+|\/+$/g, '')
@@ -9,6 +9,7 @@ export function parseHash(hash = window.location.hash): Route {
   if (head === 'armory' || head === 'weapons') return 'armory'
   if (head === 'keeps' || head === 'castles') return 'keeps'
   if (head === 'words' || head === 'voice') return 'words'
+  if (head === 'north' || head === 'true-north' || head === 'beyond') return 'north'
   return 'hall'
 }
 
@@ -17,7 +18,23 @@ export function hrefFor(route: Route): string {
   if (route === 'armory') return '#/armory'
   if (route === 'keeps') return '#/keeps'
   if (route === 'words') return '#/words'
+  if (route === 'north') return '#/north'
   return '#/'
+}
+
+export function atlasHref(locationId: string, season?: number): string {
+  if (season) return `#/map/${locationId}/${season}`
+  return `#/map/${locationId}`
+}
+
+export function parseAtlasFocus(hash = window.location.hash): { id: string; season: number | null } {
+  const path = hash.replace(/^#/, '').replace(/^\/+|\/+$/g, '')
+  const parts = path.split('/')
+  if (parts[0] !== 'map' && parts[0] !== 'atlas') return { id: '', season: null }
+  const id = parts[1] ?? ''
+  const seasonNum = Number(parts[2])
+  const season = seasonNum >= 1 && seasonNum <= 8 ? seasonNum : null
+  return { id, season }
 }
 
 export function useHashRoute(): Route {
