@@ -512,10 +512,10 @@ export const majorLocationIds = new Set([
   'pentos',
   'vaes-dothrak',
   'qarth',
+  'white-harbor',
   'harrenhal',
   'the-twins',
   'oldtown',
-  'white-harbor',
 ])
 
 export function placeMinZoom(id: string): number {

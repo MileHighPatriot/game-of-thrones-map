@@ -1,5 +1,7 @@
+import { useEffect, useState } from 'react'
 import { houses } from '../data/houses.ts'
 import { hrefFor } from '../lib/hashRoute.ts'
+import { startTheme, stopTheme } from '../lib/theme.ts'
 import { sigilSrc } from '../lib/banners.ts'
 import { SiteNav } from '../ui/SiteNav.tsx'
 
@@ -60,6 +62,49 @@ const courtHouses = COURT.map((id) => houses.find((house) => house.id === id)).f
   (house): house is (typeof houses)[number] => Boolean(house),
 )
 
+function HallMusic() {
+  const [on, setOn] = useState(false)
+
+  useEffect(() => {
+    let cancelled = false
+    const kick = () => {
+      startTheme()
+        .then(() => {
+          if (!cancelled) setOn(true)
+        })
+        .catch(() => {})
+    }
+    kick()
+    window.addEventListener('pointerdown', kick, { once: true })
+    window.addEventListener('keydown', kick, { once: true })
+    return () => {
+      cancelled = true
+      window.removeEventListener('pointerdown', kick)
+      window.removeEventListener('keydown', kick)
+      stopTheme()
+    }
+  }, [])
+
+  return (
+    <button
+      type="button"
+      className={`landing-music${on ? ' is-on' : ''}`}
+      onClick={(event) => {
+        event.stopPropagation()
+        if (on) {
+          stopTheme()
+          setOn(false)
+        } else {
+          startTheme().then(() => setOn(true))
+        }
+      }}
+      aria-pressed={on}
+    >
+      {on ? 'Music on' : 'Music off'}
+    </button>
+  )
+}
+
 export function LandingPage() {
   const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`
   const marquee = [...WORDS, ...WORDS]
@@ -75,6 +120,7 @@ export function LandingPage() {
         />
         <div className="landing-hero-veil" aria-hidden="true" />
         <SiteNav current="hall" overlay />
+        <HallMusic />
         <div className="landing-hero-copy">
           <p className="eyebrow">A fan atlas of the known world</p>
           <h1 className="landing-kicker">Westeros &amp; Essos</h1>

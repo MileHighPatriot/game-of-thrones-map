@@ -15,7 +15,8 @@ import L, { type DivIcon, type Layer, type LeafletMouseEvent, type PathOptions }
 import { battles } from '../data/battles.ts'
 import { controlBySeason } from '../data/control.ts'
 import { houseById } from '../data/houses.ts'
-import { locationById, locations, placeMinZoom } from '../data/locations.ts'
+import { locationById, locations, majorLocationIds, placeMinZoom } from '../data/locations.ts'
+import { seatPortraits } from '../data/portraits.ts'
 import { presenceBySeason } from '../data/presence.ts'
 import { regionLabelAt, regionShortName, regionsGeoJSON } from '../data/regions.ts'
 import { routes } from '../data/routes.ts'
@@ -29,6 +30,12 @@ import { MAX_ZOOM, ZOOM, fitZoom, flyZoomFor } from './zoom.ts'
 const bounds: L.LatLngBoundsExpression = [
   [0, 0],
   [MAP_HEIGHT, MAP_WIDTH],
+]
+
+const voidPad = 220
+const voidBounds: L.LatLngBoundsExpression = [
+  [-voidPad, -voidPad],
+  [MAP_HEIGHT + voidPad, MAP_WIDTH + voidPad],
 ]
 
 const imageCenter: L.LatLngExpression = [MAP_HEIGHT / 2, MAP_WIDTH / 2]
@@ -105,7 +112,7 @@ function RegionLayer() {
   if (!layers.regions) return null
 
   const control = controlBySeason[season]
-  const fill = zoom < 0.9 ? 0.32 : zoom < 1.7 ? 0.24 : 0.1
+  const fill = zoom < 0.9 ? 0.58 : zoom < 1.7 ? 0.46 : 0.28
   const band = zoom < 0.9 ? 'c' : zoom < 1.7 ? 'r' : 's'
 
   const style = (feature?: Feature): PathOptions => {
@@ -115,10 +122,11 @@ function RegionLayer() {
     const selected = selection?.kind === 'region' && selection.id === id
     return {
       color: selected ? '#f4e3b2' : paint.stroke,
-      weight: selected ? 2.8 : zoom < 1.7 ? 2.1 : 1.3,
+      weight: selected ? 3.2 : zoom < 1.7 ? 2.4 : 1.5,
       fillColor: paint.fill,
-      fillOpacity: selected ? Math.max(fill, 0.36) : fill,
-      opacity: 0.96,
+      fillOpacity: selected ? Math.max(fill, 0.64) : fill,
+      opacity: 1,
+      className: 'region-stain',
       interactive: zoom < 2.2,
     }
   }
@@ -229,6 +237,57 @@ function RouteLayer() {
   )
 }
 
+function seatSize(zoom: number, major: boolean): number {
+  if (zoom < 0.95) return major ? 46 : 32
+  if (zoom < 1.55) return major ? 64 : 46
+  return major ? 84 : 62
+}
+
+function SeatLayer() {
+  const { layers, zoom, setSelection, flyTo } = useAtlas()
+  if (!layers.places) return null
+
+  return (
+    <>
+      {locations.map((place) => {
+        const src = seatPortraits[place.id]
+        if (!src) return null
+        const min = majorLocationIds.has(place.id) ? -1 : placeMinZoom(place.id) - 0.2
+        if (zoom < min) return null
+        const size = seatSize(zoom, majorLocationIds.has(place.id))
+        const showName = zoom >= ZOOM.placeLabels
+        const html = `<div class="seat-medal" style="width:${size}px;height:${size}px"><img src="${src}" alt=""></div>${
+          showName ? `<span class="map-label place-label">${place.name}</span>` : ''
+        }`
+        return (
+          <Marker
+            key={`seat-${place.id}-${size}`}
+            position={toLatLng(place.x, place.y)}
+            zIndexOffset={450}
+            icon={icon(html, 'marker-seat', showName ? [size + 110, size] : [size, size], [size / 2, size / 2])}
+            eventHandlers={{
+              click: (event) => {
+                L.DomEvent.stopPropagation(event.originalEvent)
+                setSelection({ kind: 'location', id: place.id })
+              },
+              dblclick: (event) => {
+                L.DomEvent.stopPropagation(event.originalEvent)
+                flyTo(place.x, place.y, flyZoomFor('location'))
+              },
+            }}
+          >
+            {!showName && (
+              <Tooltip direction="top" offset={[0, -size / 2]}>
+                {place.name}
+              </Tooltip>
+            )}
+          </Marker>
+        )
+      })}
+    </>
+  )
+}
+
 function PlaceLayer() {
   const { layers, zoom, season, setSelection, flyTo } = useAtlas()
   if (!layers.places) return null
@@ -242,6 +301,7 @@ function PlaceLayer() {
     <>
       {locations
         .filter((place) => {
+          if (seatPortraits[place.id]) return false
           if (clusteredPeople?.has(place.id)) return false
           return zoom >= placeMinZoom(place.id)
         })
@@ -357,8 +417,8 @@ export function AtlasMap() {
       zoomSnap={0.25}
       zoomDelta={0.5}
       wheelPxPerZoomLevel={90}
-      maxBounds={bounds}
-      maxBoundsViscosity={0.7}
+      maxBounds={voidBounds}
+      maxBoundsViscosity={0.55}
       bounceAtZoomLimits={false}
       attributionControl={false}
       zoomControl={false}
@@ -371,6 +431,7 @@ export function AtlasMap() {
       <RouteLayer />
       <RegionLabels />
       <PlaceLayer />
+      <SeatLayer />
       <BannerLayer />
       <BattleLayer />
       <PresenceLayer />

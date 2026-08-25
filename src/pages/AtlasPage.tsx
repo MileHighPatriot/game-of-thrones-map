@@ -45,7 +45,10 @@ export function AtlasPage() {
     <>
       <HashFocus />
       <Keybinds />
-      <main className="map-stage">
+      <main
+        className="map-stage"
+        style={{ backgroundImage: `url(${import.meta.env.BASE_URL}map/void.jpg)` }}
+      >
         <AtlasMap />
         <div className="map-vignette" aria-hidden="true" />
         <div className="chrome-top">
