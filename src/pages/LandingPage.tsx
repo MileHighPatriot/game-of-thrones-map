@@ -47,6 +47,13 @@ const DOORS = [
     alt: 'A weirwood',
     href: 'words' as const,
   },
+  {
+    title: 'The True North',
+    copy: 'Beyond the Wall the maps grow thin. Free Folk, cold ones, and the reason the ice was raised.',
+    image: 'north/hero.jpg',
+    alt: 'The True North',
+    href: 'north' as const,
+  },
 ]
 
 const courtHouses = COURT.map((id) => houses.find((house) => house.id === id)).filter(
