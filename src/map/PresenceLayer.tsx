@@ -6,6 +6,7 @@ import { locationById } from '../data/locations.ts'
 import { presenceBySeason } from '../data/presence.ts'
 import { clusterHtml, compareCharacters, personHtml } from '../lib/people.ts'
 import { toLatLng } from '../lib/geo.ts'
+import { focusRegionId } from '../lib/focus.ts'
 import { useAtlas } from '../state/AtlasContext.tsx'
 import type { Character, Season } from '../types.ts'
 import { ZOOM, flyZoomFor } from './zoom.ts'
@@ -88,7 +89,8 @@ export function PresenceLayer() {
     if (!stillHere) setExpandedPresence(null)
   }, [season, expandedPresence, setExpandedPresence])
 
-  if (!layers.characters) return null
+  const focus = focusRegionId(selection, season)
+  if (!focus || !layers.characters) return null
 
   const selectedId = selection?.kind === 'character' ? selection.id : null
   const locationIds = [...new Set(presenceBySeason[season].map((pin) => pin.locationId))]
@@ -97,7 +99,7 @@ export function PresenceLayer() {
     <>
       {locationIds.map((locationId) => {
         const place = locationById[locationId]
-        if (!place) return null
+        if (!place || place.regionId !== focus) return null
         const people = peopleAtLocation(season, locationId, selectedId)
         if (people.length === 0) return null
         const spread = zoom >= ZOOM.presenceSpread

@@ -38,21 +38,27 @@ body.is-atlas {
 }
 
 .app.is-atlas {
+  position: relative;
   height: 100%;
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 
+.app.is-atlas .site-nav.is-overlay {
+  background: linear-gradient(180deg, rgba(12, 9, 7, 0.78) 0%, rgba(12, 9, 7, 0.28) 70%, transparent 100%);
+  padding: 10px 16px 22px;
+}
+
 .chrome-top {
   position: absolute;
-  top: 14px;
+  top: 58px;
   left: 14px;
-  right: 14px;
+  right: auto;
   z-index: 1200;
   display: flex;
   align-items: flex-start;
-  gap: 10px 14px;
+  gap: 8px;
   pointer-events: none;
 }
 
@@ -101,22 +107,25 @@ body.is-atlas {
 
 .search {
   position: relative;
-  flex: 1 1 18rem;
-  max-width: 26rem;
+  flex: 0 0 auto;
+  width: 13.5rem;
+  max-width: 42vw;
 }
 
 .search input {
-  background: rgba(36, 28, 22, 0.94);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+  background: rgba(18, 14, 11, 0.52);
+  box-shadow: none;
+  font-size: 0.82rem;
+  padding: 6px 10px;
 }
 
 .search input,
 .season-controls input {
   width: 100%;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(212, 180, 60, 0.22);
   background: var(--panel-soft);
   color: var(--parchment);
-  padding: 9px 12px;
+  padding: 6px 10px;
   font: inherit;
   border-radius: 2px;
 }
@@ -259,11 +268,15 @@ body.is-atlas {
 .layers-toggle {
   font: inherit;
   cursor: pointer;
-  border: 1px solid var(--line);
-  background: rgba(36, 28, 22, 0.94);
-  color: var(--parchment);
-  padding: 8px 14px;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(212, 180, 60, 0.22);
+  background: rgba(18, 14, 11, 0.52);
+  color: var(--muted);
+  padding: 5px 10px;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-family: Cinzel, serif;
+  box-shadow: none;
 }
 
 .toggles {
@@ -358,8 +371,8 @@ body.is-atlas {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 6px;
-  max-width: 16rem;
+  gap: 4px;
+  max-width: 10rem;
   pointer-events: none;
 }
 
@@ -367,11 +380,15 @@ body.is-atlas {
   pointer-events: auto;
   font: inherit;
   cursor: pointer;
-  border: 1px solid var(--line);
-  background: #2a2118;
-  color: var(--parchment);
-  padding: 6px 12px;
+  border: 1px solid rgba(212, 180, 60, 0.22);
+  background: rgba(18, 14, 11, 0.52);
+  color: var(--muted);
+  padding: 5px 10px;
   border-radius: 2px;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-family: Cinzel, serif;
 }
 
 .map-hud button:hover {
@@ -397,10 +414,10 @@ body.is-atlas {
 
 .panel {
   position: absolute;
-  top: 86px;
+  top: 128px;
   right: 14px;
   width: min(340px, 38vw);
-  max-height: calc(100% - 180px);
+  max-height: calc(100% - 160px);
   overflow: auto;
   padding: 18px 20px 24px;
   border: 1px solid var(--line);
@@ -680,44 +697,46 @@ body.is-atlas {
   color: var(--gold);
 }
 
-.season-dock {
+.chrome-tools {
   position: absolute;
-  left: 50%;
-  bottom: 14px;
-  transform: translateX(-50%);
+  top: 58px;
+  right: 14px;
   z-index: 1200;
-  width: min(560px, calc(100% - 180px));
-  display: grid;
-  grid-template-columns: minmax(9rem, 1fr) minmax(11rem, 1fr);
-  gap: 8px 16px;
-  align-items: center;
-  padding: 7px 12px 8px;
-  border: 1px solid var(--line);
-  background: rgba(27, 21, 16, 0.88);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.38);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.chrome-tools > * {
+  pointer-events: auto;
+}
+
+.season-dock {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  padding: 5px 6px 6px;
+  border: 1px solid rgba(212, 180, 60, 0.22);
+  background: rgba(18, 14, 11, 0.52);
+  box-shadow: none;
   backdrop-filter: blur(8px);
 }
 
-.season-copy {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  min-width: 0;
-}
-
-.season-copy strong {
+.season-kicker {
   font-family: Cinzel, serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: var(--gold);
+  padding: 0 4px;
 }
 
-.season-copy span,
-.season-copy em {
-  color: var(--muted);
-  font-size: 0.92rem;
-}
-
-.season-copy em {
-  font-style: normal;
+.season-copy {
+  display: none;
 }
 
 .season-controls {
@@ -728,19 +747,21 @@ body.is-atlas {
 
 .season-ticks {
   display: flex;
-  justify-content: space-between;
-  gap: 6px;
+  justify-content: flex-end;
+  gap: 2px;
 }
 
 .season-ticks button {
-  flex: 1;
-  padding: 4px 0;
+  flex: 0 0 auto;
+  min-width: 1.35rem;
+  padding: 3px 5px;
   border-radius: 2px;
+  font-size: 0.68rem;
 }
 
 .season-play {
-  flex: 0 0 2.1rem;
-  padding: 4px 0;
+  flex: 0 0 1.5rem;
+  padding: 3px 5px;
 }
 
 .dive {
@@ -1145,9 +1166,13 @@ body.is-atlas {
   mix-blend-mode: multiply;
 }
 
+.leaflet-overlay-pane svg path.region-hit {
+  cursor: pointer;
+}
+
 .leaflet-control-zoom {
   margin-left: 14px !important;
-  margin-bottom: 78px !important;
+  margin-bottom: 14px !important;
 }
 
 .leaflet-image-overlay img {
@@ -2516,7 +2541,13 @@ body.is-atlas {
 
 @media (max-width: 900px) {
   .chrome-top {
-    flex-wrap: wrap;
+    top: 92px;
+    left: 10px;
+  }
+
+  .chrome-tools {
+    top: 92px;
+    right: 10px;
   }
 
   .site-nav {
@@ -2609,8 +2640,8 @@ body.is-atlas {
 
   .search,
   .layers-menu {
-    width: 100%;
-    max-width: none;
+    width: auto;
+    max-width: 12rem;
     margin-left: 0;
   }
 
@@ -2629,20 +2660,14 @@ body.is-atlas {
   }
 
   .season-dock {
-    width: calc(100% - 24px);
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-
-  .season-copy em {
-    display: none;
+    width: auto;
   }
 
   .map-hud {
-    bottom: 132px;
+    bottom: 14px;
   }
 
   .leaflet-control-zoom {
-    margin-bottom: 132px !important;
+    margin-bottom: 14px !important;
   }
 }

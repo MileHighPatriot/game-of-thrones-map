@@ -33,7 +33,7 @@ export default function App() {
     return (
       <AtlasProvider>
         <div className="app is-atlas">
-          <SiteNav current="atlas" />
+          <SiteNav current="atlas" overlay />
           <AtlasPage />
         </div>
       </AtlasProvider>

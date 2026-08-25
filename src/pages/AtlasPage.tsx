@@ -53,10 +53,12 @@ export function AtlasPage() {
         <div className="map-vignette" aria-hidden="true" />
         <div className="chrome-top">
           <SearchBox />
+        </div>
+        <div className="chrome-tools">
           <LayerToggles />
+          <SeasonSlider />
         </div>
         <LorePanel />
-        <SeasonSlider />
         <MapHud />
       </main>
     </>

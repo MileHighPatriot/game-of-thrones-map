@@ -21,6 +21,7 @@ import { presenceBySeason } from '../data/presence.ts'
 import { regionLabelAt, regionShortName, regionsGeoJSON } from '../data/regions.ts'
 import { routes } from '../data/routes.ts'
 import { bannerSvg, regionPaint } from '../lib/banners.ts'
+import { focusRegionId } from '../lib/focus.ts'
 import { sx, sy, toLatLng } from '../lib/geo.ts'
 import { useAtlas } from '../state/AtlasContext.tsx'
 import { MAP_HEIGHT, MAP_WIDTH, type RegionFeature } from '../types.ts'
@@ -109,8 +110,7 @@ function MapEvents() {
 
 function RegionLayer() {
   const { season, layers, selection, setSelection, zoom, flyTo } = useAtlas()
-  if (!layers.regions) return null
-
+  const focus = focusRegionId(selection, season)
   const control = controlBySeason[season]
   const fill = zoom < 0.9 ? 0.58 : zoom < 1.7 ? 0.46 : 0.28
   const band = zoom < 0.9 ? 'c' : zoom < 1.7 ? 'r' : 's'
@@ -119,15 +119,26 @@ function RegionLayer() {
     const id = String(feature?.properties && (feature.properties as RegionFeature['properties']).id)
     const houseId = control[id]
     const paint = regionPaint(houseId)
-    const selected = selection?.kind === 'region' && selection.id === id
+    const open = focus === id
+    if (!open) {
+      return {
+        color: '#000',
+        weight: 0,
+        fillColor: '#000',
+        fillOpacity: 0,
+        opacity: 0,
+        className: 'region-hit',
+        interactive: true,
+      }
+    }
     return {
-      color: selected ? '#f4e3b2' : paint.stroke,
-      weight: selected ? 3.2 : zoom < 1.7 ? 2.4 : 1.5,
+      color: paint.stroke,
+      weight: zoom < 1.7 ? 2.6 : 1.6,
       fillColor: paint.fill,
-      fillOpacity: selected ? Math.max(fill, 0.64) : fill,
-      opacity: 1,
+      fillOpacity: layers.regions ? fill : 0,
+      opacity: layers.regions ? 1 : 0,
       className: 'region-stain',
-      interactive: zoom < 2.2,
+      interactive: true,
     }
   }
 
@@ -146,7 +157,7 @@ function RegionLayer() {
 
   return (
     <GeoJSON
-      key={`regions-${season}-${selection?.kind === 'region' ? selection.id : ''}-${band}`}
+      key={`regions-${season}-${focus ?? 'none'}-${band}`}
       data={regionsGeoJSON as FeatureCollection}
       style={style}
       coordsToLatLng={(coords) => L.latLng(sy(coords[1]), sx(coords[0]))}
@@ -156,14 +167,15 @@ function RegionLayer() {
 }
 
 function RegionLabels() {
-  const { season, layers, zoom, setSelection, flyTo } = useAtlas()
-  if (!layers.regions) return null
+  const { season, layers, zoom, selection, setSelection, flyTo } = useAtlas()
+  const focus = focusRegionId(selection, season)
+  if (!focus || !layers.regions) return null
   if (zoom < ZOOM.regionLabel || zoom > ZOOM.regionLabelMax) return null
 
   const control = controlBySeason[season]
   return (
     <>
-      {regionsGeoJSON.features.map((region) => {
+      {regionsGeoJSON.features.filter((region) => region.properties.id === focus).map((region) => {
         const [x, y] = regionLabelAt[region.properties.id] ?? region.properties.banner
         const house = houseById[control[region.properties.id]]
         const name = regionShortName[region.properties.id] ?? region.properties.name
@@ -193,8 +205,9 @@ function RegionLabels() {
 }
 
 function RouteLayer() {
-  const { layers, zoom, selection, setSelection, flyTo } = useAtlas()
-  if (!layers.roads) return null
+  const { layers, zoom, selection, setSelection, flyTo, season } = useAtlas()
+  const focus = focusRegionId(selection, season)
+  if (!focus || !layers.roads) return null
 
   return (
     <>
@@ -244,12 +257,14 @@ function seatSize(zoom: number, major: boolean): number {
 }
 
 function SeatLayer() {
-  const { layers, zoom, setSelection, flyTo } = useAtlas()
-  if (!layers.places) return null
+  const { layers, zoom, selection, setSelection, flyTo, season } = useAtlas()
+  const focus = focusRegionId(selection, season)
+  if (!focus || !layers.places) return null
 
   return (
     <>
       {locations.map((place) => {
+        if (place.regionId !== focus) return null
         const src = seatPortraits[place.id]
         if (!src) return null
         const min = majorLocationIds.has(place.id) ? -1 : placeMinZoom(place.id) - 0.2
@@ -289,8 +304,9 @@ function SeatLayer() {
 }
 
 function PlaceLayer() {
-  const { layers, zoom, season, setSelection, flyTo } = useAtlas()
-  if (!layers.places) return null
+  const { layers, zoom, season, selection, setSelection, flyTo } = useAtlas()
+  const focus = focusRegionId(selection, season)
+  if (!focus || !layers.places) return null
 
   const clusteredPeople =
     layers.characters && zoom < ZOOM.presenceSpread
@@ -301,6 +317,7 @@ function PlaceLayer() {
     <>
       {locations
         .filter((place) => {
+          if (place.regionId !== focus) return false
           if (seatPortraits[place.id]) return false
           if (clusteredPeople?.has(place.id)) return false
           return zoom >= placeMinZoom(place.id)
@@ -339,14 +356,15 @@ function PlaceLayer() {
 }
 
 function BannerLayer() {
-  const { season, layers, zoom, setSelection, flyTo } = useAtlas()
-  if (!layers.banners || zoom <= ZOOM.regionLabelMax) return null
+  const { season, layers, zoom, selection, setSelection, flyTo } = useAtlas()
+  const focus = focusRegionId(selection, season)
+  if (!focus || !layers.banners || zoom <= ZOOM.regionLabelMax) return null
 
   const control = controlBySeason[season]
 
   return (
     <>
-      {regionsGeoJSON.features.map((region) => {
+      {regionsGeoJSON.features.filter((region) => region.properties.id === focus).map((region) => {
         const house = houseById[control[region.properties.id]]
         if (!house) return null
         const [x, y] = region.properties.banner
@@ -375,8 +393,9 @@ function BannerLayer() {
 }
 
 function BattleLayer() {
-  const { season, layers, zoom, setSelection } = useAtlas()
-  if (!layers.battles || zoom < ZOOM.battles) return null
+  const { season, layers, zoom, selection, setSelection } = useAtlas()
+  const focus = focusRegionId(selection, season)
+  if (!focus || !layers.battles || zoom < ZOOM.battles) return null
 
   return (
     <>
@@ -384,7 +403,7 @@ function BattleLayer() {
         .filter((battle) => battle.season === season)
         .map((battle) => {
           const place = locationById[battle.locationId]
-          if (!place) return null
+          if (!place || place.regionId !== focus) return null
           return (
             <Marker
               key={battle.id}
