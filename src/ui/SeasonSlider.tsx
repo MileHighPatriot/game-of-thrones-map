@@ -6,7 +6,7 @@ import type { Season } from '../types.ts'
 const seasons: Season[] = [1, 2, 3, 4, 5, 6, 7, 8]
 
 export function SeasonSlider() {
-  const { season, setSeason, selection, playing, setPlaying } = useAtlas()
+  const { season, setSeason, playing, setPlaying } = useAtlas()
   const meta = SEASON_META[season]
 
   useEffect(() => {
@@ -22,56 +22,38 @@ export function SeasonSlider() {
   }, [playing, season, setPlaying, setSeason])
 
   return (
-    <footer className="season-dock">
-      <div className="season-copy">
-        <strong>{meta.title}</strong>
-        <span>{meta.caption}</span>
-        {!selection && <em>Zoom in to see every traveler. Each realm wears its ruling house.</em>}
-      </div>
-      <div className="season-controls">
-        <input
-          type="range"
-          min={1}
-          max={8}
-          step={1}
-          value={season}
-          aria-label="Season"
-          onChange={(event) => {
-            setPlaying(false)
-            setSeason(Number(event.target.value) as Season)
+    <footer className="season-dock" aria-label="Season">
+      <span className="season-kicker">{meta.title}</span>
+      <div className="season-ticks">
+        <button
+          type="button"
+          className={`season-play${playing ? ' active' : ''}`}
+          aria-label={playing ? 'Pause season playback' : 'Play seasons'}
+          aria-pressed={playing}
+          onClick={() => {
+            if (playing) {
+              setPlaying(false)
+              return
+            }
+            if (season === 8) setSeason(1)
+            setPlaying(true)
           }}
-        />
-        <div className="season-ticks">
+        >
+          {playing ? '❚❚' : '▶'}
+        </button>
+        {seasons.map((value) => (
           <button
+            key={value}
             type="button"
-            className={`season-play${playing ? ' active' : ''}`}
-            aria-label={playing ? 'Pause season playback' : 'Play seasons'}
-            aria-pressed={playing}
+            className={value === season ? 'active' : ''}
             onClick={() => {
-              if (playing) {
-                setPlaying(false)
-                return
-              }
-              if (season === 8) setSeason(1)
-              setPlaying(true)
+              setPlaying(false)
+              setSeason(value)
             }}
           >
-            {playing ? '❚❚' : '▶'}
+            {value}
           </button>
-          {seasons.map((value) => (
-            <button
-              key={value}
-              type="button"
-              className={value === season ? 'active' : ''}
-              onClick={() => {
-                setPlaying(false)
-                setSeason(value)
-              }}
-            >
-              {value}
-            </button>
-          ))}
-        </div>
+        ))}
       </div>
     </footer>
   )

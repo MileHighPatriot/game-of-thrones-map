@@ -57,6 +57,7 @@ export function AtlasProvider({ children }: { children: ReactNode }) {
       flyTo: (x, y, nextZoom = 1.4) => setFlyTarget({ x, y, zoom: nextZoom }),
       fitNonce,
       fitWorld: () => {
+        setSelection(null)
         setExpandedPresence(null)
         setFitNonce((count) => count + 1)
       },

@@ -33,7 +33,7 @@ export function LayerToggles() {
               {item.label}
             </button>
           ))}
-          <p className="layers-hint">Travelers stay grouped until you zoom in. Realms wear their lord’s colors.</p>
+          <p className="layers-hint">Click a realm to open it. Click the sea or Continent to close it.</p>
         </div>
       )}
     </div>

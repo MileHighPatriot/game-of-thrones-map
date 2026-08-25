@@ -147,7 +147,7 @@ export function SearchBox() {
     <div className="search">
       <input
         type="search"
-        placeholder="Search Arya, Winterfell…"
+        placeholder="Search…"
         value={query}
         onChange={(event) => setQuery(event.target.value)}
         aria-label="Search the atlas"
