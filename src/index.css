@@ -1189,6 +1189,7 @@ body.is-atlas {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   gap: 16px;
   padding: 14px 22px;
   z-index: 1300;
@@ -1209,6 +1210,7 @@ body.is-atlas {
 
 .app.is-armory .site-nav.is-solid,
 .app.is-keeps .site-nav.is-solid,
+.app.is-heroes .site-nav.is-solid,
 .app.is-words .site-nav.is-solid,
 .app.is-north .site-nav.is-solid {
   position: sticky;
@@ -1471,14 +1473,6 @@ body.is-atlas {
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
 }
 
-.landing-door:nth-child(4) {
-  grid-column: 2 / span 2;
-}
-
-.landing-door:nth-child(5) {
-  grid-column: 4 / span 2;
-}
-
 .landing-door img {
   display: block;
   width: 100%;
@@ -1561,7 +1555,8 @@ body.is-atlas {
   border-top: 1px solid var(--line);
 }
 
-.armory {
+.armory,
+.heroes {
   color: var(--parchment);
   min-height: 100%;
 }
@@ -1660,7 +1655,8 @@ body.is-atlas {
   background: #3a2d18;
 }
 
-.armory-grid {
+.armory-grid,
+.heroes-grid {
   display: flex;
   flex-direction: column;
   gap: 28px;
@@ -1669,7 +1665,8 @@ body.is-atlas {
   padding: 28px 24px 48px;
 }
 
-.weapon-card {
+.weapon-card,
+.hero-card {
   display: grid;
   grid-template-columns: minmax(240px, 38%) 1fr;
   gap: 0;
@@ -1680,15 +1677,18 @@ body.is-atlas {
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
 }
 
-.weapon-card:nth-child(even) {
+.weapon-card:nth-child(even),
+.hero-card:nth-child(even) {
   grid-template-columns: 1fr minmax(240px, 38%);
 }
 
-.weapon-card:nth-child(even) img {
+.weapon-card:nth-child(even) img,
+.hero-card:nth-child(even) img {
   order: 2;
 }
 
-.weapon-card img {
+.weapon-card img,
+.hero-card img {
   display: block;
   width: 100%;
   height: 100%;
@@ -1698,11 +1698,13 @@ body.is-atlas {
   filter: saturate(0.88) contrast(1.06);
 }
 
-.weapon-copy {
+.weapon-copy,
+.hero-copy {
   padding: 22px 24px 26px;
 }
 
-.weapon-copy h2 {
+.weapon-copy h2,
+.hero-copy h2 {
   margin: 0 0 4px;
   font-family: Cinzel, serif;
   font-weight: 500;
@@ -1710,7 +1712,8 @@ body.is-atlas {
   font-size: 1.7rem;
 }
 
-.weapon-house {
+.weapon-house,
+.hero-house {
   margin: 0 0 16px;
   color: var(--gold);
   font-family: 'Cormorant Garamond', Georgia, serif;
@@ -1718,14 +1721,16 @@ body.is-atlas {
   font-size: 1.05rem;
 }
 
-.weapon-copy dl {
+.weapon-copy dl,
+.hero-copy dl {
   margin: 0;
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
 
-.weapon-copy dt {
+.weapon-copy dt,
+.hero-copy dt {
   font-family: Cinzel, serif;
   font-size: 0.68rem;
   letter-spacing: 0.16em;
@@ -1734,7 +1739,8 @@ body.is-atlas {
   margin-bottom: 5px;
 }
 
-.weapon-copy dd {
+.weapon-copy dd,
+.hero-copy dd {
   margin: 0;
   color: var(--parchment);
   line-height: 1.5;
@@ -2544,9 +2550,7 @@ body.is-atlas {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .landing-door,
-  .landing-door:nth-child(4),
-  .landing-door:nth-child(5) {
+  .landing-door {
     grid-column: auto;
   }
 }
@@ -2584,15 +2588,19 @@ body.is-atlas {
   }
 
   .weapon-card,
-  .weapon-card:nth-child(even) {
+  .weapon-card:nth-child(even),
+  .hero-card,
+  .hero-card:nth-child(even) {
     grid-template-columns: 1fr;
   }
 
-  .weapon-card:nth-child(even) img {
+  .weapon-card:nth-child(even) img,
+  .hero-card:nth-child(even) img {
     order: 0;
   }
 
-  .weapon-card img {
+  .weapon-card img,
+  .hero-card img {
     min-height: 240px;
     max-height: 340px;
   }
