@@ -97,7 +97,18 @@ function HallMusic() {
         preload="auto"
         playsInline
         onPlay={() => setOn(true)}
-        onPause={() => setOn(false)}
+        onPause={() => {
+          const node = audioRef.current
+          if (node && node.ended) return
+          setOn(false)
+        }}
+        onEnded={() => {
+          const node = audioRef.current
+          if (!node) return
+          node.currentTime = 0
+          void node.play()
+          setOn(true)
+        }}
       />
       <button
         type="button"
