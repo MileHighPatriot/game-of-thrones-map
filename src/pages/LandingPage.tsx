@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { houses } from '../data/houses.ts'
 import { hrefFor } from '../lib/hashRoute.ts'
-import { attachTheme, startTheme, stopTheme } from '../lib/theme.ts'
+import { attachTheme, HALL_VOLUME, startTheme, stopTheme } from '../lib/theme.ts'
 import { sigilSrc } from '../lib/banners.ts'
 import { SiteNav } from '../ui/SiteNav.tsx'
 
@@ -70,10 +70,9 @@ function HallMusic() {
     const node = audioRef.current
     if (!node) return
     attachTheme(node)
-    node.volume = 1
+    node.volume = HALL_VOLUME
     node.muted = false
     const kick = () => {
-      node.volume = 1
       node.muted = false
       startTheme()
         .then(() => setOn(true))
@@ -106,10 +105,7 @@ function HallMusic() {
         onClick={(event) => {
           event.stopPropagation()
           const node = audioRef.current
-          if (node) {
-            node.volume = 1
-            node.muted = false
-          }
+          if (node) node.muted = false
           if (on) {
             stopTheme()
             setOn(false)
