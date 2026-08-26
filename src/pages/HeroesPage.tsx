@@ -52,7 +52,7 @@ export function HeroesPage() {
       <div className="heroes-grid">
         {heroes.map((hero) => (
           <article key={hero.id} id={hero.id} className="hero-card">
-            <img src={asset(hero.image)} alt={hero.name} />
+            <img src={`${asset(hero.image)}?v=got`} alt={hero.name} />
             <div className="hero-copy">
               <p className="eyebrow">{hero.epithet}</p>
               <h2>{hero.name}</h2>

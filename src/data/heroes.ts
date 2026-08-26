@@ -19,7 +19,7 @@ export const heroes: Hero[] = [
     name: 'Arthur Dayne',
     epithet: 'Sword of the Morning',
     house: 'House Dayne · Kingsguard',
-    image: 'heroes/arthur-dayne.jpg',
+    image: 'heroes/got/arthur-dayne.jpg',
     locationId: 'tower-of-joy',
     steel:
       'Dawn, the pale greatsword forged from a fallen star, kept at Starfall and given only to a knight of House Dayne judged worthy. He fought two-handed when the hour was worst — Dawn in the right, a common steel blade in the left — and men who saw it said the morning had a point.',
@@ -59,7 +59,7 @@ export const heroes: Hero[] = [
     name: 'Barristan Selmy',
     epithet: 'Barristan the Bold',
     house: 'House Selmy · Kingsguard',
-    image: 'heroes/barristan-selmy.jpg',
+    image: 'heroes/got/barristan-selmy.jpg',
     locationId: 'meereen',
     steel:
       'A longsword and a lifetime. He was never a named-steel knight; he was the named knight. Clean footwork, a high guard, and the patience of a man who had already survived the men who rushed. In old age he still moved like the boy who unhorsed Duncan the Tall.',
@@ -99,7 +99,7 @@ export const heroes: Hero[] = [
     name: 'Robert Baratheon',
     epithet: 'The Demon of the Trident',
     house: 'House Baratheon',
-    image: 'heroes/robert-baratheon.jpg',
+    image: 'heroes/got/robert-baratheon.jpg',
     locationId: 'the-trident',
     steel:
       'A two-handed warhammer too heavy for other men, antlered and ugly, the weapon of a storm lord who never learned the sword’s manners. He fought in a melee the way a storm hits a holdfast: all at once, and you were down before you understood the weather. In peace he let the hammer rust and the belly win.',
@@ -119,7 +119,7 @@ export const heroes: Hero[] = [
     name: 'Rhaegar Targaryen',
     epithet: 'The Last Dragon',
     house: 'House Targaryen',
-    image: 'heroes/rhaegar-targaryen.jpg',
+    image: 'heroes/got/rhaegar-targaryen.jpg',
     locationId: 'the-trident',
     steel:
       'A longsword and a suit of black plate inlaid with rubies. He was a tourney knight of the first rank, not a brawler. Men who trained with him said he fought as he played the harp: as if the next note were already decided. Armor and prophecy did not save him from a hammer.',
@@ -139,7 +139,7 @@ export const heroes: Hero[] = [
     name: 'Jaime Lannister',
     epithet: 'The Kingslayer',
     house: 'House Lannister · Kingsguard',
-    image: 'heroes/jaime-lannister.jpg',
+    image: 'heroes/got/jaime-lannister.jpg',
     locationId: 'whispering-wood',
     steel:
       'A prodigy with a longsword, knighted into the Kingsguard at fifteen, golden and cruelly gifted. After the maiming he learned the other hand badly and gave the better steel away: Oathkeeper to Brienne, Widow’s Wail later into his own remaining fist. He was never the knight the songs wanted. He was often the swordsman the yard required.',
@@ -159,7 +159,7 @@ export const heroes: Hero[] = [
     name: 'Gerold Hightower',
     epithet: 'The White Bull',
     house: 'House Hightower · Kingsguard',
-    image: 'heroes/gerold-hightower.jpg',
+    image: 'heroes/got/gerold-hightower.jpg',
     locationId: 'tower-of-joy',
     steel:
       'Lord Commander of Aerys’s Kingsguard. A greatsword and a bulk that made the white cloak look like a sail. He was not the Sword of the Morning; he was the wall the Morning stood beside. Old, heavy, and still the man you sent if a door was not to open.',
@@ -199,7 +199,7 @@ export const heroes: Hero[] = [
     name: 'Podrick Payne',
     epithet: 'Pod',
     house: 'House Payne',
-    image: 'heroes/podrick-payne.jpg',
+    image: 'heroes/got/podrick-payne.jpg',
     locationId: 'kings-landing',
     steel:
       'A squire’s sword until it wasn’t. He learned in Tyrion’s shadow and Brienne’s patience: a straight, unfancy longsword, both hands when he was afraid, which was often, and still the blade that killed a kingsguard in a yard when no one was watching the squire. He is living proof that the lists lie about where knights come from.',
@@ -219,7 +219,7 @@ export const heroes: Hero[] = [
     name: 'Arya Stark',
     epithet: 'No One',
     house: 'House Stark',
-    image: 'heroes/arya-stark.jpg',
+    image: 'heroes/got/arya-stark.jpg',
     locationId: 'braavos',
     steel:
       'Needle, castle-forged and small, a thin sword for a thin girl who refused to sew. Syrio Forel’s water dancing first: swift feet, a pointed stick, the lesson that not-seeing is the death. Later the Faceless Men added the other knives, the poison, and the lying. She kills with a needle and with nothing you saw coming.',
@@ -239,7 +239,7 @@ export const heroes: Hero[] = [
     name: 'Bronn',
     epithet: 'Ser Bronn of the Blackwater',
     house: 'A sellsword · later a lord',
-    image: 'heroes/bronn.jpg',
+    image: 'heroes/got/bronn.jpg',
     locationId: 'kings-landing',
     steel:
       'A sellsword’s longsword and a knife for the work the longsword is too proud to do. No named blade. No style a master-at-arms would write down. He fights dirty, cheap, and alive. That is the style. It has killed better-trained men in better armor for worse pay.',
@@ -259,7 +259,7 @@ export const heroes: Hero[] = [
     name: 'Howland Reed',
     epithet: 'Lord of Greywater Watch',
     house: 'House Reed',
-    image: 'heroes/howland-reed.jpg',
+    image: 'heroes/got/howland-reed.jpg',
     locationId: 'tower-of-joy',
     steel:
       'A crannogman’s tools: net, frog spear, bronze knife, poison that does not care about your armor. He is not a knight of the lists. He is the reason a knight of the lists died in the Prince’s Pass. The small steel, used at the right time, unmade the Sword of the Morning.',
@@ -279,7 +279,7 @@ export const heroes: Hero[] = [
     name: 'Gendry',
     epithet: 'The Bull',
     house: 'A bastard of Storm’s End',
-    image: 'heroes/gendry.jpg',
+    image: 'heroes/got/gendry.jpg',
     locationId: 'storms-end',
     steel:
       'A warhammer, because blood will out even when the name will not. He learned it at a forge first: Mott’s apprentice, a smith’s shoulders, a bull’s helm he made himself. In the field the hammer is Robert’s echo without Robert’s songs. He hits things until they are honest.',
@@ -299,7 +299,7 @@ export const heroes: Hero[] = [
     name: 'Jory Cassel',
     epithet: 'Captain of the Household Guard',
     house: 'House Cassel',
-    image: 'heroes/jory-cassel.jpg',
+    image: 'heroes/got/jory-cassel.jpg',
     locationId: 'kings-landing',
     steel:
       'Castle-forged steel and the drill of Winterfell’s yard. A household captain’s sword: competent, unshowy, meant to keep a lord alive in a street, not to win a tourney. He was good. He was not Jaime Lannister. The street made that a math problem.',
@@ -319,7 +319,7 @@ export const heroes: Hero[] = [
     name: 'Rodrik Cassel',
     epithet: 'Master-at-Arms of Winterfell',
     house: 'House Cassel',
-    image: 'heroes/rodrik-cassel.jpg',
+    image: 'heroes/got/rodrik-cassel.jpg',
     locationId: 'winterfell',
     steel:
       'A knight’s sword and a cat-o’-nine-tails for the boys in the yard. Whiskers, plate, and the patience to teach a lord’s sons that the swing comes from the hips. He was Winterfell’s memory of how to hold a blade when the Starks were still children.',
@@ -359,7 +359,7 @@ export const heroes: Hero[] = [
     name: 'Brienne of Tarth',
     epithet: 'The Maid of Tarth',
     house: 'House Tarth · Kingsguard',
-    image: 'heroes/brienne-of-tarth.jpg',
+    image: 'heroes/got/brienne-of-tarth.jpg',
     locationId: 'tarth',
     steel:
       'Oathkeeper, the Valyrian longsword Jaime put in her hand — Ice’s second life, a lion’s hilt on wolf steel. Before that, a plain even-star sword and a style no one in a tourney wanted to look at: strength, reach, a high guard, and the refusal to make a pretty corpse. She fights like a true knight in a century that uses the word for decoration.',
@@ -379,7 +379,7 @@ export const heroes: Hero[] = [
     name: 'Yara Greyjoy',
     epithet: 'Asha, in the older ink',
     house: 'House Greyjoy',
-    image: 'heroes/yara-greyjoy.jpg',
+    image: 'heroes/got/yara-greyjoy.jpg',
     locationId: 'pyke',
     steel:
       'An axe, a dirk, and a longship. Ironborn fighting is boarding, wet decks, and the first man over the rail. She is that first man. The books name her Asha; the show names her Yara. The arm is the same. She prefers a fight she can sail away from if the gods are iron, and into if they are not.',
@@ -399,7 +399,7 @@ export const heroes: Hero[] = [
     name: 'Ygritte',
     epithet: 'Kissed by Fire',
     house: 'The Free Folk',
-    image: 'heroes/ygritte.jpg',
+    image: 'heroes/got/ygritte.jpg',
     locationId: 'haunted-forest',
     steel:
       'A weirwood bow, red hair, and an arrow for crows. She fought as the Free Folk fight: no plate, no lists, a running war in trees. The bow was the point. The mouth was the other weapon. She could have killed Jon Snow a dozen times and chose, for a while, not to.',
@@ -419,7 +419,7 @@ export const heroes: Hero[] = [
     name: 'Qhorin Halfhand',
     epithet: 'The Halfhand',
     house: 'The Night’s Watch',
-    image: 'heroes/qhorin-halfhand.jpg',
+    image: 'heroes/got/qhorin-halfhand.jpg',
     locationId: 'fist',
     steel:
       'A ranger’s longsword in the left hand, because a wildling axe had taken the better fingers of the right. He made the off hand the killing one. That is a style you only learn if you live. He fought like the Wall’s memory of what rangers were for: quiet, far, and already dead if the plan required it.',
@@ -439,7 +439,7 @@ export const heroes: Hero[] = [
     name: 'Jeor Mormont',
     epithet: 'The Old Bear',
     house: 'House Mormont · Night’s Watch',
-    image: 'heroes/jeor-mormont.jpg',
+    image: 'heroes/got/jeor-mormont.jpg',
     locationId: 'castle-black',
     steel:
       'Longclaw, the Valyrian bastard sword of Bear Island, until he put a wolf’s head on it and put it in Jon Snow’s hand. He fought like an old lord who had chosen a colder house: direct, mailed, tired of speeches. The blade was a gift. The style was a warning.',
@@ -459,7 +459,7 @@ export const heroes: Hero[] = [
     name: 'Benjen Stark',
     epithet: 'The First Ranger',
     house: 'House Stark · Night’s Watch',
-    image: 'heroes/benjen-stark.jpg',
+    image: 'heroes/got/benjen-stark.jpg',
     locationId: 'castle-black',
     steel:
       'A ranger’s sword and the old gods’ kind of quiet. First Ranger of the Watch, which means he was the man you sent when the maps went white. On the show he returns as something between a corpse and a vow, with a flaming chain, and spends his last act buying a nephew a horse. That is still a Stark’s steel.',
@@ -479,7 +479,7 @@ export const heroes: Hero[] = [
     name: 'Jon Snow',
     epithet: 'The White Wolf',
     house: 'House Stark · Night’s Watch',
-    image: 'heroes/jon-snow.jpg',
+    image: 'heroes/got/jon-snow.jpg',
     locationId: 'castle-black',
     steel:
       'Longclaw, Valyrian, a bastard sword for a boy who was told he was a bastard. He learned the Watch’s yard, then the Free Folk’s, then a king’s. Ghost at his side. The style is northern: two hands when it is honest, a shield wall when it is wise, and a bad habit of walking first into places that kill first-walkers.',
@@ -499,7 +499,7 @@ export const heroes: Hero[] = [
     name: 'Tormund Giantsbane',
     epithet: 'Husband to Bears',
     house: 'The Free Folk',
-    image: 'heroes/tormund-giantsbane.jpg',
+    image: 'heroes/got/tormund-giantsbane.jpg',
     locationId: 'hardhome',
     steel:
       'A great axe and a mouth that counts as a second weapon. He fights like a man who has already told the story of the fight and is checking the facts. No plate that a southron knight would recognize. The style is Free Folk: hit, boast, live, repeat. It has kept him alive through more ends of the world than most knights have named battles.',
@@ -519,7 +519,7 @@ export const heroes: Hero[] = [
     name: 'Mance Rayder',
     epithet: 'The King-Beyond-the-Wall',
     house: 'The Free Folk · once the Watch',
-    image: 'heroes/mance-rayder.jpg',
+    image: 'heroes/got/mance-rayder.jpg',
     locationId: 'hardhome',
     steel:
       'A longsword and a king’s gift for getting men who hate kneeling to walk in the same direction. He was a ranger before he was a wildling, which is why he knew where the Watch was weak. He fought as a commander of a people who do not keep commanders. The red god burned him on the show. The books suggest a glamour and a different corpse. This hall follows the fire the south saw, and notes the ink that disagrees.',
@@ -539,7 +539,7 @@ export const heroes: Hero[] = [
     name: 'Khal Drogo',
     epithet: 'The Great Khal',
     house: 'The Dothraki',
-    image: 'heroes/khal-drogo.jpg',
+    image: 'heroes/got/khal-drogo.jpg',
     locationId: 'vaes-dothrak',
     steel:
       'An arakh, the curved silk of the grass sea, and a braid uncut because no man had ever cut it. He fought from horseback, close, fast, and without the south’s idea of a line. A khalasar is the weapon. The arakh is only the tooth.',
@@ -559,7 +559,7 @@ export const heroes: Hero[] = [
     name: 'Syrio Forel',
     epithet: 'First Sword of Braavos',
     house: 'Braavos',
-    image: 'heroes/syrio-forel.jpg',
+    image: 'heroes/got/syrio-forel.jpg',
     locationId: 'braavos',
     steel:
       'A wooden sword, then a lost practice blade, then whatever was in the room. Water dancing: the Bravo’s art, all footwork and seeing. He taught a northern girl that the eyes lie and the feet tell the truth. He faced steel plate with a broken stick and made it a lesson anyway.',
@@ -579,7 +579,7 @@ export const heroes: Hero[] = [
     name: 'Grey Worm',
     epithet: 'Commander of the Unsullied',
     house: 'The Unsullied',
-    image: 'heroes/grey-worm.jpg',
+    image: 'heroes/got/grey-worm.jpg',
     locationId: 'astapor',
     steel:
       'A spear and a shortsword, the Unsullied pair, used as they were trained in Astapor: lockstep, silence, the shield of the man beside you more important than your name. Freedom did not change the grammar of it. It only gave him a reason that was not a master’s whip.',
@@ -599,7 +599,7 @@ export const heroes: Hero[] = [
     name: 'Daario Naharis',
     epithet: 'Of the Stormcrows',
     house: 'A sellsword of Pentos',
-    image: 'heroes/daario-naharis.jpg',
+    image: 'heroes/got/daario-naharis.jpg',
     locationId: 'meereen',
     steel:
       'Arakh and stiletto, or the show’s gilded knives — a duelist’s pair for a man who smiles when he kills. Sellsword flash, not a knight’s guard. He is quick, vain, and effective in the kind of fight that happens in a tent or a street, not a shield wall.',
@@ -619,7 +619,7 @@ export const heroes: Hero[] = [
     name: 'Oberyn Martell',
     epithet: 'The Red Viper',
     house: 'House Nymeros Martell',
-    image: 'heroes/oberyn-martell.jpg',
+    image: 'heroes/got/oberyn-martell.jpg',
     locationId: 'sunspear',
     steel:
       'A spear, often poisoned, and a fighter’s vanity that was also a doctrine: keep moving, keep talking, make the big man follow. Dorne’s school, not the Reach’s. He fought as if the ending were already a story he was telling. That was the mistake, and also the reason anyone still tells it.',
@@ -639,7 +639,7 @@ export const heroes: Hero[] = [
     name: 'Sandor Clegane',
     epithet: 'The Hound',
     house: 'House Clegane',
-    image: 'heroes/sandor-clegane.jpg',
+    image: 'heroes/got/sandor-clegane.jpg',
     locationId: 'kings-landing',
     steel:
       'A greatsword as heavy as the man, no Kingsguard white, no songs. He fights like a butcher who was taught the knight’s forms and then set on fire. The burned side is the lesson. He hates his brother more than he hates the rest of the world, which is saying something, and he is still, against his own advice, the closest thing several children had to a shield.',
@@ -659,7 +659,7 @@ export const heroes: Hero[] = [
     name: 'Gregor Clegane',
     epithet: 'The Mountain That Rides',
     house: 'House Clegane',
-    image: 'heroes/gregor-clegane.jpg',
+    image: 'heroes/got/gregor-clegane.jpg',
     locationId: 'kings-landing',
     steel:
       'A two-handed greatsword the size of a lesser man’s spear, plate that looks like a keep, and a strength that makes skill a rumor. He does not fence. He ends. Later Qyburn’s work made the ending a habit that survived death. There is no style. There is a result.',
@@ -679,7 +679,7 @@ export const heroes: Hero[] = [
     name: 'Eddard Stark',
     epithet: 'The Quiet Wolf',
     house: 'House Stark',
-    image: 'heroes/ned-stark.jpg',
+    image: 'heroes/got/ned-stark.jpg',
     locationId: 'winterfell',
     steel:
       'Ice, the Valyrian greatsword of Winterfell, too large for a battlefield and perfect for a block. In war he carried a lord’s longsword like any northern commander. The style was the North’s: you swing the sword you sentence with. He was a soldier of Robert’s Rebellion before he was a cautionary tale about honor.',
