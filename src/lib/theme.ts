@@ -1,5 +1,7 @@
 let el: HTMLAudioElement | null = null
 
+export const HALL_VOLUME = 0.4
+
 function rainsSrc() {
   return `${import.meta.env.BASE_URL}landing/rains.wav`
 }
@@ -9,7 +11,7 @@ function bind(node: HTMLAudioElement) {
   el.loop = true
   el.preload = 'auto'
   el.muted = false
-  el.volume = 1
+  el.volume = HALL_VOLUME
 }
 
 export function attachTheme(node: HTMLAudioElement) {
@@ -25,7 +27,6 @@ export async function startTheme() {
   const node = el
   if (!node) return
   node.muted = false
-  node.volume = 1
   await node.play()
 }
 
