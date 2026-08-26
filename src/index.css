@@ -1698,6 +1698,11 @@ body.is-atlas {
   filter: saturate(0.88) contrast(1.06);
 }
 
+.hero-card img {
+  object-position: center 18%;
+  min-height: 420px;
+}
+
 .weapon-copy,
 .hero-copy {
   padding: 22px 24px 26px;
