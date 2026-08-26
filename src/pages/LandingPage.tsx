@@ -43,6 +43,13 @@ const DOORS = [
     href: 'keeps' as const,
   },
   {
+    title: 'The Hall of Heroes',
+    copy: 'Knights, sellswords, and the unexpected blades. A maester’s register of the realm’s famous steel.',
+    image: 'heroes/hero.jpg',
+    alt: 'A hall of faded banners',
+    href: 'heroes' as const,
+  },
+  {
     title: 'The Words',
     copy: 'House words, oaths, prophecies, and the lines that outlived the people who said them.',
     image: 'words/weirwood.jpg',

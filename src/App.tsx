@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useHashRoute } from './lib/hashRoute.ts'
 import { ArmoryPage } from './pages/ArmoryPage.tsx'
 import { AtlasPage } from './pages/AtlasPage.tsx'
+import { HeroesPage } from './pages/HeroesPage.tsx'
 import { KeepsPage } from './pages/KeepsPage.tsx'
 import { LandingPage } from './pages/LandingPage.tsx'
 import { TrueNorthPage } from './pages/TrueNorthPage.tsx'
@@ -13,6 +14,7 @@ const TITLES: Record<string, string> = {
   atlas: 'The Atlas · Westeros & Essos',
   armory: 'The Armory · Westeros & Essos',
   keeps: 'The Keeps · Westeros & Essos',
+  heroes: 'The Hall of Heroes · Westeros & Essos',
   words: 'The Words · Westeros & Essos',
   north: 'The True North · Westeros & Essos',
   hall: 'Westeros & Essos',
@@ -52,6 +54,14 @@ export default function App() {
     return (
       <div className="app is-keeps">
         <KeepsPage />
+      </div>
+    )
+  }
+
+  if (route === 'heroes') {
+    return (
+      <div className="app is-heroes">
+        <HeroesPage />
       </div>
     )
   }
