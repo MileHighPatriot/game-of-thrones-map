@@ -3,7 +3,7 @@ let el: HTMLAudioElement | null = null
 export const HALL_VOLUME = 0.4
 
 function rainsSrc() {
-  return `${import.meta.env.BASE_URL}landing/rains.wav`
+  return `${import.meta.env.BASE_URL}landing/rains-of-castamere.wav`
 }
 
 function bind(node: HTMLAudioElement) {

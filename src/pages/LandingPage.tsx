@@ -91,7 +91,7 @@ function HallMusic() {
       <audio
         ref={audioRef}
         className="landing-player"
-        src={`${import.meta.env.BASE_URL}landing/rains.wav`}
+        src={`${import.meta.env.BASE_URL}landing/rains-of-castamere.wav`}
         loop
         controls
         preload="auto"
