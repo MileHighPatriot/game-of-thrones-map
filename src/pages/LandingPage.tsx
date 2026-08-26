@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { houses } from '../data/houses.ts'
 import { hrefFor } from '../lib/hashRoute.ts'
-import { startTheme, stopTheme } from '../lib/theme.ts'
+import { attachTheme, startTheme, stopTheme } from '../lib/theme.ts'
 import { sigilSrc } from '../lib/banners.ts'
 import { SiteNav } from '../ui/SiteNav.tsx'
 
@@ -63,45 +63,67 @@ const courtHouses = COURT.map((id) => houses.find((house) => house.id === id)).f
 )
 
 function HallMusic() {
+  const audioRef = useRef<HTMLAudioElement>(null)
   const [on, setOn] = useState(false)
 
   useEffect(() => {
-    let cancelled = false
+    const node = audioRef.current
+    if (!node) return
+    attachTheme(node)
+    node.volume = 1
+    node.muted = false
     const kick = () => {
+      node.volume = 1
+      node.muted = false
       startTheme()
-        .then(() => {
-          if (!cancelled) setOn(true)
-        })
-        .catch(() => {})
+        .then(() => setOn(true))
+        .catch(() => setOn(false))
     }
-    kick()
     window.addEventListener('pointerdown', kick, { once: true })
     window.addEventListener('keydown', kick, { once: true })
     return () => {
-      cancelled = true
       window.removeEventListener('pointerdown', kick)
       window.removeEventListener('keydown', kick)
-      stopTheme()
     }
   }, [])
 
   return (
-    <button
-      type="button"
-      className={`landing-music${on ? ' is-on' : ''}`}
-      onClick={(event) => {
-        event.stopPropagation()
-        if (on) {
-          stopTheme()
-          setOn(false)
-        } else {
-          startTheme().then(() => setOn(true))
-        }
-      }}
-      aria-pressed={on}
-    >
-      {on ? 'Music on' : 'Music off'}
-    </button>
+    <div className="landing-music-dock" onPointerDown={(event) => event.stopPropagation()}>
+      <audio
+        ref={audioRef}
+        className="landing-player"
+        src={`${import.meta.env.BASE_URL}landing/rains.wav`}
+        loop
+        controls
+        preload="auto"
+        playsInline
+        onPlay={() => setOn(true)}
+        onPause={() => setOn(false)}
+      />
+      <button
+        type="button"
+        className={`landing-music${on ? ' is-on' : ''}`}
+        onClick={(event) => {
+          event.stopPropagation()
+          const node = audioRef.current
+          if (node) {
+            node.volume = 1
+            node.muted = false
+          }
+          if (on) {
+            stopTheme()
+            setOn(false)
+          } else {
+            startTheme().then(() => setOn(true)).catch(() => setOn(false))
+          }
+        }}
+        aria-pressed={on}
+        aria-label={on ? 'Mute The Rains of Castamere' : 'Play The Rains of Castamere'}
+        title="The Rains of Castamere"
+      >
+        {on ? 'The rains play' : 'Play the rains'}
+      </button>
+    </div>
   )
 }
 
