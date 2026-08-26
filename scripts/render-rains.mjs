@@ -41,7 +41,8 @@ const CELLO = [
 ]
 const PHRASE_BEATS = MELODY.reduce((sum, [, beats]) => sum + beats, 0)
 const PASSES = 3
-const LOOP_SEC = PHRASE_BEATS * PASSES * BEAT + 1.2
+const LOOP_SEC = PHRASE_BEATS * PASSES * BEAT
+const XFADE = 0.7
 
 function bowEnv(t, dur) {
   const attack = Math.min(0.12, dur * 0.18)
@@ -211,18 +212,28 @@ function room(left, right) {
   return [outL, outR]
 }
 
+function seamless(left, right) {
+  const fadeN = Math.min(left.length >> 1, Math.floor(XFADE * SAMPLE_RATE))
+  for (let i = 0; i < fadeN; i++) {
+    const a = i / fadeN
+    const tail = left.length - fadeN + i
+    left[tail] = left[tail] * (1 - a) + left[i] * a
+    right[tail] = right[tail] * (1 - a) + right[i] * a
+  }
+  return [left.subarray(fadeN), right.subarray(fadeN)]
+}
+
 const n = Math.floor(SAMPLE_RATE * LOOP_SEC)
 let left = new Float32Array(n)
 let right = new Float32Array(n)
 
 for (let i = 0; i < n; i++) {
   const t = i / SAMPLE_RATE
-  const fade = Math.min(1, t / 1.4) * Math.min(1, (LOOP_SEC - t) / 0.8)
   const drone =
     0.09 * Math.sin(2 * Math.PI * 73.42 * t) +
     0.05 * Math.sin(2 * Math.PI * 110 * t)
-  left[i] += drone * fade
-  right[i] += drone * fade * 0.96
+  left[i] += drone
+  right[i] += drone * 0.96
 }
 
 const phraseSec = PHRASE_BEATS * BEAT
@@ -231,29 +242,31 @@ placePhrase(left, right, 0.2 + phraseSec, 1, 1)
 placePhrase(left, right, 0.2 + phraseSec * 2, 2, 2)
 
 ;[left, right] = room(left, right)
+;[left, right] = seamless(left, right)
 
 let peak = 1e-9
 let sum = 0
-for (let i = 0; i < n; i++) {
+for (let i = 0; i < left.length; i++) {
   peak = Math.max(peak, Math.abs(left[i]), Math.abs(right[i]))
   sum += left[i] * left[i] + right[i] * right[i]
 }
 const scale = 0.7 / peak
-for (let i = 0; i < n; i++) {
+for (let i = 0; i < left.length; i++) {
   left[i] *= scale
   right[i] *= scale
 }
-const rms = Math.sqrt(sum / (n * 2)) * scale
+const rms = Math.sqrt(sum / (left.length * 2)) * scale
 console.log({
-  seconds: LOOP_SEC.toFixed(1),
+  seconds: (left.length / SAMPLE_RATE).toFixed(1),
   peak: 0.7,
   rms: rms.toFixed(4),
   dbfs: (20 * Math.log10(rms)).toFixed(1),
 })
 
-const buf = Buffer.alloc(44 + n * 4)
+const samples = left.length
+const buf = Buffer.alloc(44 + samples * 4)
 buf.write('RIFF', 0)
-buf.writeUInt32LE(36 + n * 4, 4)
+buf.writeUInt32LE(36 + samples * 4, 4)
 buf.write('WAVE', 8)
 buf.write('fmt ', 12)
 buf.writeUInt32LE(16, 16)
@@ -264,9 +277,9 @@ buf.writeUInt32LE(SAMPLE_RATE * 4, 28)
 buf.writeUInt16LE(4, 32)
 buf.writeUInt16LE(16, 34)
 buf.write('data', 36)
-buf.writeUInt32LE(n * 4, 40)
+buf.writeUInt32LE(samples * 4, 40)
 let o = 44
-for (let i = 0; i < n; i++) {
+for (let i = 0; i < samples; i++) {
   buf.writeInt16LE(Math.max(-1, Math.min(1, left[i])) * 32767, o)
   buf.writeInt16LE(Math.max(-1, Math.min(1, right[i])) * 32767, o + 2)
   o += 4
