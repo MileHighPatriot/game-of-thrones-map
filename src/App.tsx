@@ -5,6 +5,7 @@ import { AtlasPage } from './pages/AtlasPage.tsx'
 import { HeroesPage } from './pages/HeroesPage.tsx'
 import { KeepsPage } from './pages/KeepsPage.tsx'
 import { LandingPage } from './pages/LandingPage.tsx'
+import { RobertsPage } from './pages/RobertsPage.tsx'
 import { TrueNorthPage } from './pages/TrueNorthPage.tsx'
 import { WordsPage } from './pages/WordsPage.tsx'
 import { AtlasProvider } from './state/AtlasContext.tsx'
@@ -17,6 +18,7 @@ const TITLES: Record<string, string> = {
   heroes: 'The Hall of Heroes · Westeros & Essos',
   words: 'The Words · Westeros & Essos',
   north: 'The True North · Westeros & Essos',
+  roberts: 'Robert’s Rebellion · Westeros & Essos',
   hall: 'Westeros & Essos',
 }
 
@@ -78,6 +80,14 @@ export default function App() {
     return (
       <div className="app is-north">
         <TrueNorthPage />
+      </div>
+    )
+  }
+
+  if (route === 'roberts') {
+    return (
+      <div className="app is-roberts">
+        <RobertsPage />
       </div>
     )
   }

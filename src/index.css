@@ -1212,7 +1212,8 @@ body.is-atlas {
 .app.is-keeps .site-nav.is-solid,
 .app.is-heroes .site-nav.is-solid,
 .app.is-words .site-nav.is-solid,
-.app.is-north .site-nav.is-solid {
+.app.is-north .site-nav.is-solid,
+.app.is-roberts .site-nav.is-solid {
   position: sticky;
   top: 0;
 }
@@ -1237,6 +1238,8 @@ body.is-atlas {
 
 .site-tabs {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   gap: 3px;
   padding: 3px;
   border: 1px solid var(--line);
@@ -2523,6 +2526,223 @@ body.is-atlas {
   font-size: 0.98rem;
 }
 
+.app.is-roberts {
+  --line: rgba(196, 64, 48, 0.3);
+  background: #0e0b09;
+}
+
+.app.is-roberts .site-nav.is-solid {
+  background: rgba(14, 11, 9, 0.96);
+}
+
+.app.is-roberts .site-tabs a.active {
+  color: var(--gold);
+  background: #3a2410;
+}
+
+.roberts {
+  min-height: 100%;
+  color: var(--parchment);
+  background:
+    radial-gradient(ellipse at 50% -8%, rgba(140, 36, 28, 0.18), transparent 48%),
+    #0e0b09;
+}
+
+.roberts .room-hero {
+  margin-bottom: 48px;
+}
+
+.roberts-scroll {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+  max-width: 1180px;
+  margin: 0 auto 56px;
+  border: 1px solid var(--line);
+  background: #1b1510;
+  overflow: hidden;
+  scroll-margin-top: 72px;
+}
+
+.roberts-scroll.is-flip {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
+}
+
+.roberts-scroll.is-flip .roberts-scroll-art {
+  order: 2;
+}
+
+.roberts-scroll-art {
+  margin: 0;
+}
+
+.roberts-scroll-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  object-fit: cover;
+  object-position: center 40%;
+  filter: saturate(0.86) contrast(1.05);
+}
+
+.roberts-scroll-copy {
+  padding: 32px 32px 36px;
+}
+
+.roberts-scroll-copy h2 {
+  margin: 0 0 12px;
+  font-family: Cinzel, serif;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  font-size: clamp(1.55rem, 3vw, 2.2rem);
+}
+
+.roberts-scroll-lede {
+  margin: 0 0 18px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 1.18rem;
+  color: #f0d2b0;
+  line-height: 1.45;
+}
+
+.roberts-scroll-copy p {
+  margin: 0 0 14px;
+  color: var(--parchment);
+  line-height: 1.58;
+}
+
+.roberts-chapter {
+  padding: 8px 0 64px;
+  scroll-margin-top: 72px;
+}
+
+.roberts-chapter-head {
+  max-width: 42rem;
+  margin: 0 auto 36px;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.roberts-chapter-head h2 {
+  margin: 0 0 12px;
+  font-family: Cinzel, serif;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+}
+
+.roberts-chapter-head p:last-child {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.roberts-place-grid,
+.roberts-face-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.roberts-place,
+.roberts-face {
+  display: grid;
+  grid-template-columns: minmax(220px, 36%) 1fr;
+  border: 1px solid var(--line);
+  background: #1b1510;
+  overflow: hidden;
+  scroll-margin-top: 76px;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
+}
+
+.roberts-place:nth-child(even),
+.roberts-face:nth-child(even) {
+  grid-template-columns: 1fr minmax(220px, 36%);
+}
+
+.roberts-place:nth-child(even) img,
+.roberts-face:nth-child(even) img {
+  order: 2;
+}
+
+.roberts-place img,
+.roberts-face img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 240px;
+  object-fit: cover;
+  object-position: center 30%;
+  filter: saturate(0.88) contrast(1.05);
+}
+
+.roberts-face img {
+  min-height: 280px;
+  object-position: center 18%;
+}
+
+.roberts-copy {
+  padding: 22px 24px 26px;
+}
+
+.roberts-copy h3 {
+  margin: 0 0 8px;
+  font-family: Cinzel, serif;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  font-size: 1.5rem;
+}
+
+.roberts-role {
+  margin: 0 0 12px;
+  color: var(--gold);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 1.08rem;
+}
+
+.roberts-copy p {
+  margin: 0 0 14px;
+  color: var(--parchment);
+  line-height: 1.55;
+}
+
+.roberts-copy dl {
+  margin: 0 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.roberts-copy dt {
+  font-family: Cinzel, serif;
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 5px;
+}
+
+.roberts-copy dd {
+  margin: 0;
+  color: var(--parchment);
+  line-height: 1.55;
+}
+
+.roberts-side {
+  margin-bottom: 36px;
+}
+
+.roberts-side-label {
+  max-width: 1080px;
+  margin: 0 auto 14px;
+  padding: 0 24px;
+}
+
 
 
 @keyframes landing-kenburns {
@@ -2651,6 +2871,38 @@ body.is-atlas {
 
   .north-card img {
     max-height: 240px;
+  }
+
+  .roberts-scroll,
+  .roberts-scroll.is-flip {
+    grid-template-columns: 1fr;
+  }
+
+  .roberts-scroll.is-flip .roberts-scroll-art {
+    order: 0;
+  }
+
+  .roberts-scroll-art img {
+    min-height: 180px;
+    max-height: 240px;
+  }
+
+  .roberts-place,
+  .roberts-place:nth-child(even),
+  .roberts-face,
+  .roberts-face:nth-child(even) {
+    grid-template-columns: 1fr;
+  }
+
+  .roberts-place:nth-child(even) img,
+  .roberts-face:nth-child(even) img {
+    order: 0;
+  }
+
+  .roberts-place img,
+  .roberts-face img {
+    min-height: 200px;
+    max-height: 280px;
   }
 
   .site-tabs a {

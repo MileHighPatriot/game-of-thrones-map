@@ -63,6 +63,13 @@ const DOORS = [
     alt: 'The True North',
     href: 'north' as const,
   },
+  {
+    title: 'Roberts',
+    copy: 'The war that made a king. From Duskendale to the Trident, the tower, and the lie that followed.',
+    image: 'roberts/hero.jpg',
+    alt: 'Robert’s Rebellion',
+    href: 'roberts' as const,
+  },
 ]
 
 const courtHouses = COURT.map((id) => houses.find((house) => house.id === id)).filter(
