@@ -40,9 +40,12 @@ export const rebellionChapters: RebellionChapter[] = [
     image: 'roberts/mad-king.jpg',
     locationId: 'kings-landing',
     body: [
-      'His early reign was a working kingdom. Tywin Lannister sat as Hand, the gold of Casterly Rock paid the bills, and the court still believed a Targaryen king could be managed. The songs remember the later years. They skip the years that made them.',
-      'The turning is the Defiance of Duskendale. Lord Denys Darklyn seized the king and held him in a dun keep by a grey sea. Ser Barristan Selmy cut him out. The rescue is the last clean thing in Aerys’s story. After Duskendale he would not let a blade near him, not even to shave. He grew a wildfire faith: green fire under the city, green fire in the yard, green fire as justice.',
-      'He began to execute by flame. Tywin’s usefulness curdled into jealousy and public slight. The last insult was a white cloak: Aerys named Jaime Lannister to the Kingsguard, stripping the Hand of his heir in open court. Tywin resigned. The partnership that had kept the realm upright was over. What remained was a king who trusted pyromancers more than lords.',
+      'Aerys II was not born mad. He took the Iron Throne in 262 AC at eighteen: charming, restless, hungry to be remembered beside Aegon the Conqueror and Jaehaerys the Wise. He talked of a second Wall of ice, of canals to make Dorne bloom, of towers to rival Old Valyria. He began none of it. The moment a scheme needed coin and stone, he lost interest and invented another.',
+      'The early peace was Tywin Lannister’s. They had grown up at court together. Aerys saw a throne and dreamed of glory; Tywin saw a kingdom and knew how to run it. The Hand paid the debts, made the roads safe, settled lords, and turned a chaotic court into a government. The whisper that followed was unbearable: it is Aerys who sits, but Tywin who rules. Aerys had the man who said it mutilated — tongue ripped out with hot pincers. Ser Ilyn Payne kept the silence for the rest of his life.',
+      'A proud king cannot live in a friend’s shadow. Aerys kept Tywin close and began to punish him for being better: public insults, Joanna Lannister slighted in open court, every wise counsel answered by doing the opposite. When it came time to choose Rhaegar’s bride, Tywin offered Cersei. Aerys refused and took Elia Martell of Dorne instead — a message that no Lannister would sit beside a dragon.',
+      'Duskendale, 277 AC. The town had been the great port of Blackwater Bay before King’s Landing ate its trade. Lord Denys Darklyn wanted a charter: his own taxes, his own rule. Tywin refused. Denys invited the king in person, knowing Aerys was desperate to prove he could succeed where his Hand would not. Tywin warned him not to go without an army. Aerys went with a small escort. The guards were slaughtered. The king was beaten and thrown in a dungeon.',
+      'Tywin arrived with a host and did not storm the walls. He sat outside for six months. Some said he was waiting for Aerys to die so Rhaegar could be king. Inside the cell Aerys had time to believe it. When Barristan Selmy slipped in alone at night and carried him out, Denys surrendered and begged. Aerys wanted erasure. House Darklyn was wiped out in days. Lady Serala, Denys’s wife, had her tongue torn out, was mutilated, and burned alive.',
+      'The man who came back forbade blades near him. Hair and nails grew long. He trusted only fire: wildfire that burned green and would not go out. He called for pyromancers instead of executioners. The realm named him the Mad King, never to his face. To his face they still said Your Grace.',
     ],
   },
   {
@@ -54,8 +57,8 @@ export const rebellionChapters: RebellionChapter[] = [
     image: 'roberts/alliance.jpg',
     locationId: 'the-eyrie',
     body: [
-      'Lord Rickard of Winterfell was building a south-facing North. Brandon, the heir, was betrothed to Catelyn Tully of Riverrun. Lyanna was promised to Robert Baratheon of Storm’s End. Eddard, the second son, and Robert himself were fostered together in the Eyrie under Jon Arryn, who raised them as brothers in all but blood.',
-      'None of it was a war plan. It was lordship: trout, stag, falcon, wolf, tied by salt and marriage. When Aerys later asked Jon Arryn to send him two boys’ heads, those four regions already knew whose hall they would ride from. The rebellion’s map is the fostering’s map. The North, the Vale, the riverlands, and the stormlands did not invent each other on the day the ravens flew. Rickard had already drawn the lines.',
+      'While the king shut himself in the Red Keep, the great houses did something the realm had not done at this scale. They became allies. For centuries Starks married Stark bannermen, Baratheons married in the stormlands, Tullys looked no further than the rivers. Then Rickard Stark, guided by his maester Walys, began to weave with marriage instead of swords.',
+      'Brandon, the heir, was betrothed to Catelyn Tully of Riverrun — North to riverlands. Lyanna was promised to Robert Baratheon of Storm’s End — North to stormlands. Eddard and Robert were fostered together at the Eyrie under Jon Arryn, who had no sons of his own and raised them as brothers. Four of the Seven Kingdoms bound by blood, loyalty, and shared interest. Whether Rickard was serving the realm or preparing for something greater, no one could say. The map was no longer divided.',
     ],
   },
   {
@@ -67,9 +70,12 @@ export const rebellionChapters: RebellionChapter[] = [
     image: 'roberts/trial.jpg',
     locationId: 'harrenhal',
     body: [
-      'At the Tourney of Harrenhal, Prince Rhaegar Targaryen won the lists and laid a crown of blue winter roses in Lyanna Stark’s lap. Elia Martell, his wife, watched. The realm called it a slight. The singers later called it a beginning.',
-      'Rhaegar then took Lyanna from the road — abduction or elopement, depending on who is left to speak. He was chasing a prophecy: the Prince That Was Promised, a dragon with three heads. Brandon Stark did not wait for maesters. He rode into King’s Landing and shouted for Rhaegar to come out and die.',
-      'Aerys arrested him and summoned Rickard. The father came in armor, demanding a trial by combat. The king named fire as his champion. Rickard burned in the steel while Brandon was put in a strangling harness and told the sword that would save his father was just out of reach. That is the spark. After the throne room, the rebellion is not a choice. It is the only language left.',
+      'In 281 AC the snows melted. Lord Walter Whent announced a tourney at Harrenhal too rich for his purse. Most maesters say Prince Rhaegar paid for it. The theory is a great council under a feast: remove Aerys peacefully and put a capable man on the throne — him. Varys warned the king that staying away would look like weakness. Aerys came, his first public hour since Duskendale, and saw the realm look at his son the way it had once looked at him.',
+      'He answered with a white cloak. In front of the court he named sixteen-year-old Jaime Lannister to the Kingsguard. A cloak cannot inherit, marry, or sire. Tywin’s heir was unmade; the future of the Rock was shoved onto Tyrion, whom Tywin despised. Tywin resigned as Hand and rode home to Casterly Rock without a word.',
+      'Midway through the lists a mystery knight appeared: mismatched armor, a laughing weirwood on the shield. The Knight of the Laughing Tree unhorsed three men whose squires had bullied Howland Reed, then vanished. Aerys, sure it was a spy, sent Rhaegar to hunt them. The prince came back with an abandoned shield. What he had found, the songs later say, was Lyanna Stark.',
+      'On the last day Rhaegar unhorsed Barristan Selmy and won the championship. He was to name a Queen of Love and Beauty. He rode past his wife Elia Martell and laid a crown of blue winter roses in Lyanna’s lap — a girl already promised to Robert. To the houses it meant a prince who took what he wanted. To Rhaegar it was prophecy. The dragon must have three heads. Elia had given him Rhaenys and Aegon; the second birth nearly killed her, and the maesters said she would not survive a third. He believed he had found the missing piece in a northern girl with a warrior’s heart.',
+      'In early 282 AC Lyanna was riding through the riverlands to Brandon’s wedding at Riverrun, a small escort. Near Harrenhal, Rhaegar was waiting with Arthur Dayne and Oswell Whent. Witnesses saw a kidnapping. The truth, if it was a choosing, never caught the ravens. Brandon heard it on the road to his own wedding, rode to the Red Keep with a handful of friends, and shouted for the prince to come out and die. Rhaegar was not there. The king was. Aerys arrested them for conspiracy to murder the crown prince and summoned their fathers.',
+      'Rickard came in armor and demanded trial by combat. Aerys named fire as House Targaryen’s champion. Rickard was bound in steel and hung over a blaze. Brandon was fitted with a strangling harness, a sword inches from his hand. To save his father he had to reach it; every reach tightened the cord. He strangled himself trying. Rickard burned. The other fathers were made to watch, then executed. Aerys sat the throne and laughed. That is where the war truly begins.',
     ],
   },
   {
@@ -81,9 +87,10 @@ export const rebellionChapters: RebellionChapter[] = [
     image: 'roberts/rises.jpg',
     locationId: 'the-eyrie',
     body: [
-      'The Mad King demanded that Jon Arryn send him Eddard Stark and Robert Baratheon. Jon Arryn refused. That refusal is the war’s official first hour: the Vale in revolt, two foster sons riding for their own countries, four great regions rising together.',
-      'Robert took Gulltown, the Vale’s port, so the rebellion would have a sea. Eddard’s road home was worse: through the Mountains of the Moon, then across the Bite by water, a northern lord slipping through royal country to raise Winterfell before the crown could raise it for him. When the wolf banners came south, they came because he had made it home alive.',
-      'North, Vale, riverlands, stormlands. Stag, falcon, trout, direwolf. The Targaryen host still had the Reach, the west until Tywin chose, and Dorne’s marriage. It did not have time.',
+      'Aerys knew a living Stark meant a living North. He sent a raven to the Eyrie demanding the heads of Jon Arryn’s two wards. Jon had no sons of his own. He had raised Ned and Robert as blood. He refused, called his banners, and sent the boys home as the new lords of their countries. The rebellion’s first legal act is that refusal.',
+      'Getting home almost ended it. The Vale is a fortress with two practical doors. By land, the Bloody Gate leads into riverlands whose lord, Hoster Tully, had not yet chosen; royalists could take either man on the road. By sea there was one port: Gulltown. Its lord, Marq Grafton, one of Jon Arryn’s own bannermen, declared for the crown, shut the gates, and blockaded the harbor. If the royal fleet reached that bay, the Vale would be invaded from within. Robert gathered the loyal vale-men, was first over the walls, found Grafton in the streets, and killed him. The port opened. Robert sailed for the stormlands.',
+      'Ned took the other door: the Mountains of the Moon, cliffs, frozen passes, clans who answer to no lord. He made the Fingers, found a fisherman and his daughter willing to risk the Bite. A storm drowned the father. The girl, Willa, brought Ned to the Three Sisters. Lord Borrell of Sisterton had a choice: sell a Stark to the king, or gamble. Ned told him that if the rebels won, he would want the North as a friend. Borrell let him go with a warning: if you lose, I never saw you; if you win, I expect to be remembered.',
+      'Robert found three of his own bannermen — Grandison, Cafferen, and Fell — assembling at the ruins of Summerhall to hit Storm’s End before he could gather. He arrived first and fought each host as it came onto the field. Three battles in a day. Fell died there. Grandison, Cafferen, and Fell’s son Silveraxe were taken. Robert sat them at his table, poured his best wine, and talked. By night the men who had come to kill him were ready to die for him. That is not only a hammer. That is a leader.',
     ],
   },
   {
@@ -95,9 +102,11 @@ export const rebellionChapters: RebellionChapter[] = [
     image: 'roberts/bells.jpg',
     locationId: 'the-trident',
     body: [
-      'Robert’s first hard reverse is Ashford. Randyll Tarly of the Reach breaks him in the meadow; the huge Baratheon is wounded and has to vanish. He hides in Stoney Sept, a market town with a sept and too many doors.',
-      'Jon Connington, Hand of the King, searches the town house by house. He is close. He is not close enough. The rebels hit the streets, the bells ring, and Robert fights his way out of the hiding with a hammer in his hands. Connington is forced to retreat.',
-      'It is a rebel victory and a personal humiliation for the loyalists. Connington will carry it into exile. Robert will carry it to the Trident. The town is a footnote on most maps. The war turns there anyway.',
+      'Momentum does not last. Pushing west to meet Ned’s southbound North, Robert was intercepted by Randyll Tarly, commanding the Reach vanguard. Tarly did not wait for Mace Tyrell’s main host. He hit Ashford fast and broke Robert before the roses arrived. Wounded and cut off, Robert ran north toward the riverlands and hid in Stoney Sept.',
+      'Aerys had already spent two Hands. Owen Merryweather, chosen because he would not challenge like Tywin, called the rising a minor problem until three regions had united. Aerys stripped him, took his lands, and named Jon Connington: young, fierce, Rhaegar’s friend, a man who hated the rebels. The order was simple. Find Robert and kill him before he reached the North.',
+      'Connington surrounded the town so nothing entered or left. He offered more gold than most of Stoney Sept would see in a lifetime. He hanged hostages in cages over the streets. He searched building by building. He found nothing, because this time Robert was not being kept by lords. The townsfolk moved him from street to cellar to attic; for a time he hid in a brothel, the last place soldiers think to look. The gold went unclaimed.',
+      'Outside, help arrived: Ned with the North, Jon Arryn with the Vale, and Hoster Tully with the riverlands. Ned had sealed that alliance in blood — stepping into Brandon’s betrothal and wedding Catelyn. The hosts hit Connington’s army outside the walls. The septons rang the bells so the people would lock their doors. That sound named the battle. Inside, Robert stopped hiding and attacked from within. Connington faced war on two fronts, pulled his men back in good order, and saved most of the army. Aerys did not care. He stripped Connington of office, lands, and titles and banished him across the narrow sea with nothing.',
+      'The rebel leaders gathered at Riverrun for a double wedding. Ned married Catelyn. Jon Arryn, who had lost his heirs in the fighting and needed a line, married her sister Lysa. Four kingdoms, one cause, bound now by family as well as banners. They were no longer running. The road to King’s Landing was open.',
     ],
   },
   {
@@ -109,9 +118,10 @@ export const rebellionChapters: RebellionChapter[] = [
     image: 'keeps/storms-end.jpg',
     locationId: 'storms-end',
     body: [
-      'While Robert rides, Storm’s End is left to Stannis. Mace Tyrell sits the siege with the chivalry of the Reach and Shipbreaker Bay for a moat. The garrison starves. The castle does not fall. That is the Baratheon half of the story the singers skip: the younger brother on the wall, eating boot leather, refusing a rose lord’s courtesy.',
-      'Davos Seaworth, a Flea Bottom smuggler, runs onions and fish under the guns. The garrison lives. Stannis knights him for it and takes the first joint of each finger on the left hand for the years of smuggling — a justice so exact the realm will never stop calling him the Onion Knight.',
-      'Renly is a boy inside those walls. He will remember the hunger as a slight. Stannis will remember it as the proof that duty is a diet. The siege lasts until the war is already decided elsewhere. That does not make it smaller.',
+      'When Robert rode north to find Ned, he left Stannis at Storm’s End with five hundred men. After Ashford, Mace Tyrell and Randyll Tarly brought nearly fifty thousand. The castle has never been taken by storm. Mace offered surrender. Stannis refused. So the roses chose the slower weapon.',
+      'Lord Paxter Redwyne sealed the bay with one of the largest fleets in Westeros. Nothing in, nothing out. The stores went. Horses, then dogs, then cats, then rats. When the rats grew scarce the men boiled boots and belts. Deserters Stannis wanted loaded into a catapult and thrown into the Tyrell camp; a maester talked him down by noting they might be needed as food. He held the garrison with fear, discipline, and stubbornness. Renly was a boy inside those walls.',
+      'Outside, the war looked like a feast. Mace had food, wine, warm tents, and time. With his mother Olenna’s eye he had chosen the safest square on the board: keep the largest untouched army in Westeros sitting on a Baratheon castle. If the king won, he had contained the rebellion at its source. If the rebels won, he could say he had shed no Baratheon blood. Either way the Reach would still be whole. It was not glorious. It was smart. Inside, that game was killing five hundred men.',
+      'Help came as a smuggler. On a moonless night Davos painted his sails black and slipped the Redwyne blockade like a ghost. He brought onions and salt fish — the most important cargo of the war. The garrison lived long enough for the war to end elsewhere. When Ned later rode south to lift the siege, Mace learned the dynasty had fallen, surrendered, and marched home. Stannis knighted Davos and took a joint from each finger of the left hand for the smuggling years. The realm still calls him the Onion Knight.',
     ],
   },
   {
@@ -123,9 +133,10 @@ export const rebellionChapters: RebellionChapter[] = [
     image: 'roberts/trident.jpg',
     locationId: 'the-trident',
     body: [
-      'Prince Rhaegar finally leads the royal army in person. The hosts meet at the Trident, where every war in Westeros learns to cross. The ford will take a new name from what happens in it.',
-      'Robert and Rhaegar find each other in the water. It is single combat in the middle of a battle, the kind of hour the singers were built for. Robert’s warhammer caves the rubies on Rhaegar’s breastplate. The prince goes down. The stones wash downstream. The royal army breaks.',
-      'Barristan Selmy is wounded fighting for the dragon and spared because even Robert can tell a knight from a butcher. The rest of the Targaryen cause is a city, a sack, and a tower in Dorne. The decisive battle is already over. A hammer made a king. The crown will spend fifteen years trying to live up to the blow.',
+      'The rebel march on King’s Landing had one last river in the way: the Trident, wide and fast. From their road there was one usable ford. The royal host planted itself on it. Cross here and the capital is an open road. Fail here and the rebellion drowns in the current.',
+      'Rhaegar had finally come back from the south to take command. Finding the royal cause collapsing, he persuaded his father to swallow pride and ask Tywin for help. Aerys sent ravens to Casterly Rock. Tywin never answered. The royal army fought alone: a little over forty thousand, including ten thousand Dornish under Prince Lewyn Martell, fighting for his niece Elia and her children still held in the Red Keep. Across the water, a little over thirty-five thousand rebels — fewer, but men who had taken Gulltown, won three battles in a day at Summerhall, and walked out of Stoney Sept. The crown had the numbers. The rebels had the year.',
+      'They met in the ford. Shield wall in knee-deep rush, men slipping on stones and vanishing under the weight of their own armor, mud and blood until you could not tell them apart. Hours of stalemate. Then Robert found the man he blamed for Lyanna, for Rickard and Brandon, for a year of war. Rhaegar was no weak prince. Hammer against sword, horses circling. Rhaegar’s blade went deep into Robert’s shoulder. Bleeding, Robert did not fall. The last swing of the warhammer shattered the rubies on the prince’s breastplate and sent them into the river like drops of blood. Rhaegar went down and did not rise. The belief that had held the royal host — that the man leading them could not be beaten — broke all at once. Men threw down steel and ran.',
+      'The war was won in the water. Robert was too wounded to lead the last march. He gave the vanguard to Ned and told him to race for the capital. Barristan, cut down fighting for the dragon, was spared because even Robert could tell a knight from a butcher. The rest of the Targaryen cause was a city, a sack, and a tower in Dorne.',
     ],
   },
   {
@@ -137,9 +148,10 @@ export const rebellionChapters: RebellionChapter[] = [
     image: 'roberts/sack.jpg',
     locationId: 'kings-landing',
     body: [
-      'Tywin Lannister arrives before Ned and is admitted through the gates as a friend of the crown. The Lannister host sacks the capital. That is the west’s price for having waited to choose.',
-      'Aerys orders the pyromancers to ignite the wildfire caches under the city. Burn them all. Jaime Lannister, the last Kingsguard in the hall, kills Rossart the pyromancer and then the king on the steps of the throne, so there is still a city left to take. The realm will call him Kingslayer for the rest of his life. The city will not know what it was spared.',
-      'Tywin’s men murder Elia Martell and her two children, Rhaenys and the infant Aegon. Gregor Clegane and Amory Lorch do the work. Eddard rides in to find the city already taken and the Targaryen children dead. He is furious with Robert for smiling at the corpses and with Tywin for the method. The quarrel at the sack is the first crack in the winning side. It never closes.',
+      'Ned rode south as fast as a wounded king’s vanguard can. He was not first. After the news of Rhaegar’s death, Tywin marched from Casterly Rock with twelve thousand and sent word that he had come to defend the crown. In the Red Keep the court split. Varys told Aerys to keep the gates shut. Grand Maester Pycelle, quietly Lannister for years, said the opposite: the lions were the last hope, and a closed gate would insult them. Aerys, desperate, opened the city. The Lannisters did not march in to save it. They sacked it.',
+      'Aerys had already sent Queen Rhaella and Viserys to Dragonstone after the Trident. Elia and her children he kept — not for love. They were leverage that had bought Dorne’s ten thousand at the ford, and insurance that Dorne would not abandon him. For months he had packed wildfire under the streets, the tunnels, even the Red Keep: enough to kill every man, woman, and child in a city of half a million. If he could not rule it, no one would. He turned to his Hand, the pyromancer Rossart, and said burn them all.',
+      'Every other white cloak had gone to the Trident. Jaime was in the hall. He left, found Rossart at a postern gate, and killed him before the signal could go out. Then he came back still in the pyromancer’s blood. Aerys tried to run. Jaime caught him at the foot of the throne and put a sword through the king’s back. The knight sworn to protect him killed him to save a city. He never explained. The world named him Kingslayer and sat him in the story as a joke.',
+      'Tywin still needed to prove the winning side had no reason to doubt him. Gregor Clegane and Amory Lorch were sent into the keep. Elia and her children, Rhaenys and the infant Aegon, were murdered. The bodies were wrapped in crimson cloaks as a token of fealty. Ned rode through smoke and looting to the throne room and found Jaime sitting the Iron Throne with the dead king at his feet. When Robert arrived he accepted the corpses as a job well done. Ned demanded Tywin, Gregor, and Lorch be punished or sent to the Wall. Robert refused: he needed the Lannister alliance to hold a new kingdom. Even Jon Arryn could not quiet them. Ned rode out the next day. He had come for justice. He had gotten a crown bought with children.',
     ],
   },
   {
@@ -151,9 +163,9 @@ export const rebellionChapters: RebellionChapter[] = [
     image: 'roberts/tower.jpg',
     locationId: 'tower-of-joy',
     body: [
-      'Ned rides south with a handful of companions to find Lyanna. In the Prince’s Pass of Dorne they find a lonely tower and three Kingsguard who should have been with their king: Gerold Hightower the White Bull, Oswell Whent, and Arthur Dayne, Sword of the Morning. They are not lost. They are on an order.',
-      'The fight is brief and total. Only Eddard and Howland Reed walk away. Inside, Lyanna is dying in a bed of blood. She makes him promise to protect the newborn son — Rhaegar’s child, the boy the show will later name as the true Aegon Targaryen, raised as Jon Snow. The promise is the rest of Ned’s life.',
-      'He takes the infant home and calls him his bastard so Robert will never have a dragon left to hunt. Howland keeps the silence. Dawn goes back to Starfall. The tower is pulled down. The lie holds for a generation.',
+      'From King’s Landing Ned rode first to Storm’s End and lifted the siege. Then he did not go home. He turned south into the Red Mountains of Dorne with six companions who had been with him since the start — Howland Reed among them — looking for a tower that was barely on the maps.',
+      'Three Kingsguard stood the door: Gerold Hightower, Lord Commander; Oswell Whent; Arthur Dayne, Sword of the Morning, the finest blade in the realm. Ned asked why they were not at the Trident with the prince or in the capital with the king. Their answer was simple. The prince wanted us here. Their vows had not died with Rhaegar. If Ned wanted the tower, he would have to go through them.',
+      'Seven against three. Arthur fought like a god of war. When it ended, only Ned and Howland were alive. Inside, Lyanna was not a prisoner and had not been tortured. She was dying of childbirth, a newborn in her arms. With her last breath she named the boy Aegon Targaryen — Rhaegar’s son of ice and fire, the piece of the prophecy. She knew Robert would kill him if he ever learned. She made Ned promise. Honor would not save the child. Only a lie would. He claimed the babe as his own bastard, conceived in a wartime weakness, and named him Jon Snow. The lie protected the boy and cost Ned his reputation for the rest of his life.',
     ],
   },
   {
@@ -165,9 +177,10 @@ export const rebellionChapters: RebellionChapter[] = [
     image: 'roberts/aftermath.jpg',
     locationId: 'kings-landing',
     body: [
-      'Robert is crowned King Robert I Baratheon. Jon Arryn becomes Hand and spends the peace doing the work Robert will not. To bind the west, Robert marries Cersei Lannister — Tywin’s price, paid in a queen. The winning coalition is now a Lannister debt with a stag’s face.',
-      'Stannis is sent to take Dragonstone, the Targaryen heir’s rock, while Robert keeps Storm’s End for himself and later for Renly. It is a slight Stannis never forgives. Viserys and the newborn Daenerys slip the island with Ser Willem Darry and run for the Free Cities, Braavos first. The last dragons leave Westeros as cargo.',
-      'Jon Arryn tries to close the wounds with diplomacy, including the return of Prince Lewyn Martell’s bones to Dorne. It is not enough. Dorne remembers Elia. The exiles grow up across the water. The peace lasts fifteen years because no one wants to test the man who killed Rhaegar — until the man is fat enough to test. Then the game begins again.',
+      'Ned rode to King’s Landing with Lyanna’s bones. The anger over Rhaegar’s murdered children faded in a shared loss. Robert had won a kingdom and lost the only thing he truly wanted. Grief glued the friendship back together. Robert was crowned. He had no interest in governing, so he named Jon Arryn Hand.',
+      'He was not finished with dragons. As long as a Targaryen lived, the claim was not clean. He ordered Stannis to sail to Dragonstone and kill whoever remained — Stannis’s first great test after the siege. Stannis spent months building a fleet from nothing in the royal yards. On the island, Queen Rhaella was pregnant, with young Viserys beside her. A storm, one of the worst in living memory, smashed the Targaryen fleet in the port. In the middle of it Rhaella went into labor, birthed a girl, and named her Daenerys. The child would be Stormborn for the rest of her life. Rhaella died soon after. The garrison, fleetless and hopeless, planned to hand the children to Stannis for their own lives.',
+      'Ser Willem Darry was not part of that plan. On a moonless night he took loyal servants, the children, and what gold they could carry, and fled in a small boat to Braavos. Stannis arrived to an empty castle. Robert was furious and blamed him. Stannis had starved through a siege, built a fleet, and obeyed every order. In Robert’s eyes he was the man who let the last Targaryens escape. The grudge never healed. Storm’s End stayed with Renly. Dragonstone was Stannis’s slight.',
+      'Jon Arryn spent the peace keeping the realm from another war. He went to Dorne with the bones of Prince Lewyn, dead at the Trident, and sat with Doran Martell until Dorne did not rise. In the Reach he let Mace keep lands and titles, then seated a quiet knife: Stannis married Selyse Florent, of a house that had always claimed to be the rightful lords of the Reach. Stay loyal, or we will replace you. Then he bound the west the only way it would stay bound: Robert to Cersei Lannister. Not love. Politics. The richest house in the realm in the bed, and one of the bitterest marriages the Seven Kingdoms ever made. The peace lasted because no one wanted to test the man who had killed Rhaegar — until the man was fat enough to test.',
     ],
   },
 ]
@@ -180,7 +193,7 @@ export const rebellionPlaces: RebellionPlace[] = [
     image: 'roberts/duskendale.jpg',
     role: 'A dun port that caged a king.',
     happened:
-      'Lord Denys Darklyn’s Defiance. Aerys is held, Barristan cuts him free, and the man who comes out of the keep is not the man who went in. After Duskendale the wildfire starts to look like policy.',
+      'Once the great port of Blackwater Bay, overshadowed by King’s Landing. Denys Darklyn wanted a charter; Tywin refused; Aerys walked into an ambush. Six months in a cell. Barristan’s night rescue. House Darklyn erased, Lady Serala burned. The Mad King is made here.',
     locationId: null,
   },
   {
@@ -190,7 +203,7 @@ export const rebellionPlaces: RebellionPlace[] = [
     image: 'keeps/harrenhal.jpg',
     role: 'The lists where a prince crowned the wrong girl.',
     happened:
-      'The Tourney of Harrenhal. Rhaegar names Lyanna Queen of Love and Beauty in front of Elia and the realm. The look across the lists is the war in miniature.',
+      'Walter Whent’s lists, likely paid by Rhaegar as cover for a great council. Aerys attends. Jaime is cloaked. The Knight of the Laughing Tree rides. Rhaegar unhorses Barristan and crowns Lyanna with winter roses. The war’s first public hour.',
     locationId: 'harrenhal',
   },
   {
@@ -220,7 +233,7 @@ export const rebellionPlaces: RebellionPlace[] = [
     image: 'roberts/gulltown.jpg',
     role: 'The Vale’s port, taken so the rebellion can breathe.',
     happened:
-      'Robert takes Gulltown early, a sea-town victory that gives the rising a harbor. The stormlands’ hammer starts in someone else’s bay.',
+      'Marq Grafton shuts the only Vale port for the crown. Robert is first over the walls and kills him in the streets. The blockade breaks. Without this harbor the royal fleet could have invaded the Vale from within, and Robert would have had no fast road home.',
     locationId: null,
   },
   {
@@ -230,7 +243,7 @@ export const rebellionPlaces: RebellionPlace[] = [
     image: 'roberts/summerhall.jpg',
     role: 'A Targaryen ruin on the road to the storm.',
     happened:
-      'One of Robert’s early victories is fought near the burned palace. The site already knows what dragonfire costs. The rebellion adds a stag’s chapter to a ruin that was never rebuilt.',
+      'Lords Grandison, Cafferen, and Fell meant to unite here and hit Storm’s End. Robert fought each host as it arrived — three battles in a day. Fell died. The others, and Silveraxe, sat at Robert’s table and changed sides before night.',
     locationId: null,
   },
   {
@@ -250,7 +263,7 @@ export const rebellionPlaces: RebellionPlace[] = [
     image: 'roberts/bells.jpg',
     role: 'House to house, then the bells.',
     happened:
-      'Robert hides. Connington searches. The rebels attack, the bells ring, and the Hammer of the Stormlands walks back into the war. The loyalists never recover the hour they almost had him.',
+      'Townsfolk hide Robert from Connington’s gold, cages, and house-to-house search — even in a brothel. Ned, Jon Arryn, and Hoster hit the walls. The septons ring the bells. Robert attacks from inside. Connington retreats in order and is stripped of everything for it.',
     locationId: null,
   },
   {
@@ -260,7 +273,7 @@ export const rebellionPlaces: RebellionPlace[] = [
     image: 'keeps/storms-end.jpg',
     role: 'The castle that would not fall, fed by a smuggler.',
     happened:
-      'Stannis holds against Mace Tyrell until Davos’s onions. Renly is a boy inside. After the war Robert keeps the castle in the family and sends Stannis to Dragonstone instead — a slight that outlives the siege.',
+      'Five hundred men against fifty thousand and the Redwyne fleet. Horses, dogs, cats, rats, then boiled leather. Davos’s black sails bring onions and salt fish. Ned lifts the siege after the sack; Mace surrenders without a storm. Stannis is later sent to Dragonstone instead of given this castle.',
     locationId: 'storms-end',
   },
   {
@@ -270,7 +283,7 @@ export const rebellionPlaces: RebellionPlace[] = [
     image: 'roberts/trident.jpg',
     role: 'The ruby ford. The dynasty’s last crossing.',
     happened:
-      'Rhaegar and Robert meet in the river. The warhammer caves the breastplate. Rubies in the current. The royal army breaks. Everything after is cleanup and consequence.',
+      'The last ford on the road to the capital. Forty thousand royal, including Lewyn Martell’s Dornish, against thirty-five thousand rebels. Rhaegar wounds Robert’s shoulder; the hammer caves the rubies. The royal host breaks. The ford keeps the stones.',
     locationId: 'the-trident',
   },
   {
@@ -290,8 +303,48 @@ export const rebellionPlaces: RebellionPlace[] = [
     image: 'seats/dragonstone.jpg',
     role: 'The heir’s rock, emptied of dragons.',
     happened:
-      'Stannis is sent to take it. Willem Darry gets Viserys and Daenerys off the island to Braavos before the stag arrives. The last Targaryens leave as cargo. The war’s leftover is an exile that will come home with fire.',
+      'Rhaella and Viserys are sent here after the Trident. A storm wrecks the Targaryen fleet; Daenerys Stormborn is born and Rhaella dies. The garrison means to sell the children. Willem Darry steals them to Braavos on a moonless night. Stannis finds an empty rock and takes Robert’s blame.',
     locationId: 'dragonstone',
+  },
+  {
+    id: 'bloody-gate',
+    name: 'The Bloody Gate',
+    region: 'The Vale',
+    image: 'keeps/bloody-gate.jpg',
+    role: 'The land door Ned could not risk.',
+    happened:
+      'The Vale’s main exit into the riverlands. With Hoster Tully still unchosen, the Bloody Gate was a royalist trap. Ned took the mountain clans’ roads instead. Robert took the sea.',
+    locationId: 'bloody-gate',
+  },
+  {
+    id: 'riverrun',
+    name: 'Riverrun',
+    region: 'The Riverlands',
+    image: 'keeps/riverrun.jpg',
+    role: 'Where four kingdoms became family.',
+    happened:
+      'After the bells, a double wedding: Ned to Catelyn, Jon Arryn to Lysa, because the Lord of the Eyrie had lost his heirs and needed a line. Hoster’s hall is the knot that makes the riverlands ride.',
+    locationId: 'riverrun',
+  },
+  {
+    id: 'sisterton',
+    name: 'The Three Sisters',
+    region: 'The Bite',
+    image: 'roberts/gulltown.jpg',
+    role: 'Smuggler islands, and a lord who gambled.',
+    happened:
+      'A storm drowned Ned’s fisherman. Willa brought him to Sisterton. Lord Borrell could have sold a Stark to Aerys. He took Ned’s offer instead: if we win, you will want the North as a friend.',
+    locationId: null,
+  },
+  {
+    id: 'casterly-rock',
+    name: 'Casterly Rock',
+    region: 'The Westerlands',
+    image: 'seats/casterly-rock.jpg',
+    role: 'Where Tywin waited until the winning was done.',
+    happened:
+      'After Harrenhal, Tywin went home. Rhaegar’s ravens asking for help went unanswered. Twelve thousand lions arrived at King’s Landing only after Rhaegar was dead, claiming loyalty, then sacking the city.',
+    locationId: 'casterly-rock',
   },
 ]
 
@@ -323,7 +376,7 @@ export const rebellionFaces: RebellionFace[] = [
     house: 'House Arryn',
     image: 'seats/eyrie.jpg',
     role: 'Foster father to Ned and Robert. His refusal to send their heads is the rebellion’s first hour.',
-    fate: 'Hand of the King in the peace. He tries diplomacy, including Lewyn Martell’s bones home to Dorne. The work kills him later, off this parchment.',
+    fate: 'Hand of the King in the peace. Bones to Dorne, a Florent marriage as a knife at Highgarden, Cersei in Robert’s bed. He keeps the realm from a second war until the work kills him, off this parchment.',
     locationId: 'the-eyrie',
   },
   {
@@ -362,8 +415,8 @@ export const rebellionFaces: RebellionFace[] = [
     side: 'Rebel',
     house: 'House Baratheon',
     image: 'keeps/storms-end.jpg',
-    role: 'The younger brother on the wall. Holds Storm’s End through starvation while Robert wins the songs.',
-    fate: 'Sent to take Dragonstone instead of given Storm’s End. He never forgets the slight. The siege made the Onion Knight. The peace made a grievance.',
+    role: 'Five hundred men on the wall against fifty thousand. Holds Storm’s End through horses, rats, and boiled leather while Robert wins the songs.',
+    fate: 'Builds a fleet from nothing, finds Dragonstone empty, and takes Robert’s blame for Viserys and Daenerys. Storm’s End goes to Renly. The slight never heals.',
     locationId: 'storms-end',
   },
   {
@@ -502,8 +555,8 @@ export const rebellionFaces: RebellionFace[] = [
     side: 'Exile',
     house: 'House Targaryen',
     image: 'seats/dragonstone.jpg',
-    role: 'Born into the flight. The rebellion’s last Targaryen is a child on a ship, not a claimant on a field.',
-    fate: 'Escapes with Willem Darry. The peace that follows is the childhood that makes the later war. The stage is set in a Braavosi house.',
+    role: 'Born in the storm that wrecked the Targaryen fleet at Dragonstone, while Rhaella died of the labor. Stormborn before she could walk.',
+    fate: 'Willem Darry steals her and Viserys to Braavos on a moonless night. The peace that follows is the childhood that makes the later war.',
     locationId: 'braavos',
   },
   {
@@ -522,8 +575,8 @@ export const rebellionFaces: RebellionFace[] = [
     side: 'Lion',
     house: 'House Lannister · Kingsguard',
     image: 'heroes/got/jaime-lannister.jpg',
-    role: 'Named to the white cloak to strip Tywin of an heir. The last sword in the hall when Aerys says burn them all.',
-    fate: 'Kills Rossart, then the king. Saves the city. Spends the rest of his life as Kingslayer, sitting the throne as a joke when Ned walks in.',
+    role: 'Cloaked at sixteen at Harrenhal to unmake Tywin’s heir. Last white sword in the hall when Aerys says burn them all.',
+    fate: 'Kills Rossart at a postern, then the king at the foot of the throne, to save half a million. Never explains. Ned finds him sitting the chair. The realm names him Kingslayer.',
     locationId: 'kings-landing',
   },
   {
@@ -585,6 +638,116 @@ export const rebellionFaces: RebellionFace[] = [
     role: 'The third cloak at the door. Harrenhal’s bat on a white field, standing a secret instead of a king.',
     fate: 'Dies with Arthur and Gerold. The tower’s three are a Kingsguard that outlived its king by days, on purpose.',
     locationId: 'tower-of-joy',
+  },
+  {
+    id: 'varys',
+    name: 'Varys',
+    side: 'Crown',
+    house: 'The Spider',
+    image: 'seats/kings-landing.jpg',
+    role: 'Master of Whisperers. He warned Aerys that skipping Harrenhal would look weak, then warned him not to open the gates to Tywin.',
+    fate: 'Aerys took the first warning and not the second. The city burned without wildfire. The Spider survived to serve the next king.',
+    locationId: 'kings-landing',
+  },
+  {
+    id: 'pycelle',
+    name: 'Pycelle',
+    side: 'Lion',
+    house: 'The Citadel · the Rock’s friend',
+    image: 'seats/kings-landing.jpg',
+    role: 'Grand Maester who had been quietly Lannister for years. He told Aerys the lions were the last hope and a closed gate would insult them.',
+    fate: 'The gates opened. The sack followed. Pycelle kept his chain into the new reign.',
+    locationId: 'kings-landing',
+  },
+  {
+    id: 'randyll',
+    name: 'Randyll Tarly',
+    side: 'Crown',
+    house: 'House Tarly',
+    image: 'roberts/ashford.jpg',
+    role: 'Mace Tyrell’s vanguard. He hit Robert at Ashford before the main rose host arrived and broke him in the meadow.',
+    fate: 'The only man to defeat Robert in the field. Then he sat the siege of Storm’s End with Mace. The Reach never spent him at the Trident.',
+    locationId: null,
+  },
+  {
+    id: 'olenna',
+    name: 'Olenna Tyrell',
+    side: 'Crown',
+    house: 'House Tyrell',
+    image: 'seats/highgarden.jpg',
+    role: 'The Queen of Thorns. She read the war as a board: keep fifty thousand untouched men sitting on Storm’s End and claim whatever ending arrives.',
+    fate: 'Mace surrenders when the dynasty falls. Highgarden keeps its lands. Jon Arryn later seats a Florent marriage as a knife at the roses’ throat.',
+    locationId: 'highgarden',
+  },
+  {
+    id: 'paxter',
+    name: 'Paxter Redwyne',
+    side: 'Crown',
+    house: 'House Redwyne',
+    image: 'keeps/storms-end.jpg',
+    role: 'Lord of the Arbor. His fleet sealed Storm’s End by sea so Stannis could not be fed.',
+    fate: 'Davos still slipped through on black sails. The blockade was perfect except for one smuggler, which is how most perfect plans fail.',
+    locationId: 'storms-end',
+  },
+  {
+    id: 'denys',
+    name: 'Denys Darklyn',
+    side: 'Crown',
+    house: 'House Darklyn',
+    image: 'roberts/duskendale.jpg',
+    role: 'Lord of a fading port who wanted a charter, invited a king, and caged him when the small escort walked in.',
+    fate: 'Barristan’s rescue left him no leverage. He begged. Aerys wiped out the house. Lady Serala burned. Duskendale is a warning, not a seat.',
+    locationId: null,
+  },
+  {
+    id: 'grafton',
+    name: 'Marq Grafton',
+    side: 'Crown',
+    house: 'House Grafton',
+    image: 'roberts/gulltown.jpg',
+    role: 'Jon Arryn’s bannerman who shut Gulltown for the crown and tried to trap the rebellion in the Vale.',
+    fate: 'Robert was first over the walls and killed him in the streets. The port opened. The Vale kept its sea.',
+    locationId: null,
+  },
+  {
+    id: 'ilyn',
+    name: 'Ilyn Payne',
+    side: 'Lion',
+    house: 'House Payne',
+    image: 'roberts/mad-king.jpg',
+    role: 'The captain whose tongue Aerys had ripped out with hot pincers for saying Tywin ruled while the king sat.',
+    fate: 'He never spoke again. Years later he swings a sword for another king. The whisper he paid for is still the truth of that reign.',
+    locationId: 'kings-landing',
+  },
+  {
+    id: 'rhaella',
+    name: 'Rhaella Targaryen',
+    side: 'Exile',
+    house: 'House Targaryen',
+    image: 'seats/dragonstone.jpg',
+    role: 'Queen, sent to Dragonstone with Viserys after the Trident while Elia was kept as a hostage in the keep.',
+    fate: 'A storm wrecks the fleet. She dies birthing Daenerys. The garrison panics. Willem Darry takes the children off the rock.',
+    locationId: 'dragonstone',
+  },
+  {
+    id: 'lewyn',
+    name: 'Lewyn Martell',
+    side: 'Crown',
+    house: 'House Martell · Kingsguard',
+    image: 'seats/sunspear.jpg',
+    role: 'Prince of Dorne in a white cloak. He led ten thousand Dornish to the Trident for Elia and the children held in the Red Keep.',
+    fate: 'Dies in the ford. Jon Arryn later carries his bones home to Doran as the peace offering that keeps Dorne from a second war.',
+    locationId: 'the-trident',
+  },
+  {
+    id: 'lysa',
+    name: 'Lysa Tully',
+    side: 'Rebel',
+    house: 'House Tully',
+    image: 'keeps/riverrun.jpg',
+    role: 'Catelyn’s sister. After the bells, Jon Arryn — his heirs dead in the fighting — marries her so the Vale still has a line.',
+    fate: 'The double wedding at Riverrun binds four kingdoms by blood. The marriage is policy. The later Eyrie is another story.',
+    locationId: 'riverrun',
   },
 ]
 

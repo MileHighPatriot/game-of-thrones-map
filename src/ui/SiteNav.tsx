@@ -30,7 +30,7 @@ export function SiteNav({ current, overlay = false }: { current: Route; overlay?
           True North
         </a>
         <a className={current === 'roberts' ? 'active' : ''} href={hrefFor('roberts')} aria-current={current === 'roberts' ? 'page' : undefined}>
-          Roberts
+          The Rebellion
         </a>
       </nav>
     </header>

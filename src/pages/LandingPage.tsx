@@ -64,10 +64,10 @@ const DOORS = [
     href: 'north' as const,
   },
   {
-    title: 'Roberts',
+    title: 'The Rebellion',
     copy: 'The war that made a king. From Duskendale to the Trident, the tower, and the lie that followed.',
     image: 'roberts/hero.jpg',
-    alt: 'Robert’s Rebellion',
+    alt: 'The Rebellion',
     href: 'roberts' as const,
   },
 ]

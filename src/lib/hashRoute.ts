@@ -22,7 +22,7 @@ export function hrefFor(route: Route): string {
   if (route === 'heroes') return '#/heroes'
   if (route === 'words') return '#/words'
   if (route === 'north') return '#/north'
-  if (route === 'roberts') return '#/roberts'
+  if (route === 'roberts') return '#/rebellion'
   return '#/'
 }
 
