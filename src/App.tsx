@@ -18,7 +18,7 @@ const TITLES: Record<string, string> = {
   heroes: 'The Hall of Heroes · Westeros & Essos',
   words: 'The Words · Westeros & Essos',
   north: 'The True North · Westeros & Essos',
-  roberts: 'Robert’s Rebellion · Westeros & Essos',
+  roberts: 'The Rebellion · Westeros & Essos',
   hall: 'Westeros & Essos',
 }
 

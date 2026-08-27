@@ -55,19 +55,19 @@ export function RobertsPage() {
         <div className="room-hero-veil" />
         <div className="room-hero-copy">
           <p className="eyebrow">The war that made a king</p>
-          <h1>Robert’s Rebellion</h1>
+          <h1>The Rebellion</h1>
           <p className="room-lede">
             From Duskendale to the ruby ford. Ten chapters, the places that held them, and the
             faces that rode. Show canon, with the books where the show is silent.
           </p>
           <nav className="room-index" aria-label="Chapters">
             {rebellionChapters.map((chapter) => (
-              <a key={chapter.id} href={`#/roberts/${chapter.id}`}>
+              <a key={chapter.id} href={`#/rebellion/${chapter.id}`}>
                 {chapter.nav}
               </a>
             ))}
-            <a href="#/roberts/places">Places</a>
-            <a href="#/roberts/faces">Faces</a>
+            <a href="#/rebellion/places">Places</a>
+            <a href="#/rebellion/faces">Faces</a>
           </nav>
         </div>
       </section>
