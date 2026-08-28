@@ -51,7 +51,7 @@ export function CouncilPage() {
       <SiteNav current="council" />
 
       <section className="room-hero">
-        <img src={asset('council/hero.jpg')} alt="" className="room-hero-art" />
+        <img src={`${asset('council/got/small-council-guide.jpg')}?v=got`} alt="" className="room-hero-art" />
         <div className="room-hero-veil" />
         <div className="room-hero-copy">
           <p className="eyebrow">The table that rules the realm</p>
@@ -80,7 +80,7 @@ export function CouncilPage() {
           className={`council-scroll${index % 2 === 1 ? ' is-flip' : ''}`}
         >
           <figure className="council-scroll-art">
-            <img src={asset(chapter.image)} alt="" />
+            <img src={`${asset(chapter.image)}?v=got`} alt="" />
           </figure>
           <div className="council-scroll-copy">
             <p className="eyebrow">{chapter.kicker}</p>
@@ -145,7 +145,7 @@ export function CouncilPage() {
               <div className="council-face-grid">
                 {faces.map((face) => (
                   <article key={face.id} id={face.id} className="council-face">
-                    <img src={asset(face.image)} alt={face.name} />
+                    <img src={`${asset(face.image)}?v=got`} alt={face.name} />
                     <div className="council-copy">
                       <p className="eyebrow">{face.office}</p>
                       <h3>{face.name}</h3>
