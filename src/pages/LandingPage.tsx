@@ -73,7 +73,7 @@ const DOORS = [
   {
     title: 'The Small Council',
     copy: 'The table that rules the realm. Hands, whisperers, and the chairs that outlast kings.',
-    image: 'council/hero.jpg',
+    image: 'council/got/small-council-guide.jpg',
     alt: 'The Small Council',
     href: 'council' as const,
   },
