@@ -1213,7 +1213,8 @@ body.is-atlas {
 .app.is-heroes .site-nav.is-solid,
 .app.is-words .site-nav.is-solid,
 .app.is-north .site-nav.is-solid,
-.app.is-roberts .site-nav.is-solid {
+.app.is-roberts .site-nav.is-solid,
+.app.is-council .site-nav.is-solid {
   position: sticky;
   top: 0;
 }
@@ -2743,6 +2744,223 @@ body.is-atlas {
   padding: 0 24px;
 }
 
+.app.is-council {
+  --line: rgba(196, 154, 72, 0.32);
+  background: #0c0b0a;
+}
+
+.app.is-council .site-nav.is-solid {
+  background: rgba(12, 11, 10, 0.96);
+}
+
+.app.is-council .site-tabs a.active {
+  color: var(--gold);
+  background: #2e2414;
+}
+
+.council {
+  min-height: 100%;
+  color: var(--parchment);
+  background:
+    radial-gradient(ellipse at 50% -8%, rgba(120, 88, 32, 0.16), transparent 48%),
+    #0c0b0a;
+}
+
+.council .room-hero {
+  margin-bottom: 48px;
+}
+
+.council-scroll {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+  max-width: 1180px;
+  margin: 0 auto 56px;
+  border: 1px solid var(--line);
+  background: #1b1510;
+  overflow: hidden;
+  scroll-margin-top: 72px;
+}
+
+.council-scroll.is-flip {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
+}
+
+.council-scroll.is-flip .council-scroll-art {
+  order: 2;
+}
+
+.council-scroll-art {
+  margin: 0;
+}
+
+.council-scroll-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  object-fit: cover;
+  object-position: center 40%;
+  filter: saturate(0.86) contrast(1.05);
+}
+
+.council-scroll-copy {
+  padding: 32px 32px 36px;
+}
+
+.council-scroll-copy h2 {
+  margin: 0 0 12px;
+  font-family: Cinzel, serif;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  font-size: clamp(1.55rem, 3vw, 2.2rem);
+}
+
+.council-scroll-lede {
+  margin: 0 0 18px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 1.18rem;
+  color: #f0d2b0;
+  line-height: 1.45;
+}
+
+.council-scroll-copy p {
+  margin: 0 0 14px;
+  color: var(--parchment);
+  line-height: 1.58;
+}
+
+.council-chapter {
+  padding: 8px 0 64px;
+  scroll-margin-top: 72px;
+}
+
+.council-chapter-head {
+  max-width: 42rem;
+  margin: 0 auto 36px;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.council-chapter-head h2 {
+  margin: 0 0 12px;
+  font-family: Cinzel, serif;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+}
+
+.council-chapter-head p:last-child {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.council-place-grid,
+.council-face-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.council-place,
+.council-face {
+  display: grid;
+  grid-template-columns: minmax(220px, 36%) 1fr;
+  border: 1px solid var(--line);
+  background: #1b1510;
+  overflow: hidden;
+  scroll-margin-top: 76px;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
+}
+
+.council-place:nth-child(even),
+.council-face:nth-child(even) {
+  grid-template-columns: 1fr minmax(220px, 36%);
+}
+
+.council-place:nth-child(even) img,
+.council-face:nth-child(even) img {
+  order: 2;
+}
+
+.council-place img,
+.council-face img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 240px;
+  object-fit: cover;
+  object-position: center 30%;
+  filter: saturate(0.88) contrast(1.05);
+}
+
+.council-face img {
+  min-height: 280px;
+  object-position: center 18%;
+}
+
+.council-copy {
+  padding: 22px 24px 26px;
+}
+
+.council-copy h3 {
+  margin: 0 0 8px;
+  font-family: Cinzel, serif;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  font-size: 1.5rem;
+}
+
+.council-role {
+  margin: 0 0 12px;
+  color: var(--gold);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 1.08rem;
+}
+
+.council-copy p {
+  margin: 0 0 14px;
+  color: var(--parchment);
+  line-height: 1.55;
+}
+
+.council-copy dl {
+  margin: 0 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.council-copy dt {
+  font-family: Cinzel, serif;
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 5px;
+}
+
+.council-copy dd {
+  margin: 0;
+  color: var(--parchment);
+  line-height: 1.55;
+}
+
+.council-side {
+  margin-bottom: 36px;
+}
+
+.council-side-label {
+  max-width: 1080px;
+  margin: 0 auto 14px;
+  padding: 0 24px;
+}
+
 
 
 @keyframes landing-kenburns {
@@ -2901,6 +3119,38 @@ body.is-atlas {
 
   .roberts-place img,
   .roberts-face img {
+    min-height: 200px;
+    max-height: 280px;
+  }
+
+  .council-scroll,
+  .council-scroll.is-flip {
+    grid-template-columns: 1fr;
+  }
+
+  .council-scroll.is-flip .council-scroll-art {
+    order: 0;
+  }
+
+  .council-scroll-art img {
+    min-height: 180px;
+    max-height: 240px;
+  }
+
+  .council-place,
+  .council-place:nth-child(even),
+  .council-face,
+  .council-face:nth-child(even) {
+    grid-template-columns: 1fr;
+  }
+
+  .council-place:nth-child(even) img,
+  .council-face:nth-child(even) img {
+    order: 0;
+  }
+
+  .council-place img,
+  .council-face img {
     min-height: 200px;
     max-height: 280px;
   }

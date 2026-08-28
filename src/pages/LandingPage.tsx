@@ -70,6 +70,13 @@ const DOORS = [
     alt: 'The Rebellion',
     href: 'roberts' as const,
   },
+  {
+    title: 'The Small Council',
+    copy: 'The table that rules the realm. Hands, whisperers, and the chairs that outlast kings.',
+    image: 'council/hero.jpg',
+    alt: 'The Small Council',
+    href: 'council' as const,
+  },
 ]
 
 const courtHouses = COURT.map((id) => houses.find((house) => house.id === id)).filter(
