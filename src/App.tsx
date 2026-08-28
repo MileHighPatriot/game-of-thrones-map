@@ -5,6 +5,7 @@ import { AtlasPage } from './pages/AtlasPage.tsx'
 import { HeroesPage } from './pages/HeroesPage.tsx'
 import { KeepsPage } from './pages/KeepsPage.tsx'
 import { LandingPage } from './pages/LandingPage.tsx'
+import { CouncilPage } from './pages/CouncilPage.tsx'
 import { RobertsPage } from './pages/RobertsPage.tsx'
 import { TrueNorthPage } from './pages/TrueNorthPage.tsx'
 import { WordsPage } from './pages/WordsPage.tsx'
@@ -19,6 +20,7 @@ const TITLES: Record<string, string> = {
   words: 'The Words · Westeros & Essos',
   north: 'The True North · Westeros & Essos',
   roberts: 'The Rebellion · Westeros & Essos',
+  council: 'The Small Council · Westeros & Essos',
   hall: 'Westeros & Essos',
 }
 
@@ -88,6 +90,14 @@ export default function App() {
     return (
       <div className="app is-roberts">
         <RobertsPage />
+      </div>
+    )
+  }
+
+  if (route === 'council') {
+    return (
+      <div className="app is-council">
+        <CouncilPage />
       </div>
     )
   }

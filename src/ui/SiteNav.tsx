@@ -32,6 +32,9 @@ export function SiteNav({ current, overlay = false }: { current: Route; overlay?
         <a className={current === 'roberts' ? 'active' : ''} href={hrefFor('roberts')} aria-current={current === 'roberts' ? 'page' : undefined}>
           The Rebellion
         </a>
+        <a className={current === 'council' ? 'active' : ''} href={hrefFor('council')} aria-current={current === 'council' ? 'page' : undefined}>
+          The Council
+        </a>
       </nav>
     </header>
   )
