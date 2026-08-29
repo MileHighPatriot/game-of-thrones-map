@@ -29,18 +29,25 @@ const DOORS = [
     href: 'atlas' as const,
   },
   {
-    title: 'The Armory',
-    copy: 'Ice, Longclaw, Dawn, and the hammer that killed a prince. Named steel, named hands.',
-    image: 'weapons/ice.jpg',
-    alt: 'Ice',
-    href: 'armory' as const,
-  },
-  {
     title: 'The Keeps',
     copy: 'Who raised the stone, who sat it, and what was done in the halls.',
     image: 'seats/winterfell.jpg',
     alt: 'Winterfell',
     href: 'keeps' as const,
+  },
+  {
+    title: 'The True North',
+    copy: 'Beyond the Wall the maps grow thin. Free Folk, cold ones, and the reason the ice was raised.',
+    image: 'north/hero.jpg',
+    alt: 'The True North',
+    href: 'north' as const,
+  },
+  {
+    title: 'The Armory',
+    copy: 'Ice, Longclaw, Dawn, and the hammer that killed a prince. Named steel, named hands.',
+    image: 'weapons/ice.jpg',
+    alt: 'Ice',
+    href: 'armory' as const,
   },
   {
     title: 'The Hall of Heroes',
@@ -57,13 +64,6 @@ const DOORS = [
     href: 'words' as const,
   },
   {
-    title: 'The True North',
-    copy: 'Beyond the Wall the maps grow thin. Free Folk, cold ones, and the reason the ice was raised.',
-    image: 'north/hero.jpg',
-    alt: 'The True North',
-    href: 'north' as const,
-  },
-  {
     title: 'The Rebellion',
     copy: 'The war that made a king. From Duskendale to the Trident, the tower, and the lie that followed.',
     image: 'roberts/hero.jpg',
@@ -76,6 +76,13 @@ const DOORS = [
     image: 'council/got/small-council-guide.jpg',
     alt: 'The Small Council',
     href: 'council' as const,
+  },
+  {
+    title: 'The Iron Throne',
+    copy: 'History of the chair. Forged from a thousand swords, sat by madmen and boys, melted by a dragon.',
+    image: 'throne/hero.jpg',
+    alt: 'The Iron Throne',
+    href: 'throne' as const,
   },
 ]
 

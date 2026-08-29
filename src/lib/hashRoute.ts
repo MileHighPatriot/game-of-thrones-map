@@ -10,6 +10,7 @@ export type Route =
   | 'north'
   | 'roberts'
   | 'council'
+  | 'throne'
 
 export function parseHash(hash = window.location.hash): Route {
   const path = hash.replace(/^#/, '').replace(/^\/+|\/+$/g, '')
@@ -22,6 +23,7 @@ export function parseHash(hash = window.location.hash): Route {
   if (head === 'north' || head === 'true-north' || head === 'beyond') return 'north'
   if (head === 'roberts' || head === 'rebellion' || head === 'roberts-rebellion') return 'roberts'
   if (head === 'council' || head === 'small-council' || head === 'smallcouncil') return 'council'
+  if (head === 'throne' || head === 'iron-throne' || head === 'ironthrone') return 'throne'
   return 'hall'
 }
 
@@ -34,6 +36,7 @@ export function hrefFor(route: Route): string {
   if (route === 'north') return '#/north'
   if (route === 'roberts') return '#/rebellion'
   if (route === 'council') return '#/council'
+  if (route === 'throne') return '#/throne'
   return '#/'
 }
 
