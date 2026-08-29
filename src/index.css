@@ -1214,7 +1214,8 @@ body.is-atlas {
 .app.is-words .site-nav.is-solid,
 .app.is-north .site-nav.is-solid,
 .app.is-roberts .site-nav.is-solid,
-.app.is-council .site-nav.is-solid {
+.app.is-council .site-nav.is-solid,
+.app.is-throne .site-nav.is-solid {
   position: sticky;
   top: 0;
 }
@@ -2961,7 +2962,271 @@ body.is-atlas {
   padding: 0 24px;
 }
 
+.app.is-throne {
+  --line: rgba(176, 156, 110, 0.34);
+  background: #090807;
+}
 
+.app.is-throne .site-nav.is-solid {
+  background: rgba(9, 8, 7, 0.96);
+}
+
+.app.is-throne .site-tabs a.active {
+  color: var(--gold);
+  background: #2a1c12;
+}
+
+.throne {
+  min-height: 100%;
+  color: var(--parchment);
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(148, 42, 22, 0.2), transparent 46%),
+    radial-gradient(ellipse at 80% 8%, rgba(90, 72, 40, 0.12), transparent 42%),
+    #090807;
+}
+
+.throne .room-hero {
+  margin-bottom: 0;
+}
+
+.throne .room-hero-art {
+  object-position: center 58%;
+  filter: saturate(0.78) contrast(1.08) brightness(0.92);
+}
+
+.throne-quote {
+  max-width: 42rem;
+  margin: 0 auto 52px;
+  padding: 36px 24px 8px;
+  text-align: center;
+}
+
+.throne-quote p {
+  margin: 0 0 12px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(1.35rem, 2.8vw, 1.85rem);
+  line-height: 1.4;
+  color: #f0d2b0;
+}
+
+.throne-quote cite {
+  font-family: Cinzel, serif;
+  font-style: normal;
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.throne-scroll {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+  max-width: 1180px;
+  margin: 0 auto 56px;
+  border: 1px solid var(--line);
+  background: #16110d;
+  overflow: hidden;
+  scroll-margin-top: 72px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.38);
+}
+
+.throne-scroll.is-flip {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
+}
+
+.throne-scroll.is-flip .throne-scroll-art {
+  order: 2;
+}
+
+.throne-scroll-art {
+  margin: 0;
+}
+
+.throne-scroll-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  object-fit: cover;
+  object-position: center 40%;
+  filter: saturate(0.86) contrast(1.06);
+}
+
+.throne-scroll-copy {
+  padding: 32px 32px 36px;
+}
+
+.throne-scroll-copy h2 {
+  margin: 0 0 12px;
+  font-family: Cinzel, serif;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  font-size: clamp(1.55rem, 3vw, 2.2rem);
+}
+
+.throne-scroll-lede {
+  margin: 0 0 18px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 1.18rem;
+  color: #f0d2b0;
+  line-height: 1.45;
+}
+
+.throne-scroll-copy p {
+  margin: 0 0 14px;
+  color: var(--parchment);
+  line-height: 1.58;
+}
+
+.throne-chapter {
+  padding: 8px 0 64px;
+  scroll-margin-top: 72px;
+}
+
+.throne-chapter-head {
+  max-width: 42rem;
+  margin: 0 auto 36px;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.throne-chapter-head h2 {
+  margin: 0 0 12px;
+  font-family: Cinzel, serif;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+}
+
+.throne-chapter-head p:last-child {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.throne-place-grid,
+.throne-face-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.throne-place,
+.throne-face {
+  display: grid;
+  grid-template-columns: minmax(220px, 36%) 1fr;
+  border: 1px solid var(--line);
+  background: #16110d;
+  overflow: hidden;
+  scroll-margin-top: 76px;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
+}
+
+.throne-place:nth-child(even),
+.throne-face:nth-child(even) {
+  grid-template-columns: 1fr minmax(220px, 36%);
+}
+
+.throne-place:nth-child(even) img,
+.throne-face:nth-child(even) img {
+  order: 2;
+}
+
+.throne-place img,
+.throne-face img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 240px;
+  object-fit: cover;
+  object-position: center 30%;
+  filter: saturate(0.88) contrast(1.05);
+}
+
+.throne-face img {
+  min-height: 280px;
+  object-position: center 18%;
+}
+
+.throne-copy {
+  padding: 22px 24px 26px;
+}
+
+.throne-copy h3 {
+  margin: 0 0 8px;
+  font-family: Cinzel, serif;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  font-size: 1.5rem;
+}
+
+.throne-role {
+  margin: 0 0 12px;
+  color: var(--gold);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 1.08rem;
+  line-height: 1.45;
+}
+
+.throne-copy p {
+  margin: 0 0 14px;
+  color: var(--parchment);
+  line-height: 1.55;
+}
+
+.throne-copy dl {
+  margin: 0 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.throne-copy dt {
+  font-family: Cinzel, serif;
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 5px;
+}
+
+.throne-copy dd {
+  margin: 0;
+  color: var(--parchment);
+  line-height: 1.55;
+}
+
+.throne-side {
+  margin-bottom: 36px;
+}
+
+.throne-side-label {
+  max-width: 1080px;
+  margin: 0 auto 14px;
+  padding: 0 24px;
+}
+
+.throne-close {
+  max-width: 42rem;
+  margin: 0 auto 48px;
+  padding: 28px 24px 8px;
+  text-align: center;
+}
+
+.throne-close-line {
+  margin: 8px 0 0;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: #f0d2b0;
+  line-height: 1.35;
+}
 
 @keyframes landing-kenburns {
   from {
@@ -3155,10 +3420,55 @@ body.is-atlas {
     max-height: 280px;
   }
 
+  .throne-scroll,
+  .throne-scroll.is-flip {
+    grid-template-columns: 1fr;
+  }
+
+  .throne-scroll.is-flip .throne-scroll-art {
+    order: 0;
+  }
+
+  .throne-scroll-art img {
+    min-height: 180px;
+    max-height: 240px;
+  }
+
+  .throne-place,
+  .throne-place:nth-child(even),
+  .throne-face,
+  .throne-face:nth-child(even) {
+    grid-template-columns: 1fr;
+  }
+
+  .throne-place:nth-child(even) img,
+  .throne-face:nth-child(even) img {
+    order: 0;
+  }
+
+  .throne-place img,
+  .throne-face img {
+    min-height: 200px;
+    max-height: 280px;
+  }
+
+  .throne-quote {
+    padding: 28px 18px 32px;
+  }
+
+  .throne-close-line {
+    font-size: 1.35rem;
+  }
+
+  .site-tabs {
+    gap: 2px;
+    padding: 2px;
+  }
+
   .site-tabs a {
-    padding: 7px 8px;
-    font-size: 0.6rem;
-    letter-spacing: 0.08em;
+    padding: 5px 7px;
+    font-size: 0.56rem;
+    letter-spacing: 0.06em;
   }
 
   .landing-hero-copy {

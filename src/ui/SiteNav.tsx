@@ -14,11 +14,14 @@ export function SiteNav({ current, overlay = false }: { current: Route; overlay?
         <a className={current === 'atlas' ? 'active' : ''} href={hrefFor('atlas')} aria-current={current === 'atlas' ? 'page' : undefined}>
           The Atlas
         </a>
-        <a className={current === 'armory' ? 'active' : ''} href={hrefFor('armory')} aria-current={current === 'armory' ? 'page' : undefined}>
-          The Armory
-        </a>
         <a className={current === 'keeps' ? 'active' : ''} href={hrefFor('keeps')} aria-current={current === 'keeps' ? 'page' : undefined}>
           The Keeps
+        </a>
+        <a className={current === 'north' ? 'active' : ''} href={hrefFor('north')} aria-current={current === 'north' ? 'page' : undefined}>
+          True North
+        </a>
+        <a className={current === 'armory' ? 'active' : ''} href={hrefFor('armory')} aria-current={current === 'armory' ? 'page' : undefined}>
+          The Armory
         </a>
         <a className={current === 'heroes' ? 'active' : ''} href={hrefFor('heroes')} aria-current={current === 'heroes' ? 'page' : undefined}>
           Heroes
@@ -26,14 +29,14 @@ export function SiteNav({ current, overlay = false }: { current: Route; overlay?
         <a className={current === 'words' ? 'active' : ''} href={hrefFor('words')} aria-current={current === 'words' ? 'page' : undefined}>
           The Words
         </a>
-        <a className={current === 'north' ? 'active' : ''} href={hrefFor('north')} aria-current={current === 'north' ? 'page' : undefined}>
-          True North
-        </a>
         <a className={current === 'roberts' ? 'active' : ''} href={hrefFor('roberts')} aria-current={current === 'roberts' ? 'page' : undefined}>
           The Rebellion
         </a>
         <a className={current === 'council' ? 'active' : ''} href={hrefFor('council')} aria-current={current === 'council' ? 'page' : undefined}>
           The Council
+        </a>
+        <a className={current === 'throne' ? 'active' : ''} href={hrefFor('throne')} aria-current={current === 'throne' ? 'page' : undefined}>
+          The Iron Throne
         </a>
       </nav>
     </header>
