@@ -27,7 +27,3 @@ export function focusRegionId(selection: Selection | null, season: Season): stri
   }
   return null
 }
-
-export function inFocusRegion(regionId: string | undefined, focus: string | null): boolean {
-  return Boolean(focus && regionId === focus)
-}

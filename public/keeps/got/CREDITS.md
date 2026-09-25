@@ -35,8 +35,23 @@ Frames from HBO’s *Game of Thrones* and *House of the Dragon* (© HBO), collec
 | `tower-of-joy.jpg` | The Tower of Joy | Game of Thrones 6x03 “Oathbreaker” | https://static.wikia.nocookie.net/gameofthrones/images/6/66/603_Tower_of_Joy_Wide.jpg/revision/latest | https://gameofthrones.fandom.com/wiki/File:603_Tower_of_Joy_Wide.jpg |
 | `water-gardens.jpg` | The Water Gardens | Game of Thrones season 5 | https://static.wikia.nocookie.net/gameofthrones/images/7/71/Dorne_Season_5.png/revision/latest | https://gameofthrones.fandom.com/wiki/File:Dorne_Season_5.png |
 
-## Awaiting artwork
+## Book-only keeps
 
-These keeps never appear on screen. Their cards show `../pending.svg` until a JPG is dropped in at the path below; prompts are in the session’s `prompts-keeps.md`.
+These twelve castles never appear on screen in *Game of Thrones*, *House of the Dragon* or *A Knight of the Seven Kingdoms*, so their cards use HBO's animated *Histories & Lore* shorts (show canon) where those show the castle, and otherwise officially licensed book or card-game art. Each was cropped to 3:2 and resized to 1248×832 JPEG. `keeps/pending.svg` is now only an `onError` safety net.
 
-`karhold.jpg`, `torrhens-square.jpg`, `new-castle.jpg`, `gates-of-the-moon.jpg`, `ten-towers.jpg`, `castamere.jpg`, `the-arbor.jpg`, `griffins-roost.jpg`, `tarth.jpg` (Evenfall Hall), `summerhall.jpg`, `starfall.jpg`, `sunspear.jpg`.
+| File | Keep | Source | Image URL |
+|---|---|---|---|
+| `karhold.jpg` | Karhold | *A Game of Thrones* LCG card art by Franz Miklis © Fantasy Flight Games | https://static.wikia.nocookie.net/hieloyfuego/images/e/e4/Basti%C3%B3n_Kar_by_Franz_Miklis%2C_Fantasy_Flight_Games%C2%A9.jpg/revision/latest |
+| `torrhens-square.jpg` | Torrhen’s Square | *A Game of Thrones* LCG (1st ed.) “Torrhen’s Square”, *The Pirates of Lys* #58, art by Yoann Boissonnet © 2012 FFG. Only a 411×290 card scan exists, so the art band is scaled to full width and a blurred, darkened copy of the same art fills above and below it. Low resolution; replace if a larger scan turns up. | https://web.archive.org/web/2020id_/http://www.cardgamedb.com/forums/uploads/got/torrhens-square-tpol.jpg |
+| `new-castle.jpg` | The New Castle, White Harbor | *A Game of Thrones: The Card Game* (2nd ed.) “White Harbor”, art by Juan Carlos Barquet © 2018 George R.R. Martin & FFG (the white city and its castle seen from the harbor) | https://web.archive.org/web/2024id_/https://awoiaf.westeros.org/images/8/86/Juan_Carlos_Barquet_White_Habor.jpg |
+| `gates-of-the-moon.jpg` | The Gates of the Moon (the Eyrie above) | *The World of Ice & Fire* (2014), art by Paolo Puggioni | https://static.wikia.nocookie.net/hieloyfuego/images/4/42/Gates_of_the_Moon_by_Paolo_Puggioni%C2%A9.jpg/revision/latest |
+| `ten-towers.jpg` | Ten Towers | *A Game of Thrones* LCG card art by Juan Carlos Barquet © 2014 FFG | https://static.wikia.nocookie.net/hieloyfuego/images/c/c1/Ten_Towers_by_Juan_Carlos_Barquet%2C_Fantasy_Flight_Games%C2%A9.jpg/revision/latest |
+| `castamere.jpg` | Castamere (the castle over its mine halls) | HBO *Histories & Lore*, “The Rains of Castamere” (Game of Thrones season 7 Blu-ray) | https://static.wikia.nocookie.net/gameofthrones/images/f/f1/CastamereCastle.png/revision/latest |
+| `the-arbor.jpg` | The Arbor (the Redwyne castle above its harbor) | *A Game of Thrones: The Card Game* (2nd ed.) “The Arbor”, *No Middle Ground* #64, art by Mauricio Calle © FFG, taken from the art area of FFG’s own card image. Low resolution; replace if a larger scan turns up. | https://images-cdn.fantasyflightgames.com/filer_public/f6/40/f6403708-5c52-4517-a7ec-02f9c9e8f00d/gt05_the-arbor.png |
+| `griffins-roost.jpg` | Griffin’s Roost | *A Game of Thrones* LCG card art by Juan Carlos Barquet © 2014 FFG | https://static.wikia.nocookie.net/hieloyfuego/images/7/76/Griffin%27s_Roost_by_Juan_Carlos_Barquet%2C_Fantasy_Flight_Games%C2%A9.jpg/revision/latest |
+| `tarth.jpg` | Evenfall Hall on Tarth | *The World of Ice & Fire* (2014), art by Jordi González Escamilla | https://static.wikia.nocookie.net/hieloyfuego/images/5/53/Evenfall_Hall_on_Tarth_by_Jordi_Gonz%C3%A1lez%C2%A9.jpg/revision/latest |
+| `summerhall.jpg` | Summerhall burning on the night of the tragedy | *The World of Ice & Fire* (2014), art by Marc Simonetti | https://static.wikia.nocookie.net/hieloyfuego/images/6/68/Tragedia_de_Refugio_Estival_by_Marc_Simonetti%C2%A9.jpg/revision/latest |
+| `starfall.jpg` | Starfall and the Palestone Sword | *A Song of Ice and Fire* 2025 Calendar, art by Eddie Mendoza © Bantam Books | https://web.archive.org/web/2024id_/https://awoiaf.westeros.org/images/c/cd/Starfall_by_Eddie_Mendoza.jpg |
+| `sunspear.jpg` | Sunspear | HBO *Histories & Lore*, “Valyria’s Last Scion: House Targaryen” (Game of Thrones season 7 Blu-ray) | https://static.wikia.nocookie.net/gameofthrones/images/b/b6/Sunspear-0.png/revision/latest |
+
+Rights: the stills and animation are © HBO, and the illustrations belong to their artists and publishers (Fantasy Flight Games, Bantam/Penguin Random House). They are used here, with credit, under the same fan-wiki fair-use terms as the wikis they were collected from.

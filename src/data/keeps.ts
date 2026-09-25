@@ -7,7 +7,7 @@ export type Keep = {
   id: string
   name: string
   region: string
-  /** Stills live in keeps/got/<id>.jpg. A missing file falls back to keeps/pending.svg. */
+  /** Stills and licensed art live in keeps/got/<id>.jpg (sources in keeps/got/CREDITS.md). keeps/pending.svg is only an onError safety net. */
   image: string
   /** CSS object-position for the card crop, when the castle sits high or low in the frame. */
   focus?: string
@@ -116,6 +116,7 @@ export const keeps: Keep[] = [
     name: 'Karhold',
     region: 'The North',
     image: 'keeps/got/karhold.jpg',
+    focus: 'center 20%',
     built: 'A thousand years ago Karlon Stark, a younger son of Winterfell, put down a Bolton rising and was given lands in the cold east. Karl’s Hold became Karhold, and his heirs the Karstarks: a white sunburst on black, Stark blood on the grey shore.',
     lords: 'Rickard Karstark rides with Robb and loses sons to the Kingslayer. He murders two Lannister boys, and Robb takes his head himself. On the show Harald Karstark rides for Ramsay and dies at the Battle of the Bastards. Alys Karstark holds Karhold after him — kneeling to Jon on the show, fleeing to the Wall in the books.',
     events: [
@@ -183,6 +184,7 @@ export const keeps: Keep[] = [
     name: 'The New Castle',
     region: 'The North',
     image: 'keeps/got/new-castle.jpg',
+    focus: 'center 45%',
     built: 'The Manderlys came north as exiles from the Reach, and the King in the North gave them the Wolf’s Den at the mouth of the White Knife. They raised a city of white stone around it and a new castle on the hill above. The old den is a prison now. The New Castle looks down on the harbor, the Seal Rock, and a sea wall nearly a mile long.',
     lords: 'Wyman Manderly, Lord of White Harbor, too fat to sit a horse and too clever to be trusted with a secret. His son Wendel dies at the Red Wedding, and his heir Wylis is a Lannister captive. Wyman seems to bend to the Boltons while he waits for his moment.',
     events: [
@@ -317,6 +319,7 @@ export const keeps: Keep[] = [
     name: 'Ten Towers',
     region: 'The Iron Islands',
     image: 'keeps/got/ten-towers.jpg',
+    focus: 'center 30%',
     built: 'The newest castle in the Iron Islands, on Harlaw, richest of the isles. Lord Theomore Harlaw blamed damp old Harlaw Hall for the deaths of three infant sons and built anew, but he could never settle on a plan — so he raised ten towers joined by bridges and walkways, like ten castles crushed together.',
     lords: 'Rodrik Harlaw, the Reader, Lord of Harlaw, who would rather read than reave. His sister Alannys, Balon Greyjoy’s widow, lives there after her sons are gone. Asha (Yara on the show) spent her girlhood racing his walkways and reading in his library.',
     events: [
@@ -356,6 +359,7 @@ export const keeps: Keep[] = [
     name: 'Castamere',
     region: 'The Westerlands',
     image: 'keeps/got/castamere.jpg',
+    focus: 'center 15%',
     built: 'House Reyne dug it out of a gold mine. Above ground stood a modest castle; below it ran halls and galleries cut from the rock, as grand as anything in the west. The Reynes of Castamere were the second house of the westerlands, and under a weak Lannister lord they came to think themselves the first.',
     lords: 'Lord Roger Reyne, the Red Lion, and his brother Ser Reynard lead the revolt against Lord Tytos. Young Tywin answers it. After the Red Wedding the crown gives the empty seat to Rolph Spicer, kin of Robb’s Westerling bride.',
     events: [
@@ -453,6 +457,7 @@ export const keeps: Keep[] = [
     name: 'The Arbor',
     region: 'The Reach',
     image: 'keeps/got/the-arbor.jpg',
+    focus: 'center 40%',
     built: 'An island off the Reach’s south-western tip, across the Redwyne Straits from Oldtown. Its vineyards make Arbor gold and the best reds in the realm, and its wealth pays for one of the greatest fleets in Westeros. The Redwyne castle stands above a harbor full of ships and hills full of grapes.',
     lords: 'House Redwyne. Lord Paxter Redwyne blockades Storm’s End for the Tyrells in Robert’s Rebellion. His twin sons Horas and Hobber are Horror and Slobber at court. Olenna Tyrell was born a Redwyne.',
     events: [
@@ -480,6 +485,7 @@ export const keeps: Keep[] = [
     name: 'Griffin’s Roost',
     region: 'The Stormlands',
     image: 'keeps/got/griffins-roost.jpg',
+    focus: 'center 40%',
     built: 'The Connington seat on the stormlands coast, perched on a crag of red stone above the grey sea. A single narrow ridge leads out to it, and red-and-white griffins fly from its towers.',
     lords: 'Lord Jon Connington, Rhaegar’s friend, named Hand by Aerys and exiled after he loses the Battle of the Bells. Robert gives the castle to his cousin Ronnet, a knight but no lord. In the books Jon returns with the Golden Company and takes the Roost back without a siege.',
     events: [
@@ -492,6 +498,7 @@ export const keeps: Keep[] = [
     name: 'Evenfall Hall',
     region: 'The Stormlands',
     image: 'keeps/got/tarth.jpg',
+    focus: 'center 25%',
     built: 'Seat of House Tarth, the Evenstar, on the Sapphire Isle east of the stormlands. A fair castle on a fairer island, looking out over the Straits of Tarth: blue water, green mountains, and an old house that keeps the title Evenstar.',
     lords: 'Selwyn Tarth, the Evenstar, Lord of Tarth. His daughter Brienne is his heir; her brothers and sisters died young. The island sends its evenstar into the world in plate, not in a lord’s chair.',
     events: [
@@ -504,6 +511,7 @@ export const keeps: Keep[] = [
     name: 'Summerhall',
     region: 'The Stormlands',
     image: 'keeps/got/summerhall.jpg',
+    focus: 'center 45%',
     built: 'King Daeron II raised a summer palace in the Dornish Marches, far from court, where the Targaryens could rest. Prince Maekar made it his seat and was called the Prince of Summerhall. Now it is a shell of blackened stone on a hill.',
     lords: 'Targaryen princes. King Aegon V — Egg of the Dunk and Egg tales — died here with his son Duncan the Small and Ser Duncan the Tall, Lord Commander of his Kingsguard, when something he tried with wildfire and dragon eggs went wrong. Rhaegar was born the same day.',
     events: [
@@ -530,6 +538,7 @@ export const keeps: Keep[] = [
     name: 'Starfall',
     region: 'Dorne',
     image: 'keeps/got/starfall.jpg',
+    focus: 'center 30%',
     built: 'The seat of House Dayne, on an island where the Torrentine meets the Summer Sea. A falling star struck here, the story goes, and from its heart the Daynes forged Dawn, a pale blade as fine as Valyrian steel. The Palestone Sword, a tower of pale stone, rises over the water.',
     lords: 'House Dayne, one of the oldest in Dorne. Ser Arthur Dayne, the Sword of the Morning, dies at the Tower of Joy. His nephew Edric Dayne is Lord of Starfall in the books, a boy squire riding with Beric Dondarrion.',
     events: [

@@ -39,7 +39,7 @@ export const heroes: Hero[] = [
     name: 'Aemon the Dragonknight',
     epithet: 'The Dragonknight',
     house: 'House Targaryen · Kingsguard',
-    image: 'heroes/aemon-dragonknight.jpg',
+    image: 'heroes/got/aemon-dragonknight.jpg',
     locationId: 'kings-landing',
     steel:
       'A knight of the Kingsguard first, a prince second. The songs give him Dark Sister in some tellings; the Citadel is less certain. What is sure is the style: a swordsman so clean that later ages used his name as a measuring stick. He fought with a white cloak on his back and a brother’s crown in his keeping.',
@@ -79,7 +79,7 @@ export const heroes: Hero[] = [
     name: 'Daemon Blackfyre',
     epithet: 'The Black Dragon',
     house: 'House Blackfyre',
-    image: 'heroes/daemon-blackfyre.jpg',
+    image: 'heroes/got/daemon-blackfyre.jpg',
     locationId: 'the-trident',
     steel:
       'Blackfyre itself: Aegon the Conqueror’s Valyrian hand-and-a-half sword, darker than most of its kind, given to a bastard by a king who loved him more than his trueborn son. Daemon fought with it as if the steel were a crown. Men who saw him said he was the Warrior in the flesh, and the sword agreed.',
@@ -179,7 +179,7 @@ export const heroes: Hero[] = [
     name: 'Duncan the Tall',
     epithet: 'Dunk',
     house: 'The hedge · Kingsguard',
-    image: 'heroes/duncan-the-tall.jpg',
+    image: 'heroes/got/duncan-the-tall.jpg',
     locationId: 'kings-landing',
     steel:
       'A hedge knight’s longsword and a shield beaten half to death. He was too tall for grace and too honest for the lists’ politics. What he had was reach, a stubborn guard, and a squire who would be king. Later, as Lord Commander, the steel was the same. The cloak was new.',
@@ -339,7 +339,7 @@ export const heroes: Hero[] = [
     name: 'Garlan Tyrell',
     epithet: 'Garlan the Gallant',
     house: 'House Tyrell',
-    image: 'heroes/garlan-tyrell.jpg',
+    image: 'heroes/got/garlan-tyrell.jpg',
     locationId: 'highgarden',
     steel:
       'A longsword in a reachman’s hand, and the rare courtesy of practicing against three or four men at once because one was not enough to teach him anything. The books are clear: he was a better swordsman than Loras, and less interested in being seen. No named Valyrian. The style was enough.',

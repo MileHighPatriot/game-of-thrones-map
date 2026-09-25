@@ -4,7 +4,7 @@ let looping = false
 export const HALL_VOLUME = 0.4
 
 function rainsSrc() {
-  return `${import.meta.env.BASE_URL}landing/rains-of-castamere.wav`
+  return `${import.meta.env.BASE_URL}landing/rains-of-castamere.m4a`
 }
 
 function restart() {
@@ -16,7 +16,6 @@ function restart() {
 function bind(node: HTMLAudioElement) {
   el = node
   el.loop = true
-  el.preload = 'auto'
   el.muted = false
   el.volume = HALL_VOLUME
   if (node.dataset.loopBound === '1') return
@@ -45,8 +44,4 @@ export async function startTheme() {
 export function stopTheme() {
   looping = false
   el?.pause()
-}
-
-export function themePlaying() {
-  return Boolean(el && !el.paused)
 }

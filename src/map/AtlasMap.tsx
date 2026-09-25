@@ -11,7 +11,7 @@ import {
   useMap,
   useMapEvents,
 } from 'react-leaflet'
-import L, { type DivIcon, type Layer, type LeafletMouseEvent, type PathOptions } from 'leaflet'
+import L, { type Layer, type LeafletMouseEvent, type PathOptions } from 'leaflet'
 import { battles } from '../data/battles.ts'
 import { controlBySeason } from '../data/control.ts'
 import { houseById } from '../data/houses.ts'
@@ -20,11 +20,15 @@ import { seatPortraits } from '../data/portraits.ts'
 import { presenceBySeason } from '../data/presence.ts'
 import { regionLabelAt, regionShortName, regionsGeoJSON } from '../data/regions.ts'
 import { routes } from '../data/routes.ts'
+import { siteById, sitesByParent } from '../data/sites.ts'
 import { bannerSvg, regionPaint } from '../lib/banners.ts'
 import { focusRegionId } from '../lib/focus.ts'
+import { prefersReducedMotion } from '../lib/motion.ts'
+import { escapeHtml } from '../lib/people.ts'
 import { sx, sy, toLatLng } from '../lib/geo.ts'
-import { useAtlas } from '../state/AtlasContext.tsx'
+import { useAtlas } from '../state/useAtlas.ts'
 import { MAP_HEIGHT, MAP_WIDTH, type RegionFeature } from '../types.ts'
+import { icon, srName } from './icons.ts'
 import { FollowSelection, PresenceLayer } from './PresenceLayer.tsx'
 import { MAX_ZOOM, ZOOM, fitZoom, flyZoomFor } from './zoom.ts'
 
@@ -41,16 +45,10 @@ const voidBounds: L.LatLngBoundsExpression = [
 
 const imageCenter: L.LatLngExpression = [MAP_HEIGHT / 2, MAP_WIDTH / 2]
 
-const basemapUrl = `${import.meta.env.BASE_URL}map/westeros-essos.png`
+const basemapUrl = `${import.meta.env.BASE_URL}map/westeros-essos.webp`
 
-function icon(html: string, className: string, size: [number, number], anchor?: [number, number]): DivIcon {
-  return L.divIcon({
-    className,
-    html,
-    iconSize: size,
-    iconAnchor: anchor ?? [size[0] / 2, size[1] / 2],
-  })
-}
+/** Zoom steps the layers re-render at while a zoom animates; the exact value lands on zoomend. */
+const ZOOM_STEP = 0.25
 
 function applyFit(map: L.Map) {
   const size = map.getSize()
@@ -72,7 +70,8 @@ function MapEvents() {
       setExpandedPresence(null)
     },
     zoomend: () => setZoom(map.getZoom()),
-    zoom: () => setZoom(map.getZoom()),
+    // Mid-animation, only re-render when the zoom crosses a quarter step, not every frame.
+    zoom: () => setZoom(Math.round(map.getZoom() / ZOOM_STEP) * ZOOM_STEP),
   })
 
   useEffect(() => {
@@ -92,7 +91,8 @@ function MapEvents() {
   useEffect(() => {
     if (!fitNonce) return
     const min = applyFit(map)
-    map.flyTo(imageCenter, min, { duration: 0.7 })
+    if (prefersReducedMotion()) map.setView(imageCenter, min, { animate: false })
+    else map.flyTo(imageCenter, min, { duration: 0.7 })
   }, [fitNonce, map])
 
   useEffect(() => {
@@ -102,7 +102,9 @@ function MapEvents() {
 
   useEffect(() => {
     if (!flyTarget) return
-    map.flyTo(toLatLng(flyTarget.x, flyTarget.y), flyTarget.zoom, { duration: 1.05 })
+    const target = toLatLng(flyTarget.x, flyTarget.y)
+    if (prefersReducedMotion()) map.setView(target, flyTarget.zoom, { animate: false })
+    else map.flyTo(target, flyTarget.zoom, { duration: 1.05 })
   }, [flyTarget, map])
 
   return null
@@ -272,7 +274,7 @@ function SeatLayer() {
         const size = seatSize(zoom, majorLocationIds.has(place.id))
         const showName = zoom >= ZOOM.placeLabels
         const html = `<div class="seat-medal" style="width:${size}px;height:${size}px"><img src="${src}" alt=""></div>${
-          showName ? `<span class="map-label place-label">${place.name}</span>` : ''
+          showName ? `<span class="map-label place-label">${place.name}</span>` : srName(place.name)
         }`
         return (
           <Marker
@@ -330,7 +332,7 @@ function PlaceLayer() {
               position={toLatLng(place.x, place.y)}
               icon={icon(
                 `<span class="pin pin-${place.kind}"></span>${
-                  showName ? `<span class="map-label place-label">${place.name}</span>` : ''
+                  showName ? `<span class="map-label place-label">${place.name}</span>` : srName(place.name)
                 }`,
                 'marker-place',
                 showName ? [120, 28] : [12, 12],
@@ -372,7 +374,7 @@ function BannerLayer() {
           <Marker
             key={`${region.properties.id}-${house.id}`}
             position={toLatLng(x, y)}
-            icon={icon(bannerSvg(house.id), 'marker-banner', [28, 34])}
+            icon={icon(`${bannerSvg(house.id)}${srName(house.shortName)}`, 'marker-banner', [28, 34])}
             eventHandlers={{
               click: (event) => {
                 L.DomEvent.stopPropagation(event.originalEvent)
@@ -408,7 +410,7 @@ function BattleLayer() {
             <Marker
               key={battle.id}
               position={toLatLng(place.x + 16, place.y - 6)}
-              icon={icon('<span class="pin-battle">⚔</span>', 'marker-battle', [22, 22])}
+              icon={icon(`<span class="pin-battle" aria-hidden="true">⚔</span>${srName(battle.name)}`, 'marker-battle', [22, 22])}
               eventHandlers={{
                 click: (event) => {
                   L.DomEvent.stopPropagation(event.originalEvent)
@@ -420,6 +422,61 @@ function BattleLayer() {
             </Marker>
           )
         })}
+    </>
+  )
+}
+
+/**
+ * Sites sit on their keep's own point; fan them round it, just outside the keep's medal,
+ * or outside the ring of travelers when people are spread around the keep.
+ */
+const SITE_RING_GAP_PX = 14
+const SITE_RING_PAST_PEOPLE_PX = 64
+
+function SiteLayer() {
+  const { layers, zoom, season, selection, setSelection } = useAtlas()
+  if (selection?.kind !== 'site' || !layers.places) return null
+  const selected = siteById[selection.id]
+  if (!selected) return null
+  const grounds = sitesByParent[selected.parentId] ?? [selected]
+  const scale = 2 ** Math.max(zoom, -0.6)
+  const parentId = selected.parentId
+  const medal = seatPortraits[parentId] ? seatSize(zoom, majorLocationIds.has(parentId)) / 2 : 6
+  const peopleSpread =
+    layers.characters &&
+    zoom >= ZOOM.presenceSpread &&
+    presenceBySeason[season].some((pin) => pin.locationId === parentId)
+  const ringPx = medal + (peopleSpread ? SITE_RING_PAST_PEOPLE_PX : SITE_RING_GAP_PX)
+
+  return (
+    <>
+      {grounds.map((site, index) => {
+        const isSelected = site.id === selected.id
+        const angle = grounds.length === 1 ? -Math.PI / 2 : (index / grounds.length) * Math.PI * 2 - Math.PI / 2
+        const [lat, lng] = toLatLng(site.x, site.y)
+        const radius = ringPx / scale
+        const position: [number, number] = [lat + Math.sin(angle) * radius, lng + Math.cos(angle) * radius]
+        const name = escapeHtml(site.name)
+        const html = `<span class="site-pin site-${site.kind}"></span>${
+          isSelected ? `<span class="map-label place-label">${name}</span>` : srName(site.name)
+        }`
+        return (
+          <Marker
+            key={`site-${site.id}-${isSelected ? 'on' : 'off'}`}
+            position={position}
+            zIndexOffset={isSelected ? 1800 : 1700}
+            icon={icon(html, 'marker-site', isSelected ? [140, 18] : [12, 12], isSelected ? [6, 9] : [6, 6])}
+            eventHandlers={{
+              click: (event) => {
+                L.DomEvent.stopPropagation(event.originalEvent)
+                setSelection({ kind: 'site', id: site.id })
+              },
+            }}
+          >
+            {!isSelected && <Tooltip direction="top" offset={[0, -6]}>{site.name}</Tooltip>}
+          </Marker>
+        )
+      })}
     </>
   )
 }
@@ -454,6 +511,7 @@ export function AtlasMap() {
       <BannerLayer />
       <BattleLayer />
       <PresenceLayer />
+      <SiteLayer />
     </MapContainer>
   )
 }

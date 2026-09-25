@@ -53,7 +53,7 @@ export const weapons: Weapon[] = [
   {
     id: 'dawn',
     name: 'Dawn',
-    image: 'weapons/dawn.jpg',
+    image: 'weapons/got/dawn.jpg',
     house: 'House Dayne',
     steel: 'Star-forged greatsword',
     made: 'Not Valyrian. The Daynes say it was forged from the heart of a fallen star that struck the red mountains of Dorne. The blade is pale as milkglass, almost white, and alive in the light in a way common steel is not.',
@@ -87,7 +87,7 @@ export const weapons: Weapon[] = [
     house: 'The Iron Throne · Arya Stark',
     steel: 'Valyrian steel dagger, dragonbone hilt',
     made: 'A rippled Valyrian blade on a dragonbone hilt, small enough for an assassin’s hand. On screen the grip is dark and ridged, with a gold spine and a red stone. In House of the Dragon it is an heirloom of the Targaryen kings, with Aegon’s prophecy etched in the steel, visible only in fire.',
-    who: 'A hired catspaw used it to try to kill Bran Stark in his bed. Littlefinger lied that he had lost it to Tyrion in a wager; in the books he lost it to Robert. After Ned fell, Petyr kept it. Years later he gave it to Bran, and Bran put it in Arya’s hand.',
+    who: 'A hired catspaw used it to try to kill Bran Stark in his bed. Littlefinger claimed he had lost it to Tyrion in a wager, a lie that frames Tyrion in the show and the books alike; in the books the dagger is implied to be Robert’s, taken by Joffrey. After Ned fell, Petyr kept it. Years later he gave it to Bran, and Bran put it in Arya’s hand.',
     where: 'The Targaryen kings, Winterfell’s halls, Littlefinger’s keeping, then Arya: the dagger that killed Petyr Baelish, and the Night King in the godswood. It sailed west with her.',
   },
   {
@@ -113,17 +113,17 @@ export const weapons: Weapon[] = [
   {
     id: 'lightbringer',
     name: 'Lightbringer',
-    image: 'weapons/lightbringer.jpg',
+    image: 'weapons/got/lightbringer.jpg',
     house: 'Azor Ahai · Stannis Baratheon',
     steel: 'Legend — and a glamour',
     made: 'In the east they say Azor Ahai tempered the hero’s sword three times: water cracked it, a lion’s heart cracked it, and only when he drove it through Nissa Nissa, his wife, did the steel drink her soul and burn. That is the forging of Lightbringer.',
-    who: 'Azor Ahai, if the tales are true. Melisandre of Asshai named Stannis Azor Ahai reborn and drew a burning sword from the pyre of the Seven on Dragonstone. Maester Aemon noted the blade gave no heat. Davos was not fooled.',
+    who: 'Azor Ahai, if the tales are true. Melisandre of Asshai named Stannis Azor Ahai reborn, and Stannis drew a burning sword from the pyre of the Seven on Dragonstone. Maester Aemon noted the blade gave no heat. Davos was not fooled.',
     where: 'The legend belongs to Asshai and the Long Night. Stannis’s glowing sword was a red priestess’s trick, carried at the Wall and to Winterfell, and it died with his cause.',
   },
   {
     id: 'roberts-warhammer',
     name: 'Robert’s warhammer',
-    image: 'weapons/roberts-warhammer.jpg',
+    image: 'weapons/got/roberts-warhammer.jpg',
     house: 'House Baratheon',
     steel: 'Steel and oak',
     made: 'No spellwork. A two-handed warhammer sized for Robert Baratheon’s strength: a spiked iron head on a long oak haft. He preferred it to a sword. At the Trident it did what pretty Valyrian steel did not — it ended a prince.',
@@ -133,7 +133,7 @@ export const weapons: Weapon[] = [
   {
     id: 'lady-forlorn',
     name: 'Lady Forlorn',
-    image: 'weapons/lady-forlorn.jpg',
+    image: 'weapons/got/lady-forlorn.jpg',
     house: 'House Corbray',
     steel: 'Valyrian steel sword',
     made: 'The ancestral Valyrian blade of House Corbray of Heart’s Home in the Vale. A named sword of the old blood, kept when richer houses lost theirs.',
@@ -143,7 +143,7 @@ export const weapons: Weapon[] = [
   {
     id: 'brightroar',
     name: 'Brightroar',
-    image: 'weapons/brightroar.jpg',
+    image: 'weapons/got/brightroar.jpg',
     house: 'House Lannister',
     steel: 'Valyrian steel greatsword — lost',
     made: 'The Lannisters bought their Valyrian greatsword from Valyria with enough gold to raise an army. It roared in the hand of the Kings of the Rock for little more than a century.',

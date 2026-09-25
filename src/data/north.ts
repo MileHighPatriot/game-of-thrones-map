@@ -44,7 +44,7 @@ export const northPlaces: NorthPlace[] = [
     id: 'hardhome',
     name: 'Hardhome',
     region: 'The Shivering Sea',
-    image: 'north/hardhome.jpg',
+    image: 'north/got/hardhome.jpg',
     atmosphere:
       'A fishing village on a frozen bite of coast: driftwood huts, hide tents, and a harbor that never quite thaws. For a generation it was the closest thing the Free Folk had to a town. The sea is black. The wind comes off the ice without asking.',
     happened:
@@ -56,7 +56,7 @@ export const northPlaces: NorthPlace[] = [
     id: 'fist',
     name: 'Fist of the First Men',
     region: 'The Haunted Forest',
-    image: 'north/fist.jpg',
+    image: 'north/got/fist.jpg',
     atmosphere:
       'A bare hill with a broken ring of ancient stone — a fist closed against the sky. The First Men held it when the world was younger. The Night’s Watch finds dragonglass in its guts and thinks, for one night, that they have been given a weapon.',
     happened:
@@ -80,7 +80,7 @@ export const northPlaces: NorthPlace[] = [
     id: 'raven-cave',
     name: 'Cave of the Three-Eyed Raven',
     region: 'The Frostfangs',
-    image: 'north/raven-cave.jpg',
+    image: 'north/got/raven-cave.jpg',
     atmosphere:
       'A weirwood root-hall under the mountains. Pale roots like frozen veins. A face in the wood that has been watching since before the Andals had names. The air tastes of earth and old sap. Time is thinner here than ice.',
     happened:
@@ -92,7 +92,7 @@ export const northPlaces: NorthPlace[] = [
     id: 'haunted-forest',
     name: 'The Haunted Forest',
     region: 'Beyond the Wall',
-    image: 'north/haunted-forest.jpg',
+    image: 'north/got/haunted-forest.jpg',
     atmosphere:
       'Pines so dark they eat the noon. Weirwoods with faces the First Men cut and never explained. The Watch rangings start here and often end here. The Free Folk call it simply the wood. Southerners add the word haunted because they are new to being watched.',
     happened:
@@ -104,7 +104,7 @@ export const northPlaces: NorthPlace[] = [
     id: 'frostfangs',
     name: 'Frostfangs / Skirling Pass',
     region: 'The Frostfangs',
-    image: 'north/frostfangs.jpg',
+    image: 'north/got/frostfangs.jpg',
     atmosphere:
       'A spine of ice and granite west of the haunted wood. The Skirling Pass is a knife-cut through it, wind that can take a man off his feet, and no southern road worth the name. Mance’s host used these heights the way other armies use maps.',
     happened:
@@ -129,7 +129,7 @@ export const northPlaces: NorthPlace[] = [
     id: 'always-winter',
     name: 'Lands of Always Winter',
     region: 'Where the maps fail',
-    image: 'north/always-winter.jpg',
+    image: 'north/got/always-winter.jpg',
     atmosphere:
       'The parchment goes white. No roads. No keeps. No maester’s chain long enough. What lives here does not name itself for southern ears. The First Men said the Long Night came from this waste. They built a wall and tried to forget the rest.',
     happened:
@@ -144,7 +144,7 @@ export const northClans: NorthClan[] = [
   {
     id: 'thenns',
     name: 'The Thenns',
-    image: 'north/thenns.jpg',
+    image: 'north/got/thenns.jpg',
     customs:
       'They keep Magnars, bronze armor, and laws the other Free Folk call southern. In the books they scar their cheeks and mine metal in a vale the ice has not yet taken. They raid with discipline. They eat the dead of their enemies when the hunger is honest — a rite the show flattens into a threat.',
     wall:
@@ -154,7 +154,7 @@ export const northClans: NorthClan[] = [
   {
     id: 'hornfoots',
     name: 'The Hornfoots',
-    image: 'north/hornfoots.jpg',
+    image: 'north/got/hornfoots.jpg',
     customs:
       'They walk the snow barefoot until the soles horn over. A southern maester would call it ruin. They call it not losing your boots to a thaw. They hunt the foothills of the Frostfangs and keep few tents worth stealing.',
     wall:
@@ -174,7 +174,7 @@ export const northClans: NorthClan[] = [
   {
     id: 'cave-dwellers',
     name: 'Cave dwellers',
-    image: 'north/cave-dwellers.jpg',
+    image: 'north/got/cave-dwellers.jpg',
     customs:
       'They live in the deep Frostfangs, in holes the sun never finds. Bone charms, root-fires, a language even other Free Folk hear as a growl. They come out to raid and go back in. The cave is the keep. The mountain is the wall they actually trust.',
     wall:
@@ -184,7 +184,7 @@ export const northClans: NorthClan[] = [
   {
     id: 'frozen-shore',
     name: 'The Frozen Shore',
-    image: 'north/frozen-shore.jpg',
+    image: 'north/got/frozen-shore.jpg',
     customs:
       'Seal-fur, walrus ivory, chariots of bone on the pack ice of the Shivering Sea. They fish a sea that wants them dead and follow the ice when it moves. The books give them more names than the show ever had time to say.',
     wall:
@@ -198,7 +198,7 @@ export const northFigures: NorthFigure[] = [
     id: 'mance',
     name: 'Mance Rayder',
     title: 'King-Beyond-the-Wall',
-    image: 'north/mance.jpg',
+    image: 'north/got/mance.jpg',
     lore:
       'A brother of the Night’s Watch who rode off, took a wildling wife, and spent years making a people out of a hundred clans that would rather steal from each other. He sang more than he shouted. He united the Free Folk because he had seen what was coming behind them, not because he wanted a crown. Stannis burns a man under a glamour. The King-Beyond-the-Wall dies in a tent, knifed while the south is still arguing about whose war this is.',
     locationId: 'castle-black',
@@ -208,7 +208,7 @@ export const northFigures: NorthFigure[] = [
     id: 'tormund',
     name: 'Tormund Giantsbane',
     title: 'Tall-talker · Mance’s captain',
-    image: 'north/tormund.jpg',
+    image: 'north/got/tormund.jpg',
     lore:
       'The Free Folk’s loudest proof that they are not one thing. He boasts of bears and milk and murders, and then keeps a promise to a crow. He fights at Castle Black, Hardhome, Eastwatch, and Winterfell. When the thrones are finished he walks back beyond the Wall with Ghost, which is the only peace he would have trusted. He never learned to kneel. The story finally stops asking.',
     locationId: 'hardhome',
@@ -218,7 +218,7 @@ export const northFigures: NorthFigure[] = [
     id: 'ygritte',
     name: 'Ygritte',
     title: 'Spearwife · kissed by fire',
-    image: 'north/ygritte.jpg',
+    image: 'north/got/ygritte.jpg',
     lore:
       'She captures Jon Snow, loves him in a cave, and never quite forgives him for being a crow when it counts. She climbs the Wall, raids the Gift, and is shot in Castle Black’s yard by a boy who does not know what she meant. She dies looking at Jon, still trying to make a joke of it. You know nothing — said as a tenderness, then as a wound, then as a last true thing.',
     locationId: 'castle-black',
@@ -238,7 +238,7 @@ export const northFigures: NorthFigure[] = [
     id: 'styr',
     name: 'Styr',
     title: 'Magnar of Thenn',
-    image: 'north/thenns.jpg',
+    image: 'north/got/styr.jpg',
     lore:
       'He leads Thenns over the Wall with Mance: bronze, scars, and a contempt for crows that needs no speech. He dies in Castle Black’s yard in the same night Ygritte does. The vale that made him is still up there, farther than most southron chains will stretch.',
     locationId: 'thenn',
@@ -248,7 +248,7 @@ export const northFigures: NorthFigure[] = [
     id: 'osha',
     name: 'Osha',
     title: 'A wildling who walked south',
-    image: 'north/haunted-forest.jpg',
+    image: 'north/got/osha.jpg',
     lore:
       'Taken in the wolfswood, she stays because the true north is already dying behind her. She carries Bran and Rickon out of a fallen Winterfell, teaches southern boys that the cold has a mind, and pays for that teaching later at the hands of Ramsay’s men. She is proof the Free Folk were never only a horde at the gate. Some of them tried to save the realm’s children and were not sung.',
     locationId: 'winterfell',
@@ -260,7 +260,7 @@ export const coldOnes: ColdOne[] = [
   {
     id: 'others',
     name: 'The Others / White Walkers',
-    image: 'north/others.jpg',
+    image: 'north/got/others.jpg',
     known:
       'The show names them White Walkers: ice-pale, armored in frost, armed with blades that drink steel. They are unmade by dragonglass and Valyrian steel. The Night King is their first, a First Man bound to a weirwood with a shard of obsidian by the Children of the Forest — a weapon that learned to walk. They do not speak. They do not bargain. They raise what they kill.',
     whispered:
@@ -271,7 +271,7 @@ export const coldOnes: ColdOne[] = [
   {
     id: 'wights',
     name: 'Wights',
-    image: 'north/wights.jpg',
+    image: 'north/got/wights.jpg',
     known:
       'The dead, risen. Blue in the eye, frost in the joint, as strong as the body they used to wear. Fire unmakes them. Ordinary steel does not. At Hardhome the Night King raises a beach of them with one gesture. At Winterfell they climb the walls in a single black tide. When he shatters, they shatter with him.',
     whispered:
@@ -282,7 +282,7 @@ export const coldOnes: ColdOne[] = [
   {
     id: 'giants',
     name: 'Giants and mammoths',
-    image: 'north/giants.jpg',
+    image: 'north/got/giants.jpg',
     known:
       'They are the old people of the wood, not monsters in their own telling. Mag the Mighty dies in Castle Black’s tunnel, holding a gate that was built to keep his kind out. Wun Wun fights for Jon at the Battle of the Bastards and is shot to death in Winterfell’s yard. Mammoths carried the Free Folk to war and died on the ice.',
     whispered:
@@ -293,9 +293,9 @@ export const coldOnes: ColdOne[] = [
 ]
 
 export const wallFromNorth = {
-  image: 'north/wall-from-north.jpg',
-  gate: 'north/gate.jpg',
-  abandoned: 'north/abandoned-castles.jpg',
+  image: 'north/got/wall-from-north.jpg',
+  gate: 'north/got/gate.jpg',
+  abandoned: 'north/got/abandoned-castles.jpg',
   lede: 'From the south the Wall is a shield. From the north it is a cliff that learned to say no.',
   body: [
     'Seven hundred feet of ice, older than any house still sitting a throne. The Free Folk do not see a wonder of the world. They see a fence built by men who stole the summer and then locked the door. Climb it, and you are a raider. Beg at a gate, and you are a problem for a Lord Commander who has forgotten why the ice was poured.',
@@ -306,7 +306,7 @@ export const wallFromNorth = {
 }
 
 export const whyTheWall = {
-  image: 'north/long-night.jpg',
+  image: 'north/got/long-night.jpg',
   kicker: 'The forgotten history',
   title: 'Why the Wall was built',
   lede: 'A night that lasted a generation. A dawn the south no longer believes. Ice, raised against the dark, then used against the living.',

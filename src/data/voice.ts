@@ -215,14 +215,14 @@ export const quotes: VoiceLine[] = [
     text: 'Power is power.',
     speaker: 'Cersei Lannister',
     moment: 'She has Littlefinger’s throat held in the throne room. Knowledge is not power. A command is.',
-    source: 'Game of Thrones · “You Win or You Die”',
+    source: 'Game of Thrones · “The North Remembers”',
   },
   {
     id: 'king-no-king',
     text: 'Any man who must say “I am the king” is no true king.',
     speaker: 'Tywin Lannister',
     moment: 'To Joffrey, after the boy screams in Small Council. Tywin never needed the sentence. The boy always did.',
-    source: 'Game of Thrones · “The Prince of Winterfell”',
+    source: 'Game of Thrones · “Mhysa”',
   },
   {
     id: 'sheep',
@@ -486,10 +486,10 @@ export const prophecies: Prophecy[] = [
   {
     id: 'aegon-dream',
     title: 'Aegon’s dream',
-    speaker: 'Aegon the Conqueror, as told on Dragonstone',
+    speaker: 'Viserys I, telling Aegon the Conqueror’s dream',
     text: 'From my blood come the Prince That Was Promised, and his will be the Song of Ice and Fire.',
     moment: 'House of the Dragon’s telling: the Conquest was not only for a throne. Viserys I passes the secret to Rhaenyra. The show’s Game of Thrones never lets a character speak this sentence, but the title of the books is in it.',
-    source: 'House of the Dragon · “King of the Narrow Sea”',
+    source: 'House of the Dragon · “The Heirs of the Dragon”',
   },
   {
     id: 'woods-witch',

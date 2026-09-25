@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { SEASON_META } from '../data/seasons.ts'
-import { useAtlas } from '../state/AtlasContext.tsx'
+import { useAtlas } from '../state/useAtlas.ts'
 import type { Season } from '../types.ts'
 
 const seasons: Season[] = [1, 2, 3, 4, 5, 6, 7, 8]

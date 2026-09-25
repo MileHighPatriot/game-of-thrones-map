@@ -1,6 +1,9 @@
 import type { ThronesPortrait } from '../types.ts'
 
-export async function fetchPortrait(id: number): Promise<ThronesPortrait | null> {
+/** One request per portrait per visit; a failed one is forgotten so it can be retried. */
+const portraits = new Map<number, Promise<ThronesPortrait | null>>()
+
+async function loadPortrait(id: number): Promise<ThronesPortrait | null> {
   try {
     const response = await fetch(`https://thronesapi.com/api/v2/Characters/${id}`)
     if (!response.ok) return null
@@ -21,4 +24,15 @@ export async function fetchPortrait(id: number): Promise<ThronesPortrait | null>
   } catch {
     return null
   }
+}
+
+export function fetchPortrait(id: number): Promise<ThronesPortrait | null> {
+  const known = portraits.get(id)
+  if (known) return known
+  const pending = loadPortrait(id).then((portrait) => {
+    if (!portrait) portraits.delete(id)
+    return portrait
+  })
+  portraits.set(id, pending)
+  return pending
 }

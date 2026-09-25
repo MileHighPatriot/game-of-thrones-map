@@ -3,28 +3,25 @@ import { houses } from '../data/houses.ts'
 import { hrefFor } from '../lib/hashRoute.ts'
 import { attachTheme, HALL_VOLUME, startTheme, stopTheme } from '../lib/theme.ts'
 import { sigilSrc } from '../lib/banners.ts'
-import { SiteNav } from '../ui/SiteNav.tsx'
+import { heroImg, LANDSCAPE, lazyImg } from '../lib/img.ts'
+import { MAIN_ID, SiteNav } from '../ui/SiteNav.tsx'
 
 const COURT = ['stark', 'lannister', 'targaryen', 'baratheon', 'greyjoy', 'tyrell', 'martell', 'arryn', 'tully', 'nightswatch'] as const
 
-const WORDS = [
-  'Winter Is Coming',
-  'Hear Me Roar',
-  'Fire and Blood',
-  'Ours Is the Fury',
-  'We Do Not Sow',
-  'Growing Strong',
-  'Unbowed, Unbent, Unbroken',
-  'As High as Honor',
-  'Family, Duty, Honor',
-  'Valar Morghulis',
-]
+// The marquee reads each house's words straight from the house records, so it always
+// matches the rest of the site. Braavos closes the line with Valar Morghulis.
+const MARQUEE_HOUSES = ['stark', 'lannister', 'targaryen', 'baratheon', 'greyjoy', 'tyrell', 'martell', 'arryn', 'tully', 'braavos'] as const
+
+const WORDS = MARQUEE_HOUSES.flatMap((id) => {
+  const words = houses.find((house) => house.id === id)?.words
+  return words ? [words] : []
+})
 
 const DOORS = [
   {
     title: 'The Atlas',
     copy: 'Eight seasons. One parchment world. Watch who holds the land as the game turns.',
-    image: 'seats/kings-landing.jpg',
+    image: 'seats/got/kings-landing.jpg',
     alt: 'King’s Landing',
     href: 'atlas' as const,
   },
@@ -38,35 +35,35 @@ const DOORS = [
   {
     title: 'The True North',
     copy: 'Beyond the Wall the maps grow thin. Free Folk, cold ones, and the reason the ice was raised.',
-    image: 'north/hero.jpg',
+    image: 'north/got/hero.jpg',
     alt: 'The True North',
     href: 'north' as const,
   },
   {
     title: 'The Armory',
     copy: 'Ice, Longclaw, Dawn, and the hammer that killed a prince. Named steel, named hands.',
-    image: 'weapons/ice.jpg',
+    image: 'weapons/got/ice.jpg',
     alt: 'Ice',
     href: 'armory' as const,
   },
   {
     title: 'The Hall of Heroes',
     copy: 'Knights, sellswords, and the unexpected blades. A maester’s register of the realm’s famous steel.',
-    image: 'heroes/hero.jpg',
+    image: 'heroes/got/hero.jpg',
     alt: 'A hall of faded banners',
     href: 'heroes' as const,
   },
   {
     title: 'The Words',
     copy: 'House words, oaths, prophecies, and the lines that outlived the people who said them.',
-    image: 'words/weirwood.jpg',
+    image: 'words/got/weirwood.jpg',
     alt: 'A weirwood',
     href: 'words' as const,
   },
   {
     title: 'The Rebellion',
     copy: 'The war that made a king. From Duskendale to the Trident, the tower, and the lie that followed.',
-    image: 'roberts/hero.jpg',
+    image: 'roberts/got/hero.jpg',
     alt: 'The Rebellion',
     href: 'roberts' as const,
   },
@@ -80,7 +77,7 @@ const DOORS = [
   {
     title: 'The Iron Throne',
     copy: 'History of the chair. Forged from a thousand swords, sat by madmen and boys, melted by a dragon.',
-    image: 'throne/hero.jpg',
+    image: 'throne/got/hero.jpg',
     alt: 'The Iron Throne',
     href: 'throne' as const,
   },
@@ -119,10 +116,10 @@ function HallMusic() {
       <audio
         ref={audioRef}
         className="landing-player"
-        src={`${import.meta.env.BASE_URL}landing/rains-of-castamere.wav`}
+        src={`${import.meta.env.BASE_URL}landing/rains-of-castamere.m4a`}
         loop
         controls
-        preload="auto"
+        preload="none"
         playsInline
         onPlay={() => setOn(true)}
         onPause={() => {
@@ -174,6 +171,7 @@ export function LandingPage() {
           src={asset('landing/throne-hall.jpg')}
           alt=""
           aria-hidden="true"
+          {...heroImg()}
         />
         <div className="landing-hero-veil" aria-hidden="true" />
         <SiteNav current="hall" overlay />
@@ -200,31 +198,33 @@ export function LandingPage() {
         </div>
       </section>
 
-      <section className="landing-doors" aria-label="Ways into the atlas">
-        <p className="eyebrow">Open a door</p>
-        <h2>The realm is waiting</h2>
-        <div className="landing-doors-grid">
-          {DOORS.map((door) => (
-            <a key={door.title} className="landing-door" href={hrefFor(door.href)}>
-              <img src={asset(door.image)} alt={door.alt} />
-              <div className="landing-door-copy">
-                <strong>{door.title}</strong>
-                <p>{door.copy}</p>
-              </div>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      <section className="landing-court" aria-label="Great houses">
-        {courtHouses.map((house) => (
-          <div key={house.id} className="landing-house">
-            <img src={sigilSrc(house.id)} alt="" />
-            <strong>{house.shortName}</strong>
-            <em>{house.words}</em>
+      <main id={MAIN_ID} tabIndex={-1}>
+        <section className="landing-doors" aria-label="Ways into the atlas">
+          <p className="eyebrow">Open a door</p>
+          <h2>The realm is waiting</h2>
+          <div className="landing-doors-grid">
+            {DOORS.map((door) => (
+              <a key={door.title} className="landing-door" href={hrefFor(door.href)}>
+                <img src={asset(door.image)} alt={door.alt} {...lazyImg(LANDSCAPE)} />
+                <div className="landing-door-copy">
+                  <strong>{door.title}</strong>
+                  <p>{door.copy}</p>
+                </div>
+              </a>
+            ))}
           </div>
-        ))}
-      </section>
+        </section>
+
+        <section className="landing-court" aria-label="Great houses">
+          {courtHouses.map((house) => (
+            <div key={house.id} className="landing-house">
+              <img src={sigilSrc(house.id)} alt="" loading="lazy" decoding="async" />
+              <strong>{house.shortName}</strong>
+              <em>{house.words}</em>
+            </div>
+          ))}
+        </section>
+      </main>
 
       <footer className="landing-foot">
         Fan work. Show canon. Not affiliated with HBO or George R. R. Martin.

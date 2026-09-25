@@ -25,10 +25,6 @@ export function polygon(points: [number, number][]): RegionFeature['geometry'] {
   return { type: 'Polygon', coordinates: [closeRing(points)] }
 }
 
-export function multiPolygon(rings: [number, number][][]): RegionFeature['geometry'] {
-  return { type: 'MultiPolygon', coordinates: rings.map((ring) => [closeRing(ring)]) }
-}
-
 export function feature(
   props: RegionFeature['properties'],
   geometry: RegionFeature['geometry'],

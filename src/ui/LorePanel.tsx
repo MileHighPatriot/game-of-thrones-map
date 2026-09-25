@@ -14,9 +14,21 @@ import { flyZoomFor } from '../map/zoom.ts'
 import { seatPortraits } from '../data/portraits.ts'
 import { bannerSvg } from '../lib/banners.ts'
 import { compareCharacters, displayName, pinInitials, samePerson } from '../lib/people.ts'
-import { useAtlas } from '../state/AtlasContext.tsx'
+import { useAtlas } from '../state/useAtlas.ts'
 import type { Character, IceAndFireCharacter, IceAndFireHouse, ThronesPortrait } from '../types.ts'
 import { CharacterBio } from './CharacterBio.tsx'
+
+type ApiState = {
+  key: string
+  house: IceAndFireHouse | null
+  source: 'live' | 'cache' | null
+  character: IceAndFireCharacter | null
+  portrait: ThronesPortrait | null
+}
+
+function emptyApi(key: string): ApiState {
+  return { key, house: null, source: null, character: null, portrait: null }
+}
 
 function peopleHere(season: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8, locationId: string) {
   return presenceBySeason[season].flatMap((pin) => {
@@ -32,10 +44,7 @@ export function LorePanel() {
     setSelection(null)
     setExpandedPresence(null)
   }
-  const [apiHouse, setApiHouse] = useState<IceAndFireHouse | null>(null)
-  const [apiCharacter, setApiCharacter] = useState<IceAndFireCharacter | null>(null)
-  const [portrait, setPortrait] = useState<ThronesPortrait | null>(null)
-  const [source, setSource] = useState<'live' | 'cache' | null>(null)
+  const [api, setApi] = useState<ApiState | null>(null)
 
   const houseIdForSelection = (() => {
     if (!selection) return null
@@ -56,41 +65,47 @@ export function LorePanel() {
 
   const house = houseIdForSelection ? houseById[houseIdForSelection] : undefined
 
+  const houseApiId = house?.iceAndFireId ?? null
+  const characterId = selection?.kind === 'character' ? selection.id : null
+  // API answers are filed under the selection they were fetched for, so a new selection
+  // simply finds nothing filed yet instead of clearing state inside the effect.
+  const apiKey = `${houseApiId ?? ''}|${characterId ?? ''}`
+
   useEffect(() => {
     let cancelled = false
-    setApiHouse(null)
-    setApiCharacter(null)
-    setPortrait(null)
-    setSource(null)
-
-    async function load() {
-      if (house?.iceAndFireId) {
-        const record = await fetchHouse(house.iceAndFireId)
-        if (!cancelled && record) {
-          setApiHouse(record.data)
-          setSource(record.live ? 'live' : 'cache')
-        }
-      }
-      if (selection?.kind === 'character') {
-        const character = characterById[selection.id]
-        if (character?.iceAndFireId) {
-          const record = await fetchCharacter(character.iceAndFireId)
-          if (!cancelled && record) setApiCharacter(record.data)
-        }
-        if (character?.thronesApiId != null) {
-          const shot = await fetchPortrait(character.thronesApiId)
-          if (!cancelled && shot && samePerson(shot.fullName, character.name)) {
-            setPortrait(shot)
-          }
-        }
-      }
+    const file = (next: Partial<ApiState>) => {
+      if (cancelled) return
+      setApi((current) => ({ ...(current?.key === apiKey ? current : emptyApi(apiKey)), ...next }))
     }
 
-    void load()
+    if (houseApiId) {
+      void fetchHouse(houseApiId).then((record) => {
+        if (record) file({ house: record.data, source: record.live ? 'live' : 'cache' })
+      })
+    }
+    const character = characterId ? characterById[characterId] : undefined
+    if (character?.iceAndFireId) {
+      void fetchCharacter(character.iceAndFireId).then((record) => {
+        if (record) file({ character: record.data })
+      })
+    }
+    // A local portrait is already the one we want; only ask ThronesAPI when there is none.
+    if (character && !character.portrait && character.thronesApiId != null) {
+      void fetchPortrait(character.thronesApiId).then((shot) => {
+        if (shot && samePerson(shot.fullName, character.name)) file({ portrait: shot })
+      })
+    }
+
     return () => {
       cancelled = true
     }
-  }, [house?.iceAndFireId, selection])
+  }, [apiKey, houseApiId, characterId])
+
+  const current = api?.key === apiKey ? api : null
+  const apiHouse = current?.house ?? null
+  const apiCharacter = current?.character ?? null
+  const portrait = current?.portrait ?? null
+  const source = current?.source ?? null
 
   if (!selection) return null
 
@@ -110,7 +125,7 @@ export function LorePanel() {
         {house && (
           <div className="banner-row" dangerouslySetInnerHTML={{ __html: bannerSvg(house.id) }} />
         )}
-        <p className="words">{house?.words}</p>
+        <p className="panel-words">{house?.words}</p>
         <p>{region.properties.lore}</p>
         {house && (
           <p>
@@ -137,7 +152,7 @@ export function LorePanel() {
           onClose={closePanel}
         />
         {seatPortraits[place.id] && (
-          <img className="seat-art" src={seatPortraits[place.id]} alt="" />
+          <img className="seat-art" src={seatPortraits[place.id]} alt="" decoding="async" />
         )}
         <p>{place.lore}</p>
         {house && (
@@ -183,7 +198,7 @@ export function LorePanel() {
           onClose={closePanel}
         />
         {parent && seatPortraits[parent.id] && (
-          <img className="seat-art" src={seatPortraits[parent.id]} alt="" />
+          <img className="seat-art" src={seatPortraits[parent.id]} alt="" decoding="async" />
         )}
         <p>{site.lore}</p>
         {parent && (
@@ -246,7 +261,7 @@ export function LorePanel() {
           onClose={closePanel}
         />
         <div className="banner-row" dangerouslySetInnerHTML={{ __html: bannerSvg(selectedHouse.id) }} />
-        <p className="words">{selectedHouse.words}</p>
+        <p className="panel-words">{selectedHouse.words}</p>
         <p>{selectedHouse.lore}</p>
         <ApiHouseBlock house={apiHouse} source={source} />
       </aside>
@@ -441,7 +456,7 @@ function PeoplePicker({ title, people }: { title: string; people: Character[] })
             }}
           >
             {person.portrait ? (
-              <img src={person.portrait} alt="" />
+              <img src={person.portrait} alt="" loading="lazy" decoding="async" width={40} height={40} />
             ) : (
               <span className="face">{pinInitials(person)}</span>
             )}

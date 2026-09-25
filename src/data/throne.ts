@@ -48,7 +48,7 @@ export const throneChapters: ThroneChapter[] = [
     kicker: 'Chapter I · The Aegonfort',
     title: 'A Thousand Swords in One Fire',
     lede: 'The Conquest ended in a yard of surrendered steel. Balerion finished what the lords would not.',
-    image: 'throne/forging.jpg',
+    image: 'throne/got/forging.jpg',
     locationId: 'kings-landing',
     body: [
       'Aegon Targaryen did not want a pretty chair. He wanted the men who had bent to remember what bending cost. After the Field of Fire and the Submission of Storm’s End, after Harrenhal cooked in its own towers and Dorne still would not kneel, the swords of the conquered were piled on the highest hill at the mouth of the Blackwater. The Aegonfort was timber and mud then. The fire that came for the pile was not.',
@@ -64,7 +64,7 @@ export const throneChapters: ThroneChapter[] = [
     kicker: 'Chapter II · The object',
     title: 'Not a Seat. A Heap.',
     lede: 'Hilts, tangs, broken points, the swords of men who had names. Aegon stacked them until they were a country.',
-    image: 'throne/blades.jpg',
+    image: 'throne/got/blades.jpg',
     locationId: 'kings-landing',
     body: [
       'Look at it without the songs. It is a pile. Crossguards jammed through other crossguards. Fullers running the wrong way. A falchion melted into a longsword melted into something that might have been an axe. The show’s prop is Gemma Jackson’s mountain of blades, taller than a man standing on another man’s shoulders, asymmetric because a real heap is never fair. The books describe a monster even larger: a chair you climb, with steps of slag, so high the king’s feet dangle and a petitioner’s neck hurts from looking.',
@@ -79,13 +79,13 @@ export const throneChapters: ThroneChapter[] = [
     kicker: 'Chapter III · What it does',
     title: 'The Chair That Rules',
     lede: 'It is not a metaphor that got loose. Sit it and you are the realm. Cut yourself and the realm notices.',
-    image: 'throne/ugly.jpg',
+    image: 'throne/got/ugly.jpg',
     locationId: 'kings-landing',
     body: [
       'In Westeros the Iron Throne is the government. Not the Red Keep, not the crown, not the map. Men say the Iron Throne the way other countries say the crown: as a thing that can be taken, held, lost, and bled on. Stannis claimed it by law. Renly claimed it by love. Robb never claimed it; he claimed a different kingdom and died for a smaller word. Balon wanted the Seastone Chair and a joke about the rest. Five kings, and only one chair in the room that counted.',
       'The sitting is the job. Robert found that out and went hunting. Joffrey found it out and made cruelty into policy because the height felt like permission. Tommen sat it and wanted to be kind, which the chair cannot teach. Cersei sat it in black after she had burned the only other government in the city. Daenerys walked toward it through ash and never put her weight down. Bran inherited a realm whose prize had just been melted by a dragon who had opinions about chairs.',
       'What the chair does, practically: it raises you. Petitioners kneel on stone. You look down the length of a hall built to make that look into a fact. The Small Council can run the realm from a table. The Iron Throne is where the realm is shown who is running it. Ned sat it as Hand and discovered that a just man on an ugly chair is still only as strong as the gold cloaks at the door.',
-      'What it does, unpractically, is cut. Aerys would not have a blade near him and then sat inside a thousand of them. Jaime learned the difference between a king and a chair the night he put a sword through the back of the first and did not sit the second. The throne does not make you king. It makes the king visible. That is usually enough to get someone killed.',
+      'What it does, unpractically, is cut. Aerys would not have a blade near him and then sat inside a thousand of them. Jaime learned the difference between a king and a chair the night he put a sword through the back of the first and sat the second like a bench. The throne does not make you king. It makes the king visible. That is usually enough to get someone killed.',
     ],
   },
   {
@@ -94,7 +94,7 @@ export const throneChapters: ThroneChapter[] = [
     kicker: 'Chapter IV · The Red Keep',
     title: 'A Room Built Around a Threat',
     lede: 'Doors at one end. A dais at the other. Between them, the long walk every claimant has to take with everyone watching.',
-    image: 'throne/hall.jpg',
+    image: 'throne/got/hall.jpg',
     locationId: 'kings-landing',
     body: [
       'The Great Hall of the Red Keep is a machine for approaching the chair. You enter under the eyes of whoever holds the door. You cross a floor long enough to think twice. The throne does not come to you. By the time you are close enough to speak, you have already been made small. Aegon understood spectacle. Maegor understood stone. Together they made a room that does the kneeling for you.',
@@ -109,7 +109,7 @@ export const throneChapters: ThroneChapter[] = [
     kicker: 'Chapter V · Dragonfire',
     title: 'The Fire That Stayed',
     lede: 'Balerion’s work was not a clean pour. The seams still look like they remember the temperature.',
-    image: 'throne/heat.jpg',
+    image: 'throne/got/heat.jpg',
     locationId: 'kings-landing',
     body: [
       'Men who have stood close say the Iron Throne is warm when the hall is not. That may be a story told to children who need the Conquest to still be happening. It may be the truth of black iron in a room full of torches. The books like the legend: the dragon’s fire never quite left the metal. The show likes the look of it — a thing that was melted once and could be melted again, which is the only prophecy in this room that comes true.',
@@ -184,7 +184,7 @@ export const throneChapters: ThroneChapter[] = [
     kicker: 'Chapter X · Fire and blood',
     title: 'The Lioness, the Dragon, the Slag',
     lede: 'Cersei sat it last. Daenerys came for it through a burned city. Drogon answered in the only language older than the chair.',
-    image: 'throne/ruin.jpg',
+    image: 'throne/got/ruin.jpg',
     locationId: 'kings-landing',
     body: [
       'Cersei Lannister put the crown on her own head after she cooked the Faith, the roses, and her last useful uncle in wildfire. She sat the Iron Throne as Queen of the Seven Kingdoms with Qyburn at her ear and the Mountain where a Kingsguard should have been. No husband. No son. No Small Council worth the name. The chair had always been a pile of defeated enemies. She treated the rest of the government the same way.',
@@ -199,7 +199,7 @@ export const throneChapters: ThroneChapter[] = [
     kicker: 'Chapter XI · Six kingdoms',
     title: 'A King, and No Chair Left',
     lede: 'They chose a broken boy in a pit because Tyrion talked them into it. The prize was already a stain on the floor.',
-    image: 'throne/wood.jpg',
+    image: 'throne/got/wood.jpg',
     locationId: 'kings-landing',
     body: [
       'The lords meet in the Dragonpit, not the Great Hall, because the hall is a mouth without teeth. Tyrion names Bran the Broken. Sansa takes the North home. The Six Kingdoms need a king more than they need a pile of swords, which is fortunate, because the pile is gone. What they put him in is a wheeled chair, then a simple one, wood, in a room that still remembers the iron.',
@@ -214,7 +214,7 @@ export const thronePieces: ThronePiece[] = [
   {
     id: 'thousand',
     name: 'A thousand swords',
-    image: 'throne/blades.jpg',
+    image: 'throne/got/blades.jpg',
     what: 'The surrendered steel of the Conquest: longswords, axes, the weapons of houses that chose to kneel. Aegon stacked them on the hill that would be King’s Landing and let a dragon do the smith’s work.',
     lesson: 'The number is a liturgy. Seven, a thousand, the Faith’s arithmetic. What matters is the inventory of enemies made into one object you have to sit on.',
     remains: 'Melted twice. Once into a chair. Once into a stain. The count does not survive Drogon.',
@@ -222,7 +222,7 @@ export const thronePieces: ThronePiece[] = [
   {
     id: 'balerion',
     name: 'Balerion’s fire',
-    image: 'throne/forging.jpg',
+    image: 'throne/got/forging.jpg',
     what: 'The Black Dread’s flame, hot enough to turn iron to a pour and stone to glass. The only forge large enough to make a kingdom into furniture.',
     lesson: 'Everything the chair later does — cut, loom, outlast — is a side effect of that temperature. Aegon did not hire a smith. He hired a weapon.',
     remains: 'The same fire comes back at the end, in a smaller dragon’s mouth, and unmakes the work. The animal always had the last say.',
@@ -230,7 +230,7 @@ export const thronePieces: ThronePiece[] = [
   {
     id: 'steps',
     name: 'The steps',
-    image: 'throne/steps.jpg',
+    image: 'throne/got/steps.jpg',
     what: 'Jagged slag and fused edges between the floor and the seat. In the books the king climbs. In the show the dais is lower and still feels like a dare. Petitioners look up the whole way.',
     lesson: 'The throne does not come to you. The long walk is the first law of the hall: by the time you can speak, you have already been made small.',
     remains: 'Rubble, then a round of stone under a wooden chair. The height went when the iron went.',
@@ -238,7 +238,7 @@ export const thronePieces: ThronePiece[] = [
   {
     id: 'seams',
     name: 'The heat that stayed',
-    image: 'throne/heat.jpg',
+    image: 'throne/got/heat.jpg',
     what: 'Black iron with seams that look unfinished, as if the pour never cooled in the middle. Men say the chair is warm when the hall is not.',
     lesson: 'A story, and also a design. The throne is a fire that agreed to hold still. Aerys wanted to remind it. Drogon did.',
     remains: 'Smoke over slag. For the first time the legend is literal.',
@@ -246,7 +246,7 @@ export const thronePieces: ThronePiece[] = [
   {
     id: 'edges',
     name: 'The cuts',
-    image: 'throne/cuts.jpg',
+    image: 'throne/got/cuts.jpg',
     what: 'The blades were never ground down. Armrests are edges. The back is a cage of points. Sit carelessly and the chair sits in you.',
     lesson: 'Viserys I: a king should never sit easy. Aerys bled enough to earn a nickname. Maegor was found dead on it. Folk say it rejects the unworthy. The metal does not need the folklore. It is already sharp.',
     remains: 'Gone with the rest. Kindness was never the point. The point was the point.',
@@ -254,7 +254,7 @@ export const thronePieces: ThronePiece[] = [
   {
     id: 'skulls',
     name: 'The dragon skulls',
-    image: 'throne/skulls.jpg',
+    image: 'throne/got/skulls.jpg',
     what: 'In the books the Great Hall was lined with the heads of Targaryen dragons, Balerion down to the last hatchling. The show keeps the monsters in the cellars, where a Lannister can walk past a jaw and look like the man who killed it.',
     lesson: 'The chair was never the only trophy in the room. The skulls said: we rode these. Robert had them hauled away because he had killed a prince, not a dragon, and he knew the difference.',
     remains: 'Cellars, dust, a story Tywin liked to stand next to. Upstairs the hall went back to windows and iron.',
@@ -262,15 +262,15 @@ export const thronePieces: ThronePiece[] = [
   {
     id: 'hangings',
     name: 'Robert’s tapestries',
-    image: 'throne/tapestries.jpg',
-    what: 'Hunting scenes — stags, boars, the woods — hung where the skulls had been. A usurper’s redecoration. He sat a dragon’s chair in a room he tried to make into a hunting lodge.',
+    image: 'throne/got/tapestries.jpg',
+    what: 'In the books, hunting scenes — stags, boars, the woods — hung where the skulls had been. The show hangs Robert’s own victory behind the small council table: the Trident woven in wool, Rhaegar falling into the river. A usurper’s redecoration. He sat a dragon’s chair in a keep he tried to make his own.',
     lesson: 'You can win the Iron Throne and still refuse to look at it. Robert’s whole reign is this impulse: hang something kinder over the fact.',
     remains: 'Ash. The woods came down with the roof. The chair lasted longer than the cloth, and then it did not.',
   },
   {
     id: 'slag',
     name: 'The melt',
-    image: 'throne/melt.jpg',
+    image: 'throne/got/melt.jpg',
     what: 'Drogon’s fire, after the bells, after the queen, after the hall has already lost its roof. The Iron Throne runs and cools into a black heap that is no longer a seat.',
     lesson: 'The prize was always a dragon’s argument. The dragon ends the argument. Every war fought for this object is, in the last shot, a war for slag.',
     remains: 'A stain on a dais. Snow. The realm, which was heavier all along.',
@@ -278,7 +278,7 @@ export const thronePieces: ThronePiece[] = [
   {
     id: 'wood',
     name: 'A chair of wood',
-    image: 'throne/wood.jpg',
+    image: 'throne/got/wood.jpg',
     what: 'What they put the last king in: wheeled, then simple, in a keep that still remembers the iron. No blades. No climb. No blood in the grain.',
     lesson: 'Aegon poured a trap and called it a prize. Bran inherits the realm after the trap has been opened. The government goes back to a table, which is where it always lived.',
     remains: 'This is the chair that is left. It will not cut you. It will not make you a conqueror. That may be the point.',
@@ -302,7 +302,7 @@ export const throneFaces: ThroneFace[] = [
     bench: 'The last dragon',
     office: 'Kingsguard · the man at the foot',
     image: 'heroes/got/jaime-lannister.jpg',
-    role: 'Did not sit it. Killed the man who did, then sat on the steps with a bloody sword across his knees until his father’s host arrived. The only person in the story who uses the Iron Throne as a bench.',
+    role: 'Killed the man who sat it. In the books Ned rides into the hall and finds him seated on the Iron Throne itself, a bloody sword across his knees, waiting for his father’s host. The show never stages that hour; in “Lord Snow”, years later, Ned finds him sitting on the steps below it. The only person in the story who uses the Iron Throne as a bench.',
     fate: 'Named Kingslayer for the best thing he ever did in that room. Dies later under the same keep, far from the dais. Brienne writes the hour down. The chair never did.',
     locationId: 'kings-landing',
   },

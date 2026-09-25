@@ -7,18 +7,10 @@ import { presenceBySeason } from '../data/presence.ts'
 import { clusterHtml, compareCharacters, personHtml } from '../lib/people.ts'
 import { toLatLng } from '../lib/geo.ts'
 import { focusRegionId } from '../lib/focus.ts'
-import { useAtlas } from '../state/AtlasContext.tsx'
+import { useAtlas } from '../state/useAtlas.ts'
 import type { Character, Season } from '../types.ts'
+import { icon, srName } from './icons.ts'
 import { ZOOM, flyZoomFor } from './zoom.ts'
-
-function icon(html: string, className: string, size: [number, number], anchor?: [number, number]) {
-  return L.divIcon({
-    className,
-    html,
-    iconSize: size,
-    iconAnchor: anchor ?? [size[0] / 2, size[1] / 2],
-  })
-}
 
 function offsetLatLng(
   x: number,
@@ -116,7 +108,7 @@ export function PresenceLayer() {
               zIndexOffset={selectedId && people.some((person) => person.id === selectedId) ? 1400 : 900}
               riseOnHover
               icon={icon(
-                clusterHtml(people, place.name, selectedId, compact),
+                `${clusterHtml(people, place.name, selectedId, compact)}${srName(`${place.name}: ${names}`)}`,
                 'marker-presence',
                 size,
                 anchor,

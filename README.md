@@ -1,26 +1,25 @@
-# Westeros & Essos Atlas
+# Westeros & Essos
 
-An illustrated, season-by-season map of the known world from *Game of Thrones*. Click regions, house banners, battles, and travelers. Scrub seasons 1–8 to watch who holds the land.
+A fan atlas of the known world from *Game of Thrones*, in ten rooms:
 
-Fan work. Show canon. Not affiliated with HBO or George R. R. Martin.
+- **The Hall**: the front door, with the house words and a door into every room.
+- **The Atlas**: an illustrated, season-by-season map. Click a realm, keep, banner, battle, or traveler; scrub seasons 1–8 (or press 1–8, ←/→, P) to watch who holds the land and where everyone is.
+- **The Keeps**, **True North**, **The Armory**, **Heroes**, **The Words**, **The Rebellion**, **The Council**, **The Iron Throne**: illustrated chronicles. Every card can be linked to directly, e.g. `#/heroes/sandor-clegane` or `#/weapons/needle`, and most have a "Show on Atlas" link.
 
-## What is local vs API
+Fan work. Show canon, with book notes where the show is silent. Not affiliated with HBO or George R. R. Martin.
 
-The Ice and Fire API has houses and characters, not a map. This atlas keeps geography, battles, house control, and character presence in local data. Popups enrich from [An API of Ice and Fire](https://anapioficeandfire.com/) and optional [ThronesAPI](https://thronesapi.com/) portraits, with a local cache if those services are down.
+## Data
 
-Character presence was drafted from the scene/location work in [jeffreylancaster/game-of-thrones](https://github.com/jeffreylancaster/game-of-thrones), then hand-curated to one primary pin per person per season.
-
-The parchment basemap is an original illustration, not HBO’s official map.
+Geography, battles, house control, character presence, and every chronicle are local data in `src/data/`. Atlas panels also enrich from [An API of Ice and Fire](https://anapioficeandfire.com/) and [ThronesAPI](https://thronesapi.com/) portraits, with a local cache if those services are down. Character presence was drafted from [jeffreylancaster/game-of-thrones](https://github.com/jeffreylancaster/game-of-thrones), then hand-curated to one primary pin per person per season. The parchment basemap is an original illustration, not HBO's official map.
 
 ## Run
 
 ```bash
 npm install
-npm run dev
+npm run dev          # local dev server
+npm run lint         # oxlint
+npm run build        # typecheck + build to dist/
+npm run build:pages  # typecheck + build to docs/ for GitHub Pages
 ```
 
-```bash
-npm run build
-```
-
-The build is static and GitHub Pages–ready (`base: './'`).
+GitHub Pages serves `docs/` at `https://milehighpatriot.github.io/game-of-thrones-map/`. Routing is hash-based, so no server rewrites are needed.

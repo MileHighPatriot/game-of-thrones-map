@@ -1,0 +1,1 @@
+var e=[864,1152],t=[1248,832],n=[1152,864],r=[1280,720];function i(e){return{loading:`lazy`,decoding:`async`,width:e[0],height:e[1]}}function a(e=r){return{fetchPriority:`high`,width:e[0],height:e[1]}}export{a,r as i,e as n,i as o,n as r,t};

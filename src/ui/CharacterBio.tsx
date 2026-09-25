@@ -2,7 +2,7 @@ import { useEffect, type CSSProperties, type ReactNode } from 'react'
 import { presenceBySeason } from '../data/presence.ts'
 import { locationById } from '../data/locations.ts'
 import { flyZoomFor } from '../map/zoom.ts'
-import { useAtlas } from '../state/AtlasContext.tsx'
+import { useAtlas } from '../state/useAtlas.ts'
 import type { Character, Season } from '../types.ts'
 
 const ALL_SEASONS: Season[] = [1, 2, 3, 4, 5, 6, 7, 8]
@@ -32,11 +32,14 @@ export function CharacterBio({
     if (!first) return
     setPlaying(false)
     setSeason(first)
+    // Only when a new character opens: jump to their first season if the current one is empty.
+    // Re-running on every season change would undo the reader's own pick of an empty season.
+    // oxlint-disable-next-line react-hooks/exhaustive-deps
   }, [character])
 
   return (
     <>
-      {image && <img className="portrait" src={image} alt={character.name} />}
+      {image && <img className="portrait" src={image} alt={character.name} decoding="async" />}
       <p className="bio-tagline">{character.lore}</p>
 
       <div className="score-card">
@@ -66,8 +69,8 @@ export function CharacterBio({
 
       <section className="bio-section">
         <p className="eyebrow">Backstory</p>
-        {character.backstory.split('\n\n').map((paragraph) => (
-          <p key={paragraph.slice(0, 32)}>{paragraph}</p>
+        {character.backstory.split('\n\n').map((paragraph, index) => (
+          <p key={index}>{paragraph}</p>
         ))}
       </section>
 

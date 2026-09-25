@@ -1,28 +1,6 @@
-import { createContext, useContext, useMemo, useState, type ReactNode } from 'react'
+import { useCallback, useMemo, useState, type ReactNode } from 'react'
 import type { FlyTarget, LayerKey, Season, Selection } from '../types.ts'
-
-export type LayerState = Record<LayerKey, boolean>
-
-type AtlasContextValue = {
-  season: Season
-  setSeason: (season: Season) => void
-  selection: Selection | null
-  setSelection: (selection: Selection | null) => void
-  layers: LayerState
-  toggleLayer: (key: LayerKey) => void
-  zoom: number
-  setZoom: (zoom: number) => void
-  flyTarget: FlyTarget | null
-  flyTo: (x: number, y: number, zoom?: number) => void
-  fitNonce: number
-  fitWorld: () => void
-  expandedPresence: string | null
-  setExpandedPresence: (locationId: string | null) => void
-  playing: boolean
-  setPlaying: (playing: boolean) => void
-}
-
-const AtlasContext = createContext<AtlasContextValue | null>(null)
+import { AtlasContext, type AtlasContextValue, type LayerState } from './useAtlas.ts'
 
 const initialLayers: LayerState = {
   regions: true,
@@ -43,6 +21,20 @@ export function AtlasProvider({ children }: { children: ReactNode }) {
   const [expandedPresence, setExpandedPresence] = useState<string | null>(null)
   const [playing, setPlaying] = useState(false)
 
+  const toggleLayer = useCallback(
+    (key: LayerKey) => setLayers((current) => ({ ...current, [key]: !current[key] })),
+    [],
+  )
+  const flyTo = useCallback(
+    (x: number, y: number, nextZoom = 1.4) => setFlyTarget({ x, y, zoom: nextZoom }),
+    [],
+  )
+  const fitWorld = useCallback(() => {
+    setSelection(null)
+    setExpandedPresence(null)
+    setFitNonce((count) => count + 1)
+  }, [])
+
   const value = useMemo<AtlasContextValue>(
     () => ({
       season,
@@ -50,30 +42,20 @@ export function AtlasProvider({ children }: { children: ReactNode }) {
       selection,
       setSelection,
       layers,
-      toggleLayer: (key) => setLayers((current) => ({ ...current, [key]: !current[key] })),
+      toggleLayer,
       zoom,
       setZoom,
       flyTarget,
-      flyTo: (x, y, nextZoom = 1.4) => setFlyTarget({ x, y, zoom: nextZoom }),
+      flyTo,
       fitNonce,
-      fitWorld: () => {
-        setSelection(null)
-        setExpandedPresence(null)
-        setFitNonce((count) => count + 1)
-      },
+      fitWorld,
       expandedPresence,
       setExpandedPresence,
       playing,
       setPlaying,
     }),
-    [season, selection, layers, zoom, flyTarget, fitNonce, expandedPresence, playing],
+    [season, selection, layers, toggleLayer, zoom, flyTarget, flyTo, fitNonce, fitWorld, expandedPresence, playing],
   )
 
   return <AtlasContext.Provider value={value}>{children}</AtlasContext.Provider>
-}
-
-export function useAtlas() {
-  const context = useContext(AtlasContext)
-  if (!context) throw new Error('useAtlas must be used inside AtlasProvider')
-  return context
 }

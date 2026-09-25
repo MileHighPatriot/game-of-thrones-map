@@ -43,7 +43,7 @@ export const councilChapters: CouncilChapter[] = [
     kicker: 'Chapter I · The Red Keep',
     title: 'Seven Chairs',
     lede: 'Aegon made a kingdom too large for one man. He sat a table so the realm could be ruled when the king was hunting, sleeping, or mad.',
-    image: 'council/founding.jpg',
+    image: 'council/got/founding.jpg',
     locationId: 'kings-landing',
     body: [
       'The Small Council is the inner government of the Iron Throne: not the lords in their keeps, and not the mob in Flea Bottom. It is a closed room in the Red Keep where policy is made, debts are counted, and the king is told what he already wants to hear. The king heads it. Only he can turn its advice into law. When he is absent, a child, or drunk, the Hand of the King sits in his place and speaks with his voice.',
@@ -166,7 +166,7 @@ export const councilChapters: CouncilChapter[] = [
     locationId: 'kings-landing',
     body: [
       'The lords chose Bran the Broken in the Dragonpit because Tyrion talked them into it. The North took its independence and went home with Sansa. The Six Kingdoms still needed a government. The new Small Council is the joke the ending is willing to tell: almost no one at the table was born to it.',
-      'Tyrion sits as Hand, older, slower, and finally in the chair he had only borrowed. Bronn of the Blackwater, Lord of Highgarden by extortion and a promise, is Master of Coin and immediately more interested in brothels than in the budget. Davos, who once smuggled onions under a Redwyne blockade, is Master of Ships. Samwell Tarly, who stole himself a maester’s chain and a stolen book, is Grand Maester — named, in the show’s shorthand, without waiting on the Conclave. Brienne of Tarth is Lady Commander of the Kingsguard, and she writes Jaime into the White Book as the man the songs would not.',
+      'Tyrion sits as Hand, older, slower, and finally in the chair he had only borrowed. Bronn of the Blackwater, Lord of Highgarden by extortion and a promise, is Master of Coin and immediately more interested in brothels than in the budget. Davos, who once smuggled onions under a Redwyne blockade, is Master of Ships. Samwell Tarly, who stole himself a maester’s chain and a stolen book, is Grand Maester — named, in the show’s shorthand, without waiting on the Conclave. Brienne of Tarth is Lord Commander of the Kingsguard, and she writes Jaime into the White Book as the man the songs would not.',
       'Master of Laws is unnamed. Master of Whisperers is unnamed. Master of War is unnamed. The empty chairs are the point. For the first time in the story the room is not full of people collecting secrets against each other. It may not last. It is, for an hour, a table that is trying to rebuild a city instead of a dynasty.',
       'The Small Council was invented so a king would not have to rule alone. It became the place where the ruling actually happened, whether the king was there or not. Hands died, whisperers fled, maesters were murdered in their chains. The furniture is older than any of them. Someone is always sitting it.',
     ],
@@ -177,7 +177,7 @@ export const councilChairs: CouncilChair[] = [
   {
     id: 'hand',
     name: 'Hand of the King',
-    image: 'council/chair-hand.jpg',
+    image: 'council/got/chair-hand.jpg',
     duty:
       'Chief advisor and chair of the table. When the king is absent, a child, or unwilling, the Hand is the king in all but name. The pin is a golden hand. The job is to be blamed for everything the crown does and everything it fails to do.',
     who: 'Orys Baratheon sat the first. Septon Barth sat the best. Tywin sat the longest that the show still remembers. Jon Arryn, Ned, Tyrion, Kevan, Qyburn. The chair outranks every other office and is the one men kill for.',
@@ -186,7 +186,7 @@ export const councilChairs: CouncilChair[] = [
   {
     id: 'maester',
     name: 'Grand Maester',
-    image: 'council/chair-maester.jpg',
+    image: 'council/got/chair-maester.jpg',
     duty:
       'The Citadel’s man in the Red Keep: letters, healing, history, and the polite voice of Oldtown at a table of lords. Unique among the chairs: the Conclave names him, not the king. A king may imprison a Grand Maester. He may not replace the chain.',
     who: 'Pycelle sat it through Aerys, Robert, Joffrey, and Tommen, feigning frailty and serving Lannister gold. He was murdered in his chambers so he could not crawl out of Cersei’s wildfire and name another Hand.',
@@ -195,7 +195,7 @@ export const councilChairs: CouncilChair[] = [
   {
     id: 'coin',
     name: 'Master of Coin',
-    image: 'council/chair-coin.jpg',
+    image: 'council/got/chair-coin.jpg',
     duty:
       'Treasurer and bookkeeper of the realm. Customs, taxes, loans, the mint. The office looks like a counting-house and is usually a story about who is actually owed.',
     who: 'Littlefinger made the ledgers sing and the crown poor: six million gold, much of it to Casterly Rock and the Iron Bank, hidden under a reputation for cleverness. Tyrion inherited the mess. Mace later held coin and ships together because Cersei needed a man who would sign.',
@@ -204,7 +204,7 @@ export const councilChairs: CouncilChair[] = [
   {
     id: 'whisper',
     name: 'Master of Whisperers',
-    image: 'council/chair-whisper.jpg',
+    image: 'council/got/chair-whisper.jpg',
     duty:
       'Spymaster. Birds, secrets, the knowledge of what is being said in kitchens and across the narrow sea. The office has no army and often more power than the ones that do.',
     who: 'Varys sat it for Aerys, Robert, Joffrey, Tommen, and then Daenerys — the longest memory in the room. Qyburn took it as Cersei’s reward and used little birds as knives. Larys Strong sat a version of it in the Dance; the show’s later hours do not linger there.',
@@ -213,7 +213,7 @@ export const councilChairs: CouncilChair[] = [
   {
     id: 'laws',
     name: 'Master of Laws',
-    image: 'council/chair-laws.jpg',
+    image: 'council/got/chair-laws.jpg',
     duty:
       'Chief legal advisor: the king’s justice, the dungeons of the Red Keep, the gold cloaks in their better hours. When the office is empty, law is whatever the person with the army says it is.',
     who: 'Renly Baratheon sat it for Robert, young and easy in the chair, until he crowned himself and took the office into the field. After that the show leaves it vacant through Joffrey, Tommen, and Cersei. In the books Kevan held it under Joffrey for a time.',
@@ -222,7 +222,7 @@ export const councilChairs: CouncilChair[] = [
   {
     id: 'ships',
     name: 'Master of Ships',
-    image: 'council/chair-ships.jpg',
+    image: 'council/got/chair-ships.jpg',
     duty:
       'Admiral of the royal fleet and the crown’s maritime defense. In peacetime it is docks and timber. In war it is whether King’s Landing eats.',
     who: 'Stannis rebuilt the fleet after the rebellion and then used it against the nephew who took his brother’s throne. Mace Tyrell later held it as a Tyrell price, and held coin besides. The royal fleet is a habit more than a constant: it dies, and is built again.',
@@ -231,16 +231,16 @@ export const councilChairs: CouncilChair[] = [
   {
     id: 'cloak',
     name: 'Lord Commander of the Kingsguard',
-    image: 'council/chair-cloak.jpg',
+    image: 'council/got/chair-cloak.jpg',
     duty:
       'Commander of the seven white cloaks, and by tradition the table’s military voice. In the books the Lord Commander sits the council as a right. In the show Robert often left Barristan out of the room, and the seat itself was treated as optional until the ending put it back.',
     who: 'The White Bull under Aerys. Barristan the Bold under Robert, dismissed as if a lifetime vow were a job. Jaime named in his place, often absent, later stripped after kneeling to the Faith. The cloak is for life. The show broke that twice.',
-    fate: 'Brienne of Tarth is Lady Commander. She keeps the White Book honestly. Podrick stands behind her. The old argument about whether a woman can wear the cloak ended the way most of them end: she was already wearing it.',
+    fate: 'Brienne of Tarth is Lord Commander. She keeps the White Book honestly. Podrick stands behind her. The old argument about whether a woman can wear the cloak ended the way most of them end: she was already wearing it.',
   },
   {
     id: 'war',
     name: 'Master of War',
-    image: 'council/chair-war.jpg',
+    image: 'council/got/chair-war.jpg',
     duty:
       'Cersei’s invention during Tommen’s reign: a land commander at the table, overlapping the old work of the Lord Commander and the title Protector of the Realm. She offered it to Kevan. He refused. The office is a chair made to look like power.',
     who: 'No one sat it properly. Kevan would not. Grey Worm was something like it in the ruins of King’s Landing, holding the city for a queen who was already dead. Bran’s table leaves it unnamed.',
@@ -443,7 +443,7 @@ export const councilFaces: CouncilFace[] = [
     id: 'brienne',
     name: 'Brienne of Tarth',
     bench: 'The last table',
-    office: 'Lady Commander of the Kingsguard · Bran I',
+    office: 'Lord Commander of the Kingsguard · Bran I',
     image: 'heroes/got/brienne-of-tarth.jpg',
     role: 'The oathkeeper. She sat no council until the last one. She took the white and the book, and she wrote Jaime as he was, not as the songs needed him.',
     fate: 'Alive in the cloak the show once pretended a woman could not wear. Podrick at her shoulder. The military voice at the table is finally a knight who meant the vow.',

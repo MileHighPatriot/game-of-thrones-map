@@ -1,9 +1,10 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useRef } from 'react'
 import { locationById } from '../data/locations.ts'
 import { parseAtlasFocus } from '../lib/hashRoute.ts'
 import { AtlasMap } from '../map/AtlasMap.tsx'
 import { flyZoomFor } from '../map/zoom.ts'
-import { useAtlas } from '../state/AtlasContext.tsx'
+import { AtlasProvider } from '../state/AtlasContext.tsx'
+import { useAtlas } from '../state/useAtlas.ts'
 import type { Season } from '../types.ts'
 import { Keybinds } from '../ui/Keybinds.tsx'
 import { LayerToggles } from '../ui/LayerToggles.tsx'
@@ -11,11 +12,14 @@ import { LorePanel } from '../ui/LorePanel.tsx'
 import { MapHud } from '../ui/MapHud.tsx'
 import { SearchBox } from '../ui/SearchBox.tsx'
 import { SeasonSlider } from '../ui/SeasonSlider.tsx'
+import { MAIN_ID, SiteNav } from '../ui/SiteNav.tsx'
 
 function HashFocus() {
   const atlas = useAtlas()
   const atlasRef = useRef(atlas)
-  atlasRef.current = atlas
+  useLayoutEffect(() => {
+    atlasRef.current = atlas
+  })
 
   useEffect(() => {
     const apply = () => {
@@ -40,12 +44,16 @@ function HashFocus() {
   return null
 }
 
+/** The whole Atlas: its state, the overlay nav, and the map. Loaded as its own chunk. */
 export function AtlasPage() {
   return (
-    <>
+    <AtlasProvider>
+      <SiteNav current="atlas" overlay />
       <HashFocus />
       <Keybinds />
       <main
+        id={MAIN_ID}
+        tabIndex={-1}
         className="map-stage"
         style={{ backgroundImage: `url(${import.meta.env.BASE_URL}map/void.jpg)` }}
       >
@@ -61,6 +69,6 @@ export function AtlasPage() {
         <LorePanel />
         <MapHud />
       </main>
-    </>
+    </AtlasProvider>
   )
 }

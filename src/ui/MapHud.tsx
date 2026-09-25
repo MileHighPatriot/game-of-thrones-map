@@ -1,6 +1,6 @@
 import { focusRegionId } from '../lib/focus.ts'
 import { regionShortName } from '../data/regions.ts'
-import { useAtlas } from '../state/AtlasContext.tsx'
+import { useAtlas } from '../state/useAtlas.ts'
 
 export function MapHud() {
   const { fitWorld, season, selection } = useAtlas()

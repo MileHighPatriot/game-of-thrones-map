@@ -1,19 +1,21 @@
-import { useEffect } from 'react'
-import { useHashRoute } from './lib/hashRoute.ts'
-import { ArmoryPage } from './pages/ArmoryPage.tsx'
-import { AtlasPage } from './pages/AtlasPage.tsx'
-import { HeroesPage } from './pages/HeroesPage.tsx'
-import { KeepsPage } from './pages/KeepsPage.tsx'
-import { LandingPage } from './pages/LandingPage.tsx'
-import { CouncilPage } from './pages/CouncilPage.tsx'
-import { ThronePage } from './pages/ThronePage.tsx'
-import { RobertsPage } from './pages/RobertsPage.tsx'
-import { TrueNorthPage } from './pages/TrueNorthPage.tsx'
-import { WordsPage } from './pages/WordsPage.tsx'
-import { AtlasProvider } from './state/AtlasContext.tsx'
-import { SiteNav } from './ui/SiteNav.tsx'
+import { lazy, Suspense, useEffect, type ComponentType } from 'react'
+import { useHashRoute, type Route } from './lib/hashRoute.ts'
 
-const TITLES: Record<string, string> = {
+// Each room is its own chunk: the Hall no longer downloads Leaflet or every chronicle.
+const pages: Record<Route, ComponentType> = {
+  hall: lazy(() => import('./pages/LandingPage.tsx').then((m) => ({ default: m.LandingPage }))),
+  atlas: lazy(() => import('./pages/AtlasPage.tsx').then((m) => ({ default: m.AtlasPage }))),
+  armory: lazy(() => import('./pages/ArmoryPage.tsx').then((m) => ({ default: m.ArmoryPage }))),
+  keeps: lazy(() => import('./pages/KeepsPage.tsx').then((m) => ({ default: m.KeepsPage }))),
+  heroes: lazy(() => import('./pages/HeroesPage.tsx').then((m) => ({ default: m.HeroesPage }))),
+  words: lazy(() => import('./pages/WordsPage.tsx').then((m) => ({ default: m.WordsPage }))),
+  north: lazy(() => import('./pages/TrueNorthPage.tsx').then((m) => ({ default: m.TrueNorthPage }))),
+  roberts: lazy(() => import('./pages/RobertsPage.tsx').then((m) => ({ default: m.RobertsPage }))),
+  council: lazy(() => import('./pages/CouncilPage.tsx').then((m) => ({ default: m.CouncilPage }))),
+  throne: lazy(() => import('./pages/ThronePage.tsx').then((m) => ({ default: m.ThronePage }))),
+}
+
+const TITLES: Record<Route, string> = {
   atlas: 'The Atlas · Westeros & Essos',
   armory: 'The Armory · Westeros & Essos',
   keeps: 'The Keeps · Westeros & Essos',
@@ -28,93 +30,22 @@ const TITLES: Record<string, string> = {
 
 export default function App() {
   const route = useHashRoute()
+  const Page = pages[route]
 
   useEffect(() => {
     document.body.classList.toggle('is-atlas', route === 'atlas')
-    document.title = TITLES[route] ?? 'Westeros & Essos'
+    document.title = TITLES[route]
     return () => {
       document.body.classList.remove('is-atlas')
     }
   }, [route])
 
-  if (route === 'atlas') {
-    return (
-      <AtlasProvider>
-        <div className="app is-atlas">
-          <SiteNav current="atlas" overlay />
-          <AtlasPage />
-        </div>
-      </AtlasProvider>
-    )
-  }
-
-  if (route === 'armory') {
-    return (
-      <div className="app is-armory">
-        <ArmoryPage />
-      </div>
-    )
-  }
-
-  if (route === 'keeps') {
-    return (
-      <div className="app is-keeps">
-        <KeepsPage />
-      </div>
-    )
-  }
-
-  if (route === 'heroes') {
-    return (
-      <div className="app is-heroes">
-        <HeroesPage />
-      </div>
-    )
-  }
-
-  if (route === 'words') {
-    return (
-      <div className="app is-words">
-        <WordsPage />
-      </div>
-    )
-  }
-
-  if (route === 'north') {
-    return (
-      <div className="app is-north">
-        <TrueNorthPage />
-      </div>
-    )
-  }
-
-  if (route === 'roberts') {
-    return (
-      <div className="app is-roberts">
-        <RobertsPage />
-      </div>
-    )
-  }
-
-  if (route === 'council') {
-    return (
-      <div className="app is-council">
-        <CouncilPage />
-      </div>
-    )
-  }
-
-  if (route === 'throne') {
-    return (
-      <div className="app is-throne">
-        <ThronePage />
-      </div>
-    )
-  }
-
   return (
-    <div className="app is-hall">
-      <LandingPage />
+    <div className={`app is-${route}`}>
+      {/* While a room's chunk loads, the page shows only its own background. */}
+      <Suspense fallback={null}>
+        <Page />
+      </Suspense>
     </div>
   )
 }

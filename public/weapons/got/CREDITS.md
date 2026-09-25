@@ -1,6 +1,8 @@
 # Armory images: sources
 
-Every image here shows a real HBO prop from *Game of Thrones* or *House of the Dragon*, taken from an HBO still, an HBO promo, an HBO prop photo, or an officially licensed replica. They are cropped or padded to 864×1152. HBO owns all images. They are used here in a non-commercial fan project.
+Most images here show a real HBO prop from *Game of Thrones* or *House of the Dragon*, taken from an HBO still, an HBO promo, an HBO prop photo, or an officially licensed replica. Where the show never put a weapon on screen, the image comes from HBO's official *Histories & Lore* animated shorts or from officially licensed book art (*The World of Ice & Fire*, Fantasy Flight Games cards). Card images are cropped or padded to 864×1152; the tab banner `hero.jpg` is 1280×720.
+
+Rights: HBO owns the stills and *Histories & Lore* frames; the credited artists and their publishers (Random House / Bantam for *The World of Ice & Fire*, Fantasy Flight Games for the card art) own the book art. All images are used here with credit in a non-commercial fan project, under the same fair-use basis as the fan wikis they were found on.
 
 | File | What it shows | Source | Source URL |
 | --- | --- | --- | --- |
@@ -13,13 +15,15 @@ Every image here shows a real HBO prop from *Game of Thrones* or *House of the D
 | `heartsbane.jpg` | Heartsbane with its burl-wood scabbard on the antler stand from Horn Hill. The image is rotated so the pommel is at the top. | HBO prop photograph (S6), via the Game of Thrones Wiki (File:Heartsbane Cropped.png) | https://static.wikia.nocookie.net/gameofthrones/images/9/9a/Heartsbane_Cropped.png/revision/latest?cb=20160622112258 |
 | `blackfyre.jpg` | Viserys I gripping Blackfyre on the Iron Throne: many-sided pommel, grip wound in wire, dragon-wing crossguard | HBO *House of the Dragon* S1 official trailer frame, via the Game of Thrones Wiki (File:Viserys I with Blackfyre.png) | https://static.wikia.nocookie.net/gameofthrones/images/b/b9/Viserys_I_with_Blackfyre.png/revision/latest?cb=20220505195340 |
 | `dark-sister.jpg` | Dark Sister held upright: dragon-egg pommel, dark grip, swept dragon-wing guard | HBO still, *House of the Dragon* S1E10 "The Black Queen", via the Game of Thrones Wiki (File:TBQ Dark Sister.png) | https://static.wikia.nocookie.net/gameofthrones/images/7/77/TBQ_Dark_Sister.png/revision/latest?cb=20221018083210 |
+| `dawn.jpg` | Dawn planted point-down at the Tower of Joy: pale blade, long grip, star-and-sun pommel | HBO still, *Game of Thrones* S6E3 "Oathbreaker", via the Game of Thrones Wiki (File:603 Dawn.png). Small source (355×595), upscaled. | https://static.wikia.nocookie.net/gameofthrones/images/d/d1/603_Dawn.png/revision/latest?cb=20160509071921 |
+| `lightbringer.jpg` | Stannis's burning sword planted in the sand before the pyre of the Seven on Dragonstone, Stannis striding past | HBO still, *Game of Thrones* S2E1 "The North Remembers", via the Game of Thrones Wiki (File:Lightbringer.jpg). Small source (550×355), cropped, brightened and upscaled. | https://static.wikia.nocookie.net/gameofthrones/images/4/4c/Lightbringer.jpg/revision/latest?cb=20121214153530 |
+| `roberts-warhammer.jpg` | Robert Baratheon in antlered helm at the Trident, his spiked warhammer in hand | HBO *Histories & Lore* animated short "The Riverlands" (Blu-ray extra), via the Game of Thrones Wiki (File:HL3 Riverlands Robert at Trident.png) | https://static.wikia.nocookie.net/gameofthrones/images/6/6d/HL3_Riverlands_Robert_at_Trident.png/revision/latest?cb=20170901022050 |
+| `lady-forlorn.jpg` | A Corbray knight (Ser Lyn, per the card) gripping Lady Forlorn: ruby-set pommel, brass guard, the Corbray ravens-and-hearts on his surcoat | Fantasy Flight Games *A Game of Thrones* LCG card art "Lady Forlorn" by JB Casacop, © 2018 George R. R. Martin under license to FFG, via A Wiki of Ice and Fire (File:JB Casacop Lady Forlorn.jpg; fetched through the Internet Archive because awoiaf blocks scripts) | https://awoiaf.westeros.org/images/d/d4/JB_Casacop_Lady_Forlorn.jpg (archived: https://web.archive.org/web/2024id_/https://awoiaf.westeros.org/images/d/d4/JB_Casacop_Lady_Forlorn.jpg) |
+| `brightroar.jpg` | Brightroar, the full greatsword: roaring-lion pommel, red spiral grip, gilded crossguard. The white background has been replaced with a dark one. | Official illustration from *The World of Ice & Fire* (2014), via A Wiki of Ice and Fire (File:Brightroar.png; fetched through the Internet Archive) | https://awoiaf.westeros.org/images/c/c7/Brightroar.png (archived: https://web.archive.org/web/2024id_/https://awoiaf.westeros.org/images/c/c7/Brightroar.png) |
+| `hero.jpg` (tab banner) | Swords laid out on a table as a hand takes one up | HBO *House of the Dragon* S2 official trailer "Smallfolk" frame, via the Game of Thrones Wiki (File:OT2 Swords.png) | https://static.wikia.nocookie.net/gameofthrones/images/8/81/OT2_Swords.png/revision/latest?cb=20240520045001 |
 
-## Not in this folder yet
+## Notes
 
-These still use the older AI images in `public/weapons/`. When you generate a new image for one of them, save it here as `got/<id>.jpg` and update its `image` path in `src/data/weapons.ts`:
-
-- `dawn.jpg`: book only
-- `brightroar.jpg`: book only
-- `lady-forlorn.jpg`: book only
-- `lightbringer.jpg`: on screen in S2E1, but no clear still or prop photo was found
-- `roberts-warhammer.jpg`: never shown on screen. Valyrian Steel does make a licensed book-version replica (VS0004).
+- Dawn and Lightbringer come from small screenshots, so they are softer than the other cards. A sharper frame of either scene would be a good upgrade.
+- *Histories & Lore* also shows Brightroar (a blade on Tommen II's ship) and Lady Forlorn (a sketch of a blade section) in its "Valyrian Steel" short. Both frames are small fragments that don't show the hilt, so the licensed book art was used instead: https://static.wikia.nocookie.net/gameofthrones/images/6/6b/Lady_Forlorn.png/revision/latest?cb=20150303015749
+- Every armory card now uses a file from this folder. The older AI images in `public/weapons/` are no longer referenced by `weapons.ts` or `ArmoryPage.tsx`.

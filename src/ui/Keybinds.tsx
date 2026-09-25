@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useAtlas } from '../state/AtlasContext.tsx'
+import { useAtlas } from '../state/useAtlas.ts'
 import type { Season } from '../types.ts'
 
 function isTypingTarget(target: EventTarget | null): boolean {
@@ -35,18 +35,23 @@ export function Keybinds() {
       }
       if (event.key === 'ArrowLeft') {
         event.preventDefault()
+        // The map would otherwise take the arrow to pan once it has focus.
+        event.stopPropagation()
         setPlaying(false)
         if (season > 1) setSeason((season - 1) as Season)
         return
       }
       if (event.key === 'ArrowRight') {
         event.preventDefault()
+        event.stopPropagation()
         setPlaying(false)
         if (season < 8) setSeason((season + 1) as Season)
       }
     }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
+    // Capture on document, so the keys still reach the Atlas after a click on the map,
+    // whose own keyboard handler stops them from bubbling.
+    document.addEventListener('keydown', onKey, true)
+    return () => document.removeEventListener('keydown', onKey, true)
   }, [season, playing, setSeason, setSelection, setExpandedPresence, setPlaying])
 
   return null

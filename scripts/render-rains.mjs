@@ -1,3 +1,4 @@
+import { execFileSync } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
 
@@ -285,7 +286,12 @@ for (let i = 0; i < samples; i++) {
   o += 4
 }
 
-const out = path.join(import.meta.dirname, '..', 'public', 'landing', 'rains-of-castamere.wav')
-fs.mkdirSync(path.dirname(out), { recursive: true })
-fs.writeFileSync(out, buf)
-console.log('wrote', out, buf.length)
+// Render to WAV, then ship AAC: the site plays public/landing/rains-of-castamere.m4a.
+const dir = path.join(import.meta.dirname, '..', 'public', 'landing')
+const wav = path.join(dir, 'rains-of-castamere.wav')
+const out = path.join(dir, 'rains-of-castamere.m4a')
+fs.mkdirSync(dir, { recursive: true })
+fs.writeFileSync(wav, buf)
+execFileSync('afconvert', ['-f', 'm4af', '-d', 'aac', '-b', '160000', wav, out])
+fs.rmSync(wav)
+console.log('wrote', out, fs.statSync(out).size)

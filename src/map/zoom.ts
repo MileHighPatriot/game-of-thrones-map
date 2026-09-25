@@ -23,12 +23,6 @@ export function fitZoom(width: number, height: number): number {
   return raw - 0.16
 }
 
-export function zoomName(zoom: number): string {
-  if (zoom < 0.85) return 'Continent'
-  if (zoom < 1.7) return 'Realms'
-  return 'Seat'
-}
-
 export function flyZoomFor(kind: string): number {
   if (kind === 'character') return 1.62
   if (kind === 'region') return 1.15

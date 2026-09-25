@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState, type FocusEvent, type KeyboardEvent } from 'react'
 import { battles } from '../data/battles.ts'
 import { characters } from '../data/characters.ts'
 import { houses } from '../data/houses.ts'
@@ -9,7 +9,7 @@ import { routes } from '../data/routes.ts'
 import { sites } from '../data/sites.ts'
 import { characterMatchesQuery, initials } from '../lib/people.ts'
 import { flyZoomFor } from '../map/zoom.ts'
-import { useAtlas } from '../state/AtlasContext.tsx'
+import { useAtlas } from '../state/useAtlas.ts'
 import type { Selection } from '../types.ts'
 
 type Hit = {
@@ -26,6 +26,9 @@ type Hit = {
 export function SearchBox() {
   const { season, setSelection, flyTo, setExpandedPresence } = useAtlas()
   const [query, setQuery] = useState('')
+  const [open, setOpen] = useState(true)
+  const listRef = useRef<HTMLUListElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const hits = useMemo(() => {
     const needle = query.trim().toLowerCase()
@@ -143,39 +146,84 @@ export function SearchBox() {
     return results.slice(0, 10)
   }, [query, season])
 
+  const pick = (hit: Hit) => {
+    setSelection({ kind: hit.kind, id: hit.id })
+    if (hit.kind === 'character') {
+      const pin = presenceBySeason[season].find((item) => item.characterId === hit.id)
+      setExpandedPresence(pin?.locationId ?? null)
+    } else if (hit.kind === 'location') {
+      setExpandedPresence(hit.id)
+    } else {
+      setExpandedPresence(null)
+    }
+    flyTo(hit.x, hit.y, flyZoomFor(hit.kind))
+    setQuery('')
+  }
+
+  const resultButtons = () => [...(listRef.current?.querySelectorAll('button') ?? [])]
+
+  /** Up and down walk the results; Enter takes the focused one (or the first from the box). */
+  const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Escape') {
+      if (!query) return
+      event.stopPropagation()
+      setQuery('')
+      inputRef.current?.focus()
+      return
+    }
+    if (event.key === 'Enter' && event.target === inputRef.current && hits[0]) {
+      event.preventDefault()
+      pick(hits[0])
+      return
+    }
+    if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return
+    const buttons = resultButtons()
+    if (buttons.length === 0) return
+    event.preventDefault()
+    event.stopPropagation()
+    const at = buttons.indexOf(document.activeElement as HTMLButtonElement)
+    if (event.key === 'ArrowDown') {
+      buttons[Math.min(at + 1, buttons.length - 1)]?.focus()
+    } else if (at <= 0) {
+      inputRef.current?.focus()
+    } else {
+      buttons[at - 1]?.focus()
+    }
+  }
+
+  // The list closes when focus leaves the search box, and comes back when it returns.
+  const onBlur = (event: FocusEvent<HTMLDivElement>) => {
+    if (event.relatedTarget instanceof Node && event.currentTarget.contains(event.relatedTarget)) return
+    setOpen(false)
+  }
+
+  const showList = open && hits.length > 0
+
   return (
-    <div className="search">
+    <div className="search" onKeyDown={onKeyDown} onBlur={onBlur} onFocus={() => setOpen(true)}>
       <input
+        ref={inputRef}
         type="search"
         placeholder="Search…"
         value={query}
-        onChange={(event) => setQuery(event.target.value)}
+        onChange={(event) => {
+          setQuery(event.target.value)
+          setOpen(true)
+        }}
         aria-label="Search the atlas"
+        aria-expanded={showList}
+        aria-controls="atlas-search-results"
       />
-      {hits.length > 0 && (
-        <ul>
+      {showList && (
+        // Mouse presses keep focus in the box, so a click on a result is never lost to blur.
+        <ul id="atlas-search-results" ref={listRef} onMouseDown={(event) => event.preventDefault()}>
           {hits.map((hit) => (
             <li key={`${hit.kind}-${hit.id}`}>
-              <button
-                type="button"
-                onClick={() => {
-                  setSelection({ kind: hit.kind, id: hit.id })
-                  if (hit.kind === 'character') {
-                    const pin = presenceBySeason[season].find((item) => item.characterId === hit.id)
-                    setExpandedPresence(pin?.locationId ?? null)
-                  } else if (hit.kind === 'location') {
-                    setExpandedPresence(hit.id)
-                  } else {
-                    setExpandedPresence(null)
-                  }
-                  flyTo(hit.x, hit.y, flyZoomFor(hit.kind))
-                  setQuery('')
-                }}
-              >
+              <button type="button" onClick={() => pick(hit)}>
                 {hit.kind === 'character' ? (
                   <span className="search-bio">
                     {hit.portrait ? (
-                      <img src={hit.portrait} alt="" />
+                      <img src={hit.portrait} alt="" decoding="async" />
                     ) : (
                       <span className="search-face">{initials(hit.label)}</span>
                     )}

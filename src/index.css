@@ -52,7 +52,7 @@ body.is-atlas {
 
 .chrome-top {
   position: absolute;
-  top: 58px;
+  top: calc(var(--nav-h, 68px) - 10px);
   left: 14px;
   right: auto;
   z-index: 1200;
@@ -66,35 +66,12 @@ body.is-atlas {
   pointer-events: auto;
 }
 
-.brand {
-  flex: 0 0 auto;
-  min-width: 8rem;
-  padding: 6px 11px 8px;
-  background: rgba(27, 21, 16, 0.82);
-  border: 1px solid var(--line);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.32);
-  backdrop-filter: blur(8px);
-}
-
-.brand h1,
 .panel h2 {
   margin: 0;
   font-family: Cinzel, 'Times New Roman', serif;
   letter-spacing: 0.04em;
   font-size: 1.35rem;
   line-height: 1.15;
-}
-
-.brand h1 {
-  font-size: 1.05rem;
-}
-
-.city-title {
-  font-family: Cinzel, serif;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-size: 13px;
-  background: rgba(239, 228, 200, 0.9);
 }
 
 .eyebrow {
@@ -119,8 +96,7 @@ body.is-atlas {
   padding: 6px 10px;
 }
 
-.search input,
-.season-controls input {
+.search input {
   width: 100%;
   border: 1px solid rgba(212, 180, 60, 0.22);
   background: var(--panel-soft);
@@ -131,7 +107,6 @@ body.is-atlas {
 }
 
 .search input:focus,
-.season-controls input:focus,
 .close:focus,
 .toggles button:focus-visible,
 .season-ticks button:focus-visible,
@@ -140,9 +115,57 @@ body.is-atlas {
 .site-tabs a:focus-visible,
 .landing-enter:focus-visible,
 .landing-door:focus-visible,
-.site-wordmark:focus-visible {
-  outline: 1px solid var(--gold);
+.site-wordmark:focus-visible,
+.room-index a:focus-visible,
+.room-atlas:focus-visible,
+.dive:focus-visible,
+.layers-toggle:focus-visible,
+.map-hud button:focus-visible,
+.search li button:focus-visible,
+.grounds button:focus-visible,
+.skip-link:focus-visible {
+  outline: 2px solid var(--gold);
   outline-offset: 1px;
+}
+
+/* The skip link waits off-screen until a keyboard reaches it. */
+.skip-link {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2000;
+  padding: 8px 12px;
+  background: var(--panel);
+  color: var(--gold);
+  border: 1px solid var(--line);
+  font-family: Cinzel, serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transform: translateY(calc(-100% - 16px));
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+/* Main landmarks take focus from the skip link without drawing a box round the page. */
+main[tabindex='-1']:focus {
+  outline: none;
+}
+
+/* Text for screen readers only, e.g. the name inside a map pin. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .search ul {
@@ -263,6 +286,8 @@ body.is-atlas {
 .layers-menu {
   margin-left: auto;
   position: relative;
+  /* The open menu drops over the season dock beneath it, not under it. */
+  z-index: 2;
 }
 
 .layers-toggle {
@@ -449,7 +474,7 @@ body.is-atlas {
   font-size: 0.9rem;
 }
 
-.words {
+.panel-words {
   font-family: Cinzel, serif;
   color: var(--gold);
   font-size: 0.95rem;
@@ -699,9 +724,10 @@ body.is-atlas {
 
 .chrome-tools {
   position: absolute;
-  top: 58px;
+  top: calc(var(--nav-h, 68px) - 10px);
   right: 14px;
-  z-index: 1200;
+  /* Above the lore panel, so the Layers menu and the season dock stay usable over it. */
+  z-index: 1250;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -737,12 +763,6 @@ body.is-atlas {
 
 .season-copy {
   display: none;
-}
-
-.season-controls {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
 }
 
 .season-ticks {
@@ -783,7 +803,6 @@ body.is-atlas {
 .marker-place,
 .marker-banner,
 .marker-battle,
-.marker-char,
 .marker-label,
 .marker-site,
 .marker-presence {
@@ -862,13 +881,6 @@ body.is-atlas {
   text-transform: uppercase;
   color: #d4b43c;
   line-height: 1;
-}
-
-.region-label {
-  font-family: Cinzel, serif;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-size: 12px;
 }
 
 .place-label {
@@ -1678,7 +1690,7 @@ body.is-atlas {
   border: 1px solid var(--line);
   background: #1b1510;
   overflow: hidden;
-  scroll-margin-top: 76px;
+  scroll-margin-top: calc(var(--nav-h, 65px) + 11px);
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
 }
 
@@ -1774,7 +1786,7 @@ body.is-atlas {
   border: 1px solid var(--line);
   background: #1b1510;
   overflow: hidden;
-  scroll-margin-top: 76px;
+  scroll-margin-top: calc(var(--nav-h, 65px) + 11px);
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
 }
 
@@ -1845,6 +1857,8 @@ body.is-atlas {
 }
 
 .words {
+  font-family: Cinzel, serif;
+  font-size: 0.95rem;
   color: var(--parchment);
   background:
     radial-gradient(ellipse at 50% 0%, rgba(58, 45, 24, 0.45), transparent 42%),
@@ -2156,7 +2170,7 @@ body.is-atlas {
 .words-voice,
 .words-oath,
 .words-prophecy {
-  scroll-margin-top: 72px;
+  scroll-margin-top: calc(var(--nav-h, 65px) + 7px);
 }
 
 .app.is-north {
@@ -2268,7 +2282,7 @@ body.is-atlas {
   border: 1px solid var(--line);
   background: #10161c;
   overflow: hidden;
-  scroll-margin-top: 72px;
+  scroll-margin-top: calc(var(--nav-h, 65px) + 7px);
 }
 
 .north-scroll-art img {
@@ -2309,7 +2323,7 @@ body.is-atlas {
 
 .north-chapter {
   padding: 8px 0 72px;
-  scroll-margin-top: 72px;
+  scroll-margin-top: calc(var(--nav-h, 65px) + 7px);
 }
 
 .north-chapter-head {
@@ -2348,7 +2362,7 @@ body.is-atlas {
   border: 1px solid var(--line);
   background: #10161c;
   overflow: hidden;
-  scroll-margin-top: 76px;
+  scroll-margin-top: calc(var(--nav-h, 65px) + 11px);
   box-shadow: 0 18px 36px rgba(0, 0, 0, 0.38);
 }
 
@@ -2562,7 +2576,7 @@ body.is-atlas {
   border: 1px solid var(--line);
   background: #1b1510;
   overflow: hidden;
-  scroll-margin-top: 72px;
+  scroll-margin-top: calc(var(--nav-h, 65px) + 7px);
 }
 
 .roberts-scroll.is-flip {
@@ -2616,7 +2630,7 @@ body.is-atlas {
 
 .roberts-chapter {
   padding: 8px 0 64px;
-  scroll-margin-top: 72px;
+  scroll-margin-top: calc(var(--nav-h, 65px) + 7px);
 }
 
 .roberts-chapter-head {
@@ -2657,7 +2671,7 @@ body.is-atlas {
   border: 1px solid var(--line);
   background: #1b1510;
   overflow: hidden;
-  scroll-margin-top: 76px;
+  scroll-margin-top: calc(var(--nav-h, 65px) + 11px);
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
 }
 
@@ -2779,7 +2793,7 @@ body.is-atlas {
   border: 1px solid var(--line);
   background: #1b1510;
   overflow: hidden;
-  scroll-margin-top: 72px;
+  scroll-margin-top: calc(var(--nav-h, 65px) + 7px);
 }
 
 .council-scroll.is-flip {
@@ -2833,7 +2847,7 @@ body.is-atlas {
 
 .council-chapter {
   padding: 8px 0 64px;
-  scroll-margin-top: 72px;
+  scroll-margin-top: calc(var(--nav-h, 65px) + 7px);
 }
 
 .council-chapter-head {
@@ -2874,7 +2888,7 @@ body.is-atlas {
   border: 1px solid var(--line);
   background: #1b1510;
   overflow: hidden;
-  scroll-margin-top: 76px;
+  scroll-margin-top: calc(var(--nav-h, 65px) + 11px);
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
 }
 
@@ -3027,7 +3041,7 @@ body.is-atlas {
   border: 1px solid var(--line);
   background: #16110d;
   overflow: hidden;
-  scroll-margin-top: 72px;
+  scroll-margin-top: calc(var(--nav-h, 65px) + 7px);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.38);
 }
 
@@ -3082,7 +3096,7 @@ body.is-atlas {
 
 .throne-chapter {
   padding: 8px 0 64px;
-  scroll-margin-top: 72px;
+  scroll-margin-top: calc(var(--nav-h, 65px) + 7px);
 }
 
 .throne-chapter-head {
@@ -3123,7 +3137,7 @@ body.is-atlas {
   border: 1px solid var(--line);
   background: #16110d;
   overflow: hidden;
-  scroll-margin-top: 76px;
+  scroll-margin-top: calc(var(--nav-h, 65px) + 11px);
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
 }
 
@@ -3265,12 +3279,10 @@ body.is-atlas {
 
 @media (max-width: 900px) {
   .chrome-top {
-    top: 92px;
     left: 10px;
   }
 
   .chrome-tools {
-    top: 92px;
     right: 10px;
   }
 
@@ -3506,5 +3518,38 @@ body.is-atlas {
 
   .leaflet-control-zoom {
     margin-bottom: 14px !important;
+  }
+}
+
+/* Phones: the tabs become one row that scrolls sideways, so the nav stays two lines tall
+   and every tab is a comfortable tap. Desktop keeps the wrapped bar above. */
+@media (max-width: 600px) {
+  .site-nav {
+    gap: 8px;
+  }
+
+  .site-tabs {
+    flex: 1 1 100%;
+    min-width: 0;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .site-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .site-tabs a {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    min-height: 32px;
+    padding: 0 10px;
+    font-size: 0.6rem;
+    white-space: nowrap;
   }
 }
