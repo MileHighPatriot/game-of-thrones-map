@@ -77,7 +77,9 @@ export function WordsPage() {
           <p className="eyebrow">The rest of the parchment</p>
           <p className="words-lesser-lede">
             Official words from the books and the Citadel’s heraldry. Houses known only from the
-            video games are left off. Frey’s “We Stand Together” is unconfirmed, so it is not here.
+            video games are left off. House Frey has no official words: “We stand together” is only a
+            toast at the Twins in the show. House Baelish has none either, and the Night’s Watch swears
+            an oath instead (see Oaths below).
           </p>
           <ul className="words-lesser">
             {lesser.map((item) => (

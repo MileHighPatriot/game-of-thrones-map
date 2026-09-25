@@ -68,7 +68,7 @@ export const northPlaces: NorthPlace[] = [
     id: 'crasters-keep',
     name: 'Craster’s Keep',
     region: 'The Haunted Forest',
-    image: 'north/crasters-keep.jpg',
+    image: 'keeps/got/crasters-keep.jpg',
     atmosphere:
       'Not a keep in any southern sense: a sod-and-timber sty, sheep bones in the yard, a roof that leaks smoke. Craster keeps his daughters as wives and gives his sons to the wood. The Watch uses him because the maps have no other fire.',
     happened:
@@ -228,7 +228,7 @@ export const northFigures: NorthFigure[] = [
     id: 'craster',
     name: 'Craster',
     title: 'A keep, a crime, a custom',
-    image: 'north/crasters-keep.jpg',
+    image: 'keeps/got/crasters-keep.jpg',
     lore:
       'He keeps his own blood as wives and pays the wood in sons. The Watch calls him an ally because hunger makes ugly maps. The Free Folk call him a thing they would have burned out if the cold had left them the time. He dies on his own floor, and the bargain he made with the dark does not die with him.',
     locationId: 'crasters-keep',

@@ -1,0 +1,42 @@
+# Keep stills — sources
+
+Frames from HBO’s *Game of Thrones* and *House of the Dragon* (© HBO), collected from the fan wikis for a non-commercial fan atlas. Each was center-cropped to 3:2 and resized to 1248×832 JPEG (the banner to 1280×720).
+
+| File | Keep | Episode | Image URL | Wiki page |
+|---|---|---|---|---|
+| `hero.jpg` | Keeps tab banner (Winterfell at night) | Game of Thrones, season 7 | https://static.wikia.nocookie.net/gameofthrones/images/6/6f/Winterfell-season7.png/revision/latest | https://gameofthrones.fandom.com/wiki/File:Winterfell-season7.png |
+| `winterfell.jpg` | Winterfell | Game of Thrones 8x01 “Winterfell” | https://static.wikia.nocookie.net/gameofthrones/images/1/1f/801_Winterfell_Overview.png/revision/latest | https://gameofthrones.fandom.com/wiki/File:801_Winterfell_Overview.png |
+| `castle-black.jpg` | Castle Black | Game of Thrones 1x04 “Cripples, Bastards, and Broken Things” | https://static.wikia.nocookie.net/gameofthrones/images/7/7b/Castle_Black.jpg/revision/latest | https://gameofthrones.fandom.com/wiki/File:Castle_Black.jpg |
+| `nightfort.jpg` | The Nightfort | Game of Thrones season 3 (wiki files it under 3x09 “The Rains of Castamere”) | https://static.wikia.nocookie.net/gameofthrones/images/6/62/The_Nightfort.png/revision/latest | https://gameofthrones.fandom.com/wiki/File:The_Nightfort.png |
+| `eastwatch.jpg` | Eastwatch-by-the-Sea | Game of Thrones 7x05 “Eastwatch” | https://static.wikia.nocookie.net/gameofthrones/images/4/4e/705_Eastwatch.png/revision/latest | https://gameofthrones.fandom.com/wiki/File:705_Eastwatch.png |
+| `crasters-keep.jpg` | Craster’s Keep | Game of Thrones 4x05 “First of His Name” | https://static.wikia.nocookie.net/gameofthrones/images/7/74/S04E5_-_Craster%27s_Keep_on_fire.png/revision/latest | https://gameofthrones.fandom.com/wiki/File:S04E5_-_Craster%27s_Keep_on_fire.png |
+| `queenscrown.jpg` | Queenscrown | Game of Thrones 3x09 “The Rains of Castamere” | https://static.wikia.nocookie.net/gameofthrones/images/a/a9/The_Gift_Queenscrown.jpg/revision/latest | https://gameofthrones.fandom.com/wiki/File:The_Gift_Queenscrown.jpg |
+| `last-hearth.jpg` | Last Hearth | Game of Thrones 8x01 “Winterfell” | https://static.wikia.nocookie.net/gameofthrones/images/8/8a/801_Last_Hearth.png/revision/latest | https://gameofthrones.fandom.com/wiki/File:801_Last_Hearth.png |
+| `dreadfort.jpg` | The Dreadfort | Game of Thrones 4x02 “The Lion and the Rose” | https://static.wikia.nocookie.net/gameofthrones/images/2/2e/The-Dreadfort-402.jpg/revision/latest | https://gameofthrones.fandom.com/wiki/File:The-Dreadfort-402.jpg |
+| `deepwood-motte.jpg` | Deepwood Motte (courtyard) | Game of Thrones 6x07 “The Broken Man” | https://static.wikia.nocookie.net/gameofthrones/images/1/1e/607_Deepwood_Motte.png/revision/latest | https://gameofthrones.fandom.com/wiki/File:607_Deepwood_Motte.png |
+| `bear-island.jpg` | Bear Island (Mormont Keep) | Game of Thrones 6x07 “The Broken Man” | https://static.wikia.nocookie.net/gameofthrones/images/1/16/Bear-island-02.jpg/revision/latest | https://gameofthrones.fandom.com/wiki/File:Bear-island-02.jpg |
+| `moat-cailin.jpg` | Moat Cailin | Game of Thrones 4x08 “The Mountain and the Viper” | https://static.wikia.nocookie.net/gameofthrones/images/e/e2/S04E8_-_Moat_Cailin.png/revision/latest | https://gameofthrones.fandom.com/wiki/File:S04E8_-_Moat_Cailin.png |
+| `the-eyrie.jpg` | The Eyrie | House of the Dragon 2x05 “Regent” | https://static.wikia.nocookie.net/gameofthrones/images/5/55/Eyrie_HotD.jpg/revision/latest | https://gameofthrones.fandom.com/wiki/File:Eyrie_HotD.jpg |
+| `bloody-gate.jpg` | The Bloody Gate (Eyrie behind) | Game of Thrones 4x05 “First of His Name” | https://static.wikia.nocookie.net/gameofthrones/images/2/2d/Eyrie_S4.jpg/revision/latest | https://gameofthrones.fandom.com/wiki/File:Eyrie_S4.jpg |
+| `runestone.jpg` | Runestone | Game of Thrones 5x01 “The Wars to Come” | https://static.wikia.nocookie.net/gameofthrones/images/0/0c/501_Runestone_Littlefinger_Sansa_Sweetrobin_training.jpg/revision/latest | https://gameofthrones.fandom.com/wiki/File:501_Runestone_Littlefinger_Sansa_Sweetrobin_training.jpg |
+| `the-twins.jpg` | The Twins | Game of Thrones 1x09 “Baelor” | https://static.wikia.nocookie.net/gameofthrones/images/e/e8/Twins_long.jpg/revision/latest | https://gameofthrones.fandom.com/wiki/File:Twins_long.jpg |
+| `riverrun.jpg` | Riverrun | Game of Thrones 6x07 “The Broken Man” | https://static.wikia.nocookie.net/gameofthrones/images/f/fc/The_broken_Riverrun_land.jpg/revision/latest | https://gameofthrones.fandom.com/wiki/File:The_broken_Riverrun_land.jpg |
+| `harrenhal.jpg` | Harrenhal | House of the Dragon season 2 (episode not tagged on the wiki) | https://static.wikia.nocookie.net/gameofthrones/images/4/46/Harrenhal_by_Daylight.png/revision/latest | https://gameofthrones.fandom.com/wiki/File:Harrenhal_by_Daylight.png |
+| `pyke.jpg` | Pyke | Game of Thrones 2x02 “The Night Lands” | https://static.wikia.nocookie.net/gameofthrones/images/4/4f/Pykecastle3.jpg/revision/latest | https://gameofthrones.fandom.com/wiki/File:Pykecastle3.jpg |
+| `golden-tooth.jpg` | The Golden Tooth | House of the Dragon 2x06 “Smallfolk” | https://static.wikia.nocookie.net/gameofthrones/images/4/4b/GoldenTooth-206.png/revision/latest | https://gameofthrones.fandom.com/wiki/File:GoldenTooth-206.png |
+| `casterly-rock.jpg` | Casterly Rock | Game of Thrones 7x03 “The Queen’s Justice” | https://static.wikia.nocookie.net/gameofthrones/images/a/a8/Casterly-rock.png/revision/latest | https://gameofthrones.fandom.com/wiki/File:Casterly-rock.png |
+| `red-keep.jpg` | The Red Keep | Game of Thrones 7x07 “The Dragon and the Wolf” | https://static.wikia.nocookie.net/gameofthrones/images/e/e0/Red_Keep_Full_Shot.jpg/revision/latest | https://gameofthrones.fandom.com/wiki/File:Red_Keep_Full_Shot.jpg |
+| `dragonstone.jpg` | Dragonstone | Game of Thrones season 7 | https://static.wikia.nocookie.net/gameofthrones/images/5/58/Dragonstone-season7.png/revision/latest | https://gameofthrones.fandom.com/wiki/File:Dragonstone-season7.png |
+| `driftmark.jpg` | Driftmark (High Tide and the causeway) | House of the Dragon 1x07 “Driftmark” | https://static.wikia.nocookie.net/gameofthrones/images/b/bd/0_20092022-HouseoftheDragon1.jpg.webp/revision/latest | https://gameofthrones.fandom.com/wiki/File:0_20092022-HouseoftheDragon1.jpg.webp |
+| `highgarden.jpg` | Highgarden | Game of Thrones 7x03 “The Queen’s Justice” | https://static.wikia.nocookie.net/gameofthrones/images/9/92/Lannister_army_reaches_Highgarden_s7.JPG/revision/latest | https://gameofthrones.fandom.com/wiki/File:Lannister_army_reaches_Highgarden_s7.JPG |
+| `horn-hill.jpg` | Horn Hill | Game of Thrones 6x06 “Blood of My Blood” | https://static.wikia.nocookie.net/gameofthrones/images/c/ca/Horn_Hill_highres.png/revision/latest | https://gameofthrones.fandom.com/wiki/File:Horn_Hill_highres.png |
+| `hightower.jpg` | The Hightower / Oldtown | Game of Thrones 6x10 “The Winds of Winter” (same frame as the English wiki’s low-res Oldtown6x10.png) | https://static.wikia.nocookie.net/hieloyfuego/images/0/09/Antigua_HBO.jpg/revision/latest | https://hieloyfuego.fandom.com/wiki/Archivo:Antigua_HBO.jpg |
+| `storms-end.jpg` | Storm’s End | House of the Dragon 1x10 “The Black Queen” (same frame as the wiki’s TBQ_Arrax_Storm’s_End_Promo.jpg) | https://wikiofthrones.com/wp-content/uploads/2022/10/Arrax-storm-3742615.jpg | https://wikiofthrones.com/house-of-the-dragon-episode-10-finally-showed-us-what-storms-end-looks-like |
+| `tower-of-joy.jpg` | The Tower of Joy | Game of Thrones 6x03 “Oathbreaker” | https://static.wikia.nocookie.net/gameofthrones/images/6/66/603_Tower_of_Joy_Wide.jpg/revision/latest | https://gameofthrones.fandom.com/wiki/File:603_Tower_of_Joy_Wide.jpg |
+| `water-gardens.jpg` | The Water Gardens | Game of Thrones season 5 | https://static.wikia.nocookie.net/gameofthrones/images/7/71/Dorne_Season_5.png/revision/latest | https://gameofthrones.fandom.com/wiki/File:Dorne_Season_5.png |
+
+## Awaiting artwork
+
+These keeps never appear on screen. Their cards show `../pending.svg` until a JPG is dropped in at the path below; prompts are in the session’s `prompts-keeps.md`.
+
+`karhold.jpg`, `torrhens-square.jpg`, `new-castle.jpg`, `gates-of-the-moon.jpg`, `ten-towers.jpg`, `castamere.jpg`, `the-arbor.jpg`, `griffins-roost.jpg`, `tarth.jpg` (Evenfall Hall), `summerhall.jpg`, `starfall.jpg`, `sunspear.jpg`.

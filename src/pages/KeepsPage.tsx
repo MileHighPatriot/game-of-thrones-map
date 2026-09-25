@@ -1,11 +1,29 @@
-import { useEffect } from 'react'
+import { useEffect, type SyntheticEvent } from 'react'
 import { keeps } from '../data/keeps.ts'
 import { atlasHref } from '../lib/hashRoute.ts'
 import { SiteNav } from '../ui/SiteNav.tsx'
 
+// Keeps whose atlas pin is the surrounding city rather than a pin of their own.
+const keepLocationAlias: Record<string, string> = {
+  'red-keep': 'kings-landing',
+  'new-castle': 'white-harbor',
+  hightower: 'oldtown',
+}
+
 function keepLocationId(id: string): string {
-  if (id === 'red-keep') return 'kings-landing'
-  return id
+  return keepLocationAlias[id] ?? id
+}
+
+const pendingArt = `${import.meta.env.BASE_URL}keeps/pending.svg`
+
+// Book-only keeps point at keeps/got/<id>.jpg before the artwork exists.
+// Swap to the placeholder once; a dropped-in JPG shows up with no code change.
+function showPendingArt(event: SyntheticEvent<HTMLImageElement>) {
+  const img = event.currentTarget
+  if (img.dataset.pending) return
+  img.dataset.pending = 'true'
+  img.style.objectPosition = 'center'
+  img.src = pendingArt
 }
 
 function keepIdFromHash(): string {
@@ -36,7 +54,7 @@ export function KeepsPage() {
     <div className="keeps">
       <SiteNav current="keeps" />
       <section className="room-hero">
-        <img src={asset('keeps/hero.jpg')} alt="" className="room-hero-art" />
+        <img src={asset('keeps/got/hero.jpg')} alt="" className="room-hero-art" />
         <div className="room-hero-veil" />
         <div className="room-hero-copy">
           <p className="eyebrow">Stone of the Seven Kingdoms</p>
@@ -57,7 +75,15 @@ export function KeepsPage() {
       <div className="keeps-grid">
         {keeps.map((keep) => (
           <article key={keep.id} id={keep.id} className="keep-card">
-            <img src={asset(keep.image)} alt={keep.name} />
+            <img
+              src={asset(keep.image)}
+              alt={keep.name}
+              width={1248}
+              height={832}
+              loading="lazy"
+              style={keep.focus ? { objectPosition: keep.focus } : undefined}
+              onError={showPendingArt}
+            />
             <div className="keep-copy">
               <p className="eyebrow">{keep.region}</p>
               <h2>{keep.name}</h2>

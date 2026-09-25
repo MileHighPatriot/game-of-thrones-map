@@ -31,7 +31,7 @@ const DOORS = [
   {
     title: 'The Keeps',
     copy: 'Who raised the stone, who sat it, and what was done in the halls.',
-    image: 'seats/winterfell.jpg',
+    image: 'keeps/got/winterfell.jpg',
     alt: 'Winterfell',
     href: 'keeps' as const,
   },
