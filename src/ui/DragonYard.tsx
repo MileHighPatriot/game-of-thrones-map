@@ -1,10 +1,13 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Grid, OrbitControls } from '@react-three/drei'
+import { Grid, OrbitControls, useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
 import type { Dragon } from '../data/dragons.ts'
-import { assertUnitDragon, makeHorse, makePerson, makeUnitDragon, meshHeight, meshLengthZ } from './dragonMesh.ts'
+import { assertUnitDragon, makeHorse, makePerson, meshHeight, meshLengthZ } from './dragonMesh.ts'
 import { besidePose, layoutRow, overviewPose, standPoint } from './yardFrame.ts'
+
+const DRAGON_URL = `${import.meta.env.BASE_URL}dragons/yard-dragon.glb`
+useGLTF.preload(DRAGON_URL)
 
 type Band = 'all' | 'great' | 'young'
 
@@ -111,7 +114,16 @@ function YardScene({
   selectedId: string | null
   onPick: (id: string | null) => void
 }) {
-  const dragon = useMemo(() => makeUnitDragon(), [])
+  const gltf = useGLTF(DRAGON_URL)
+  const dragon = useMemo(() => {
+    const found: THREE.Mesh[] = []
+    gltf.scene.traverse((node) => {
+      if ((node as THREE.Mesh).isMesh) found.push(node as THREE.Mesh)
+    })
+    const geometry = found[0]?.geometry
+    if (!geometry) throw new Error('Yard dragon has no mesh')
+    return geometry
+  }, [gltf])
   const person = useMemo(() => makePerson(), [])
   const horse = useMemo(() => makeHorse(), [])
   const anchor = placed.find((d) => d.id === selectedId) ?? placed[0]
@@ -173,7 +185,7 @@ function YardScene({
             metalness={0.05}
             emissive={d.id === selectedId ? '#8a6230' : '#000000'}
             emissiveIntensity={d.id === selectedId ? 0.28 : 0}
-            side={THREE.DoubleSide}
+            side={THREE.FrontSide}
           />
         </mesh>
       ))}

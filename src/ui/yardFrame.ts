@@ -1,7 +1,16 @@
 import * as THREE from 'three'
 
-/** Half-width of the unit dragon, with a little air so wings do not touch. */
-export const WING = 0.36
+/**
+ * Half-width of the unit dragon. Measured from the shared mesh (wing tip).
+ * The 8 m gap in the row is the air between wingtips.
+ */
+export const WING = 0.52
+
+/** Height of the unit dragon, feet to the top of the raised wing. */
+export const BODY_H = 0.79
+
+/** Half-width of the head and shoulders, so the scale figure stands clear of the jaw. */
+export const HEAD = 0.2
 
 const GAP = 8
 
@@ -31,7 +40,7 @@ export function dragonCorners(placed: Array<{ x: number; lengthMeters: number }>
   const corners: THREE.Vector3[] = []
   for (const d of placed) {
     const hx = d.lengthMeters * WING
-    const hy = d.lengthMeters * 0.42
+    const hy = d.lengthMeters * BODY_H
     const hz = d.lengthMeters * 0.5
     for (const x of [d.x - hx, d.x + hx]) {
       for (const y of [0, hy]) {
@@ -79,7 +88,7 @@ export function overviewPose(
   const xs = placed.map((d) => d.x)
   const mid = (Math.min(...xs) + Math.max(...xs)) / 2
   const biggest = placed[0]?.lengthMeters ?? 10
-  const target = new THREE.Vector3(mid, Math.min(14, biggest * 0.05), 0)
+  const target = new THREE.Vector3(mid, Math.min(48, biggest * 0.26), 0)
   const position = fitCamera(fovDeg, aspect, target, new THREE.Vector3(-0.55, 0.36, -1), dragonCorners(placed))
   return { position, target }
 }
@@ -87,8 +96,7 @@ export function overviewPose(
 /** Feet of the scale figure, just in front of the snout and clear of the jaw. */
 export function standPoint(dragon: { x: number; lengthMeters: number }): THREE.Vector3 {
   const noseZ = -dragon.lengthMeters / 2
-  const noseR = dragon.lengthMeters * 0.045
-  return new THREE.Vector3(dragon.x + noseR + 1.5, 0, noseZ - 2.4)
+  return new THREE.Vector3(dragon.x + dragon.lengthMeters * HEAD + 1.2, 0, noseZ - 2.4)
 }
 
 /**
