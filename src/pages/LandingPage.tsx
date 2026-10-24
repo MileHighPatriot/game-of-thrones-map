@@ -81,6 +81,13 @@ const DOORS = [
     alt: 'The Iron Throne',
     href: 'throne' as const,
   },
+  {
+    title: 'The Dragons',
+    copy: 'Every named dragon of the known world, ranked by size and by what they burned.',
+    image: 'dragons/got/hero.jpg',
+    alt: 'A dragon over Westeros',
+    href: 'dragons' as const,
+  },
 ]
 
 const courtHouses = COURT.map((id) => houses.find((house) => house.id === id)).filter(

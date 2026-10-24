@@ -39,3 +39,16 @@ Photoreal cinematic establishing shot, 3:2 landscape (1248x832), no text. A gold
 ### Torrhen's Square
 Target: public/keeps/got/torrhens-square.jpg
 Photoreal cinematic establishing shot, 3:2 landscape (1248x832), no text. A stern grey stone castle in the wooded North of Westeros, on the northern shore of a large still lake. Thirty-foot curtain walls have square towers at each corner and a heavy square keep. Pine and oak woods, the wolfswood, rise behind it, and a river runs south out of the lake. The light is overcast and cool, with low mist on the water. Banners show three green sentinel trees on white (House Tallhart). The castle sits centered in the middle third of the frame, mirrored in the lake.
+
+## The Dragons (`public/dragons/art/`, 1248×832)
+
+Shared prefix for every prompt: *Photoreal cinematic wide shot, Game of Thrones HBO production design, natural colour grade, overcast light, scale shown by tiny human figures or architecture, no text or watermark.*
+
+- **meraxes.jpg** — A silver dragon with golden eyes banking low over a sandstone Dornish castle in a desert canyon, a scorpion bolt the length of a man flying up toward her from the wall.
+- **quicksilver.jpg** — A pale white-silver young dragon, a quarter the size of the enormous black dragon diving on her from above, over a vast grey lake with a melted castle on the far shore.
+- **terrax.jpg** — A lean Valyrian dragon gliding over endless green jungle canopy and a brown river, a lone rider in bronze on its back, steam rising from the trees.
+- **urrax.jpg** — Age-of-Heroes tapestry mood but photoreal: a knight crouched behind a polished mirror shield before a great dragon that stares at its own reflection, cave mouth, torchlight.
+- **morning.jpg** — A pale pink hatchling dragon with black horns and crest, cat-sized, on a stone windowsill of a mountain castle in the Vale at dawn.
+- **last-dragon.jpg** — A small stunted green dragon with withered wings lying in straw inside a vast dim domed pit, chains on the floor, a maester watching from the shadows.
+- **nagga.jpg** — Enormous pale stone ribs standing in a ring on a grey windswept hill above a cold sea, Ironborn figures small among them.
+- **dragonbinder.jpg** — A six-foot curved horn of black metal banded with red gold and Valyrian glyphs, lying on a driftwood throne at a stormy shore.

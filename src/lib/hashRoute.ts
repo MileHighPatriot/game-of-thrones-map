@@ -11,6 +11,7 @@ export type Route =
   | 'roberts'
   | 'council'
   | 'throne'
+  | 'dragons'
 
 /** Every hash head that opens a page, keyed by the page it opens. */
 const ROUTE_HEADS: Record<Exclude<Route, 'hall'>, readonly string[]> = {
@@ -23,6 +24,7 @@ const ROUTE_HEADS: Record<Exclude<Route, 'hall'>, readonly string[]> = {
   roberts: ['roberts', 'rebellion', 'roberts-rebellion'],
   council: ['council', 'small-council', 'smallcouncil'],
   throne: ['throne', 'iron-throne', 'ironthrone'],
+  dragons: ['dragons', 'dragon'],
 }
 
 function hashParts(hash: string): string[] {
@@ -62,6 +64,7 @@ export function hrefFor(route: Route): string {
   if (route === 'roberts') return '#/rebellion'
   if (route === 'council') return '#/council'
   if (route === 'throne') return '#/throne'
+  if (route === 'dragons') return '#/dragons'
   return '#/'
 }
 

@@ -1,10 +1,11 @@
 # Westeros & Essos
 
-A fan atlas of the known world from *Game of Thrones*, in ten rooms:
+A fan atlas of the known world from *Game of Thrones*, in eleven rooms:
 
 - **The Hall**: the front door, with the house words and a door into every room.
 - **The Atlas**: an illustrated, season-by-season map. Click a realm, keep, banner, battle, or traveler; scrub seasons 1–8 (or press 1–8, ←/→, P) to watch who holds the land and where everyone is.
-- **The Keeps**, **True North**, **The Armory**, **Heroes**, **The Words**, **The Rebellion**, **The Council**, **The Iron Throne**: illustrated chronicles. Every card can be linked to directly, e.g. `#/heroes/sandor-clegane` or `#/weapons/needle`, and most have a "Show on Atlas" link.
+- **The Keeps**, **True North**, **The Armory**, **Heroes**, **The Words**, **The Rebellion**, **The Council**, **The Iron Throne**: illustrated chronicles.
+- **The Dragons**: every named dragon of the known world, from Balerion to Drogon, sortable by size, danger, age or rider. Battles and fates are shown only through *House of the Dragon* season 3 (`SHOW_LINE` in `src/data/dragons.ts`). Every card can be linked to directly, e.g. `#/heroes/sandor-clegane` or `#/weapons/needle`, and most have a "Show on Atlas" link.
 
 Fan work. Show canon, with book notes where the show is silent. Not affiliated with HBO or George R. R. Martin.
 

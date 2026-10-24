@@ -15,6 +15,7 @@ const TABS: { route: Route; label: string }[] = [
   { route: 'roberts', label: 'The Rebellion' },
   { route: 'council', label: 'The Council' },
   { route: 'throne', label: 'The Iron Throne' },
+  { route: 'dragons', label: 'The Dragons' },
 ]
 
 /**

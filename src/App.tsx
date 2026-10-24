@@ -13,6 +13,7 @@ const pages: Record<Route, ComponentType> = {
   roberts: lazy(() => import('./pages/RobertsPage.tsx').then((m) => ({ default: m.RobertsPage }))),
   council: lazy(() => import('./pages/CouncilPage.tsx').then((m) => ({ default: m.CouncilPage }))),
   throne: lazy(() => import('./pages/ThronePage.tsx').then((m) => ({ default: m.ThronePage }))),
+  dragons: lazy(() => import('./pages/DragonsPage.tsx').then((m) => ({ default: m.DragonsPage }))),
 }
 
 const TITLES: Record<Route, string> = {
@@ -25,6 +26,7 @@ const TITLES: Record<Route, string> = {
   roberts: 'The Rebellion · Westeros & Essos',
   council: 'The Small Council · Westeros & Essos',
   throne: 'The Iron Throne · Westeros & Essos',
+  dragons: 'The Dragons · Westeros & Essos',
   hall: 'Westeros & Essos',
 }
 

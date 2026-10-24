@@ -117,6 +117,7 @@ body.is-atlas {
 .landing-door:focus-visible,
 .site-wordmark:focus-visible,
 .room-index a:focus-visible,
+.dragons-order button:focus-visible,
 .room-atlas:focus-visible,
 .dive:focus-visible,
 .layers-toggle:focus-visible,
@@ -1227,7 +1228,8 @@ main[tabindex='-1']:focus {
 .app.is-north .site-nav.is-solid,
 .app.is-roberts .site-nav.is-solid,
 .app.is-council .site-nav.is-solid,
-.app.is-throne .site-nav.is-solid {
+.app.is-throne .site-nav.is-solid,
+.app.is-dragons .site-nav.is-solid {
   position: sticky;
   top: 0;
 }
@@ -3242,6 +3244,443 @@ main[tabindex='-1']:focus {
   line-height: 1.35;
 }
 
+/* The Dragons: ember and ash. */
+.app.is-dragons {
+  --line: rgba(196, 128, 64, 0.32);
+  background: #0a0706;
+}
+
+.app.is-dragons .site-nav.is-solid {
+  background: rgba(10, 7, 6, 0.96);
+}
+
+.app.is-dragons .site-tabs a.active {
+  color: #f2b14a;
+  background: #2e1810;
+}
+
+.dragons {
+  min-height: 100%;
+  color: var(--parchment);
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(214, 92, 24, 0.22), transparent 48%),
+    radial-gradient(ellipse at 15% 20%, rgba(120, 40, 20, 0.14), transparent 40%),
+    #0a0706;
+}
+
+.dragons .room-hero {
+  margin-bottom: 0;
+}
+
+.dragons .room-hero-art {
+  object-position: center 45%;
+  filter: saturate(0.9) contrast(1.08) brightness(0.9);
+}
+
+.dragons-quote {
+  max-width: 42rem;
+  margin: 0 auto 44px;
+  padding: 36px 24px 8px;
+  text-align: center;
+}
+
+.dragons-quote p {
+  margin: 0 0 12px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(1.35rem, 2.8vw, 1.85rem);
+  line-height: 1.4;
+  color: #f3c89a;
+}
+
+.dragons-quote cite {
+  font-family: Cinzel, serif;
+  font-style: normal;
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.dragons-chapter {
+  padding: 24px 0 48px;
+  scroll-margin-top: calc(var(--nav-h, 65px) + 7px);
+}
+
+.dragons-chapter-head {
+  max-width: 1080px;
+  margin: 0 auto 28px;
+  padding: 0 24px;
+}
+
+.dragons-chapter-head h2 {
+  margin: 6px 0 10px;
+  font-family: Cinzel, serif;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+}
+
+.dragons-chapter-head > p:not(.eyebrow) {
+  max-width: 48rem;
+  margin: 0 0 18px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.dragons-order {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.dragons-order-label {
+  font-family: Cinzel, serif;
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-right: 6px;
+}
+
+.dragons-order button {
+  font-family: Cinzel, serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--parchment);
+  background: #1b110d;
+  border: 1px solid var(--line);
+  padding: 9px 16px;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.dragons-order button:hover {
+  background: #2a1810;
+}
+
+.dragons-order button.active {
+  color: #f2b14a;
+  background: #3a1f12;
+  border-color: rgba(242, 177, 74, 0.6);
+}
+
+.dragons-legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px 20px;
+  margin: 0;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  background: rgba(27, 17, 13, 0.7);
+}
+
+.dragons-legend dt {
+  margin-bottom: 4px;
+}
+
+.dragons-legend dd {
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.dragons-flames {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: rgba(239, 230, 212, 0.22);
+}
+
+.dragons-flames .is-lit {
+  color: #f0862a;
+  text-shadow: 0 0 8px rgba(240, 134, 42, 0.55);
+}
+
+.dragons-flames-label {
+  margin-left: 8px;
+  font-family: Cinzel, serif;
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #f2b14a;
+}
+
+.dragons-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.dragons-card {
+  display: grid;
+  grid-template-columns: minmax(260px, 42%) 1fr;
+  border: 1px solid var(--line);
+  background: #15100c;
+  overflow: hidden;
+  scroll-margin-top: calc(var(--nav-h, 65px) + 11px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.38);
+}
+
+.dragons-card:nth-child(even) {
+  grid-template-columns: 1fr minmax(260px, 42%);
+}
+
+.dragons-card:nth-child(even) .dragons-art {
+  order: 2;
+}
+
+.dragons-art {
+  position: relative;
+  margin: 0;
+}
+
+.dragons-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  object-fit: cover;
+  object-position: center 40%;
+  filter: saturate(0.92) contrast(1.06);
+}
+
+.dragons-rank {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 6px 12px;
+  font-family: Cinzel, serif;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--parchment);
+  background: rgba(10, 7, 6, 0.78);
+  border: 1px solid var(--line);
+}
+
+.dragons-rank strong {
+  color: #f2b14a;
+  font-size: 0.9rem;
+  margin-right: 6px;
+}
+
+.dragons-copy {
+  padding: 24px 26px 28px;
+}
+
+.dragons-copy .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dragons-swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(239, 230, 212, 0.35);
+  flex: none;
+}
+
+.dragons-copy h3 {
+  margin: 6px 0 6px;
+  font-family: Cinzel, serif;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  font-size: 1.7rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 14px;
+}
+
+.dragons-copy h3 small {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+  font-size: 1.1rem;
+  color: #f3c89a;
+}
+
+.dragons-riders {
+  margin: 0 0 16px;
+  color: var(--gold);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 1.08rem;
+  line-height: 1.45;
+}
+
+.dragons-copy > p {
+  margin: 0 0 14px;
+  color: var(--parchment);
+  line-height: 1.58;
+}
+
+.dragons-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px 20px;
+  margin: 0 0 18px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.dragons-facts dt {
+  font-family: Cinzel, serif;
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 5px;
+}
+
+.dragons-facts dd {
+  margin: 0;
+  color: var(--parchment);
+  line-height: 1.5;
+}
+
+.dragons-note {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.86rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.dragons-copy h4.eyebrow {
+  margin: 4px 0 10px;
+}
+
+.dragons-battles {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dragons-battles li {
+  display: grid;
+  gap: 2px;
+  padding-left: 14px;
+  border-left: 2px solid rgba(240, 134, 42, 0.55);
+  line-height: 1.5;
+}
+
+.dragons-battles strong {
+  font-family: Cinzel, serif;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  font-size: 0.95rem;
+}
+
+.dragons-where {
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+
+.dragons-where a {
+  color: #f2b14a;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(242, 177, 74, 0.4);
+}
+
+.dragons-where a:hover {
+  border-bottom-color: #f2b14a;
+}
+
+.dragons-none {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.dragons-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 22px;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.dragons-tile {
+  border: 1px solid var(--line);
+  background: #15100c;
+  overflow: hidden;
+  scroll-margin-top: calc(var(--nav-h, 65px) + 11px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
+}
+
+.dragons-tile img {
+  display: block;
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  filter: saturate(0.9) contrast(1.05);
+}
+
+.dragons-tile-copy {
+  padding: 18px 20px 22px;
+}
+
+.dragons-tile-copy h3 {
+  margin: 0 0 8px;
+  font-family: Cinzel, serif;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  font-size: 1.2rem;
+}
+
+.dragons-tile-copy p {
+  margin: 0 0 10px;
+  line-height: 1.55;
+}
+
+.dragons-tile-who {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.dragons-close {
+  max-width: 42rem;
+  margin: 0 auto 48px;
+  padding: 20px 24px 8px;
+  text-align: center;
+}
+
+.dragons-close-line {
+  margin: 8px 0 0;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.4vw, 1.5rem);
+  color: #f3c89a;
+  line-height: 1.4;
+}
+
+/* Ten doors in a three-wide grid leave one alone: centre it. */
+@media (min-width: 1101px) {
+  .landing-door:last-child:nth-child(3n + 1) {
+    grid-column: 3 / 5;
+  }
+}
+
 @keyframes landing-kenburns {
   from {
     transform: scale(1.04) translate3d(0, 0, 0);
@@ -3432,6 +3871,24 @@ main[tabindex='-1']:focus {
     max-height: 280px;
   }
 
+  .dragons-card,
+  .dragons-card:nth-child(even) {
+    grid-template-columns: 1fr;
+  }
+
+  .dragons-card:nth-child(even) .dragons-art {
+    order: 0;
+  }
+
+  .dragons-art img {
+    min-height: 200px;
+    max-height: 300px;
+  }
+
+  .dragons-copy {
+    padding: 20px 18px 24px;
+  }
+
   .throne-scroll,
   .throne-scroll.is-flip {
     grid-template-columns: 1fr;
@@ -3521,6 +3978,57 @@ main[tabindex='-1']:focus {
   }
 }
 
+.dragons-yard-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.dragons-yard {
+  position: relative;
+  height: min(78vh, 820px);
+  min-height: 520px;
+  border: 1px solid rgba(201, 163, 106, 0.35);
+  background: #1c1a17;
+  overflow: hidden;
+}
+
+.dragons-yard canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.dragons-yard-readout {
+  position: absolute;
+  left: 14px;
+  bottom: 12px;
+  margin: 0;
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  padding: 8px 12px;
+  background: rgba(18, 16, 14, 0.78);
+  color: var(--parchment);
+  font-size: 0.92rem;
+  pointer-events: none;
+}
+
+.dragons-yard-readout strong {
+  font-family: Cinzel, serif;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: #f3c89a;
+}
+
+.dragons-yard-note {
+  max-width: 46rem;
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
 /* Phones: the tabs become one row that scrolls sideways, so the nav stays two lines tall
    and every tab is a comfortable tap. Desktop keeps the wrapped bar above. */
 @media (max-width: 600px) {
@@ -3551,5 +4059,11 @@ main[tabindex='-1']:focus {
     padding: 0 10px;
     font-size: 0.6rem;
     white-space: nowrap;
+  }
+
+  .dragons-yard {
+    height: 70vh;
+    min-height: 420px;
+    margin: 0 12px;
   }
 }
