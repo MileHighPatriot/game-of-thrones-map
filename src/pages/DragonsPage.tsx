@@ -73,11 +73,12 @@ function YardChapter() {
         <p className="eyebrow">Snout to tail</p>
         <h2>The yard</h2>
         <p>
-          One shape, every size. Vhagar is 150 metres, the length the show’s effects crew gave her.
-          Balerion is a little longer, because every history says he was the largest. Drogon is 55.
-          The rest follow the order of the register, including the two ratios the story already tells:
-          Quicksilver a quarter of Balerion, Arrax a fifth of Vhagar. These are a working scale, not
-          tape measures from the books.
+          Balerion fills the yard. Vhagar stands beside him, fifteen metres shorter. Drogon waits in
+          front of them. Arrax is 30 metres long, and the keep beside him is 30 metres tall. Under
+          them, the same metres put a man and a horse next to the small dragons, then next to the
+          hatchlings. Vhagar is 150, the length the show’s effects crew gave her. Balerion is 165.
+          Drogon is 55. Quicksilver is a quarter of Balerion. The rest follow the order of the
+          register. A working scale.
         </p>
       </header>
       {ready ? (

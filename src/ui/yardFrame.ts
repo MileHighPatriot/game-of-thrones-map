@@ -1,116 +1,127 @@
 import * as THREE from 'three'
 
 /**
- * Half-width of the unit dragon. Measured from the shared mesh (wing tip).
- * The 8 m gap in the row is the air between wingtips.
+ * Half-width of the unit dragon, wing tip to the centre line.
+ * Measured from public/dragons/yard-dragon.glb after it was stood snout-to-tail.
  */
-export const WING = 0.52
+export const WING = 0.514
 
-/** Height of the unit dragon, feet to the top of the raised wing. */
-export const BODY_H = 0.79
+/** Height of the unit dragon, feet to the top of the wing. */
+export const BODY_H = 0.704
 
-/** Half-width of the head and shoulders, so the scale figure stands clear of the jaw. */
-export const HEAD = 0.2
+/** Nose-side camera for a dragon that still faces −z. */
+export const CHART_DIR = new THREE.Vector3(-0.12, 0.46, -1)
 
-const GAP = 8
+/** Side camera for a profile row. Dragons face −x, so this eye sees their length. */
+export const PROFILE_DIR = new THREE.Vector3(0.04, 0.36, 1)
 
-type Sized = { lengthMeters: number; sizeRank: number }
+/** rotation.y that turns the snout (−z) onto −x. Matches Object3D, not a second formula. */
+export const PROFILE_YAW = Math.PI / 2
 
-/**
- * Largest to smallest along the row.
- * The overview camera sits on the nose side (world −z) and looks toward +z.
- * In that view world +x is screen-left, so the largest dragon is parked at the high-x end.
- * A node projection check in the yard frame test pins that sign.
- */
-export function layoutRow<T extends Sized>(list: T[]): Array<T & { x: number }> {
-  const sorted = [...list].sort((a, b) => b.lengthMeters - a.lengthMeters || a.sizeRank - b.sizeRank)
-  const placed: Array<T & { x: number }> = []
-  for (const dragon of sorted) {
-    const wing = dragon.lengthMeters * WING
-    const prev = placed[placed.length - 1]
-    const x = prev ? prev.x + prev.lengthMeters * WING + wing + GAP : 0
-    placed.push({ ...dragon, x })
-  }
-  const end = placed[placed.length - 1]?.x ?? 0
-  for (const dragon of placed) dragon.x = end - dragon.x
-  return placed
+export type BodyProfile = { bulk: number; stature: number }
+
+/** Caraxes is a snake. Hatchlings are stocky. The old ones are a little heavier. Length stays exact. */
+export function bodyProfile(id: string, meters: number): BodyProfile {
+  if (id === 'caraxes') return { bulk: 0.62, stature: 0.7 }
+  if (meters <= 3) return { bulk: 1.18, stature: 1.32 }
+  if (meters >= 120) return { bulk: 1.05, stature: 1.02 }
+  return { bulk: 1, stature: 1 }
 }
 
-export function dragonCorners(placed: Array<{ x: number; lengthMeters: number }>): THREE.Vector3[] {
+type Sized = { lengthMeters: number; sizeRank: number; bulk: number; stature: number }
+
+export function boxCorners(origin: THREE.Vector3, size: THREE.Vector3): THREE.Vector3[] {
   const corners: THREE.Vector3[] = []
-  for (const d of placed) {
-    const hx = d.lengthMeters * WING
-    const hy = d.lengthMeters * BODY_H
-    const hz = d.lengthMeters * 0.5
-    for (const x of [d.x - hx, d.x + hx]) {
-      for (const y of [0, hy]) {
-        for (const z of [-hz, hz]) corners.push(new THREE.Vector3(x, y, z))
+  for (const x of [0, size.x]) {
+    for (const y of [0, size.y]) {
+      for (const z of [0, size.z]) corners.push(origin.clone().add(new THREE.Vector3(x, y, z)))
+    }
+  }
+  return corners
+}
+
+/**
+ * Orthographic fit. `offsetDir` points from the look target toward the camera.
+ * The sideways axis is the camera's own X column after lookAt, not a second cross product.
+ * Zoom is pixels per world unit, matching a view whose frustum is the pane in pixels.
+ */
+export function fitOrtho(
+  viewW: number,
+  viewH: number,
+  offsetDir: THREE.Vector3,
+  corners: THREE.Vector3[],
+  fill = 0.84,
+): { position: THREE.Vector3; target: THREE.Vector3; zoom: number } {
+  const eye = offsetDir.clone().normalize()
+  const seed = new THREE.Vector3()
+  for (const corner of corners) seed.add(corner)
+  if (corners.length > 0) seed.multiplyScalar(1 / corners.length)
+
+  const cam = new THREE.OrthographicCamera(-viewW / 2, viewW / 2, viewH / 2, -viewH / 2, -8000, 8000)
+  cam.position.copy(seed).addScaledVector(eye, 80)
+  cam.lookAt(seed)
+  cam.updateMatrixWorld()
+  const right = new THREE.Vector3().setFromMatrixColumn(cam.matrixWorld, 0)
+  const camUp = new THREE.Vector3().setFromMatrixColumn(cam.matrixWorld, 1)
+
+  let minX = Infinity
+  let maxX = -Infinity
+  let minY = Infinity
+  let maxY = -Infinity
+  for (const corner of corners) {
+    const d = corner.clone().sub(seed)
+    const x = d.dot(right)
+    const y = d.dot(camUp)
+    minX = Math.min(minX, x)
+    maxX = Math.max(maxX, x)
+    minY = Math.min(minY, y)
+    maxY = Math.max(maxY, y)
+  }
+  const worldW = Math.max(0.5, maxX - minX)
+  const worldH = Math.max(0.5, maxY - minY)
+  const center = seed
+    .clone()
+    .addScaledVector(right, (minX + maxX) / 2)
+    .addScaledVector(camUp, (minY + maxY) / 2)
+  const position = center.clone().addScaledVector(eye, Math.hypot(worldW, worldH) * 2 + 30)
+  const zoom = fill * Math.min(viewW / worldW, viewH / worldH)
+  return { position, target: center, zoom }
+}
+
+export type Stand = { x: number; z: number; yaw: number; lengthMeters: number; bulk: number; stature: number }
+
+/**
+ * Corners of a dragon after position and rotation.y.
+ * The yaw matrix is Object3D's: x' = lx cos + lz sin, z' = −lx sin + lz cos.
+ */
+export function orientedCorners(stand: Stand): THREE.Vector3[] {
+  const hx = stand.lengthMeters * stand.bulk * WING
+  const hy = stand.lengthMeters * stand.stature * BODY_H
+  const hz = stand.lengthMeters * 0.5
+  const c = Math.cos(stand.yaw)
+  const s = Math.sin(stand.yaw)
+  const corners: THREE.Vector3[] = []
+  for (const lx of [-hx, hx]) {
+    for (const y of [0, hy]) {
+      for (const lz of [-hz, hz]) {
+        corners.push(new THREE.Vector3(
+          stand.x + lx * c + lz * s,
+          y,
+          stand.z - lx * s + lz * c,
+        ))
       }
     }
   }
   return corners
 }
 
-/** Distance along offsetDir that fits every corner inside the view, with a margin. */
-export function fitCamera(
-  fovDeg: number,
-  aspect: number,
-  target: THREE.Vector3,
-  offsetDir: THREE.Vector3,
-  corners: THREE.Vector3[],
-  fill = 0.84,
-): THREE.Vector3 {
-  const cam = new THREE.PerspectiveCamera(fovDeg, Math.max(aspect, 0.4), 0.15, 9000)
-  const dir = offsetDir.clone().normalize()
-  let dist = 30
-  for (let i = 0; i < 16; i++) {
-    cam.position.copy(target).addScaledVector(dir, dist)
-    cam.lookAt(target)
-    cam.updateProjectionMatrix()
-    cam.updateMatrixWorld()
-    let maxN = 0.001
-    for (const corner of corners) {
-      const ndc = corner.clone().project(cam)
-      maxN = Math.max(maxN, Math.abs(ndc.x), Math.abs(ndc.y))
-    }
-    const next = THREE.MathUtils.clamp(dist * (maxN / fill), 6, 8000)
-    if (Math.abs(next - dist) / dist < 0.015) return target.clone().addScaledVector(dir, next)
-    dist = next
-  }
-  return target.clone().addScaledVector(dir, dist)
-}
-
-export function overviewPose(
-  placed: Array<{ x: number; lengthMeters: number }>,
-  fovDeg: number,
-  aspect: number,
-): { position: THREE.Vector3; target: THREE.Vector3 } {
-  const xs = placed.map((d) => d.x)
-  const mid = (Math.min(...xs) + Math.max(...xs)) / 2
-  const biggest = placed[0]?.lengthMeters ?? 10
-  const target = new THREE.Vector3(mid, Math.min(48, biggest * 0.26), 0)
-  const position = fitCamera(fovDeg, aspect, target, new THREE.Vector3(-0.55, 0.36, -1), dragonCorners(placed))
-  return { position, target }
-}
-
-/** Feet of the scale figure, just in front of the snout and clear of the jaw. */
-export function standPoint(dragon: { x: number; lengthMeters: number }): THREE.Vector3 {
-  const noseZ = -dragon.lengthMeters / 2
-  return new THREE.Vector3(dragon.x + dragon.lengthMeters * HEAD + 1.2, 0, noseZ - 2.4)
-}
-
-/**
- * A person-height view from in front of the snout.
- * The figure stays in frame. The look point rises with the head, capped so
- * Balerion does not shrink the person back to a speck.
- */
-export function besidePose(dragon: { x: number; lengthMeters: number }): {
-  position: THREE.Vector3
-  target: THREE.Vector3
-} {
-  const stand = standPoint(dragon)
-  const lookY = Math.min(2.15, Math.max(1.05, dragon.lengthMeters * 0.045))
-  const target = new THREE.Vector3(stand.x + 1.05, lookY, stand.z + 2.2)
-  const position = new THREE.Vector3(stand.x + 1.5, 1.7, stand.z - 11)
-  return { position, target }
+/** Largest at low x, which is screen-left when the camera sits on +z. Length runs along x. */
+export function profileRow<T extends Sized>(list: T[], gap: number): Array<T & Stand> {
+  const sorted = [...list].sort((a, b) => b.lengthMeters - a.lengthMeters || a.sizeRank - b.sizeRank)
+  let cursor = 0
+  return sorted.map((dragon) => {
+    const x = cursor + dragon.lengthMeters * 0.5
+    cursor += dragon.lengthMeters + gap
+    return { ...dragon, x, z: 0, yaw: PROFILE_YAW }
+  })
 }

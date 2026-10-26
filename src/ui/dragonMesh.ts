@@ -16,24 +16,24 @@ export function assertUnitDragon(geo: THREE.BufferGeometry) {
 const hide = () => new THREE.MeshStandardMaterial({ color: '#cbbba6', roughness: 0.82 })
 const cloth = () => new THREE.MeshStandardMaterial({ color: '#3c3834', roughness: 0.88 })
 
-/** A person 1.83 m tall, feet on y = 0, facing −z. */
+/** A person 1.83 m tall, feet on y = 0, facing −z. Shoulders are wide enough to read at chart scale. */
 export function makePerson(): THREE.Group {
   const g = new THREE.Group()
   const skin = hide()
   const wool = cloth()
-  const legH = 0.94
-  const torsoH = 0.64
-  const headR = 0.13
-  for (const x of [-0.09, 0.09]) {
-    const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.055, 0.045, legH, 8), wool)
-    leg.position.set(x, legH / 2, 0)
+  for (const x of [-0.1, 0.1]) {
+    const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.05, 0.78, 8), wool)
+    leg.position.set(x, 0.39, 0)
     g.add(leg)
   }
-  const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.13, torsoH, 10), wool)
-  torso.position.set(0, legH + torsoH / 2, 0)
-  g.add(torso)
-  const head = new THREE.Mesh(new THREE.SphereGeometry(headR, 12, 10), skin)
-  head.position.set(0, legH + torsoH + headR * 0.85, 0)
+  const cloak = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.22, 0.72, 10), wool)
+  cloak.position.y = 1.02
+  g.add(cloak)
+  const arms = new THREE.Mesh(new THREE.BoxGeometry(0.66, 0.1, 0.12), wool)
+  arms.position.y = 1.28
+  g.add(arms)
+  const head = new THREE.Mesh(new THREE.SphereGeometry(0.14, 12, 10), skin)
+  head.position.y = 1.52
   g.add(head)
   g.updateMatrixWorld(true)
   const box = new THREE.Box3().setFromObject(g)
@@ -89,4 +89,23 @@ export function meshLengthZ(object: THREE.Object3D): number {
 export function meshHeight(object: THREE.Object3D): number {
   const box = new THREE.Box3().setFromObject(object)
   return box.max.y - box.min.y
+}
+
+/** A square keep, 14 m across and 30 m to the top of the battlement. Feet on y = 0. */
+export function makeTower(): THREE.Group {
+  const g = new THREE.Group()
+  const stone = new THREE.MeshStandardMaterial({ color: '#8d8478', roughness: 0.92 })
+  const dark = new THREE.MeshStandardMaterial({ color: '#2c2824', roughness: 0.8 })
+  const shaft = new THREE.Mesh(new THREE.BoxGeometry(12, 27, 12), stone)
+  shaft.position.y = 13.5
+  g.add(shaft)
+  const crown = new THREE.Mesh(new THREE.BoxGeometry(14.5, 3, 14.5), stone)
+  crown.position.y = 28.5
+  g.add(crown)
+  const door = new THREE.Mesh(new THREE.BoxGeometry(2.4, 3.6, 0.5), dark)
+  door.position.set(0, 1.8, 6.15)
+  g.add(door)
+  g.userData.role = 'tower'
+  g.userData.height = 30
+  return g
 }
