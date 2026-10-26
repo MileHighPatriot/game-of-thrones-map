@@ -128,7 +128,7 @@ export function DragonsPage() {
       <main id={MAIN_ID} tabIndex={-1}>
         <section className="room-hero">
           <img
-            src={asset('dragons/got/hero.jpg')}
+            src={asset('dragons/art/hero.jpg')}
             alt=""
             className="room-hero-art"
             {...heroImg()}

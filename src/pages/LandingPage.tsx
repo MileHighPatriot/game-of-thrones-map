@@ -84,7 +84,7 @@ const DOORS = [
   {
     title: 'The Dragons',
     copy: 'Every named dragon of the known world, ranked by size and by what they burned.',
-    image: 'dragons/got/hero.jpg',
+    image: 'dragons/art/hero.jpg',
     alt: 'A dragon over Westeros',
     href: 'dragons' as const,
   },

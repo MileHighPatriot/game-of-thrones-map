@@ -42,7 +42,7 @@ Photoreal cinematic establishing shot, 3:2 landscape (1248x832), no text. A ster
 
 ## The Dragons (`public/dragons/art/`, 1248×832)
 
-Shared prefix for every prompt: *Photoreal cinematic wide shot, Game of Thrones HBO production design, natural colour grade, overcast light, scale shown by tiny human figures or architecture, no text or watermark.*
+The register portraits and `hero.jpg` (1280×720) are original art made for this site. Shared look: photoreal cinematic wide shot, natural colour, the whole dragon readable in frame, no text or watermark.
 
 - **meraxes.jpg** — A silver dragon with golden eyes banking low over a sandstone Dornish castle in a desert canyon, a scorpion bolt the length of a man flying up toward her from the wall.
 - **quicksilver.jpg** — A pale white-silver young dragon, a quarter the size of the enormous black dragon diving on her from above, over a vast grey lake with a melted castle on the far shore.
